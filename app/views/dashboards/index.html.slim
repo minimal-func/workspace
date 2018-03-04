@@ -1,21 +1,22 @@
-.col-md-6
-  = simple_form_for(@user, url: dashboards_url, method: :post, html: { class: 'row' }) do |f|
-    .col-md-12
-      = f.simple_fields_for :today_reflections do |reflection|
-        = reflection.input :content, placeholder: "Reflection", label: false, required: true
+.d-flex.justify-content-center
+  .col-md-8
+    = simple_form_for(@user, url: dashboards_url, method: :post, html: { class: 'row' }) do |f|
+      .col-md-12
+        = f.simple_fields_for :today_reflections do |reflection|
+          = reflection.input :content, placeholder: "Reflection", required: true
 
-    .col-md-10
-      .input-radio.input-radio--innerlabel
-        = f.simple_fields_for :today_day_ratings do |day_rating|
-          = day_rating.input :value, as: :radio_buttons, label: false, required: true, collection: 1..10, input_html: { class: 'col-md-1' }, wrapper_html: { class: 'row' }
+      .col-md-12
+        .input-radio.input-radio--innerlabel.d-flex.justify-content-center
+          = f.simple_fields_for :today_day_ratings do |day_rating|
+            = day_rating.input :value, as: :radio_buttons, label: false, required: true, collection: 1..10, input_html: { class: 'col-md-1' }, wrapper_html: { class: 'row' }
 
-    .col-md-12
-      = f.simple_fields_for :today_biggest_challenges do |biggest_challenge|
-        = biggest_challenge.input :content, placeholder: "Biggest Challenge", label: false, required: true
+      .col-md-12
+        = f.simple_fields_for :today_biggest_challenges do |biggest_challenge|
+          = biggest_challenge.input :content, placeholder: "Biggest Challenge", required: true
 
-    .col-md-12
-      = f.simple_fields_for :today_daily_lessons do |daily_lesson|
-        = daily_lesson.input :content, placeholder: "Daily Lesson", label: false, required: true
+      .col-md-12
+        = f.simple_fields_for :today_daily_lessons do |daily_lesson|
+          = daily_lesson.input :content, placeholder: "Daily Lesson", required: true
 
-    .col-md-12
-      = f.button :submit
+      .col-md-12
+        = f.button :submit, "Save my day"

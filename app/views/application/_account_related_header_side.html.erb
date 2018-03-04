@@ -1,0 +1,39 @@
+<% if current_user %>
+  <div class="bar__module">
+      <ul class="menu-horizontal">
+          <li class="dropdown">
+              <span class="dropdown__trigger">
+                  <img alt="avatar" class="avatar image--xxs" src="img/avatar-round-1.png" /> <%= current_user.email %>
+              </span>
+          </li>
+          <li class="dropdown">
+              <span class="dropdown__trigger">
+                  <i class="stack-interface stack-bell"></i> Alerts
+              </span>
+          </li>
+      </ul>
+  </div>
+  <div class="bar__module">
+      <a class="btn btn--primary btn--sm type--uppercase" href="#">
+          <span class="btn__text">
+              Upgrade
+          </span>
+      </a>
+  </div>
+
+<% else %>
+  <div class="bar__module">
+    <a class="btn btn--sm type--uppercase" href="#">
+      <span class="btn__text">
+          Login
+      </span>
+    </a>
+    <a class="btn btn--sm btn--primary type--uppercase" href="#">
+      <span class="btn__text">
+         Signup
+      </span>
+    </a>
+  </div>
+<% end %>
+
+<!--end module-->
