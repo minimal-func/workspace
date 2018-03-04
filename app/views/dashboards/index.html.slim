@@ -2,6 +2,9 @@
   .col-md-8
     = simple_form_for(@user, url: dashboards_url, method: :post, html: { class: 'row' }) do |f|
       .col-md-12
+        span
+          = DateTime.now
+      .col-md-12
         = f.simple_fields_for :today_reflections do |reflection|
           = reflection.input :content, placeholder: "I didn't have time today but tomorrow I will...", label: "Reflecting on today:", required: true
 
