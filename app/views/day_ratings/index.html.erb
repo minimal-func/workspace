@@ -1,0 +1,16 @@
+<table class="border--round table--alternate-row">
+  <thead>
+    <tr>
+      <th>Day Rating</th>
+      <th>Day</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @day_ratings.each do |rating| %>
+      <tr>
+        <td><%= rating.value %></td>
+        <td><%= rating.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

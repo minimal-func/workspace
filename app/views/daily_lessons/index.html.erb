@@ -1,0 +1,16 @@
+<table class="border--round table--alternate-row">
+  <thead>
+    <tr>
+      <th style="width: 80%">Daily Lessons</th>
+      <th style="width: 20%">Day</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @daily_lessons.each do |lesson| %>
+      <tr>
+        <td><%= lesson.content %></td>
+        <td><%= lesson.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

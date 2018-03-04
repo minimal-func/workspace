@@ -3,23 +3,35 @@
       <ul class="menu-horizontal">
           <li class="dropdown">
               <span class="dropdown__trigger">
-                  <img alt="avatar" class="avatar image--xxs" src="img/avatar-round-1.png" /> <%= current_user.email %>
+                <%= image_tag "avatar-round-1.png", class: "avatar image--xxs" %><%= current_user.email %>
               </span>
+              <div class="dropdown__container">
+                <div class="container">
+                  <div class="row">
+                    <div class="dropdown__content col-lg-1">
+                      <ul class="menu-vertical">
+                        <li>
+                            <%= link_to "Log out", destroy_user_session_url, method: :delete %>
+                        </li>
+                      </ul>
+                  </div>
+                </div>
+              </div>
           </li>
-          <li class="dropdown">
+<!--           <li class="dropdown">
               <span class="dropdown__trigger">
                   <i class="stack-interface stack-bell"></i> Alerts
               </span>
-          </li>
+          </li> -->
       </ul>
   </div>
-  <div class="bar__module">
+<!--   <div class="bar__module">
       <a class="btn btn--primary btn--sm type--uppercase" href="#">
           <span class="btn__text">
               Upgrade
           </span>
       </a>
-  </div>
+  </div> -->
 
 <% else %>
   <div class="bar__module">
