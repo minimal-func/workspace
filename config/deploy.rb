@@ -4,7 +4,7 @@ lock "~> 3.10.1"
 set :application, "reflections"
 set :repo_url, "git@gitlab.com:ildarsafin/daily_reflections.git"
 
-set :deploy_to, "/home/deploy/reflections"
+set :deploy_to, "/home/deploy/reflections_production"
 
 set :linked_files, %w(config/database.yml)
 set :linked_dirs, %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system)
