@@ -16,7 +16,7 @@ namespace :deploy do
     on roles(:all) do
       within release_path do
         execute :cp, "#{release_path}/config/database.yml.example #{shared_path}/config/database.yml"
-        execute :rake, "db:create RAILS_ENV=#{fetch(:stage)}"
+        # execute :rake, "db:create RAILS_ENV=#{fetch(:stage)}"
         execute :rake, "db:migrate RAILS_ENV=#{fetch(:stage)}"
       end
     end
