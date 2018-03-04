@@ -4,7 +4,7 @@ set :user, "deploy"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
-set :branch, "production"
+set :branch, "master"
 
 set :stage, :production
 set :rails_env, :production
