@@ -9,7 +9,7 @@
     <% @day_ratings.each do |rating| %>
       <tr>
         <td><%= rating.value %></td>
-        <td><%= rating.created_at %></td>
+        <td><%= rating.created_at.strftime("%m/%d/%Y at %H:%M") %></td>
       </tr>
     <% end %>
   </tbody>

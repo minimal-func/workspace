@@ -8,8 +8,8 @@
   <tbody>
     <% @biggest_challenges.each do |challenge| %>
       <tr>
-        <td><%= challenge.content %></td>
-        <td><%= challenge.created_at %></td>
+        <td><%= challenge.content.html_safe %></td>
+        <td><%= challenge.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
       </tr>
     <% end %>
   </tbody>

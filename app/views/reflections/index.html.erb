@@ -8,8 +8,8 @@
   <tbody>
     <% @reflections.each do |reflection| %>
       <tr>
-        <td><%= reflection.content %></td>
-        <td><%= reflection.created_at %></td>
+        <td><%= reflection.content.html_safe %></td>
+        <td><%= reflection.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
       </tr>
     <% end %>
   </tbody>
