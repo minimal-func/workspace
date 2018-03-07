@@ -9,7 +9,7 @@
     <% @daily_lessons.each do |lesson| %>
       <tr>
         <td><%= lesson.content.html_safe %></td>
-        <td><%= lesson.created_at.strftime("%m/%d/%Y at %H:%M") %></td>
+        <td><%= lesson.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
       </tr>
     <% end %>
   </tbody>
