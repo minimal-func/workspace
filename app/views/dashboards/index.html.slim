@@ -6,7 +6,7 @@
           = DateTime.now.strftime("%A, %d %B %Y, %H:%M")
       .col-md-12
         = f.simple_fields_for :today_reflections do |reflection|
-          = reflection.input :content, placeholder: "I didn't have time today but tomorrow I will...", label: "Reflecting on today:", required: true, input_html: { rows: 6 }
+          = reflection.input :content, placeholder: "I didn't have time today but tomorrow I will...", label: "Reflecting on today: (in markdown format)", required: true, input_html: { rows: 6 }
 
       .col-md-12
         label * My level of confidence that I'm on the right track (1=lowest 10=highest):
