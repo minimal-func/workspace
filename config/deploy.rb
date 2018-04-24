@@ -2,7 +2,7 @@
 lock "~> 3.10.1"
 
 set :application, "reflections"
-set :repo_url, "git@gitlab.com:ildarsafin/daily_reflections.git"
+set :repo_url, "https://github.com/ildarsafin/myreflections"
 
 set :deploy_to, "/home/deploy/reflections"
 
