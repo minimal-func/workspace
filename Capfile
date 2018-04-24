@@ -11,7 +11,7 @@ require "capistrano/rails/assets"
 require "capistrano/rbenv"
 
 set :rbenv_type, :user
-set :rbenv_ruby, '2.5.0'
+set :rbenv_ruby, '2.5.1'
 
 # Load the SCM plugin appropriate to your project:
 #
