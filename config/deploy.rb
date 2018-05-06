@@ -11,6 +11,10 @@ set :linked_dirs, %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 
 set :keep_releases, 3
 
+require "bundler/capistrano"
+require "rbenv/capistrano"
+before "deploy:assets:precompile", "bundle:install"
+
 namespace :deploy do
   before :updated, :copy_database_config do
     on roles(:all) do
