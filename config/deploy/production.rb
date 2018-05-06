@@ -10,7 +10,7 @@ set :stage, :production
 set :rails_env, :production
 set :rack_env, :production
 
-server "52.29.72.141",
+server "18.195.174.215",
   roles: %w(web app),
   port: fetch(:port),
   user: fetch(:user),
