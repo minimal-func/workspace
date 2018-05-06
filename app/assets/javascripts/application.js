@@ -12,5 +12,6 @@
 //
 //= require rails-ujs
 //= require jquery-3.1.1.min
-//= require parallax
+//= require highcharts
+//= require chartkick
 //= require_tree .

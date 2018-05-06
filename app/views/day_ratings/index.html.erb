@@ -12,5 +12,8 @@
         <td><%= rating.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
       </tr>
     <% end %>
+
+
+    <%= line_chart @day_ratings.pluck(:created_at, :value) %>
   </tbody>
 </table>
