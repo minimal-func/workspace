@@ -6,6 +6,8 @@ class DashboardsController < ApplicationController
     @user.today_day_ratings.first_or_initialize
     @user.today_biggest_challenges.first_or_initialize
     @user.today_daily_lessons.first_or_initialize
+
+    @life_countdown ||= current_user.life_countdown
   end
 
   def create

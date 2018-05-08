@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180303192549) do
+ActiveRecord::Schema.define(version: 20180508085135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(version: 20180303192549) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_day_ratings_on_user_id"
+  end
+
+  create_table "life_countdowns", force: :cascade do |t|
+    t.integer "planned_years"
+    t.date "born_in"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_life_countdowns_on_user_id"
   end
 
   create_table "reflections", force: :cascade do |t|
@@ -67,5 +76,6 @@ ActiveRecord::Schema.define(version: 20180303192549) do
   add_foreign_key "biggest_challenges", "users"
   add_foreign_key "daily_lessons", "users"
   add_foreign_key "day_ratings", "users"
+  add_foreign_key "life_countdowns", "users"
   add_foreign_key "reflections", "users"
 end

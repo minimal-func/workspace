@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :today_reflections, -> { today }, class_name: "Reflection", dependent: :destroy
   has_many :today_daily_lessons, -> { today }, class_name: "DailyLesson", dependent: :destroy
 
+  has_one :life_countdown
+
   def today_biggest_challenges=(value)
     if today_biggest_challenges.size.empty?
       biggest_challenges.create(value)

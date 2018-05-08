@@ -4,6 +4,14 @@
       .col-md-12
         span
           = DateTime.now.strftime("%A, %d %B %Y, %H:%M")
+      - if @life_countdown
+        .col-md-12
+          span
+            | I want to live in this world until #{ @life_countdown.planned_years } years old. I've already lived #{@life_countdown.years_lived} years. I've left #{@life_countdown.years_left} years.
+        .col-md-12
+          span
+            | My time is running: &nbsp;
+            strong class="countdown" data-date="#{ @life_countdown.calculate_final_date.strftime('%d/%m/%Y')}"
       .col-md-12
         = f.simple_fields_for :today_reflections do |reflection|
           = reflection.input :content, placeholder: "I didn't have time today but tomorrow I will...", label: "Reflecting on today: (in markdown format)", required: true, input_html: { rows: 6 }
