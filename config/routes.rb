@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :biggest_challenges, only: [:index]
   resources :day_ratings, only: [:index]
   resources :daily_lessons, only: [:index]
-  resources :life_countdown, only: [:new, :create]
+  resources :main_task, only: [:new, :create]
 
   devise_for :users, controllers: {
     sessions:    "users/sessions",

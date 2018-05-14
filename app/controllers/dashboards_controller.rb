@@ -7,7 +7,7 @@ class DashboardsController < ApplicationController
     @user.today_biggest_challenges.first_or_initialize
     @user.today_daily_lessons.first_or_initialize
 
-    @life_countdown ||= current_user.life_countdown
+    @main_task ||= current_user.main_task
   end
 
   def create
