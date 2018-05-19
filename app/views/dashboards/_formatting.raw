@@ -1,0 +1,36 @@
+App uses Markdown for formatting.
+
+First Level Header
+This is like the title of the book
+===============================
+
+
+Second Level Header
+1.1: Start
+----------------
+
+
+Paragraphs
+Add two new lines to start a new paragraph.
+
+
+Bold
+**Bold and strong** text.
+
+
+Emphasis
+To make it *different*.
+
+
+Lists
+
+Ingredients:
+
+- To Do
+- Groceries
+
+Images
+![Picture](https://example.com/picture.png)
+
+Links
+To download a PDF version, [click the link](https://example.com/the-book.pdf).
