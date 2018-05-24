@@ -1,0 +1,19 @@
+<table class="border--round table--alternate-row">
+  <thead>
+    <tr>
+      <th>Energy Level</th>
+      <th>Day</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @energy_levels.each do |level| %>
+      <tr>
+        <td><%= level.value %></td>
+        <td><%= level.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
+      </tr>
+    <% end %>
+
+
+    <%= line_chart @energy_levels.pluck(:created_at, :value) %>
+  </tbody>
+</table>

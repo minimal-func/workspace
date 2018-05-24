@@ -1,4 +1,4 @@
-class RenameLifeCountdownToMainTask < ActiveRecord::Migration[5.1]
+class CreateMainTasks < ActiveRecord::Migration[5.1]
   def change
     drop_table :life_countdowns
 
