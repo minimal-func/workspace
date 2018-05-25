@@ -1,3 +1,5 @@
 .col-md-12
-  .working-task-timer
-    = react_component("TaskBox", { presenter: @working_tasks_presenter.to_json, prerender: true})
+  .row.justify-content-md-center
+    .col-md-8
+      .working-task-timer
+        = react_component("TaskBox", { presenter: @working_tasks_presenter.to_json, prerender: true})

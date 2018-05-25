@@ -1,6 +1,5 @@
 {
   "name": "reflections",
   "private": true,
-  "dependencies": {},
-  "scripts": { "postinstall": "cd client && npm install" }
+  "dependencies": {}
 }
