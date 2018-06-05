@@ -16,8 +16,6 @@ class User < ApplicationRecord
   has_many :today_reflections, -> { today }, class_name: "Reflection", dependent: :destroy
   has_many :today_daily_lessons, -> { today }, class_name: "DailyLesson", dependent: :destroy
 
-  has_many :working_tasks
-
   has_one :main_task
 
   def today_biggest_challenges=(value)

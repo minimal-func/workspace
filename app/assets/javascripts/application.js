@@ -14,7 +14,4 @@
 //= require jquery-3.1.1.min
 //= require highcharts
 //= require chartkick
-//= require react
-//= require react_ujs
-//= require components
 //= require_tree .

@@ -8,10 +8,6 @@ Rails.application.routes.draw do
   resources :daily_lessons, only: [:index]
   resources :main_task, only: [:new, :create]
 
-  resources :working_tasks, only: [:create, :index] do
-    post :finish
-  end
-
   devise_for :users, controllers: {
     sessions:    "users/sessions",
     passwords: "users/passwords",
