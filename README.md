@@ -13,6 +13,12 @@ Features:
 - Track your progress and levels
 - Your one main goal with countdown!
 
+
+![Screenshot](/app/assets/images/dashboard_page.png)]
+
+
+![Screenshot](/app/assets/images/plot_energy_level.png)]
+
 Roadmap:
 ---------
 - Add endless scrolling (pagination) for reports
