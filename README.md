@@ -14,10 +14,10 @@ Features:
 - Your one main goal with countdown!
 
 
-![Screenshot](/app/assets/images/dashboard_page.png)]
+![Screenshot](/app/assets/images/dashboard_page.png)
 
 
-![Screenshot](/app/assets/images/plot_energy_level.png)]
+![Screenshot](/app/assets/images/plot_energy_level.png)
 
 Roadmap:
 ---------

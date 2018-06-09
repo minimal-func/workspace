@@ -18,46 +18,6 @@ class User < ApplicationRecord
 
   has_one :main_task
 
-  def today_biggest_challenges=(value)
-    if today_biggest_challenges.size.empty?
-      biggest_challenges.create(value)
-    else
-      raise ActiveRecord::Rollback, "BiggestChallenge already created!"
-    end
-  end
-
-  def today_day_ratings=(value)
-    if today_day_ratings.size.empty?
-      day_ratings.create(value)
-    else
-      raise ActiveRecord::Rollback, "DayRating already created!"
-    end
-  end
-
-  def today_reflections=(value)
-    if today_reflections.size.empty?
-      reflections.create(value)
-    else
-      raise ActiveRecord::Rollback, "Reflection already created!"
-    end
-  end
-
-  def today_daily_lessons=(value)
-    if today_daily_lessons.size.empty?
-      daily_lessons.create(value)
-    else
-      raise ActiveRecord::Rollback, "DailyLesson already created!"
-    end
-  end
-
-  def today_energy_levels=(value)
-    if today_energy_levels.size.empty?
-      energy_levels.create(value)
-    else
-      raise ActiveRecord::Rollback, "BiggestChallenge already created!"
-    end
-  end
-
   accepts_nested_attributes_for :today_day_ratings, allow_destroy: true
   accepts_nested_attributes_for :today_energy_levels, allow_destroy: true
   accepts_nested_attributes_for :today_reflections, allow_destroy: true
