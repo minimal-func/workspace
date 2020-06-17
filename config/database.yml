@@ -13,4 +13,7 @@ test:
 
 production:
   <<: *default
-  url: <%= ENV.fetch("POSTGRESQL_URL", "") %>
+  database: reflections_production
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
