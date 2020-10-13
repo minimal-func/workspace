@@ -1,0 +1,6 @@
+ul
+  - @projects.each do |project|
+    li
+      = link_to project.title, timetracker_project_tasks_url(project)
+
+= link_to "new project", new_timetracker_project_url

@@ -1,0 +1,165 @@
+// document
+
+*{
+	margin: 0;
+	padding: 0;
+}
+html{
+	height: 100%;
+	width: 100%;
+	text-size-adjust: none;
+}
+body{
+	position: relative;
+	font: 400 1em/1.4em $font;
+	background: $bg-color;
+	color: $text-color;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	width: 100%;
+
+	@media all and(max-width: 1000px){
+		min-width: 320px;
+	}
+}
+
+// reset img border for ie
+
+img, a img{
+	border: 0;
+}
+
+// html5 for older browsers
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section{
+	display: block;
+}
+
+// inputs
+
+input, select, button, textarea{
+	font: 400 1em/1.1em $font-inputs;
+	box-sizing: border-box;
+}
+
+button::-moz-focus-inner, input::-moz-focus-inner{
+	border: 0;
+	padding: 0;
+}
+.button{
+	text-decoration: none;
+	display: inline-block;
+	padding: 0.5em 2.5em;
+	color: #fff;
+	background-color: $green;
+	border: none;
+	cursor: pointer;
+	background-image: linear-gradient(to right, darken($green, 20%), darken($green, 20%));
+	background-size: 0 100%;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	transition: background-size 0.2s $easeOutCubic;
+	&:hover{
+		background-size: 100% 100%;
+	}
+}
+
+// links
+
+a{
+	color: $link-color;
+
+	&:hover{
+		color: $link-color-hover;
+	}
+}
+.dt{
+	$offset: .12em;
+	top: -$offset;
+	border-bottom: 1px dotted;
+	text-decoration: none;
+	position: relative;
+	cursor: pointer;
+	color: $link-color;
+
+	span{
+		position: relative;
+		color: $link-color;
+		top: $offset;
+		margin-bottom: -$offset;
+		transition: color 0.2s $easeOutCubic;
+	}
+
+	&:hover,
+	&:hover span{
+		color: $link-color-hover;
+	}
+}
+
+
+
+// mixs
+
+@mixin clearfix{
+	&:after{
+		content: "";
+		display: block;
+		clear: both;
+		width: 0;
+		height: 0;
+		padding: 0;
+		margin: 0;
+		border: 0;
+	}
+}
+
+@mixin dt($color, $hover-color, $offset: .2em){
+	top: -$offset;
+	border-bottom: 1px dotted;
+	text-decoration: none;
+	position: relative;
+	cursor: pointer;
+	color: $color;
+
+	span{
+		position: relative;
+		top: $offset;
+		margin-bottom: -$offset;
+	}
+
+	&:hover{
+		&, span{
+			color: $hover-color;
+		}
+	}
+}
+@mixin solid($color: $link-color, $hover-color: $link-color-hover, $offset: .2em){
+  border-bottom-style: solid;
+}
+
+@mixin line($color: $link-color, $hover-color: $link-color-hover, $alpha: .5){
+	color: $color;
+	color: fade-out($color, .5);
+
+	span{
+		color: $color;
+	}
+	&:hover{
+		color: $hover-color;
+		color: fade-out($hover-color, .5);
+		span{
+			color: $hover-color;
+		}
+	}
+}
+
+@mixin retina-bg($img, $width, $height){
+	background-image: url("#{$images}#{$img}");
+	background-size: $width $height;
+
+	@media (min-device-pixel-ratio: 1.25), (min-resolution: 1.25dppx){
+		background-image: url("#{$retina}#{$img}");
+	}
+}
+

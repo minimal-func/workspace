@@ -1,0 +1,64 @@
+.background-big {
+	background: image-url("background-big.jpg");
+}
+
+.form{
+	margin-bottom: 2em;
+	form{
+		white-space: nowrap;
+		position: relative;
+		input{
+			display: inline-block;
+			padding: 0.5em 1em;
+			padding-right: 230px;
+			width: 100%;
+			border: 1px solid $gray-border;
+			border-radius: 2px;
+		}
+		.button-holder{
+			position: absolute;
+			height: 100%;
+			right: 0;
+			top: 0;
+		}
+		.timer{
+			display: inline-block;
+			padding: 0.4em 1em;
+			line-height: normal;
+			color: $gray-text-dark;
+		}
+		button{
+			height: 100%;
+			border-radius: 0 2px 2px 0;
+		}
+	}
+}
+
+.task-list{
+	h4{
+		margin-bottom: 0.5em;
+	}
+	.result-table{
+		border-collapse: collapse;
+		margin-bottom: 2em;
+		font-size: 0.9em;
+		width: 100%;
+		tr{
+			border: 1px solid $gray-border;
+			td{
+				padding: 1em;
+				vertical-align: top;
+			}
+			.name{
+				white-space: nowrap;
+			}
+			.time{
+				white-space: nowrap;
+				color: $gray-text-dark;
+			}
+			.desc{
+				color: $gray-text-dark;
+			}
+		}
+	}
+}

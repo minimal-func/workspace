@@ -1,0 +1,36 @@
+// vars
+$font: 				"Open Sans", "Helvetica Neue", Tahoma, Arial, Helvetica, sans-serif;
+$font-inputs: 		$font;
+
+
+// colors
+$bg-color:			#fff;
+$gray-bg: 			#F1F1F1;
+$text-color:		#000;
+
+$link-color:		#069;
+$link-color-hover: 	#f00;
+
+$gmap-bg: 			#e5e3df;
+
+$black: 			#323232;
+$green: 			#A0D38A;
+
+$gray-text: 		#ADADAD;
+$gray-text-dark:	#939393;
+$gray-border: 		#D8D8D8;
+
+
+
+// paths
+$images: 			"/img/";
+$retina: 			"/img/retina/";
+
+
+//easings
+$easeInOutCubic: 	cubic-bezier(0.645, 0.045, 0.355, 1);
+$easeOutCubic: 		cubic-bezier(0.215, 0.61, 0.355, 1);
+$easeInCubic: 		cubic-bezier(0.55, 0.055, 0.675, 0.19);
+$easeInQuad: 		cubic-bezier(0.55, 0.085, 0.68, 0.53);
+$easeOutBack:		cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$easeInBack:		cubic-bezier(0.6, -0.28, 0.735, 0.045);;

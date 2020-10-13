@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Timetracker</title>
+    <%= csrf_meta_tags %>
+
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script>
+      document.getElementsByTagName('html')[0].className = 'js ' + ((/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) ? 'mobile' : 'desktop');
+    </script>
+
+    <%= stylesheet_link_tag 'timetracker', media: 'all' %>
+
+  </head>
+
+  <body>
+    <header class="header header-main">
+      <div class="wrapper">
+        <%= current_user.email %>
+        <div class="user">
+          <%= image_tag gravatar_url(current_user.email, 128) || "avatar-round-1.png", class: "avatar image--xxs round" %><%= current_user.email %>
+        </div>
+        <div class="clr"></div>
+      </div>
+    </header>
+
+    <%= yield %>
+
+    <footer class="footer footer-main">
+      <div class="wrapper">
+
+      </div>
+    </footer>
+
+    <%= javascript_include_tag 'application' %>
+
+  </body>
+</html>

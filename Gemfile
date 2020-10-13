@@ -28,6 +28,11 @@ gem "simple_form"
 
 gem "redcarpet"
 
+gem "react-rails"
+gem "semantic-ui-sass", github: "doabit/semantic-ui-sass"
+
+gem 'pagy'
+
 group :test do
   gem "simplecov", require: false
   gem "capybara"

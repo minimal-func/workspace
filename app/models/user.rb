@@ -18,6 +18,8 @@ class User < ApplicationRecord
 
   has_one :main_task
 
+  has_many :projects
+
   accepts_nested_attributes_for :today_day_ratings, allow_destroy: true
   accepts_nested_attributes_for :today_energy_levels, allow_destroy: true
   accepts_nested_attributes_for :today_reflections, allow_destroy: true
