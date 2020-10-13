@@ -1,8 +1,8 @@
-# MyReflections diary application
+# Workspace - Personal productivity application
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/ildarsafin/myreflections)
 
-MyReflections is webapp which allows you to write your thoughts and track your energy levels and rate your day.
+Workspace is webapp which allows you to write your thoughts and track your energy levels and rate your day.
 
 Features:
 ---------
