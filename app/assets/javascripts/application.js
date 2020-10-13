@@ -22,7 +22,6 @@
 //= require react
 //= require react_ujs
 //= require components
-//= require scripts
 
 $(function() {
   $(".conclusion-popup").on("click", function(e){
