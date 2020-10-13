@@ -63,11 +63,6 @@ end
 
 group :staging, :production do
   gem "rails_12factor"
-
-  gem "capistrano"
-  gem "capistrano-bundler"
-  gem "capistrano-rails"
-  gem "capistrano-rbenv", github: "capistrano/rbenv"
 end
 
 group :development do
