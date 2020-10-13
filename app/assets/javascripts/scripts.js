@@ -273,46 +273,6 @@ mr = (function (mr, $, window, document){
 
 }(mr, jQuery, window, document));
 
-//////////////// Countdown
-mr = (function (mr, $, window, document){
-    "use strict";
-
-    mr.countdown = mr.countdown || {};
-    mr.countdown.options = mr.countdown.options || {};
-
-    mr.countdown.documentReady = function($){
-
-        $('.countdown[data-date]').each(function(){
-            var element      = $(this),
-                date         = element.attr('data-date'),
-                daysText     = typeof element.attr('data-days-text') !== typeof undefined ? '%D '+element.attr('data-days-text')+' %H:%M:%S': '%D days %H:%M:%S',
-                daysText     = typeof mr.countdown.options.format !== typeof undefined ? mr.countdown.options.format : daysText,
-                dateFormat   = typeof element.attr('data-date-format') !== typeof undefined ? element.attr('data-date-format'): daysText,
-
-                fallback;
-
-            if(typeof element.attr('data-date-fallback') !== typeof undefined){
-                fallback = element.attr('data-date-fallback') || "Timer Done";
-            }
-
-            element.countdown(date, function(event) {
-                if(event.elapsed){
-                    element.text(fallback);
-                }else{
-                    element.text(
-                      event.strftime(dateFormat)
-                    );
-                }
-            });
-        });
-
-    };
-
-    mr.components.documentReadyDeferred.push(mr.countdown.documentReady);
-    return mr;
-
-}(mr, jQuery, window, document));
-
 //////////////// Datepicker
 mr = (function (mr, $, window, document){
     "use strict";
