@@ -1,10 +1,4 @@
-// require("react_ujs");
-// require('components/TaskBox');
-// require('components/EndTaskForm');
-// require('components/TaskForm');
-// require('components/Task');
-// require('components/TasksList');
-// Support component names relative to this directory:
+import '../stylesheets/application';
 
 var componentRequireContext = require.context("components", true);
 var ReactRailsUJS = require("react_ujs");
