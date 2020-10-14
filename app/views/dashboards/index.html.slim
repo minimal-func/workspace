@@ -9,7 +9,7 @@
           span
             | I need to&nbsp;
             = @main_task.name.downcase
-            | &nbsp;on&nbsp;
+            | &nbsp;by&nbsp;
             strong= @main_task.planned_finish.strftime("%A, %d %B %Y")
       .col-md-12
         = f.simple_fields_for :today_reflections do |reflection|
