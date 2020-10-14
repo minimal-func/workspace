@@ -1,7 +1,6 @@
-.d-flex.justify-content-center
-  .col-md-8
+.row
+  .col-md-12
     = simple_form_for(@main_task, url: main_task_index_url, method: :post, html: { class: 'row' }) do |f|
-
       .col-md-12
         label * My main task is:
         = f.input :name

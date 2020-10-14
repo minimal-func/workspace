@@ -12,16 +12,9 @@
 //
 //= require jquery
 //= require rails-ujs
-//= require semantic-ui
 //= require highcharts
-//= require easypiechart.min
-//= require jquery.datetimepicker.full
 //= require datepicker
 //= require chartkick
-//= require project
-//= require react
-//= require react_ujs
-//= require components
 //= require scripts
 
 $(function() {

@@ -17,9 +17,6 @@ gem "uglifier", ">= 1.3.0"
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem "therubyracer", platforms: :ruby
 
-# Use CoffeeScript for .coffee assets and views
-gem "coffee-rails"
-
 gem "jquery-rails"
 
 gem "devise"
@@ -29,13 +26,12 @@ gem "simple_form"
 gem "redcarpet"
 
 gem "react-rails"
-gem "semantic-ui-sass", github: "doabit/semantic-ui-sass"
+gem 'webpacker', '~> 4.x'
 
 gem 'pagy'
 
 group :test do
   gem "simplecov", require: false
-  gem "capybara"
   gem "database_cleaner"
   gem "shoulda-matchers", require: false
   gem "timecop"
