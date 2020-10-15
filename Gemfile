@@ -18,6 +18,9 @@ gem "sass-rails"
 gem "uglifier", ">= 1.3.0"
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem "therubyracer", platforms: :ruby
+gem 'jbuilder', '~> 2.7'
+
+gem "rest-client"
 
 gem "jquery-rails"
 

@@ -3,7 +3,8 @@ import '../stylesheets/application';
 var componentRequireContext = require.context("components", true);
 var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);
-require("trix")
+
+import Trix from "trix";
 require("@rails/actiontext")
 
 $.ajaxSetup({
