@@ -8,6 +8,8 @@ gem "pg"
 gem "chartkick"
 gem "highcharts-rails"
 
+gem 'image_processing', '~> 1.2'
+
 # Use Puma as the app server
 gem "puma"
 # Use SCSS for stylesheets

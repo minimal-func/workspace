@@ -1,0 +1,31 @@
+section class="space--sm"
+  .container
+    .row
+      - @topics.each do |topic|
+        .col-md-6.mb-3
+          .card.card-2.text-center
+            .card__top
+              = link_to wiki_topic_concepts_path(topic) do
+                - if topic.featured_image.attached?
+                  = image_tag topic.featured_image
+            .card__body
+              = link_to wiki_topic_concepts_path(topic) do
+                h4
+                  = topic.name
+
+              span class="type--fade" by #{topic.creator.email}
+              p
+                = topic.short_description
+
+            .card__bottom.text-center
+              .card__action
+                - if user_signed_in? && current_user.subscribed?(topic)
+                  span class="h6 type--uppercase type--fade" Subscribed
+                  a href="#" disabled=true
+                    i class="material-icons" flip_to_front
+                - else
+                  span class="h6 type--uppercase" Subscribe
+                  = link_to wiki_topic_subscribe_path(topic), method: :post do
+                    i class="material-icons" flip_to_front
+
+= link_to 'New topic', new_wiki_topic_path

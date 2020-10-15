@@ -20,6 +20,21 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :wiki do
+    resources :topics do
+      resources :concepts
+  
+      post :subscribe
+    end
+  
+    resources :concepts, only: [] do
+      post :learn
+    end
+  end
+  
+  resources :embeds
+
+
   devise_for :users, controllers: {
     sessions:    "users/sessions",
     passwords: "users/passwords",

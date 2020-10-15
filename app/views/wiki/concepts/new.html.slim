@@ -1,0 +1,22 @@
+.container
+  .row
+    .col-8
+      = simple_form_for @concept, url: wiki_topic_concepts_url(@topic) do |f|
+        .row
+          .col-12
+            = f.input :title
+
+          .col-12
+            = f.input :featured_image
+
+          .col-12
+            = f.input :short_description
+
+          .col-12
+            = f.input :learning_time_minutes
+
+          .col-12
+            = f.input :content, as: :rich_text_area, input_html: { data: { embeds_path: embeds_path(@concept, format: :json) } }
+
+          .col-12
+            = f.submit

@@ -25,4 +25,22 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :today_reflections, allow_destroy: true
   accepts_nested_attributes_for :today_daily_lessons, allow_destroy: true
   accepts_nested_attributes_for :today_biggest_challenges, allow_destroy: true
+
+  has_many :topic_subscriptions, class_name: 'Wiki::TopicSubscription', foreign_key: 'wiki_topic_id'
+  has_many :topics, through: :topic_subscriptions, class_name: 'Wiki::Topic'
+
+  has_many :concept_learnings, class_name: 'Wiki::ConceptLearning', foreign_key: 'wiki_concept_id'
+  has_many :concepts, through: :concept_learnings, class_name: 'Wiki::Concept'
+
+  def topic_creator?(topic)
+    topic.created_by == id
+  end
+
+  def subscribed?(topic)
+    topic_subscriptions.where(topic: topic).present?
+  end
+
+  def learned?(concept)
+    concept_learnings.where(concept: concept).present?
+  end
 end

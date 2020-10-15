@@ -1,8 +1,6 @@
 module Timetracker
   class ProjectsController < ApplicationController
 
-    # layout 'timetracker'
-
     def index
       @projects = current_user.projects
     end

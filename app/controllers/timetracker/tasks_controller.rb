@@ -1,8 +1,6 @@
 module Timetracker
   class TasksController < ApplicationController
     
-    # layout 'timetracker'
-    
     def index
       @projects = current_user.projects
       @current_project = Project.find(params[:project_id])

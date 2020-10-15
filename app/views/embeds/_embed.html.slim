@@ -1,0 +1,5 @@
+.youtube-embed.embed
+  .content
+    = image_tag(embed.thumbnail_url) if embed.thumbnail_url.present?
+    p = "Embed from #{embed.provider_name} (#{embed.content})"
+    p.embed-html = embed.html
