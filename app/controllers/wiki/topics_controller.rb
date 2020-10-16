@@ -13,7 +13,7 @@ module Wiki
     end
 
     def index
-      @topics = Wiki::Topic.all
+      @topics = current_user.topics.all
     end
 
     def subscribe
