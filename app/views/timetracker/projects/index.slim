@@ -1,9 +1,8 @@
-.row
-  .col-md-12
-    ul
-      - @projects.each do |project|
-        li
-          = link_to project.title, timetracker_project_tasks_url(project)
-.row
-  .col-md-12
-    = link_to "new project", new_timetracker_project_url
+.col-md-12
+  ul
+    - @projects.each do |project|
+      li
+        = link_to project.title, timetracker_project_tasks_url(project)
+
+.col-md-12
+  = link_to "new project", new_timetracker_project_url
