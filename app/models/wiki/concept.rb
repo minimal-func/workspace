@@ -4,7 +4,7 @@ module Wiki
 
     belongs_to :topic, class_name: 'Wiki::Topic', foreign_key: 'wiki_topic_id'
   
-    has_many :concept_learnings, class_name: 'Wiki::ConceptLearning', dependent: :destroy
+    has_many :concept_learnings, class_name: 'Wiki::ConceptLearning', foreign_key: 'wiki_concept_id', dependent: :destroy
     has_many :users, through: :concept_learnings
   
     has_rich_text :content
