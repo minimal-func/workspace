@@ -1,6 +1,8 @@
 module Wiki
   class ConceptsController < ApplicationController
 
+    skip_before_action :authenticate_user!, only: [:index, :show]
+
     def new
       @topic = Wiki::Topic.find(params[:topic_id])
       @concept = @topic.concepts.build
