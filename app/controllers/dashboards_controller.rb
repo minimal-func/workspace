@@ -27,6 +27,7 @@ class DashboardsController < ApplicationController
       today_daily_lessons_attributes: [:id, :content],
       today_reflections_attributes: [:id, :content],
       today_biggest_challenges_attributes: [:id, :content],
+      today_moods_attributes: [:id, :value],
       today_day_ratings_attributes: [:id, :value],
       today_energy_levels_attributes: [:id, :value]
     )
