@@ -16,6 +16,12 @@
           = reflection.input :content, placeholder: "I didn't have time today but tomorrow I will...", label: "Reflecting on today: (in markdown format)", required: true, input_html: { rows: 6 }
 
       .col-md-12
+        label * My mood today (1=bad 10=awesome):
+        .input-radio.input-radio--innerlabel.d-flex.justify-content-center
+          = f.simple_fields_for :today_moods do |mood|
+            = mood.input :value, as: :radio_buttons, label: false, required: true, collection: 1..10, checked: mood.object.value || 10, input_html: { class: 'col-md-1' }, wrapper_html: { class: 'row' }
+
+      .col-md-12
         label * My level of confidence that I'm on the right track (1=lowest 10=highest):
         .input-radio.input-radio--innerlabel.d-flex.justify-content-center
           = f.simple_fields_for :today_day_ratings do |day_rating|

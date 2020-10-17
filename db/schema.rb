@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_15_160818) do
+ActiveRecord::Schema.define(version: 2020_10_17_134315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,14 @@ ActiveRecord::Schema.define(version: 2020_10_15_160818) do
     t.index ["user_id"], name: "index_main_tasks_on_user_id"
   end
 
+  create_table "moods", force: :cascade do |t|
+    t.integer "value"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_moods_on_user_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.bigint "user_id", null: false
@@ -191,6 +199,7 @@ ActiveRecord::Schema.define(version: 2020_10_15_160818) do
   add_foreign_key "day_ratings", "users"
   add_foreign_key "energy_levels", "users"
   add_foreign_key "main_tasks", "users"
+  add_foreign_key "moods", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "reflections", "users"
   add_foreign_key "tasks", "projects"

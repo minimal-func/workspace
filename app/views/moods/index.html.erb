@@ -1,0 +1,18 @@
+<table class="border--round table--alternate-row">
+  <thead>
+    <tr>
+      <th>Mood</th>
+      <th>Day</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @moods.each do |mood| %>
+      <tr>
+        <td><%= mood.value %></td>
+        <td><%= mood.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
+      </tr>
+    <% end %>
+
+    <%= line_chart @moods.pluck(:created_at, :value) %>
+  </tbody>
+</table>
