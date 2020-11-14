@@ -1,0 +1,16 @@
+<table class="border--round table--alternate-row">
+  <thead>
+    <tr>
+      <th style="width: 80%">Daily Gratitudes</th>
+      <th style="width: 20%">Day</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @daily_gratitudes.each do |gratitude| %>
+      <tr>
+        <td><%= gratitude.content.html_safe %></td>
+        <td><%= gratitude.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

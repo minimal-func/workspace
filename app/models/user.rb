@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :moods, dependent: :destroy
   has_many :reflections, dependent: :destroy
   has_many :daily_lessons, dependent: :destroy
+  has_many :daily_gratitudes, dependent: :destroy
   has_many :biggest_challenges, dependent: :destroy
 
   has_many :today_biggest_challenges, -> { today }, class_name: "BiggestChallenge", dependent: :destroy
@@ -17,6 +18,7 @@ class User < ApplicationRecord
   has_many :today_moods, -> { today }, class_name: "Mood", dependent: :destroy
   has_many :today_reflections, -> { today }, class_name: "Reflection", dependent: :destroy
   has_many :today_daily_lessons, -> { today }, class_name: "DailyLesson", dependent: :destroy
+  has_many :today_daily_gratitudes, -> { today }, class_name: "DailyGratitude", dependent: :destroy
 
   has_one :main_task
 
@@ -27,6 +29,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :today_moods, allow_destroy: true
   accepts_nested_attributes_for :today_reflections, allow_destroy: true
   accepts_nested_attributes_for :today_daily_lessons, allow_destroy: true
+  accepts_nested_attributes_for :today_daily_gratitudes, allow_destroy: true
   accepts_nested_attributes_for :today_biggest_challenges, allow_destroy: true
 
   has_many :topic_subscriptions, class_name: 'Wiki::TopicSubscription', foreign_key: 'wiki_topic_id'
