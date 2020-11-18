@@ -2,7 +2,10 @@ module Timetracker
   class ProjectsController < ApplicationController
 
     def index
-      @projects = current_user.projects
+      projects = current_user.projects
+
+      @active_projects = projects.where(closed: false)
+      @closed_projects = projects.where(closed: true)
     end
 
     def new
@@ -12,6 +15,24 @@ module Timetracker
     def create
       @project = current_user.projects.create(project_params)
       redirect_to timetracker_project_tasks_url(@project)
+    end
+
+    def close
+      @project = current_user.projects.find(params[:project_id])
+      @project.update(closed: true)
+      redirect_to timetracker_projects_url
+    end
+
+    def open
+      @project = current_user.projects.find(params[:project_id])
+      @project.update(closed: false)
+      redirect_to timetracker_projects_url
+    end
+
+    def destroy
+      @project = current_user.projects.find(params[:id])
+      @project.destroy
+      redirect_to timetracker_projects_url
     end
 
     private

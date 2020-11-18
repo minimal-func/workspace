@@ -11,12 +11,15 @@ Rails.application.routes.draw do
   resources :main_task, only: [:new, :create]
 
   namespace :timetracker do
-    resources :projects, only: [:new, :create, :index] do
+    resources :projects, only: %i[new create index destroy] do
+      post :close
+      post :open
+
       resources :tasks, only: [:create, :index] do
         post :finish
       end
     end
-  
+
     resources :tasks, only: [] do
       post :finish
     end

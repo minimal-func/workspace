@@ -1,12 +1,11 @@
 module Timetracker
   class TasksController < ApplicationController
-    
+
     def index
       @projects = current_user.projects
       @current_project = Project.find(params[:project_id])
 
       @pagy, @tasks = pagy(@current_project.tasks.order(created_at: :desc), items: 10)
-
 
       @tasks_presenter = {
         tasks: @tasks,
