@@ -11,6 +11,16 @@
             = @main_task.name.downcase
             | &nbsp;by&nbsp;
             strong= @main_task.planned_finish.strftime("%A, %d %B %Y")
+            =< link_to "edit", new_main_task_url, class: 'color--dark'
+
+        .col-md-12
+          p
+            => link_to "Track my time", timetracker_projects_url, class: 'color--dark'
+      - else
+        .col-md-12
+          span You did not set your main task yet
+        .col-md-12
+          = link_to "Set my main task", new_main_task_url
 
       .col-md-12
         label * My mood today (1=bad 10=awesome):
@@ -50,5 +60,5 @@
         = f.button :submit, "Save my day"
 
       .col-md-12
-        p
+        pre
           = simple_format(render "formatting")

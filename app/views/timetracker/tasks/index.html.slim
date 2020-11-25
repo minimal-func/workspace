@@ -1,8 +1,5 @@
 .col-md-12
   h1
     = @current_project.title
-
-.col-md-12
   = react_component("TaskBox", { presenter: @tasks_presenter.to_json, prerender: true})
-.col-md-12
-  == pagy_nav(@pagy)
+  == pagy_nav(@pagy) if @pagy.pages > 1
