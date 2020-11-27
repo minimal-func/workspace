@@ -1,6 +1,8 @@
 module Wiki
   class TopicsController < ApplicationController
 
+    before_action :set_app_title
+
     def new
       @topic = Wiki::Topic.new
     end
@@ -26,6 +28,10 @@ module Wiki
 
     def topic_params
       params.require(:wiki_topic).permit(:name, :featured_image, :short_description)
+    end
+
+    def set_app_title
+      @app_title = 'Wiki'
     end
 
   end

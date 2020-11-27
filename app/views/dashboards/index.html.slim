@@ -1,11 +1,11 @@
 .d-flex.justify-content-center
-  .col-md-8
+  .col-sm-12
     = simple_form_for(@user, url: dashboards_url, method: :post, html: { class: 'row' }) do |f|
-      .col-md-12
+      .col-sm-12
         span
           = DateTime.now.strftime("%A, %d %B %Y, %H:%M")
       - if @main_task
-        .col-md-12
+        .col-sm-12
           span
             | I need to&nbsp;
             = @main_task.name.downcase
@@ -13,52 +13,52 @@
             strong= @main_task.planned_finish.strftime("%A, %d %B %Y")
             =< link_to "edit", new_main_task_url, class: 'color--dark'
 
-        .col-md-12
+        .col-sm-12
           p
             => link_to "Track my time", timetracker_projects_url, class: 'color--dark'
       - else
-        .col-md-12
+        .col-sm-12
           span You did not set your main task yet
-        .col-md-12
+        .col-sm-12
           = link_to "Set my main task", new_main_task_url
 
-      .col-md-12
+      .col-sm-12
         label * My mood today (1=bad 10=awesome):
         .input-radio.input-radio--innerlabel.d-flex.justify-content-center
           = f.simple_fields_for :today_moods do |mood|
-            = mood.input :value, as: :radio_buttons, label: false, required: true, collection: 1..10, checked: mood.object.value || 10, input_html: { class: 'col-md-1' }, wrapper_html: { class: 'row' }
+            = mood.input :value, as: :radio_buttons, label: false, required: true, collection: 1..10, checked: mood.object.value || 10, wrapper_html: { class: 'row' }
 
-      .col-md-12
+      .col-sm-12
         label * My level of confidence that I'm on the right track (1=lowest 10=highest):
         .input-radio.input-radio--innerlabel.d-flex.justify-content-center
           = f.simple_fields_for :today_day_ratings do |day_rating|
-            = day_rating.input :value, as: :radio_buttons, label: false, required: true, collection: 1..10, checked: day_rating.object.value || 10, input_html: { class: 'col-md-1' }, wrapper_html: { class: 'row' }
+            = day_rating.input :value, as: :radio_buttons, label: false, required: true, collection: 1..10, checked: day_rating.object.value || 10, wrapper_html: { class: 'row' }
 
-      .col-md-12
+      .col-sm-12
         label * My level of energy (1=lowest 10=highest):
         .input-radio.input-radio--innerlabel.d-flex.justify-content-center
           = f.simple_fields_for :today_energy_levels do |energy_level|
-            = energy_level.input :value, as: :radio_buttons, label: false, required: true, collection: 1..10, checked: energy_level.object.value || 10, input_html: { class: 'col-md-1' }, wrapper_html: { class: 'row' }
+            = energy_level.input :value, as: :radio_buttons, label: false, required: true, collection: 1..10, checked: energy_level.object.value || 10, wrapper_html: { class: 'row' }
 
-      .col-md-12
+      .col-sm-12
         = f.simple_fields_for :today_biggest_challenges do |biggest_challenge|
           = biggest_challenge.input :content, placeholder: "To make my day successful I need to ...", label: "Today's Biggest Challenge:", required: true, input_html: { rows: 1 }
 
-      .col-md-12
+      .col-sm-12
         = f.simple_fields_for :today_daily_lessons do |daily_lesson|
           = daily_lesson.input :content, placeholder: "What did I learn today", label: "One Important thing I learned today:", required: true, input_html: { rows: 1 }
 
-      .col-md-12
+      .col-sm-12
         = f.simple_fields_for :today_daily_gratitudes do |daily_gratitude|
           = daily_gratitude.input :content, placeholder: "Today I am grateful for ...", label: "Today I am grateful for:", required: true, input_html: { rows: 2 }
 
-      .col-md-12
+      .col-sm-12
         = f.simple_fields_for :today_reflections do |reflection|
           = reflection.input :content, placeholder: "I didn't have time today but tomorrow I will...", label: "Reflecting on today: (in markdown format)", required: true, input_html: { rows: 6 }
 
-      .col-md-12
+      .col-sm-12
         = f.button :submit, "Save my day"
 
-      .col-md-12
+      .col-sm-12
         pre
           = simple_format(render "formatting")

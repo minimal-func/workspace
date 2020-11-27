@@ -3,6 +3,8 @@ module Wiki
 
     skip_before_action :authenticate_user!, only: [:index, :show]
 
+    before_action :set_app_title
+
     def new
       @topic = Wiki::Topic.find(params[:topic_id])
       @concept = @topic.concepts.build
@@ -39,5 +41,8 @@ module Wiki
       params.require(:wiki_concept).permit(:title, :content, :featured_image, :short_description, :learning_time_minutes)
     end
 
+    def set_app_title
+      @app_title = 'Wiki'
+    end
   end
 end

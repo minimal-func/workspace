@@ -1,6 +1,8 @@
 module Timetracker
   class ProjectsController < ApplicationController
 
+    before_action :set_app_title
+
     def index
       projects = current_user.projects
 
@@ -41,5 +43,8 @@ module Timetracker
       params.require(:project).permit(:title)
     end
 
+    def set_app_title
+      @app_title = 'Timetracker'
+    end
   end
 end
