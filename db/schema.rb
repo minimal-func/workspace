@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_18_204051) do
+ActiveRecord::Schema.define(version: 2020_12_26_151441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,44 +164,6 @@ ActiveRecord::Schema.define(version: 2020_11_18_204051) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "wiki_concept_learnings", force: :cascade do |t|
-    t.bigint "wiki_concept_id"
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_wiki_concept_learnings_on_user_id"
-    t.index ["wiki_concept_id"], name: "index_wiki_concept_learnings_on_wiki_concept_id"
-  end
-
-  create_table "wiki_concepts", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.string "short_description"
-    t.integer "learning_time_minutes"
-    t.integer "created_by"
-    t.bigint "wiki_topic_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["wiki_topic_id"], name: "index_wiki_concepts_on_wiki_topic_id"
-  end
-
-  create_table "wiki_topic_subscriptions", force: :cascade do |t|
-    t.bigint "wiki_topic_id"
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_wiki_topic_subscriptions_on_user_id"
-    t.index ["wiki_topic_id"], name: "index_wiki_topic_subscriptions_on_wiki_topic_id"
-  end
-
-  create_table "wiki_topics", force: :cascade do |t|
-    t.string "name"
-    t.string "short_description"
-    t.integer "created_by"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "biggest_challenges", "users"
   add_foreign_key "daily_gratitudes", "users"
@@ -213,9 +175,4 @@ ActiveRecord::Schema.define(version: 2020_11_18_204051) do
   add_foreign_key "projects", "users"
   add_foreign_key "reflections", "users"
   add_foreign_key "tasks", "projects"
-  add_foreign_key "wiki_concept_learnings", "users"
-  add_foreign_key "wiki_concept_learnings", "wiki_concepts"
-  add_foreign_key "wiki_concepts", "wiki_topics"
-  add_foreign_key "wiki_topic_subscriptions", "users"
-  add_foreign_key "wiki_topic_subscriptions", "wiki_topics"
 end

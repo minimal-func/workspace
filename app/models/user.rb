@@ -39,16 +39,4 @@ class User < ApplicationRecord
   has_many :concepts, through: :concept_learnings, class_name: 'Wiki::Concept'
 
   has_many :created_topics, class_name: 'Wiki::Topic', foreign_key: :created_by
-
-  def topic_creator?(topic)
-    topic.created_by == id
-  end
-
-  def subscribed?(topic)
-    topic_subscriptions.where(topic: topic).present?
-  end
-
-  def learned?(concept)
-    concept_learnings.where(concept: concept).present?
-  end
 end
