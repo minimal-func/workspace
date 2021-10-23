@@ -13,8 +13,12 @@ test:
 
 production:
   <<: *default
-  database: workspace_production
-  username: <%= ENV['RDS_USERNAME'] %>
-  password: <%= ENV['RDS_PASSWORD'] %>
-  host: <%= ENV['RDS_HOSTNAME'] %>
-  port: <%= ENV['RDS_PORT'] %>
+  url: <%= ENV.fetch("POSTGRESQL_URL", "") %>
+
+# production:
+#   <<: *default
+#   database: workspace_production
+#   username: <%= ENV['RDS_USERNAME'] %>
+#   password: <%= ENV['RDS_PASSWORD'] %>
+#   host: <%= ENV['RDS_HOSTNAME'] %>
+#   port: <%= ENV['RDS_PORT'] %>
