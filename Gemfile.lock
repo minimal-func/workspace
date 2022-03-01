@@ -120,7 +120,7 @@ GEM
     factory_bot_rails (6.1.0)
       factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
-    ffi (1.13.1)
+    ffi (1.15.5)
     fuubar (2.5.0)
       rspec-core (~> 3.0)
       ruby-progressbar (~> 1.4)
@@ -134,7 +134,7 @@ GEM
       domain_name (~> 0.5)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
-    image_processing (1.11.0)
+    image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     jasmine (3.6.0)
@@ -174,7 +174,7 @@ GEM
     mimemagic (0.3.10)
       nokogiri (~> 1)
       rake
-    mini_magick (4.10.1)
+    mini_magick (4.11.0)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.2)
@@ -293,8 +293,8 @@ GEM
     rubocop-ast (0.8.0)
       parser (>= 2.7.1.5)
     ruby-progressbar (1.10.1)
-    ruby-vips (2.0.17)
-      ffi (~> 1.9)
+    ruby-vips (2.1.4)
+      ffi (~> 1.12)
     ruby_dep (1.5.0)
     rubyzip (2.3.0)
     sass (3.7.4)
@@ -390,7 +390,7 @@ DEPENDENCIES
   factory_bot_rails
   fuubar
   highcharts-rails
-  image_processing (~> 1.2)
+  image_processing (~> 1.12)
   jasmine
   jasmine-jquery-rails
   jbuilder (~> 2.7)
