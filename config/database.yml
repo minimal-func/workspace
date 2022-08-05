@@ -11,14 +11,14 @@ test:
   <<: *default
   database: workspace_test
 
+#production:
+#  <<: *default
+#  url: <%#= ENV.fetch("DATABASE_URL", "") %>
+
 production:
   <<: *default
-  url: <%= ENV.fetch("DATABASE_URL", "") %>
-
-# production:
-#   <<: *default
-#   database: workspace_production
-#   username: <%= ENV['RDS_USERNAME'] %>
-#   password: <%= ENV['RDS_PASSWORD'] %>
-#   host: <%= ENV['RDS_HOSTNAME'] %>
-#   port: <%= ENV['RDS_PORT'] %>
+  database: workspace_production
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  port: <%= ENV['RDS_PORT'] %>
