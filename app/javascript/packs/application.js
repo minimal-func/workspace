@@ -92,3 +92,5 @@ $(function() {
       .replaceWith($embed.find(".embed-html").text());
   });
 });
+
+require("trix")
