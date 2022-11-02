@@ -54,7 +54,7 @@
 
       .col-sm-12
         = f.simple_fields_for :today_reflections do |reflection|
-          = reflection.input :content, as: :rich_text_area, placeholder: "I didn't have time today but tomorrow I will...", label: "Reflecting on today: (in markdown format)", required: true, input_html: { data: { embeds_path: embeds_path(reflection.object, format: :json) }, class: 'content' }
+          = reflection.input :content, as: :rich_text_area, label: "I didn't have time today but tomorrow I will...", required: true, input_html: { data: { embeds_path: embeds_path(reflection.object, format: :json) } }
 
       .col-sm-12
         = f.button :submit, "Save my day"
