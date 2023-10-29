@@ -7,8 +7,8 @@ ReactRailsUJS.useContext(componentRequireContext);
 import Trix from "trix";
 require("@rails/actiontext")
 
-import { Turbo } from "@hotwired/turbo-rails"
-window.Turbo = Turbo
+import { Turbo } from "@hotwired/turbo-rails";
+window.Turbo = Turbo;
 
 import $ from "jquery";
 
