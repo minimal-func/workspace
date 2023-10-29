@@ -1,4 +1,5 @@
 import React from "react"
+import $ from "jquery";
 
 class EndTaskForm extends React.Component {
   handleSubmit (event) {

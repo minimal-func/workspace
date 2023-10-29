@@ -10,6 +10,8 @@ require("@rails/actiontext")
 import { Turbo } from "@hotwired/turbo-rails"
 window.Turbo = Turbo
 
+import $ from "jquery";
+
 $.ajaxSetup({
   headers: {
     "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),

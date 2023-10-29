@@ -1,4 +1,5 @@
 import React from "react"
+import $ from "jquery";
 import EndTaskForm from './EndTaskForm'
 import TaskForm from './TaskForm'
 import TasksList from './TasksList'
