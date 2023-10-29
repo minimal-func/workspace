@@ -1,9 +1,9 @@
 source "https://rubygems.org"
 
-ruby "2.7.3"
+ruby "3.2.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
-gem "rails", '>= 6.0'
+gem "rails", '>= 7.0'
 gem "pg"
 gem "chartkick"
 gem "highcharts-rails"
@@ -33,9 +33,10 @@ gem "simple_form"
 gem "redcarpet"
 
 gem "react-rails"
-gem 'webpacker', '~> 4.x'
+gem 'webpacker'
 
 gem 'pagy'
+gem 'turbo-rails'
 
 group :test do
   gem "simplecov", require: false
@@ -80,3 +81,6 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
 end
 
+
+# Use Redis for Action Cable
+gem "redis", "~> 4.0"

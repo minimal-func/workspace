@@ -7,6 +7,9 @@ ReactRailsUJS.useContext(componentRequireContext);
 import Trix from "trix";
 require("@rails/actiontext")
 
+import { Turbo } from "@hotwired/turbo-rails"
+window.Turbo = Turbo
+
 $.ajaxSetup({
   headers: {
     "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),

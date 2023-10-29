@@ -16,6 +16,8 @@
 //= require datepicker
 //= require chartkick
 //= require scripts
+//= require @hotwired/turbo-rails
+window.Turbo = Turbo
 
 $(function() {
   $(".conclusion-popup").on("click", function(e){
