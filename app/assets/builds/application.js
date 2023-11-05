@@ -32450,6 +32450,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
   var TaskBox_default = TaskBox;
 
   // app/javascript/packs/application.js
+  var import_jquery4 = __toESM(require_jquery());
   var import_trix = __toESM(require_trix_umd_min());
 
   // node_modules/@hotwired/turbo/dist/turbo.es2017-esm.js
@@ -36475,16 +36476,6 @@ For more info, visit https://fb.me/react-mock-scheduler`);
   addEventListener("turbo:before-fetch-request", encodeMethodIntoRequestBody);
 
   // app/javascript/packs/application.js
-  var import_jquery4 = __toESM(require_jquery());
-  window.onload = main;
-  function main() {
-    const rootElement = document.getElementById("root");
-    if (rootElement) {
-      const presenter = JSON.parse(rootElement.dataset.presenter);
-      console.log(presenter);
-      import_react_dom.default.render(/* @__PURE__ */ import_react6.default.createElement(TaskBox_default, { presenter }), rootElement);
-    }
-  }
   init_actiontext();
   window.Turbo = turbo_es2017_esm_exports;
   import_jquery4.default.ajaxSetup({
@@ -36492,7 +36483,16 @@ For more info, visit https://fb.me/react-mock-scheduler`);
       "X-CSRF-Token": (0, import_jquery4.default)('meta[name="csrf-token"]').attr("content")
     }
   });
+  function loadReact() {
+    const rootElement = document.getElementById("root");
+    if (rootElement) {
+      const presenter = JSON.parse(rootElement.dataset.presenter);
+      console.log(presenter);
+      import_react_dom.default.render(/* @__PURE__ */ import_react6.default.createElement(TaskBox_default, { presenter }), rootElement);
+    }
+  }
   (0, import_jquery4.default)(function() {
+    loadReact();
     var element = document.querySelector("trix-editor");
     if (element) {
       var editor = element.editor;

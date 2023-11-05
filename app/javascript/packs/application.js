@@ -1,8 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TaskBox from '../components/TaskBox';
+import $ from "jquery";
 
-window.onload = loadReact;
+import Trix from "trix";
+require("@rails/actiontext")
+
+import { Turbo } from "@hotwired/turbo-rails";
+window.Turbo = Turbo;
+
+$.ajaxSetup({
+  headers: {
+    "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
+  },
+});
 
 function loadReact(){
   const rootElement = document.getElementById('root');
@@ -13,22 +24,8 @@ function loadReact(){
   }
 }
 
-
-import Trix from "trix";
-require("@rails/actiontext")
-
-import { Turbo } from "@hotwired/turbo-rails";
-window.Turbo = Turbo;
-
-import $ from "jquery";
-
-$.ajaxSetup({
-  headers: {
-    "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
-  },
-});
-
 $(function() {
+  loadReact();
 
   var element = document.querySelector("trix-editor")
 
