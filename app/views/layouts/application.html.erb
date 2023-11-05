@@ -5,11 +5,8 @@
     <%= csrf_meta_tags %>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= stylesheet_pack_tag    'application' %>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <%= javascript_include_tag 'application' %>
-    <%= javascript_pack_tag 'application' %>
   </head>
 
   <body>
@@ -20,5 +17,6 @@
       </div>
     </div>
     <%= render "footer" %>
+    <%= javascript_include_tag 'application' %>
   </body>
 </html>

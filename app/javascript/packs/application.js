@@ -1,8 +1,13 @@
-import '../stylesheets/application';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TaskBox from '../components/TaskBox';
 
-var componentRequireContext = require.context("components", true);
-var ReactRailsUJS = require("react_ujs");
-ReactRailsUJS.useContext(componentRequireContext);
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  const presenter = JSON.parse(rootElement.dataset.presenter);
+  console.log(presenter);
+  ReactDOM.render(<TaskBox presenter={presenter} />, rootElement);
+}
 
 import Trix from "trix";
 require("@rails/actiontext")

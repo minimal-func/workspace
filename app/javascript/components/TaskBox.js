@@ -7,7 +7,7 @@ import TasksList from './TasksList'
 class TaskBox extends React.Component {
   constructor (props) {
     super(props);
-    let parsed_presenter = JSON.parse(props.presenter);
+    let parsed_presenter = props.presenter;
     this.state = {
       tasks: parsed_presenter.tasks,
       current_task: null,

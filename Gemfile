@@ -32,9 +32,6 @@ gem "simple_form"
 
 gem "redcarpet"
 
-gem "react-rails"
-gem 'webpacker'
-
 gem 'pagy'
 gem 'turbo-rails'
 

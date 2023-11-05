@@ -16,7 +16,7 @@ class TaskForm extends React.Component {
   render () {
     return (
       <div className="form">
-        <form ref="form" className="row" action="" action={ this.props.form.action } acceptCharset="UTF-8" method="post" onSubmit={ this.handleSubmit.bind(this) } >
+        <form ref="form" className="row" action={ this.props.form.action } acceptCharset="UTF-8" method="post" onSubmit={ this.handleSubmit.bind(this) } >
           <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
           <div className="col-md-8">
             <div className="row">
