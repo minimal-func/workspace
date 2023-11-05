@@ -13,7 +13,6 @@
 //= require jquery
 //= require rails-ujs
 //= require datepicker
-//= require scripts
 
 $(function() {
   $(".conclusion-popup").on("click", function(e){

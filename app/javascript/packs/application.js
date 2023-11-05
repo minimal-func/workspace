@@ -5,8 +5,12 @@ import $ from "jquery";
 import "chartkick";
 import "chartkick/highcharts";
 
+window.jQuery = $;
+
 import Trix from "trix";
 require("@rails/actiontext")
+
+require('./scripts')
 
 import { Turbo } from "@hotwired/turbo-rails";
 window.Turbo = Turbo;

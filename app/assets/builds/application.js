@@ -19692,12 +19692,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           return typeof obj === "object" || typeof obj === "function" ? class2type[toString.call(obj)] || "object" : typeof obj;
         }
-        var version = "3.7.1", rhtmlSuffix = /HTML$/i, jQuery = function(selector, context) {
-          return new jQuery.fn.init(selector, context);
+        var version = "3.7.1", rhtmlSuffix = /HTML$/i, jQuery2 = function(selector, context) {
+          return new jQuery2.fn.init(selector, context);
         };
-        jQuery.fn = jQuery.prototype = {
+        jQuery2.fn = jQuery2.prototype = {
           jquery: version,
-          constructor: jQuery,
+          constructor: jQuery2,
           length: 0,
           toArray: function() {
             return slice.call(this);
@@ -19709,15 +19709,15 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             return num < 0 ? this[num + this.length] : this[num];
           },
           pushStack: function(elems) {
-            var ret = jQuery.merge(this.constructor(), elems);
+            var ret = jQuery2.merge(this.constructor(), elems);
             ret.prevObject = this;
             return ret;
           },
           each: function(callback) {
-            return jQuery.each(this, callback);
+            return jQuery2.each(this, callback);
           },
           map: function(callback) {
-            return this.pushStack(jQuery.map(this, function(elem, i) {
+            return this.pushStack(jQuery2.map(this, function(elem, i) {
               return callback.call(elem, i, elem);
             }));
           },
@@ -19731,12 +19731,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             return this.eq(-1);
           },
           even: function() {
-            return this.pushStack(jQuery.grep(this, function(_elem, i) {
+            return this.pushStack(jQuery2.grep(this, function(_elem, i) {
               return (i + 1) % 2;
             }));
           },
           odd: function() {
-            return this.pushStack(jQuery.grep(this, function(_elem, i) {
+            return this.pushStack(jQuery2.grep(this, function(_elem, i) {
               return i % 2;
             }));
           },
@@ -19751,7 +19751,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           sort: arr.sort,
           splice: arr.splice
         };
-        jQuery.extend = jQuery.fn.extend = function() {
+        jQuery2.extend = jQuery2.fn.extend = function() {
           var options, name, src, copy, copyIsArray, clone, target = arguments[0] || {}, i = 1, length = arguments.length, deep = false;
           if (typeof target === "boolean") {
             deep = target;
@@ -19772,17 +19772,17 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 if (name === "__proto__" || target === copy) {
                   continue;
                 }
-                if (deep && copy && (jQuery.isPlainObject(copy) || (copyIsArray = Array.isArray(copy)))) {
+                if (deep && copy && (jQuery2.isPlainObject(copy) || (copyIsArray = Array.isArray(copy)))) {
                   src = target[name];
                   if (copyIsArray && !Array.isArray(src)) {
                     clone = [];
-                  } else if (!copyIsArray && !jQuery.isPlainObject(src)) {
+                  } else if (!copyIsArray && !jQuery2.isPlainObject(src)) {
                     clone = {};
                   } else {
                     clone = src;
                   }
                   copyIsArray = false;
-                  target[name] = jQuery.extend(deep, clone, copy);
+                  target[name] = jQuery2.extend(deep, clone, copy);
                 } else if (copy !== void 0) {
                   target[name] = copy;
                 }
@@ -19791,7 +19791,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           return target;
         };
-        jQuery.extend({
+        jQuery2.extend({
           expando: "jQuery" + (version + Math.random()).replace(/\D/g, ""),
           isReady: true,
           error: function(msg) {
@@ -19843,7 +19843,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             var node, ret = "", i = 0, nodeType = elem.nodeType;
             if (!nodeType) {
               while (node = elem[i++]) {
-                ret += jQuery.text(node);
+                ret += jQuery2.text(node);
               }
             }
             if (nodeType === 1 || nodeType === 11) {
@@ -19861,7 +19861,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             var ret = results || [];
             if (arr2 != null) {
               if (isArrayLike(Object(arr2))) {
-                jQuery.merge(
+                jQuery2.merge(
                   ret,
                   typeof arr2 === "string" ? [arr2] : arr2
                 );
@@ -19920,9 +19920,9 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           support
         });
         if (typeof Symbol === "function") {
-          jQuery.fn[Symbol.iterator] = arr[Symbol.iterator];
+          jQuery2.fn[Symbol.iterator] = arr[Symbol.iterator];
         }
-        jQuery.each(
+        jQuery2.each(
           "Boolean Number String Function Array Date RegExp Object Error Symbol".split(" "),
           function(_i, name) {
             class2type["[object " + name + "]"] = name.toLowerCase();
@@ -19946,7 +19946,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           "^" + whitespace + "+|((?:^|[^\\\\])(?:\\\\.)*)" + whitespace + "+$",
           "g"
         );
-        jQuery.contains = function(a, b) {
+        jQuery2.contains = function(a, b) {
           var bup = b && b.parentNode;
           return a === bup || !!(bup && bup.nodeType === 1 && (a.contains ? a.contains(bup) : a.compareDocumentPosition && a.compareDocumentPosition(bup) & 16));
         };
@@ -19960,12 +19960,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           return "\\" + ch;
         }
-        jQuery.escapeSelector = function(sel) {
+        jQuery2.escapeSelector = function(sel) {
           return (sel + "").replace(rcssescape, fcssescape);
         };
         var preferredDoc = document2, pushNative = push;
         (function() {
-          var i, Expr, outermostContext, sortInput, hasDuplicate, push2 = pushNative, document3, documentElement2, documentIsHTML, rbuggyQSA, matches, expando = jQuery.expando, dirruns = 0, done = 0, classCache = createCache(), tokenCache = createCache(), compilerCache = createCache(), nonnativeSelectorCache = createCache(), sortOrder = function(a, b) {
+          var i, Expr, outermostContext, sortInput, hasDuplicate, push2 = pushNative, document3, documentElement2, documentIsHTML, rbuggyQSA, matches, expando = jQuery2.expando, dirruns = 0, done = 0, classCache = createCache(), tokenCache = createCache(), compilerCache = createCache(), nonnativeSelectorCache = createCache(), sortOrder = function(a, b) {
             if (a === b) {
               hasDuplicate = true;
             }
@@ -20060,7 +20060,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                     newContext = rsibling.test(selector) && testContext(context.parentNode) || context;
                     if (newContext != context || !support.scope) {
                       if (nid = context.getAttribute("id")) {
-                        nid = jQuery.escapeSelector(nid);
+                        nid = jQuery2.escapeSelector(nid);
                       } else {
                         context.setAttribute("id", nid = expando);
                       }
@@ -20170,14 +20170,14 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
             document3 = doc;
             documentElement2 = document3.documentElement;
-            documentIsHTML = !jQuery.isXMLDoc(document3);
+            documentIsHTML = !jQuery2.isXMLDoc(document3);
             matches = documentElement2.matches || documentElement2.webkitMatchesSelector || documentElement2.msMatchesSelector;
             if (documentElement2.msMatchesSelector && preferredDoc != document3 && (subWindow = document3.defaultView) && subWindow.top !== subWindow) {
               subWindow.addEventListener("unload", unloadHandler);
             }
             support.getById = assert(function(el) {
-              documentElement2.appendChild(el).id = jQuery.expando;
-              return !document3.getElementsByName || !document3.getElementsByName(jQuery.expando).length;
+              documentElement2.appendChild(el).id = jQuery2.expando;
+              return !document3.getElementsByName || !document3.getElementsByName(jQuery2.expando).length;
             });
             support.disconnectedMatch = assert(function(el) {
               return matches.call(el, "*");
@@ -20325,7 +20325,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             if ((context.ownerDocument || context) != document3) {
               setDocument(context);
             }
-            return jQuery.contains(context, elem);
+            return jQuery2.contains(context, elem);
           };
           find.attr = function(elem, name) {
             if ((elem.ownerDocument || elem) != document3) {
@@ -20340,7 +20340,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           find.error = function(msg) {
             throw new Error("Syntax error, unrecognized expression: " + msg);
           };
-          jQuery.uniqueSort = function(results) {
+          jQuery2.uniqueSort = function(results) {
             var elem, duplicates = [], j = 0, i2 = 0;
             hasDuplicate = !support.sortStable;
             sortInput = !support.sortStable && slice.call(results, 0);
@@ -20358,10 +20358,10 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             sortInput = null;
             return results;
           };
-          jQuery.fn.uniqueSort = function() {
-            return this.pushStack(jQuery.uniqueSort(slice.apply(this)));
+          jQuery2.fn.uniqueSort = function() {
+            return this.pushStack(jQuery2.uniqueSort(slice.apply(this)));
           };
-          Expr = jQuery.expr = {
+          Expr = jQuery2.expr = {
             cacheLength: 50,
             createPseudo: markFunction,
             match: matchExpr,
@@ -20563,7 +20563,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               contains: markFunction(function(text) {
                 text = text.replace(runescape, funescape);
                 return function(elem) {
-                  return (elem.textContent || jQuery.text(elem)).indexOf(text) > -1;
+                  return (elem.textContent || jQuery2.text(elem)).indexOf(text) > -1;
                 };
               }),
               lang: markFunction(function(lang) {
@@ -20954,7 +20954,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 }
                 push2.apply(results, setMatched);
                 if (outermost && !seed && setMatched.length > 0 && matchedCount + setMatchers.length > 1) {
-                  jQuery.uniqueSort(results);
+                  jQuery2.uniqueSort(results);
                 }
               }
               if (outermost) {
@@ -21041,25 +21041,25 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           support.sortDetached = assert(function(el) {
             return el.compareDocumentPosition(document3.createElement("fieldset")) & 1;
           });
-          jQuery.find = find;
-          jQuery.expr[":"] = jQuery.expr.pseudos;
-          jQuery.unique = jQuery.uniqueSort;
+          jQuery2.find = find;
+          jQuery2.expr[":"] = jQuery2.expr.pseudos;
+          jQuery2.unique = jQuery2.uniqueSort;
           find.compile = compile;
           find.select = select;
           find.setDocument = setDocument;
           find.tokenize = tokenize;
-          find.escape = jQuery.escapeSelector;
-          find.getText = jQuery.text;
-          find.isXML = jQuery.isXMLDoc;
-          find.selectors = jQuery.expr;
-          find.support = jQuery.support;
-          find.uniqueSort = jQuery.uniqueSort;
+          find.escape = jQuery2.escapeSelector;
+          find.getText = jQuery2.text;
+          find.isXML = jQuery2.isXMLDoc;
+          find.selectors = jQuery2.expr;
+          find.support = jQuery2.support;
+          find.uniqueSort = jQuery2.uniqueSort;
         })();
         var dir = function(elem, dir2, until) {
           var matched = [], truncate = until !== void 0;
           while ((elem = elem[dir2]) && elem.nodeType !== 9) {
             if (elem.nodeType === 1) {
-              if (truncate && jQuery(elem).is(until)) {
+              if (truncate && jQuery2(elem).is(until)) {
                 break;
               }
               matched.push(elem);
@@ -21076,45 +21076,45 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           return matched;
         };
-        var rneedsContext = jQuery.expr.match.needsContext;
+        var rneedsContext = jQuery2.expr.match.needsContext;
         var rsingleTag = /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i;
         function winnow(elements, qualifier, not) {
           if (isFunction2(qualifier)) {
-            return jQuery.grep(elements, function(elem, i) {
+            return jQuery2.grep(elements, function(elem, i) {
               return !!qualifier.call(elem, i, elem) !== not;
             });
           }
           if (qualifier.nodeType) {
-            return jQuery.grep(elements, function(elem) {
+            return jQuery2.grep(elements, function(elem) {
               return elem === qualifier !== not;
             });
           }
           if (typeof qualifier !== "string") {
-            return jQuery.grep(elements, function(elem) {
+            return jQuery2.grep(elements, function(elem) {
               return indexOf2.call(qualifier, elem) > -1 !== not;
             });
           }
-          return jQuery.filter(qualifier, elements, not);
+          return jQuery2.filter(qualifier, elements, not);
         }
-        jQuery.filter = function(expr, elems, not) {
+        jQuery2.filter = function(expr, elems, not) {
           var elem = elems[0];
           if (not) {
             expr = ":not(" + expr + ")";
           }
           if (elems.length === 1 && elem.nodeType === 1) {
-            return jQuery.find.matchesSelector(elem, expr) ? [elem] : [];
+            return jQuery2.find.matchesSelector(elem, expr) ? [elem] : [];
           }
-          return jQuery.find.matches(expr, jQuery.grep(elems, function(elem2) {
+          return jQuery2.find.matches(expr, jQuery2.grep(elems, function(elem2) {
             return elem2.nodeType === 1;
           }));
         };
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           find: function(selector) {
             var i, ret, len = this.length, self2 = this;
             if (typeof selector !== "string") {
-              return this.pushStack(jQuery(selector).filter(function() {
+              return this.pushStack(jQuery2(selector).filter(function() {
                 for (i = 0; i < len; i++) {
-                  if (jQuery.contains(self2[i], this)) {
+                  if (jQuery2.contains(self2[i], this)) {
                     return true;
                   }
                 }
@@ -21122,9 +21122,9 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
             ret = this.pushStack([]);
             for (i = 0; i < len; i++) {
-              jQuery.find(selector, self2[i], ret);
+              jQuery2.find(selector, self2[i], ret);
             }
-            return len > 1 ? jQuery.uniqueSort(ret) : ret;
+            return len > 1 ? jQuery2.uniqueSort(ret) : ret;
           },
           filter: function(selector) {
             return this.pushStack(winnow(this, selector || [], false));
@@ -21135,12 +21135,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           is: function(selector) {
             return !!winnow(
               this,
-              typeof selector === "string" && rneedsContext.test(selector) ? jQuery(selector) : selector || [],
+              typeof selector === "string" && rneedsContext.test(selector) ? jQuery2(selector) : selector || [],
               false
             ).length;
           }
         });
-        var rootjQuery, rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]+))$/, init = jQuery.fn.init = function(selector, context, root) {
+        var rootjQuery, rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]+))$/, init = jQuery2.fn.init = function(selector, context, root) {
           var match, elem;
           if (!selector) {
             return this;
@@ -21154,13 +21154,13 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
             if (match && (match[1] || !context)) {
               if (match[1]) {
-                context = context instanceof jQuery ? context[0] : context;
-                jQuery.merge(this, jQuery.parseHTML(
+                context = context instanceof jQuery2 ? context[0] : context;
+                jQuery2.merge(this, jQuery2.parseHTML(
                   match[1],
                   context && context.nodeType ? context.ownerDocument || context : document2,
                   true
                 ));
-                if (rsingleTag.test(match[1]) && jQuery.isPlainObject(context)) {
+                if (rsingleTag.test(match[1]) && jQuery2.isPlainObject(context)) {
                   for (match in context) {
                     if (isFunction2(this[match])) {
                       this[match](context[match]);
@@ -21188,50 +21188,50 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             this.length = 1;
             return this;
           } else if (isFunction2(selector)) {
-            return root.ready !== void 0 ? root.ready(selector) : selector(jQuery);
+            return root.ready !== void 0 ? root.ready(selector) : selector(jQuery2);
           }
-          return jQuery.makeArray(selector, this);
+          return jQuery2.makeArray(selector, this);
         };
-        init.prototype = jQuery.fn;
-        rootjQuery = jQuery(document2);
+        init.prototype = jQuery2.fn;
+        rootjQuery = jQuery2(document2);
         var rparentsprev = /^(?:parents|prev(?:Until|All))/, guaranteedUnique = {
           children: true,
           contents: true,
           next: true,
           prev: true
         };
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           has: function(target) {
-            var targets = jQuery(target, this), l = targets.length;
+            var targets = jQuery2(target, this), l = targets.length;
             return this.filter(function() {
               var i = 0;
               for (; i < l; i++) {
-                if (jQuery.contains(this, targets[i])) {
+                if (jQuery2.contains(this, targets[i])) {
                   return true;
                 }
               }
             });
           },
           closest: function(selectors, context) {
-            var cur, i = 0, l = this.length, matched = [], targets = typeof selectors !== "string" && jQuery(selectors);
+            var cur, i = 0, l = this.length, matched = [], targets = typeof selectors !== "string" && jQuery2(selectors);
             if (!rneedsContext.test(selectors)) {
               for (; i < l; i++) {
                 for (cur = this[i]; cur && cur !== context; cur = cur.parentNode) {
-                  if (cur.nodeType < 11 && (targets ? targets.index(cur) > -1 : cur.nodeType === 1 && jQuery.find.matchesSelector(cur, selectors))) {
+                  if (cur.nodeType < 11 && (targets ? targets.index(cur) > -1 : cur.nodeType === 1 && jQuery2.find.matchesSelector(cur, selectors))) {
                     matched.push(cur);
                     break;
                   }
                 }
               }
             }
-            return this.pushStack(matched.length > 1 ? jQuery.uniqueSort(matched) : matched);
+            return this.pushStack(matched.length > 1 ? jQuery2.uniqueSort(matched) : matched);
           },
           index: function(elem) {
             if (!elem) {
               return this[0] && this[0].parentNode ? this.first().prevAll().length : -1;
             }
             if (typeof elem === "string") {
-              return indexOf2.call(jQuery(elem), this[0]);
+              return indexOf2.call(jQuery2(elem), this[0]);
             }
             return indexOf2.call(
               this,
@@ -21240,8 +21240,8 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           },
           add: function(selector, context) {
             return this.pushStack(
-              jQuery.uniqueSort(
-                jQuery.merge(this.get(), jQuery(selector, context))
+              jQuery2.uniqueSort(
+                jQuery2.merge(this.get(), jQuery2(selector, context))
               )
             );
           },
@@ -21256,7 +21256,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           return cur;
         }
-        jQuery.each({
+        jQuery2.each({
           parent: function(elem) {
             var parent = elem.parentNode;
             return parent && parent.nodeType !== 11 ? parent : null;
@@ -21298,20 +21298,20 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             if (nodeName(elem, "template")) {
               elem = elem.content || elem;
             }
-            return jQuery.merge([], elem.childNodes);
+            return jQuery2.merge([], elem.childNodes);
           }
         }, function(name, fn) {
-          jQuery.fn[name] = function(until, selector) {
-            var matched = jQuery.map(this, fn, until);
+          jQuery2.fn[name] = function(until, selector) {
+            var matched = jQuery2.map(this, fn, until);
             if (name.slice(-5) !== "Until") {
               selector = until;
             }
             if (selector && typeof selector === "string") {
-              matched = jQuery.filter(selector, matched);
+              matched = jQuery2.filter(selector, matched);
             }
             if (this.length > 1) {
               if (!guaranteedUnique[name]) {
-                jQuery.uniqueSort(matched);
+                jQuery2.uniqueSort(matched);
               }
               if (rparentsprev.test(name)) {
                 matched.reverse();
@@ -21323,13 +21323,13 @@ For more info, visit https://fb.me/react-mock-scheduler`);
         var rnothtmlwhite = /[^\x20\t\r\n\f]+/g;
         function createOptions(options) {
           var object = {};
-          jQuery.each(options.match(rnothtmlwhite) || [], function(_, flag) {
+          jQuery2.each(options.match(rnothtmlwhite) || [], function(_, flag) {
             object[flag] = true;
           });
           return object;
         }
-        jQuery.Callbacks = function(options) {
-          options = typeof options === "string" ? createOptions(options) : jQuery.extend({}, options);
+        jQuery2.Callbacks = function(options) {
+          options = typeof options === "string" ? createOptions(options) : jQuery2.extend({}, options);
           var firing, memory, fired, locked, list = [], queue = [], firingIndex = -1, fire = function() {
             locked = locked || options.once;
             fired = firing = true;
@@ -21361,7 +21361,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                   queue.push(memory);
                 }
                 (function add(args) {
-                  jQuery.each(args, function(_, arg) {
+                  jQuery2.each(args, function(_, arg) {
                     if (isFunction2(arg)) {
                       if (!options.unique || !self2.has(arg)) {
                         list.push(arg);
@@ -21378,9 +21378,9 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               return this;
             },
             remove: function() {
-              jQuery.each(arguments, function(_, arg) {
+              jQuery2.each(arguments, function(_, arg) {
                 var index;
-                while ((index = jQuery.inArray(arg, list, index)) > -1) {
+                while ((index = jQuery2.inArray(arg, list, index)) > -1) {
                   list.splice(index, 1);
                   if (index <= firingIndex) {
                     firingIndex--;
@@ -21390,7 +21390,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               return this;
             },
             has: function(fn) {
-              return fn ? jQuery.inArray(fn, list) > -1 : list.length > 0;
+              return fn ? jQuery2.inArray(fn, list) > -1 : list.length > 0;
             },
             empty: function() {
               if (list) {
@@ -21457,29 +21457,29 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             reject.apply(void 0, [value2]);
           }
         }
-        jQuery.extend({
+        jQuery2.extend({
           Deferred: function(func) {
             var tuples = [
               [
                 "notify",
                 "progress",
-                jQuery.Callbacks("memory"),
-                jQuery.Callbacks("memory"),
+                jQuery2.Callbacks("memory"),
+                jQuery2.Callbacks("memory"),
                 2
               ],
               [
                 "resolve",
                 "done",
-                jQuery.Callbacks("once memory"),
-                jQuery.Callbacks("once memory"),
+                jQuery2.Callbacks("once memory"),
+                jQuery2.Callbacks("once memory"),
                 0,
                 "resolved"
               ],
               [
                 "reject",
                 "fail",
-                jQuery.Callbacks("once memory"),
-                jQuery.Callbacks("once memory"),
+                jQuery2.Callbacks("once memory"),
+                jQuery2.Callbacks("once memory"),
                 1,
                 "rejected"
               ]
@@ -21496,8 +21496,8 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               },
               pipe: function() {
                 var fns = arguments;
-                return jQuery.Deferred(function(newDefer) {
-                  jQuery.each(tuples, function(_i, tuple) {
+                return jQuery2.Deferred(function(newDefer) {
+                  jQuery2.each(tuples, function(_i, tuple) {
                     var fn = isFunction2(fns[tuple[4]]) && fns[tuple[4]];
                     deferred[tuple[1]](function() {
                       var returned = fn && fn.apply(this, arguments);
@@ -21560,8 +21560,8 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                       try {
                         mightThrow();
                       } catch (e) {
-                        if (jQuery.Deferred.exceptionHook) {
-                          jQuery.Deferred.exceptionHook(
+                        if (jQuery2.Deferred.exceptionHook) {
+                          jQuery2.Deferred.exceptionHook(
                             e,
                             process2.error
                           );
@@ -21578,16 +21578,16 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                     if (depth) {
                       process2();
                     } else {
-                      if (jQuery.Deferred.getErrorHook) {
-                        process2.error = jQuery.Deferred.getErrorHook();
-                      } else if (jQuery.Deferred.getStackHook) {
-                        process2.error = jQuery.Deferred.getStackHook();
+                      if (jQuery2.Deferred.getErrorHook) {
+                        process2.error = jQuery2.Deferred.getErrorHook();
+                      } else if (jQuery2.Deferred.getStackHook) {
+                        process2.error = jQuery2.Deferred.getStackHook();
                       }
                       window2.setTimeout(process2);
                     }
                   };
                 }
-                return jQuery.Deferred(function(newDefer) {
+                return jQuery2.Deferred(function(newDefer) {
                   tuples[0][3].add(
                     resolve(
                       0,
@@ -21613,10 +21613,10 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 }).promise();
               },
               promise: function(obj) {
-                return obj != null ? jQuery.extend(obj, promise) : promise;
+                return obj != null ? jQuery2.extend(obj, promise) : promise;
               }
             }, deferred = {};
-            jQuery.each(tuples, function(i, tuple) {
+            jQuery2.each(tuples, function(i, tuple) {
               var list = tuple[2], stateString = tuple[5];
               promise[tuple[1]] = list.add;
               if (stateString) {
@@ -21644,7 +21644,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             return deferred;
           },
           when: function(singleValue) {
-            var remaining = arguments.length, i = remaining, resolveContexts = Array(i), resolveValues = slice.call(arguments), primary = jQuery.Deferred(), updateFunc = function(i2) {
+            var remaining = arguments.length, i = remaining, resolveContexts = Array(i), resolveValues = slice.call(arguments), primary = jQuery2.Deferred(), updateFunc = function(i2) {
               return function(value) {
                 resolveContexts[i2] = this;
                 resolveValues[i2] = arguments.length > 1 ? slice.call(arguments) : value;
@@ -21671,7 +21671,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
         });
         var rerrorNames = /^(Eval|Internal|Range|Reference|Syntax|Type|URI)Error$/;
-        jQuery.Deferred.exceptionHook = function(error, asyncError) {
+        jQuery2.Deferred.exceptionHook = function(error, asyncError) {
           if (window2.console && window2.console.warn && error && rerrorNames.test(error.name)) {
             window2.console.warn(
               "jQuery.Deferred exception: " + error.message,
@@ -21680,40 +21680,40 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             );
           }
         };
-        jQuery.readyException = function(error) {
+        jQuery2.readyException = function(error) {
           window2.setTimeout(function() {
             throw error;
           });
         };
-        var readyList = jQuery.Deferred();
-        jQuery.fn.ready = function(fn) {
+        var readyList = jQuery2.Deferred();
+        jQuery2.fn.ready = function(fn) {
           readyList.then(fn).catch(function(error) {
-            jQuery.readyException(error);
+            jQuery2.readyException(error);
           });
           return this;
         };
-        jQuery.extend({
+        jQuery2.extend({
           isReady: false,
           readyWait: 1,
           ready: function(wait) {
-            if (wait === true ? --jQuery.readyWait : jQuery.isReady) {
+            if (wait === true ? --jQuery2.readyWait : jQuery2.isReady) {
               return;
             }
-            jQuery.isReady = true;
-            if (wait !== true && --jQuery.readyWait > 0) {
+            jQuery2.isReady = true;
+            if (wait !== true && --jQuery2.readyWait > 0) {
               return;
             }
-            readyList.resolveWith(document2, [jQuery]);
+            readyList.resolveWith(document2, [jQuery2]);
           }
         });
-        jQuery.ready.then = readyList.then;
+        jQuery2.ready.then = readyList.then;
         function completed() {
           document2.removeEventListener("DOMContentLoaded", completed);
           window2.removeEventListener("load", completed);
-          jQuery.ready();
+          jQuery2.ready();
         }
         if (document2.readyState === "complete" || document2.readyState !== "loading" && !document2.documentElement.doScroll) {
-          window2.setTimeout(jQuery.ready);
+          window2.setTimeout(jQuery2.ready);
         } else {
           document2.addEventListener("DOMContentLoaded", completed);
           window2.addEventListener("load", completed);
@@ -21737,7 +21737,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               } else {
                 bulk = fn;
                 fn = function(elem, _key, value2) {
-                  return bulk.call(jQuery(elem), value2);
+                  return bulk.call(jQuery2(elem), value2);
                 };
               }
             }
@@ -21770,7 +21770,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           return owner.nodeType === 1 || owner.nodeType === 9 || !+owner.nodeType;
         };
         function Data() {
-          this.expando = jQuery.expando + Data.uid++;
+          this.expando = jQuery2.expando + Data.uid++;
         }
         Data.uid = 1;
         Data.prototype = {
@@ -21829,7 +21829,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 delete cache2[key[i]];
               }
             }
-            if (key === void 0 || jQuery.isEmptyObject(cache2)) {
+            if (key === void 0 || jQuery2.isEmptyObject(cache2)) {
               if (owner.nodeType) {
                 owner[this.expando] = void 0;
               } else {
@@ -21839,7 +21839,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           },
           hasData: function(owner) {
             var cache2 = owner[this.expando];
-            return cache2 !== void 0 && !jQuery.isEmptyObject(cache2);
+            return cache2 !== void 0 && !jQuery2.isEmptyObject(cache2);
           }
         };
         var dataPriv = new Data();
@@ -21880,7 +21880,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           return data;
         }
-        jQuery.extend({
+        jQuery2.extend({
           hasData: function(elem) {
             return dataUser.hasData(elem) || dataPriv.hasData(elem);
           },
@@ -21897,7 +21897,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             dataPriv.remove(elem, name);
           }
         });
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           data: function(key, value) {
             var i, name, data, elem = this[0], attrs = elem && elem.attributes;
             if (key === void 0) {
@@ -21948,7 +21948,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             });
           }
         });
-        jQuery.extend({
+        jQuery2.extend({
           queue: function(elem, type, data) {
             var queue;
             if (elem) {
@@ -21956,7 +21956,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               queue = dataPriv.get(elem, type);
               if (data) {
                 if (!queue || Array.isArray(data)) {
-                  queue = dataPriv.access(elem, type, jQuery.makeArray(data));
+                  queue = dataPriv.access(elem, type, jQuery2.makeArray(data));
                 } else {
                   queue.push(data);
                 }
@@ -21966,8 +21966,8 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           },
           dequeue: function(elem, type) {
             type = type || "fx";
-            var queue = jQuery.queue(elem, type), startLength = queue.length, fn = queue.shift(), hooks = jQuery._queueHooks(elem, type), next = function() {
-              jQuery.dequeue(elem, type);
+            var queue = jQuery2.queue(elem, type), startLength = queue.length, fn = queue.shift(), hooks = jQuery2._queueHooks(elem, type), next = function() {
+              jQuery2.dequeue(elem, type);
             };
             if (fn === "inprogress") {
               fn = queue.shift();
@@ -21987,13 +21987,13 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           _queueHooks: function(elem, type) {
             var key = type + "queueHooks";
             return dataPriv.get(elem, key) || dataPriv.access(elem, key, {
-              empty: jQuery.Callbacks("once memory").add(function() {
+              empty: jQuery2.Callbacks("once memory").add(function() {
                 dataPriv.remove(elem, [type + "queue", key]);
               })
             });
           }
         });
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           queue: function(type, data) {
             var setter = 2;
             if (typeof type !== "string") {
@@ -22002,26 +22002,26 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               setter--;
             }
             if (arguments.length < setter) {
-              return jQuery.queue(this[0], type);
+              return jQuery2.queue(this[0], type);
             }
             return data === void 0 ? this : this.each(function() {
-              var queue = jQuery.queue(this, type, data);
-              jQuery._queueHooks(this, type);
+              var queue = jQuery2.queue(this, type, data);
+              jQuery2._queueHooks(this, type);
               if (type === "fx" && queue[0] !== "inprogress") {
-                jQuery.dequeue(this, type);
+                jQuery2.dequeue(this, type);
               }
             });
           },
           dequeue: function(type) {
             return this.each(function() {
-              jQuery.dequeue(this, type);
+              jQuery2.dequeue(this, type);
             });
           },
           clearQueue: function(type) {
             return this.queue(type || "fx", []);
           },
           promise: function(type, obj) {
-            var tmp, count = 1, defer = jQuery.Deferred(), elements = this, i = this.length, resolve = function() {
+            var tmp, count = 1, defer = jQuery2.Deferred(), elements = this, i = this.length, resolve = function() {
               if (!--count) {
                 defer.resolveWith(elements, [elements]);
               }
@@ -22047,36 +22047,36 @@ For more info, visit https://fb.me/react-mock-scheduler`);
         var cssExpand = ["Top", "Right", "Bottom", "Left"];
         var documentElement = document2.documentElement;
         var isAttached = function(elem) {
-          return jQuery.contains(elem.ownerDocument, elem);
+          return jQuery2.contains(elem.ownerDocument, elem);
         }, composed = { composed: true };
         if (documentElement.getRootNode) {
           isAttached = function(elem) {
-            return jQuery.contains(elem.ownerDocument, elem) || elem.getRootNode(composed) === elem.ownerDocument;
+            return jQuery2.contains(elem.ownerDocument, elem) || elem.getRootNode(composed) === elem.ownerDocument;
           };
         }
         var isHiddenWithinTree = function(elem, el) {
           elem = el || elem;
-          return elem.style.display === "none" || elem.style.display === "" && isAttached(elem) && jQuery.css(elem, "display") === "none";
+          return elem.style.display === "none" || elem.style.display === "" && isAttached(elem) && jQuery2.css(elem, "display") === "none";
         };
         function adjustCSS(elem, prop, valueParts, tween) {
           var adjusted, scale, maxIterations = 20, currentValue = tween ? function() {
             return tween.cur();
           } : function() {
-            return jQuery.css(elem, prop, "");
-          }, initial = currentValue(), unit = valueParts && valueParts[3] || (jQuery.cssNumber[prop] ? "" : "px"), initialInUnit = elem.nodeType && (jQuery.cssNumber[prop] || unit !== "px" && +initial) && rcssNum.exec(jQuery.css(elem, prop));
+            return jQuery2.css(elem, prop, "");
+          }, initial = currentValue(), unit = valueParts && valueParts[3] || (jQuery2.cssNumber[prop] ? "" : "px"), initialInUnit = elem.nodeType && (jQuery2.cssNumber[prop] || unit !== "px" && +initial) && rcssNum.exec(jQuery2.css(elem, prop));
           if (initialInUnit && initialInUnit[3] !== unit) {
             initial = initial / 2;
             unit = unit || initialInUnit[3];
             initialInUnit = +initial || 1;
             while (maxIterations--) {
-              jQuery.style(elem, prop, initialInUnit + unit);
+              jQuery2.style(elem, prop, initialInUnit + unit);
               if ((1 - scale) * (1 - (scale = currentValue() / initial || 0.5)) <= 0) {
                 maxIterations = 0;
               }
               initialInUnit = initialInUnit / scale;
             }
             initialInUnit = initialInUnit * 2;
-            jQuery.style(elem, prop, initialInUnit + unit);
+            jQuery2.style(elem, prop, initialInUnit + unit);
             valueParts = valueParts || [];
           }
           if (valueParts) {
@@ -22097,7 +22097,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             return display;
           }
           temp = doc.body.appendChild(doc.createElement(nodeName2));
-          display = jQuery.css(temp, "display");
+          display = jQuery2.css(temp, "display");
           temp.parentNode.removeChild(temp);
           if (display === "none") {
             display = "block";
@@ -22137,7 +22137,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           return elements;
         }
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           show: function() {
             return showHide(this, true);
           },
@@ -22150,9 +22150,9 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
             return this.each(function() {
               if (isHiddenWithinTree(this)) {
-                jQuery(this).show();
+                jQuery2(this).show();
               } else {
-                jQuery(this).hide();
+                jQuery2(this).hide();
               }
             });
           }
@@ -22194,7 +22194,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             ret = [];
           }
           if (tag === void 0 || tag && nodeName(context, tag)) {
-            return jQuery.merge([context], ret);
+            return jQuery2.merge([context], ret);
           }
           return ret;
         }
@@ -22215,19 +22215,19 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             elem = elems[i];
             if (elem || elem === 0) {
               if (toType(elem) === "object") {
-                jQuery.merge(nodes, elem.nodeType ? [elem] : elem);
+                jQuery2.merge(nodes, elem.nodeType ? [elem] : elem);
               } else if (!rhtml.test(elem)) {
                 nodes.push(context.createTextNode(elem));
               } else {
                 tmp = tmp || fragment.appendChild(context.createElement("div"));
                 tag = (rtagName.exec(elem) || ["", ""])[1].toLowerCase();
                 wrap = wrapMap[tag] || wrapMap._default;
-                tmp.innerHTML = wrap[1] + jQuery.htmlPrefilter(elem) + wrap[2];
+                tmp.innerHTML = wrap[1] + jQuery2.htmlPrefilter(elem) + wrap[2];
                 j = wrap[0];
                 while (j--) {
                   tmp = tmp.lastChild;
                 }
-                jQuery.merge(nodes, tmp.childNodes);
+                jQuery2.merge(nodes, tmp.childNodes);
                 tmp = fragment.firstChild;
                 tmp.textContent = "";
               }
@@ -22236,7 +22236,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           fragment.textContent = "";
           i = 0;
           while (elem = nodes[i++]) {
-            if (selection && jQuery.inArray(elem, selection) > -1) {
+            if (selection && jQuery2.inArray(elem, selection) > -1) {
               if (ignored) {
                 ignored.push(elem);
               }
@@ -22298,16 +22298,16 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           if (one === 1) {
             origFn = fn;
             fn = function(event) {
-              jQuery().off(event);
+              jQuery2().off(event);
               return origFn.apply(this, arguments);
             };
-            fn.guid = origFn.guid || (origFn.guid = jQuery.guid++);
+            fn.guid = origFn.guid || (origFn.guid = jQuery2.guid++);
           }
           return elem.each(function() {
-            jQuery.event.add(this, types, fn, data, selector);
+            jQuery2.event.add(this, types, fn, data, selector);
           });
         }
-        jQuery.event = {
+        jQuery2.event = {
           global: {},
           add: function(elem, types, handler, data, selector) {
             var handleObjIn, eventHandle, tmp, events, t, handleObj, special, handlers, type, namespaces, origType, elemData = dataPriv.get(elem);
@@ -22320,17 +22320,17 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               selector = handleObjIn.selector;
             }
             if (selector) {
-              jQuery.find.matchesSelector(documentElement, selector);
+              jQuery2.find.matchesSelector(documentElement, selector);
             }
             if (!handler.guid) {
-              handler.guid = jQuery.guid++;
+              handler.guid = jQuery2.guid++;
             }
             if (!(events = elemData.events)) {
               events = elemData.events = /* @__PURE__ */ Object.create(null);
             }
             if (!(eventHandle = elemData.handle)) {
               eventHandle = elemData.handle = function(e) {
-                return typeof jQuery !== "undefined" && jQuery.event.triggered !== e.type ? jQuery.event.dispatch.apply(elem, arguments) : void 0;
+                return typeof jQuery2 !== "undefined" && jQuery2.event.triggered !== e.type ? jQuery2.event.dispatch.apply(elem, arguments) : void 0;
               };
             }
             types = (types || "").match(rnothtmlwhite) || [""];
@@ -22342,17 +22342,17 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               if (!type) {
                 continue;
               }
-              special = jQuery.event.special[type] || {};
+              special = jQuery2.event.special[type] || {};
               type = (selector ? special.delegateType : special.bindType) || type;
-              special = jQuery.event.special[type] || {};
-              handleObj = jQuery.extend({
+              special = jQuery2.event.special[type] || {};
+              handleObj = jQuery2.extend({
                 type,
                 origType,
                 data,
                 handler,
                 guid: handler.guid,
                 selector,
-                needsContext: selector && jQuery.expr.match.needsContext.test(selector),
+                needsContext: selector && jQuery2.expr.match.needsContext.test(selector),
                 namespace: namespaces.join(".")
               }, handleObjIn);
               if (!(handlers = events[type])) {
@@ -22375,7 +22375,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               } else {
                 handlers.push(handleObj);
               }
-              jQuery.event.global[type] = true;
+              jQuery2.event.global[type] = true;
             }
           },
           remove: function(elem, types, handler, selector, mappedTypes) {
@@ -22391,11 +22391,11 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               namespaces = (tmp[2] || "").split(".").sort();
               if (!type) {
                 for (type in events) {
-                  jQuery.event.remove(elem, type + types[t], handler, selector, true);
+                  jQuery2.event.remove(elem, type + types[t], handler, selector, true);
                 }
                 continue;
               }
-              special = jQuery.event.special[type] || {};
+              special = jQuery2.event.special[type] || {};
               type = (selector ? special.delegateType : special.bindType) || type;
               handlers = events[type] || [];
               tmp = tmp[2] && new RegExp("(^|\\.)" + namespaces.join("\\.(?:.*\\.|)") + "(\\.|$)");
@@ -22414,17 +22414,17 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               }
               if (origCount && !handlers.length) {
                 if (!special.teardown || special.teardown.call(elem, namespaces, elemData.handle) === false) {
-                  jQuery.removeEvent(elem, type, elemData.handle);
+                  jQuery2.removeEvent(elem, type, elemData.handle);
                 }
                 delete events[type];
               }
             }
-            if (jQuery.isEmptyObject(events)) {
+            if (jQuery2.isEmptyObject(events)) {
               dataPriv.remove(elem, "handle events");
             }
           },
           dispatch: function(nativeEvent) {
-            var i, j, ret, matched, handleObj, handlerQueue, args = new Array(arguments.length), event = jQuery.event.fix(nativeEvent), handlers = (dataPriv.get(this, "events") || /* @__PURE__ */ Object.create(null))[event.type] || [], special = jQuery.event.special[event.type] || {};
+            var i, j, ret, matched, handleObj, handlerQueue, args = new Array(arguments.length), event = jQuery2.event.fix(nativeEvent), handlers = (dataPriv.get(this, "events") || /* @__PURE__ */ Object.create(null))[event.type] || [], special = jQuery2.event.special[event.type] || {};
             args[0] = event;
             for (i = 1; i < arguments.length; i++) {
               args[i] = arguments[i];
@@ -22433,7 +22433,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             if (special.preDispatch && special.preDispatch.call(this, event) === false) {
               return;
             }
-            handlerQueue = jQuery.event.handlers.call(this, event, handlers);
+            handlerQueue = jQuery2.event.handlers.call(this, event, handlers);
             i = 0;
             while ((matched = handlerQueue[i++]) && !event.isPropagationStopped()) {
               event.currentTarget = matched.elem;
@@ -22442,7 +22442,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 if (!event.rnamespace || handleObj.namespace === false || event.rnamespace.test(handleObj.namespace)) {
                   event.handleObj = handleObj;
                   event.data = handleObj.data;
-                  ret = ((jQuery.event.special[handleObj.origType] || {}).handle || handleObj.handler).apply(matched.elem, args);
+                  ret = ((jQuery2.event.special[handleObj.origType] || {}).handle || handleObj.handler).apply(matched.elem, args);
                   if (ret !== void 0) {
                     if ((event.result = ret) === false) {
                       event.preventDefault();
@@ -22468,7 +22468,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                     handleObj = handlers[i];
                     sel = handleObj.selector + " ";
                     if (matchedSelectors[sel] === void 0) {
-                      matchedSelectors[sel] = handleObj.needsContext ? jQuery(sel, this).index(cur) > -1 : jQuery.find(sel, this, null, [cur]).length;
+                      matchedSelectors[sel] = handleObj.needsContext ? jQuery2(sel, this).index(cur) > -1 : jQuery2.find(sel, this, null, [cur]).length;
                     }
                     if (matchedSelectors[sel]) {
                       matchedHandlers.push(handleObj);
@@ -22487,7 +22487,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             return handlerQueue;
           },
           addProp: function(name, hook) {
-            Object.defineProperty(jQuery.Event.prototype, name, {
+            Object.defineProperty(jQuery2.Event.prototype, name, {
               enumerable: true,
               configurable: true,
               get: isFunction2(hook) ? function() {
@@ -22510,7 +22510,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             });
           },
           fix: function(originalEvent) {
-            return originalEvent[jQuery.expando] ? originalEvent : new jQuery.Event(originalEvent);
+            return originalEvent[jQuery2.expando] ? originalEvent : new jQuery2.Event(originalEvent);
           },
           special: {
             load: {
@@ -22548,12 +22548,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
         function leverageNative(el, type, isSetup) {
           if (!isSetup) {
             if (dataPriv.get(el, type) === void 0) {
-              jQuery.event.add(el, type, returnTrue);
+              jQuery2.event.add(el, type, returnTrue);
             }
             return;
           }
           dataPriv.set(el, type, false);
-          jQuery.event.add(el, type, {
+          jQuery2.event.add(el, type, {
             namespace: false,
             handler: function(event) {
               var result, saved = dataPriv.get(this, type);
@@ -22569,11 +22569,11 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                     event.preventDefault();
                     return result;
                   }
-                } else if ((jQuery.event.special[type] || {}).delegateType) {
+                } else if ((jQuery2.event.special[type] || {}).delegateType) {
                   event.stopPropagation();
                 }
               } else if (saved) {
-                dataPriv.set(this, type, jQuery.event.trigger(
+                dataPriv.set(this, type, jQuery2.event.trigger(
                   saved[0],
                   saved.slice(1),
                   this
@@ -22584,14 +22584,14 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           });
         }
-        jQuery.removeEvent = function(elem, type, handle) {
+        jQuery2.removeEvent = function(elem, type, handle) {
           if (elem.removeEventListener) {
             elem.removeEventListener(type, handle);
           }
         };
-        jQuery.Event = function(src, props) {
-          if (!(this instanceof jQuery.Event)) {
-            return new jQuery.Event(src, props);
+        jQuery2.Event = function(src, props) {
+          if (!(this instanceof jQuery2.Event)) {
+            return new jQuery2.Event(src, props);
           }
           if (src && src.type) {
             this.originalEvent = src;
@@ -22604,13 +22604,13 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             this.type = src;
           }
           if (props) {
-            jQuery.extend(this, props);
+            jQuery2.extend(this, props);
           }
           this.timeStamp = src && src.timeStamp || Date.now();
-          this[jQuery.expando] = true;
+          this[jQuery2.expando] = true;
         };
-        jQuery.Event.prototype = {
-          constructor: jQuery.Event,
+        jQuery2.Event.prototype = {
+          constructor: jQuery2.Event,
           isDefaultPrevented: returnFalse,
           isPropagationStopped: returnFalse,
           isImmediatePropagationStopped: returnFalse,
@@ -22638,7 +22638,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             this.stopPropagation();
           }
         };
-        jQuery.each({
+        jQuery2.each({
           altKey: true,
           bubbles: true,
           cancelable: true,
@@ -22670,11 +22670,11 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           toElement: true,
           touches: true,
           which: true
-        }, jQuery.event.addProp);
-        jQuery.each({ focus: "focusin", blur: "focusout" }, function(type, delegateType) {
+        }, jQuery2.event.addProp);
+        jQuery2.each({ focus: "focusin", blur: "focusout" }, function(type, delegateType) {
           function focusMappedHandler(nativeEvent) {
             if (document2.documentMode) {
-              var handle = dataPriv.get(this, "handle"), event = jQuery.event.fix(nativeEvent);
+              var handle = dataPriv.get(this, "handle"), event = jQuery2.event.fix(nativeEvent);
               event.type = nativeEvent.type === "focusin" ? "focus" : "blur";
               event.isSimulated = true;
               handle(nativeEvent);
@@ -22682,14 +22682,14 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 handle(event);
               }
             } else {
-              jQuery.event.simulate(
+              jQuery2.event.simulate(
                 delegateType,
                 nativeEvent.target,
-                jQuery.event.fix(nativeEvent)
+                jQuery2.event.fix(nativeEvent)
               );
             }
           }
-          jQuery.event.special[type] = {
+          jQuery2.event.special[type] = {
             setup: function() {
               var attaches;
               leverageNative(this, type, true);
@@ -22726,7 +22726,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             },
             delegateType
           };
-          jQuery.event.special[delegateType] = {
+          jQuery2.event.special[delegateType] = {
             setup: function() {
               var doc = this.ownerDocument || this.document || this, dataHolder = document2.documentMode ? this : doc, attaches = dataPriv.get(dataHolder, delegateType);
               if (!attaches) {
@@ -22753,18 +22753,18 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           };
         });
-        jQuery.each({
+        jQuery2.each({
           mouseenter: "mouseover",
           mouseleave: "mouseout",
           pointerenter: "pointerover",
           pointerleave: "pointerout"
         }, function(orig, fix) {
-          jQuery.event.special[orig] = {
+          jQuery2.event.special[orig] = {
             delegateType: fix,
             bindType: fix,
             handle: function(event) {
               var ret, target = this, related = event.relatedTarget, handleObj = event.handleObj;
-              if (!related || related !== target && !jQuery.contains(target, related)) {
+              if (!related || related !== target && !jQuery2.contains(target, related)) {
                 event.type = handleObj.origType;
                 ret = handleObj.handler.apply(this, arguments);
                 event.type = fix;
@@ -22773,7 +22773,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           };
         });
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           on: function(types, selector, data, fn) {
             return on(this, types, selector, data, fn);
           },
@@ -22784,7 +22784,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             var handleObj, type;
             if (types && types.preventDefault && types.handleObj) {
               handleObj = types.handleObj;
-              jQuery(types.delegateTarget).off(
+              jQuery2(types.delegateTarget).off(
                 handleObj.namespace ? handleObj.origType + "." + handleObj.namespace : handleObj.origType,
                 handleObj.selector,
                 handleObj.handler
@@ -22805,14 +22805,14 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               fn = returnFalse;
             }
             return this.each(function() {
-              jQuery.event.remove(this, types, fn, selector);
+              jQuery2.event.remove(this, types, fn, selector);
             });
           }
         });
         var rnoInnerhtml = /<script|<style|<link/i, rchecked = /checked\s*(?:[^=]|=\s*.checked.)/i, rcleanScript = /^\s*<!\[CDATA\[|\]\]>\s*$/g;
         function manipulationTarget(elem, content) {
           if (nodeName(elem, "table") && nodeName(content.nodeType !== 11 ? content : content.firstChild, "tr")) {
-            return jQuery(elem).children("tbody")[0] || elem;
+            return jQuery2(elem).children("tbody")[0] || elem;
           }
           return elem;
         }
@@ -22840,14 +22840,14 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               dataPriv.remove(dest, "handle events");
               for (type in events) {
                 for (i = 0, l = events[type].length; i < l; i++) {
-                  jQuery.event.add(dest, type, events[type][i]);
+                  jQuery2.event.add(dest, type, events[type][i]);
                 }
               }
             }
           }
           if (dataUser.hasData(src)) {
             udataOld = dataUser.access(src);
-            udataCur = jQuery.extend({}, udataOld);
+            udataCur = jQuery2.extend({}, udataOld);
             dataUser.set(dest, udataCur);
           }
         }
@@ -22878,27 +22878,27 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               fragment = first;
             }
             if (first || ignored) {
-              scripts = jQuery.map(getAll(fragment, "script"), disableScript);
+              scripts = jQuery2.map(getAll(fragment, "script"), disableScript);
               hasScripts = scripts.length;
               for (; i < l; i++) {
                 node = fragment;
                 if (i !== iNoClone) {
-                  node = jQuery.clone(node, true, true);
+                  node = jQuery2.clone(node, true, true);
                   if (hasScripts) {
-                    jQuery.merge(scripts, getAll(node, "script"));
+                    jQuery2.merge(scripts, getAll(node, "script"));
                   }
                 }
                 callback.call(collection[i], node, i);
               }
               if (hasScripts) {
                 doc = scripts[scripts.length - 1].ownerDocument;
-                jQuery.map(scripts, restoreScript);
+                jQuery2.map(scripts, restoreScript);
                 for (i = 0; i < hasScripts; i++) {
                   node = scripts[i];
-                  if (rscriptType.test(node.type || "") && !dataPriv.access(node, "globalEval") && jQuery.contains(doc, node)) {
+                  if (rscriptType.test(node.type || "") && !dataPriv.access(node, "globalEval") && jQuery2.contains(doc, node)) {
                     if (node.src && (node.type || "").toLowerCase() !== "module") {
-                      if (jQuery._evalUrl && !node.noModule) {
-                        jQuery._evalUrl(node.src, {
+                      if (jQuery2._evalUrl && !node.noModule) {
+                        jQuery2._evalUrl(node.src, {
                           nonce: node.nonce || node.getAttribute("nonce")
                         }, doc);
                       }
@@ -22913,10 +22913,10 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           return collection;
         }
         function remove(elem, selector, keepData) {
-          var node, nodes = selector ? jQuery.filter(selector, elem) : elem, i = 0;
+          var node, nodes = selector ? jQuery2.filter(selector, elem) : elem, i = 0;
           for (; (node = nodes[i]) != null; i++) {
             if (!keepData && node.nodeType === 1) {
-              jQuery.cleanData(getAll(node));
+              jQuery2.cleanData(getAll(node));
             }
             if (node.parentNode) {
               if (keepData && isAttached(node)) {
@@ -22927,13 +22927,13 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           return elem;
         }
-        jQuery.extend({
+        jQuery2.extend({
           htmlPrefilter: function(html) {
             return html;
           },
           clone: function(elem, dataAndEvents, deepDataAndEvents) {
             var i, l, srcElements, destElements, clone = elem.cloneNode(true), inPage = isAttached(elem);
-            if (!support.noCloneChecked && (elem.nodeType === 1 || elem.nodeType === 11) && !jQuery.isXMLDoc(elem)) {
+            if (!support.noCloneChecked && (elem.nodeType === 1 || elem.nodeType === 11) && !jQuery2.isXMLDoc(elem)) {
               destElements = getAll(clone);
               srcElements = getAll(elem);
               for (i = 0, l = srcElements.length; i < l; i++) {
@@ -22958,16 +22958,16 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             return clone;
           },
           cleanData: function(elems) {
-            var data, elem, type, special = jQuery.event.special, i = 0;
+            var data, elem, type, special = jQuery2.event.special, i = 0;
             for (; (elem = elems[i]) !== void 0; i++) {
               if (acceptData(elem)) {
                 if (data = elem[dataPriv.expando]) {
                   if (data.events) {
                     for (type in data.events) {
                       if (special[type]) {
-                        jQuery.event.remove(elem, type);
+                        jQuery2.event.remove(elem, type);
                       } else {
-                        jQuery.removeEvent(elem, type, data.handle);
+                        jQuery2.removeEvent(elem, type, data.handle);
                       }
                     }
                   }
@@ -22980,7 +22980,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           }
         });
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           detach: function(selector) {
             return remove(this, selector, true);
           },
@@ -22989,7 +22989,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           },
           text: function(value) {
             return access(this, function(value2) {
-              return value2 === void 0 ? jQuery.text(this) : this.empty().each(function() {
+              return value2 === void 0 ? jQuery2.text(this) : this.empty().each(function() {
                 if (this.nodeType === 1 || this.nodeType === 11 || this.nodeType === 9) {
                   this.textContent = value2;
                 }
@@ -23030,7 +23030,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             var elem, i = 0;
             for (; (elem = this[i]) != null; i++) {
               if (elem.nodeType === 1) {
-                jQuery.cleanData(getAll(elem, false));
+                jQuery2.cleanData(getAll(elem, false));
                 elem.textContent = "";
               }
             }
@@ -23040,7 +23040,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             dataAndEvents = dataAndEvents == null ? false : dataAndEvents;
             deepDataAndEvents = deepDataAndEvents == null ? dataAndEvents : deepDataAndEvents;
             return this.map(function() {
-              return jQuery.clone(this, dataAndEvents, deepDataAndEvents);
+              return jQuery2.clone(this, dataAndEvents, deepDataAndEvents);
             });
           },
           html: function(value) {
@@ -23050,12 +23050,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 return elem.innerHTML;
               }
               if (typeof value2 === "string" && !rnoInnerhtml.test(value2) && !wrapMap[(rtagName.exec(value2) || ["", ""])[1].toLowerCase()]) {
-                value2 = jQuery.htmlPrefilter(value2);
+                value2 = jQuery2.htmlPrefilter(value2);
                 try {
                   for (; i < l; i++) {
                     elem = this[i] || {};
                     if (elem.nodeType === 1) {
-                      jQuery.cleanData(getAll(elem, false));
+                      jQuery2.cleanData(getAll(elem, false));
                       elem.innerHTML = value2;
                     }
                   }
@@ -23072,8 +23072,8 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             var ignored = [];
             return domManip(this, arguments, function(elem) {
               var parent = this.parentNode;
-              if (jQuery.inArray(this, ignored) < 0) {
-                jQuery.cleanData(getAll(this));
+              if (jQuery2.inArray(this, ignored) < 0) {
+                jQuery2.cleanData(getAll(this));
                 if (parent) {
                   parent.replaceChild(elem, this);
                 }
@@ -23081,18 +23081,18 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }, ignored);
           }
         });
-        jQuery.each({
+        jQuery2.each({
           appendTo: "append",
           prependTo: "prepend",
           insertBefore: "before",
           insertAfter: "after",
           replaceAll: "replaceWith"
         }, function(name, original) {
-          jQuery.fn[name] = function(selector) {
-            var elems, ret = [], insert = jQuery(selector), last = insert.length - 1, i = 0;
+          jQuery2.fn[name] = function(selector) {
+            var elems, ret = [], insert = jQuery2(selector), last = insert.length - 1, i = 0;
             for (; i <= last; i++) {
               elems = i === last ? this : this.clone(true);
-              jQuery(insert[i])[original](elems);
+              jQuery2(insert[i])[original](elems);
               push.apply(ret, elems.get());
             }
             return this.pushStack(ret);
@@ -23149,7 +23149,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           div.style.backgroundClip = "content-box";
           div.cloneNode(true).style.backgroundClip = "";
           support.clearCloneStyle = div.style.backgroundClip === "content-box";
-          jQuery.extend(support, {
+          jQuery2.extend(support, {
             boxSizingReliable: function() {
               computeStyleTests();
               return boxSizingReliableVal;
@@ -23199,7 +23199,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               ret = ret.replace(rtrimCSS, "$1") || void 0;
             }
             if (ret === "" && !isAttached(elem)) {
-              ret = jQuery.style(elem, name);
+              ret = jQuery2.style(elem, name);
             }
             if (!support.pixelBoxStyles() && rnumnonpx.test(ret) && rboxStyle.test(name)) {
               width = style.width;
@@ -23236,7 +23236,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
         }
         function finalPropName(name) {
-          var final = jQuery.cssProps[name] || vendorProps[name];
+          var final = jQuery2.cssProps[name] || vendorProps[name];
           if (final) {
             return final;
           }
@@ -23260,21 +23260,21 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           for (; i < 4; i += 2) {
             if (box === "margin") {
-              marginDelta += jQuery.css(elem, box + cssExpand[i], true, styles);
+              marginDelta += jQuery2.css(elem, box + cssExpand[i], true, styles);
             }
             if (!isBorderBox) {
-              delta += jQuery.css(elem, "padding" + cssExpand[i], true, styles);
+              delta += jQuery2.css(elem, "padding" + cssExpand[i], true, styles);
               if (box !== "padding") {
-                delta += jQuery.css(elem, "border" + cssExpand[i] + "Width", true, styles);
+                delta += jQuery2.css(elem, "border" + cssExpand[i] + "Width", true, styles);
               } else {
-                extra += jQuery.css(elem, "border" + cssExpand[i] + "Width", true, styles);
+                extra += jQuery2.css(elem, "border" + cssExpand[i] + "Width", true, styles);
               }
             } else {
               if (box === "content") {
-                delta -= jQuery.css(elem, "padding" + cssExpand[i], true, styles);
+                delta -= jQuery2.css(elem, "padding" + cssExpand[i], true, styles);
               }
               if (box !== "margin") {
-                delta -= jQuery.css(elem, "border" + cssExpand[i] + "Width", true, styles);
+                delta -= jQuery2.css(elem, "border" + cssExpand[i] + "Width", true, styles);
               }
             }
           }
@@ -23286,15 +23286,15 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           return delta + marginDelta;
         }
         function getWidthOrHeight(elem, dimension, extra) {
-          var styles = getStyles(elem), boxSizingNeeded = !support.boxSizingReliable() || extra, isBorderBox = boxSizingNeeded && jQuery.css(elem, "boxSizing", false, styles) === "border-box", valueIsBorderBox = isBorderBox, val = curCSS(elem, dimension, styles), offsetProp = "offset" + dimension[0].toUpperCase() + dimension.slice(1);
+          var styles = getStyles(elem), boxSizingNeeded = !support.boxSizingReliable() || extra, isBorderBox = boxSizingNeeded && jQuery2.css(elem, "boxSizing", false, styles) === "border-box", valueIsBorderBox = isBorderBox, val = curCSS(elem, dimension, styles), offsetProp = "offset" + dimension[0].toUpperCase() + dimension.slice(1);
           if (rnumnonpx.test(val)) {
             if (!extra) {
               return val;
             }
             val = "auto";
           }
-          if ((!support.boxSizingReliable() && isBorderBox || !support.reliableTrDimensions() && nodeName(elem, "tr") || val === "auto" || !parseFloat(val) && jQuery.css(elem, "display", false, styles) === "inline") && elem.getClientRects().length) {
-            isBorderBox = jQuery.css(elem, "boxSizing", false, styles) === "border-box";
+          if ((!support.boxSizingReliable() && isBorderBox || !support.reliableTrDimensions() && nodeName(elem, "tr") || val === "auto" || !parseFloat(val) && jQuery2.css(elem, "display", false, styles) === "inline") && elem.getClientRects().length) {
+            isBorderBox = jQuery2.css(elem, "boxSizing", false, styles) === "border-box";
             valueIsBorderBox = offsetProp in elem;
             if (valueIsBorderBox) {
               val = elem[offsetProp];
@@ -23310,7 +23310,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             val
           ) + "px";
         }
-        jQuery.extend({
+        jQuery2.extend({
           cssHooks: {
             opacity: {
               get: function(elem, computed) {
@@ -23359,7 +23359,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             if (!isCustomProp) {
               name = finalPropName(origName);
             }
-            hooks = jQuery.cssHooks[name] || jQuery.cssHooks[origName];
+            hooks = jQuery2.cssHooks[name] || jQuery2.cssHooks[origName];
             if (value !== void 0) {
               type = typeof value;
               if (type === "string" && (ret = rcssNum.exec(value)) && ret[1]) {
@@ -23370,7 +23370,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 return;
               }
               if (type === "number" && !isCustomProp) {
-                value += ret && ret[3] || (jQuery.cssNumber[origName] ? "" : "px");
+                value += ret && ret[3] || (jQuery2.cssNumber[origName] ? "" : "px");
               }
               if (!support.clearCloneStyle && value === "" && name.indexOf("background") === 0) {
                 style[name] = "inherit";
@@ -23394,7 +23394,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             if (!isCustomProp) {
               name = finalPropName(origName);
             }
-            hooks = jQuery.cssHooks[name] || jQuery.cssHooks[origName];
+            hooks = jQuery2.cssHooks[name] || jQuery2.cssHooks[origName];
             if (hooks && "get" in hooks) {
               val = hooks.get(elem, true, extra);
             }
@@ -23411,17 +23411,17 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             return val;
           }
         });
-        jQuery.each(["height", "width"], function(_i, dimension) {
-          jQuery.cssHooks[dimension] = {
+        jQuery2.each(["height", "width"], function(_i, dimension) {
+          jQuery2.cssHooks[dimension] = {
             get: function(elem, computed, extra) {
               if (computed) {
-                return rdisplayswap.test(jQuery.css(elem, "display")) && (!elem.getClientRects().length || !elem.getBoundingClientRect().width) ? swap(elem, cssShow, function() {
+                return rdisplayswap.test(jQuery2.css(elem, "display")) && (!elem.getClientRects().length || !elem.getBoundingClientRect().width) ? swap(elem, cssShow, function() {
                   return getWidthOrHeight(elem, dimension, extra);
                 }) : getWidthOrHeight(elem, dimension, extra);
               }
             },
             set: function(elem, value, extra) {
-              var matches, styles = getStyles(elem), scrollboxSizeBuggy = !support.scrollboxSize() && styles.position === "absolute", boxSizingNeeded = scrollboxSizeBuggy || extra, isBorderBox = boxSizingNeeded && jQuery.css(elem, "boxSizing", false, styles) === "border-box", subtract = extra ? boxModelAdjustment(
+              var matches, styles = getStyles(elem), scrollboxSizeBuggy = !support.scrollboxSize() && styles.position === "absolute", boxSizingNeeded = scrollboxSizeBuggy || extra, isBorderBox = boxSizingNeeded && jQuery2.css(elem, "boxSizing", false, styles) === "border-box", subtract = extra ? boxModelAdjustment(
                 elem,
                 dimension,
                 extra,
@@ -23435,13 +23435,13 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               }
               if (subtract && (matches = rcssNum.exec(value)) && (matches[3] || "px") !== "px") {
                 elem.style[dimension] = value;
-                value = jQuery.css(elem, dimension);
+                value = jQuery2.css(elem, dimension);
               }
               return setPositiveNumber(elem, value, subtract);
             }
           };
         });
-        jQuery.cssHooks.marginLeft = addGetHookIf(
+        jQuery2.cssHooks.marginLeft = addGetHookIf(
           support.reliableMarginLeft,
           function(elem, computed) {
             if (computed) {
@@ -23451,12 +23451,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           }
         );
-        jQuery.each({
+        jQuery2.each({
           margin: "",
           padding: "",
           border: "Width"
         }, function(prefix, suffix) {
-          jQuery.cssHooks[prefix + suffix] = {
+          jQuery2.cssHooks[prefix + suffix] = {
             expand: function(value) {
               var i = 0, expanded = {}, parts = typeof value === "string" ? value.split(" ") : [value];
               for (; i < 4; i++) {
@@ -23466,10 +23466,10 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           };
           if (prefix !== "margin") {
-            jQuery.cssHooks[prefix + suffix].set = setPositiveNumber;
+            jQuery2.cssHooks[prefix + suffix].set = setPositiveNumber;
           }
         });
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           css: function(name, value) {
             return access(this, function(elem, name2, value2) {
               var styles, len, map = {}, i = 0;
@@ -23477,28 +23477,28 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 styles = getStyles(elem);
                 len = name2.length;
                 for (; i < len; i++) {
-                  map[name2[i]] = jQuery.css(elem, name2[i], false, styles);
+                  map[name2[i]] = jQuery2.css(elem, name2[i], false, styles);
                 }
                 return map;
               }
-              return value2 !== void 0 ? jQuery.style(elem, name2, value2) : jQuery.css(elem, name2);
+              return value2 !== void 0 ? jQuery2.style(elem, name2, value2) : jQuery2.css(elem, name2);
             }, name, value, arguments.length > 1);
           }
         });
         function Tween(elem, options, prop, end, easing) {
           return new Tween.prototype.init(elem, options, prop, end, easing);
         }
-        jQuery.Tween = Tween;
+        jQuery2.Tween = Tween;
         Tween.prototype = {
           constructor: Tween,
           init: function(elem, options, prop, end, easing, unit) {
             this.elem = elem;
             this.prop = prop;
-            this.easing = easing || jQuery.easing._default;
+            this.easing = easing || jQuery2.easing._default;
             this.options = options;
             this.start = this.now = this.cur();
             this.end = end;
-            this.unit = unit || (jQuery.cssNumber[prop] ? "" : "px");
+            this.unit = unit || (jQuery2.cssNumber[prop] ? "" : "px");
           },
           cur: function() {
             var hooks = Tween.propHooks[this.prop];
@@ -23507,7 +23507,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           run: function(percent) {
             var eased, hooks = Tween.propHooks[this.prop];
             if (this.options.duration) {
-              this.pos = eased = jQuery.easing[this.easing](
+              this.pos = eased = jQuery2.easing[this.easing](
                 percent,
                 this.options.duration * percent,
                 0,
@@ -23537,14 +23537,14 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               if (tween.elem.nodeType !== 1 || tween.elem[tween.prop] != null && tween.elem.style[tween.prop] == null) {
                 return tween.elem[tween.prop];
               }
-              result = jQuery.css(tween.elem, tween.prop, "");
+              result = jQuery2.css(tween.elem, tween.prop, "");
               return !result || result === "auto" ? 0 : result;
             },
             set: function(tween) {
-              if (jQuery.fx.step[tween.prop]) {
-                jQuery.fx.step[tween.prop](tween);
-              } else if (tween.elem.nodeType === 1 && (jQuery.cssHooks[tween.prop] || tween.elem.style[finalPropName(tween.prop)] != null)) {
-                jQuery.style(tween.elem, tween.prop, tween.now + tween.unit);
+              if (jQuery2.fx.step[tween.prop]) {
+                jQuery2.fx.step[tween.prop](tween);
+              } else if (tween.elem.nodeType === 1 && (jQuery2.cssHooks[tween.prop] || tween.elem.style[finalPropName(tween.prop)] != null)) {
+                jQuery2.style(tween.elem, tween.prop, tween.now + tween.unit);
               } else {
                 tween.elem[tween.prop] = tween.now;
               }
@@ -23558,7 +23558,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           }
         };
-        jQuery.easing = {
+        jQuery2.easing = {
           linear: function(p) {
             return p;
           },
@@ -23567,17 +23567,17 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           },
           _default: "swing"
         };
-        jQuery.fx = Tween.prototype.init;
-        jQuery.fx.step = {};
+        jQuery2.fx = Tween.prototype.init;
+        jQuery2.fx.step = {};
         var fxNow, inProgress, rfxtypes = /^(?:toggle|show|hide)$/, rrun = /queueHooks$/;
         function schedule() {
           if (inProgress) {
             if (document2.hidden === false && window2.requestAnimationFrame) {
               window2.requestAnimationFrame(schedule);
             } else {
-              window2.setTimeout(schedule, jQuery.fx.interval);
+              window2.setTimeout(schedule, jQuery2.fx.interval);
             }
-            jQuery.fx.tick();
+            jQuery2.fx.tick();
           }
         }
         function createFxNow() {
@@ -23609,7 +23609,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
         function defaultPrefilter(elem, props, opts) {
           var prop, value, toggle, hooks, oldfire, propTween, restoreDisplay, display, isBox = "width" in props || "height" in props, anim = this, orig = {}, style = elem.style, hidden = elem.nodeType && isHiddenWithinTree(elem), dataShow = dataPriv.get(elem, "fxshow");
           if (!opts.queue) {
-            hooks = jQuery._queueHooks(elem, "fx");
+            hooks = jQuery2._queueHooks(elem, "fx");
             if (hooks.unqueued == null) {
               hooks.unqueued = 0;
               oldfire = hooks.empty.fire;
@@ -23623,7 +23623,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             anim.always(function() {
               anim.always(function() {
                 hooks.unqueued--;
-                if (!jQuery.queue(elem, "fx").length) {
+                if (!jQuery2.queue(elem, "fx").length) {
                   hooks.empty.fire();
                 }
               });
@@ -23641,11 +23641,11 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                   continue;
                 }
               }
-              orig[prop] = dataShow && dataShow[prop] || jQuery.style(elem, prop);
+              orig[prop] = dataShow && dataShow[prop] || jQuery2.style(elem, prop);
             }
           }
-          propTween = !jQuery.isEmptyObject(props);
-          if (!propTween && jQuery.isEmptyObject(orig)) {
+          propTween = !jQuery2.isEmptyObject(props);
+          if (!propTween && jQuery2.isEmptyObject(orig)) {
             return;
           }
           if (isBox && elem.nodeType === 1) {
@@ -23654,19 +23654,19 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             if (restoreDisplay == null) {
               restoreDisplay = dataPriv.get(elem, "display");
             }
-            display = jQuery.css(elem, "display");
+            display = jQuery2.css(elem, "display");
             if (display === "none") {
               if (restoreDisplay) {
                 display = restoreDisplay;
               } else {
                 showHide([elem], true);
                 restoreDisplay = elem.style.display || restoreDisplay;
-                display = jQuery.css(elem, "display");
+                display = jQuery2.css(elem, "display");
                 showHide([elem]);
               }
             }
             if (display === "inline" || display === "inline-block" && restoreDisplay != null) {
-              if (jQuery.css(elem, "float") === "none") {
+              if (jQuery2.css(elem, "float") === "none") {
                 if (!propTween) {
                   anim.done(function() {
                     style.display = restoreDisplay;
@@ -23710,7 +23710,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 }
                 dataPriv.remove(elem, "fxshow");
                 for (prop in orig) {
-                  jQuery.style(elem, prop, orig[prop]);
+                  jQuery2.style(elem, prop, orig[prop]);
                 }
               });
             }
@@ -23738,7 +23738,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               props[name] = value;
               delete props[index];
             }
-            hooks = jQuery.cssHooks[name];
+            hooks = jQuery2.cssHooks[name];
             if (hooks && "expand" in hooks) {
               value = hooks.expand(value);
               delete props[name];
@@ -23754,7 +23754,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
         }
         function Animation(elem, properties, options) {
-          var result, stopped, index = 0, length = Animation.prefilters.length, deferred = jQuery.Deferred().always(function() {
+          var result, stopped, index = 0, length = Animation.prefilters.length, deferred = jQuery2.Deferred().always(function() {
             delete tick.elem;
           }), tick = function() {
             if (stopped) {
@@ -23775,10 +23775,10 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             return false;
           }, animation = deferred.promise({
             elem,
-            props: jQuery.extend({}, properties),
-            opts: jQuery.extend(true, {
+            props: jQuery2.extend({}, properties),
+            opts: jQuery2.extend(true, {
               specialEasing: {},
-              easing: jQuery.easing._default
+              easing: jQuery2.easing._default
             }, options),
             originalProperties: properties,
             originalOptions: options,
@@ -23786,7 +23786,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             duration: options.duration,
             tweens: [],
             createTween: function(prop, end) {
-              var tween = jQuery.Tween(
+              var tween = jQuery2.Tween(
                 elem,
                 animation.opts,
                 prop,
@@ -23819,18 +23819,18 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             result = Animation.prefilters[index].call(animation, elem, props, animation.opts);
             if (result) {
               if (isFunction2(result.stop)) {
-                jQuery._queueHooks(animation.elem, animation.opts.queue).stop = result.stop.bind(result);
+                jQuery2._queueHooks(animation.elem, animation.opts.queue).stop = result.stop.bind(result);
               }
               return result;
             }
           }
-          jQuery.map(props, createTween, animation);
+          jQuery2.map(props, createTween, animation);
           if (isFunction2(animation.opts.start)) {
             animation.opts.start.call(elem, animation);
           }
           animation.progress(animation.opts.progress).done(animation.opts.done, animation.opts.complete).fail(animation.opts.fail).always(animation.opts.always);
-          jQuery.fx.timer(
-            jQuery.extend(tick, {
+          jQuery2.fx.timer(
+            jQuery2.extend(tick, {
               elem,
               anim: animation,
               queue: animation.opts.queue
@@ -23838,7 +23838,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           );
           return animation;
         }
-        jQuery.Animation = jQuery.extend(Animation, {
+        jQuery2.Animation = jQuery2.extend(Animation, {
           tweeners: {
             "*": [function(prop, value) {
               var tween = this.createTween(prop, value);
@@ -23869,20 +23869,20 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           }
         });
-        jQuery.speed = function(speed, easing, fn) {
-          var opt = speed && typeof speed === "object" ? jQuery.extend({}, speed) : {
+        jQuery2.speed = function(speed, easing, fn) {
+          var opt = speed && typeof speed === "object" ? jQuery2.extend({}, speed) : {
             complete: fn || !fn && easing || isFunction2(speed) && speed,
             duration: speed,
             easing: fn && easing || easing && !isFunction2(easing) && easing
           };
-          if (jQuery.fx.off) {
+          if (jQuery2.fx.off) {
             opt.duration = 0;
           } else {
             if (typeof opt.duration !== "number") {
-              if (opt.duration in jQuery.fx.speeds) {
-                opt.duration = jQuery.fx.speeds[opt.duration];
+              if (opt.duration in jQuery2.fx.speeds) {
+                opt.duration = jQuery2.fx.speeds[opt.duration];
               } else {
-                opt.duration = jQuery.fx.speeds._default;
+                opt.duration = jQuery2.fx.speeds._default;
               }
             }
           }
@@ -23895,18 +23895,18 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               opt.old.call(this);
             }
             if (opt.queue) {
-              jQuery.dequeue(this, opt.queue);
+              jQuery2.dequeue(this, opt.queue);
             }
           };
           return opt;
         };
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           fadeTo: function(speed, to, easing, callback) {
             return this.filter(isHiddenWithinTree).css("opacity", 0).show().end().animate({ opacity: to }, speed, easing, callback);
           },
           animate: function(prop, speed, easing, callback) {
-            var empty = jQuery.isEmptyObject(prop), optall = jQuery.speed(speed, easing, callback), doAnimation = function() {
-              var anim = Animation(this, jQuery.extend({}, prop), optall);
+            var empty = jQuery2.isEmptyObject(prop), optall = jQuery2.speed(speed, easing, callback), doAnimation = function() {
+              var anim = Animation(this, jQuery2.extend({}, prop), optall);
               if (empty || dataPriv.get(this, "finish")) {
                 anim.stop(true);
               }
@@ -23929,7 +23929,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               this.queue(type || "fx", []);
             }
             return this.each(function() {
-              var dequeue = true, index = type != null && type + "queueHooks", timers = jQuery.timers, data = dataPriv.get(this);
+              var dequeue = true, index = type != null && type + "queueHooks", timers = jQuery2.timers, data = dataPriv.get(this);
               if (index) {
                 if (data[index] && data[index].stop) {
                   stopQueue(data[index]);
@@ -23949,7 +23949,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 }
               }
               if (dequeue || !gotoEnd) {
-                jQuery.dequeue(this, type);
+                jQuery2.dequeue(this, type);
               }
             });
           },
@@ -23958,9 +23958,9 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               type = type || "fx";
             }
             return this.each(function() {
-              var index, data = dataPriv.get(this), queue = data[type + "queue"], hooks = data[type + "queueHooks"], timers = jQuery.timers, length = queue ? queue.length : 0;
+              var index, data = dataPriv.get(this), queue = data[type + "queue"], hooks = data[type + "queueHooks"], timers = jQuery2.timers, length = queue ? queue.length : 0;
               data.finish = true;
-              jQuery.queue(this, type, []);
+              jQuery2.queue(this, type, []);
               if (hooks && hooks.stop) {
                 hooks.stop.call(this, true);
               }
@@ -23979,13 +23979,13 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             });
           }
         });
-        jQuery.each(["toggle", "show", "hide"], function(_i, name) {
-          var cssFn = jQuery.fn[name];
-          jQuery.fn[name] = function(speed, easing, callback) {
+        jQuery2.each(["toggle", "show", "hide"], function(_i, name) {
+          var cssFn = jQuery2.fn[name];
+          jQuery2.fn[name] = function(speed, easing, callback) {
             return speed == null || typeof speed === "boolean" ? cssFn.apply(this, arguments) : this.animate(genFx(name, true), speed, easing, callback);
           };
         });
-        jQuery.each({
+        jQuery2.each({
           slideDown: genFx("show"),
           slideUp: genFx("hide"),
           slideToggle: genFx("toggle"),
@@ -23993,13 +23993,13 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           fadeOut: { opacity: "hide" },
           fadeToggle: { opacity: "toggle" }
         }, function(name, props) {
-          jQuery.fn[name] = function(speed, easing, callback) {
+          jQuery2.fn[name] = function(speed, easing, callback) {
             return this.animate(props, speed, easing, callback);
           };
         });
-        jQuery.timers = [];
-        jQuery.fx.tick = function() {
-          var timer, i = 0, timers = jQuery.timers;
+        jQuery2.timers = [];
+        jQuery2.fx.tick = function() {
+          var timer, i = 0, timers = jQuery2.timers;
           fxNow = Date.now();
           for (; i < timers.length; i++) {
             timer = timers[i];
@@ -24008,32 +24008,32 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           }
           if (!timers.length) {
-            jQuery.fx.stop();
+            jQuery2.fx.stop();
           }
           fxNow = void 0;
         };
-        jQuery.fx.timer = function(timer) {
-          jQuery.timers.push(timer);
-          jQuery.fx.start();
+        jQuery2.fx.timer = function(timer) {
+          jQuery2.timers.push(timer);
+          jQuery2.fx.start();
         };
-        jQuery.fx.interval = 13;
-        jQuery.fx.start = function() {
+        jQuery2.fx.interval = 13;
+        jQuery2.fx.start = function() {
           if (inProgress) {
             return;
           }
           inProgress = true;
           schedule();
         };
-        jQuery.fx.stop = function() {
+        jQuery2.fx.stop = function() {
           inProgress = null;
         };
-        jQuery.fx.speeds = {
+        jQuery2.fx.speeds = {
           slow: 600,
           fast: 200,
           _default: 400
         };
-        jQuery.fn.delay = function(time, type) {
-          time = jQuery.fx ? jQuery.fx.speeds[time] || time : time;
+        jQuery2.fn.delay = function(time, type) {
+          time = jQuery2.fx ? jQuery2.fx.speeds[time] || time : time;
           type = type || "fx";
           return this.queue(type, function(next, hooks) {
             var timeout = window2.setTimeout(next, time);
@@ -24052,32 +24052,32 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           input.type = "radio";
           support.radioValue = input.value === "t";
         })();
-        var boolHook, attrHandle = jQuery.expr.attrHandle;
-        jQuery.fn.extend({
+        var boolHook, attrHandle = jQuery2.expr.attrHandle;
+        jQuery2.fn.extend({
           attr: function(name, value) {
-            return access(this, jQuery.attr, name, value, arguments.length > 1);
+            return access(this, jQuery2.attr, name, value, arguments.length > 1);
           },
           removeAttr: function(name) {
             return this.each(function() {
-              jQuery.removeAttr(this, name);
+              jQuery2.removeAttr(this, name);
             });
           }
         });
-        jQuery.extend({
+        jQuery2.extend({
           attr: function(elem, name, value) {
             var ret, hooks, nType = elem.nodeType;
             if (nType === 3 || nType === 8 || nType === 2) {
               return;
             }
             if (typeof elem.getAttribute === "undefined") {
-              return jQuery.prop(elem, name, value);
+              return jQuery2.prop(elem, name, value);
             }
-            if (nType !== 1 || !jQuery.isXMLDoc(elem)) {
-              hooks = jQuery.attrHooks[name.toLowerCase()] || (jQuery.expr.match.bool.test(name) ? boolHook : void 0);
+            if (nType !== 1 || !jQuery2.isXMLDoc(elem)) {
+              hooks = jQuery2.attrHooks[name.toLowerCase()] || (jQuery2.expr.match.bool.test(name) ? boolHook : void 0);
             }
             if (value !== void 0) {
               if (value === null) {
-                jQuery.removeAttr(elem, name);
+                jQuery2.removeAttr(elem, name);
                 return;
               }
               if (hooks && "set" in hooks && (ret = hooks.set(elem, value, name)) !== void 0) {
@@ -24089,7 +24089,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             if (hooks && "get" in hooks && (ret = hooks.get(elem, name)) !== null) {
               return ret;
             }
-            ret = jQuery.find.attr(elem, name);
+            ret = jQuery2.find.attr(elem, name);
             return ret == null ? void 0 : ret;
           },
           attrHooks: {
@@ -24118,15 +24118,15 @@ For more info, visit https://fb.me/react-mock-scheduler`);
         boolHook = {
           set: function(elem, value, name) {
             if (value === false) {
-              jQuery.removeAttr(elem, name);
+              jQuery2.removeAttr(elem, name);
             } else {
               elem.setAttribute(name, name);
             }
             return name;
           }
         };
-        jQuery.each(jQuery.expr.match.bool.source.match(/\w+/g), function(_i, name) {
-          var getter = attrHandle[name] || jQuery.find.attr;
+        jQuery2.each(jQuery2.expr.match.bool.source.match(/\w+/g), function(_i, name) {
+          var getter = attrHandle[name] || jQuery2.find.attr;
           attrHandle[name] = function(elem, name2, isXML) {
             var ret, handle, lowercaseName = name2.toLowerCase();
             if (!isXML) {
@@ -24139,25 +24139,25 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           };
         });
         var rfocusable = /^(?:input|select|textarea|button)$/i, rclickable = /^(?:a|area)$/i;
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           prop: function(name, value) {
-            return access(this, jQuery.prop, name, value, arguments.length > 1);
+            return access(this, jQuery2.prop, name, value, arguments.length > 1);
           },
           removeProp: function(name) {
             return this.each(function() {
-              delete this[jQuery.propFix[name] || name];
+              delete this[jQuery2.propFix[name] || name];
             });
           }
         });
-        jQuery.extend({
+        jQuery2.extend({
           prop: function(elem, name, value) {
             var ret, hooks, nType = elem.nodeType;
             if (nType === 3 || nType === 8 || nType === 2) {
               return;
             }
-            if (nType !== 1 || !jQuery.isXMLDoc(elem)) {
-              name = jQuery.propFix[name] || name;
-              hooks = jQuery.propHooks[name];
+            if (nType !== 1 || !jQuery2.isXMLDoc(elem)) {
+              name = jQuery2.propFix[name] || name;
+              hooks = jQuery2.propHooks[name];
             }
             if (value !== void 0) {
               if (hooks && "set" in hooks && (ret = hooks.set(elem, value, name)) !== void 0) {
@@ -24173,7 +24173,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           propHooks: {
             tabIndex: {
               get: function(elem) {
-                var tabindex = jQuery.find.attr(elem, "tabindex");
+                var tabindex = jQuery2.find.attr(elem, "tabindex");
                 if (tabindex) {
                   return parseInt(tabindex, 10);
                 }
@@ -24190,7 +24190,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
         });
         if (!support.optSelected) {
-          jQuery.propHooks.selected = {
+          jQuery2.propHooks.selected = {
             get: function(elem) {
               var parent = elem.parentNode;
               if (parent && parent.parentNode) {
@@ -24209,7 +24209,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           };
         }
-        jQuery.each([
+        jQuery2.each([
           "tabIndex",
           "readOnly",
           "maxLength",
@@ -24221,7 +24221,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           "frameBorder",
           "contentEditable"
         ], function() {
-          jQuery.propFix[this.toLowerCase()] = this;
+          jQuery2.propFix[this.toLowerCase()] = this;
         });
         function stripAndCollapse(value) {
           var tokens = value.match(rnothtmlwhite) || [];
@@ -24239,12 +24239,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           return [];
         }
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           addClass: function(value) {
             var classNames, cur, curValue, className, i, finalValue;
             if (isFunction2(value)) {
               return this.each(function(j) {
-                jQuery(this).addClass(value.call(this, j, getClass(this)));
+                jQuery2(this).addClass(value.call(this, j, getClass(this)));
               });
             }
             classNames = classesToArray(value);
@@ -24272,7 +24272,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             var classNames, cur, curValue, className, i, finalValue;
             if (isFunction2(value)) {
               return this.each(function(j) {
-                jQuery(this).removeClass(value.call(this, j, getClass(this)));
+                jQuery2(this).removeClass(value.call(this, j, getClass(this)));
               });
             }
             if (!arguments.length) {
@@ -24303,7 +24303,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             var classNames, className, i, self2, type = typeof value, isValidValue = type === "string" || Array.isArray(value);
             if (isFunction2(value)) {
               return this.each(function(i2) {
-                jQuery(this).toggleClass(
+                jQuery2(this).toggleClass(
                   value.call(this, i2, getClass(this), stateVal),
                   stateVal
                 );
@@ -24315,7 +24315,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             classNames = classesToArray(value);
             return this.each(function() {
               if (isValidValue) {
-                self2 = jQuery(this);
+                self2 = jQuery2(this);
                 for (i = 0; i < classNames.length; i++) {
                   className = classNames[i];
                   if (self2.hasClass(className)) {
@@ -24350,12 +24350,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
         });
         var rreturn = /\r/g;
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           val: function(value) {
             var hooks, ret, valueIsFunction, elem = this[0];
             if (!arguments.length) {
               if (elem) {
-                hooks = jQuery.valHooks[elem.type] || jQuery.valHooks[elem.nodeName.toLowerCase()];
+                hooks = jQuery2.valHooks[elem.type] || jQuery2.valHooks[elem.nodeName.toLowerCase()];
                 if (hooks && "get" in hooks && (ret = hooks.get(elem, "value")) !== void 0) {
                   return ret;
                 }
@@ -24374,7 +24374,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 return;
               }
               if (valueIsFunction) {
-                val = value.call(this, i, jQuery(this).val());
+                val = value.call(this, i, jQuery2(this).val());
               } else {
                 val = value;
               }
@@ -24383,23 +24383,23 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               } else if (typeof val === "number") {
                 val += "";
               } else if (Array.isArray(val)) {
-                val = jQuery.map(val, function(value2) {
+                val = jQuery2.map(val, function(value2) {
                   return value2 == null ? "" : value2 + "";
                 });
               }
-              hooks = jQuery.valHooks[this.type] || jQuery.valHooks[this.nodeName.toLowerCase()];
+              hooks = jQuery2.valHooks[this.type] || jQuery2.valHooks[this.nodeName.toLowerCase()];
               if (!hooks || !("set" in hooks) || hooks.set(this, val, "value") === void 0) {
                 this.value = val;
               }
             });
           }
         });
-        jQuery.extend({
+        jQuery2.extend({
           valHooks: {
             option: {
               get: function(elem) {
-                var val = jQuery.find.attr(elem, "value");
-                return val != null ? val : stripAndCollapse(jQuery.text(elem));
+                var val = jQuery2.find.attr(elem, "value");
+                return val != null ? val : stripAndCollapse(jQuery2.text(elem));
               }
             },
             select: {
@@ -24413,7 +24413,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 for (; i < max; i++) {
                   option = options[i];
                   if ((option.selected || i === index) && !option.disabled && (!option.parentNode.disabled || !nodeName(option.parentNode, "optgroup"))) {
-                    value = jQuery(option).val();
+                    value = jQuery2(option).val();
                     if (one) {
                       return value;
                     }
@@ -24423,10 +24423,10 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 return values;
               },
               set: function(elem, value) {
-                var optionSet, option, options = elem.options, values = jQuery.makeArray(value), i = options.length;
+                var optionSet, option, options = elem.options, values = jQuery2.makeArray(value), i = options.length;
                 while (i--) {
                   option = options[i];
-                  if (option.selected = jQuery.inArray(jQuery.valHooks.option.get(option), values) > -1) {
+                  if (option.selected = jQuery2.inArray(jQuery2.valHooks.option.get(option), values) > -1) {
                     optionSet = true;
                   }
                 }
@@ -24438,16 +24438,16 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           }
         });
-        jQuery.each(["radio", "checkbox"], function() {
-          jQuery.valHooks[this] = {
+        jQuery2.each(["radio", "checkbox"], function() {
+          jQuery2.valHooks[this] = {
             set: function(elem, value) {
               if (Array.isArray(value)) {
-                return elem.checked = jQuery.inArray(jQuery(elem).val(), value) > -1;
+                return elem.checked = jQuery2.inArray(jQuery2(elem).val(), value) > -1;
               }
             }
           };
           if (!support.checkOn) {
-            jQuery.valHooks[this].get = function(elem) {
+            jQuery2.valHooks[this].get = function(elem) {
               return elem.getAttribute("value") === null ? "on" : elem.value;
             };
           }
@@ -24455,7 +24455,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
         var location2 = window2.location;
         var nonce = { guid: Date.now() };
         var rquery = /\?/;
-        jQuery.parseXML = function(data) {
+        jQuery2.parseXML = function(data) {
           var xml, parserErrorElem;
           if (!data || typeof data !== "string") {
             return null;
@@ -24466,7 +24466,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           parserErrorElem = xml && xml.getElementsByTagName("parsererror")[0];
           if (!xml || parserErrorElem) {
-            jQuery.error("Invalid XML: " + (parserErrorElem ? jQuery.map(parserErrorElem.childNodes, function(el) {
+            jQuery2.error("Invalid XML: " + (parserErrorElem ? jQuery2.map(parserErrorElem.childNodes, function(el) {
               return el.textContent;
             }).join("\n") : data));
           }
@@ -24475,14 +24475,14 @@ For more info, visit https://fb.me/react-mock-scheduler`);
         var rfocusMorph = /^(?:focusinfocus|focusoutblur)$/, stopPropagationCallback = function(e) {
           e.stopPropagation();
         };
-        jQuery.extend(jQuery.event, {
+        jQuery2.extend(jQuery2.event, {
           trigger: function(event, data, elem, onlyHandlers) {
             var i, cur, tmp, bubbleType, ontype, handle, special, lastElement, eventPath = [elem || document2], type = hasOwn.call(event, "type") ? event.type : event, namespaces = hasOwn.call(event, "namespace") ? event.namespace.split(".") : [];
             cur = lastElement = tmp = elem = elem || document2;
             if (elem.nodeType === 3 || elem.nodeType === 8) {
               return;
             }
-            if (rfocusMorph.test(type + jQuery.event.triggered)) {
+            if (rfocusMorph.test(type + jQuery2.event.triggered)) {
               return;
             }
             if (type.indexOf(".") > -1) {
@@ -24491,7 +24491,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               namespaces.sort();
             }
             ontype = type.indexOf(":") < 0 && "on" + type;
-            event = event[jQuery.expando] ? event : new jQuery.Event(type, typeof event === "object" && event);
+            event = event[jQuery2.expando] ? event : new jQuery2.Event(type, typeof event === "object" && event);
             event.isTrigger = onlyHandlers ? 2 : 3;
             event.namespace = namespaces.join(".");
             event.rnamespace = event.namespace ? new RegExp("(^|\\.)" + namespaces.join("\\.(?:.*\\.|)") + "(\\.|$)") : null;
@@ -24499,8 +24499,8 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             if (!event.target) {
               event.target = elem;
             }
-            data = data == null ? [event] : jQuery.makeArray(data, [event]);
-            special = jQuery.event.special[type] || {};
+            data = data == null ? [event] : jQuery2.makeArray(data, [event]);
+            special = jQuery2.event.special[type] || {};
             if (!onlyHandlers && special.trigger && special.trigger.apply(elem, data) === false) {
               return;
             }
@@ -24541,7 +24541,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                   if (tmp) {
                     elem[ontype] = null;
                   }
-                  jQuery.event.triggered = type;
+                  jQuery2.event.triggered = type;
                   if (event.isPropagationStopped()) {
                     lastElement.addEventListener(type, stopPropagationCallback);
                   }
@@ -24549,7 +24549,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                   if (event.isPropagationStopped()) {
                     lastElement.removeEventListener(type, stopPropagationCallback);
                   }
-                  jQuery.event.triggered = void 0;
+                  jQuery2.event.triggered = void 0;
                   if (tmp) {
                     elem[ontype] = tmp;
                   }
@@ -24559,27 +24559,27 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             return event.result;
           },
           simulate: function(type, elem, event) {
-            var e = jQuery.extend(
-              new jQuery.Event(),
+            var e = jQuery2.extend(
+              new jQuery2.Event(),
               event,
               {
                 type,
                 isSimulated: true
               }
             );
-            jQuery.event.trigger(e, null, elem);
+            jQuery2.event.trigger(e, null, elem);
           }
         });
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           trigger: function(type, data) {
             return this.each(function() {
-              jQuery.event.trigger(type, data, this);
+              jQuery2.event.trigger(type, data, this);
             });
           },
           triggerHandler: function(type, data) {
             var elem = this[0];
             if (elem) {
-              return jQuery.event.trigger(type, data, elem, true);
+              return jQuery2.event.trigger(type, data, elem, true);
             }
           }
         });
@@ -24587,7 +24587,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
         function buildParams(prefix, obj, traditional, add) {
           var name;
           if (Array.isArray(obj)) {
-            jQuery.each(obj, function(i, v) {
+            jQuery2.each(obj, function(i, v) {
               if (traditional || rbracket.test(prefix)) {
                 add(prefix, v);
               } else {
@@ -24607,7 +24607,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             add(prefix, obj);
           }
         }
-        jQuery.param = function(a, traditional) {
+        jQuery2.param = function(a, traditional) {
           var prefix, s = [], add = function(key, valueOrFunction) {
             var value = isFunction2(valueOrFunction) ? valueOrFunction() : valueOrFunction;
             s[s.length] = encodeURIComponent(key) + "=" + encodeURIComponent(value == null ? "" : value);
@@ -24615,8 +24615,8 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           if (a == null) {
             return "";
           }
-          if (Array.isArray(a) || a.jquery && !jQuery.isPlainObject(a)) {
-            jQuery.each(a, function() {
+          if (Array.isArray(a) || a.jquery && !jQuery2.isPlainObject(a)) {
+            jQuery2.each(a, function() {
               add(this.name, this.value);
             });
           } else {
@@ -24626,24 +24626,24 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           return s.join("&");
         };
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           serialize: function() {
-            return jQuery.param(this.serializeArray());
+            return jQuery2.param(this.serializeArray());
           },
           serializeArray: function() {
             return this.map(function() {
-              var elements = jQuery.prop(this, "elements");
-              return elements ? jQuery.makeArray(elements) : this;
+              var elements = jQuery2.prop(this, "elements");
+              return elements ? jQuery2.makeArray(elements) : this;
             }).filter(function() {
               var type = this.type;
-              return this.name && !jQuery(this).is(":disabled") && rsubmittable.test(this.nodeName) && !rsubmitterTypes.test(type) && (this.checked || !rcheckableType.test(type));
+              return this.name && !jQuery2(this).is(":disabled") && rsubmittable.test(this.nodeName) && !rsubmitterTypes.test(type) && (this.checked || !rcheckableType.test(type));
             }).map(function(_i, elem) {
-              var val = jQuery(this).val();
+              var val = jQuery2(this).val();
               if (val == null) {
                 return null;
               }
               if (Array.isArray(val)) {
-                return jQuery.map(val, function(val2) {
+                return jQuery2.map(val, function(val2) {
                   return { name: elem.name, value: val2.replace(rCRLF, "\r\n") };
                 });
               }
@@ -24677,7 +24677,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           function inspect(dataType) {
             var selected;
             inspected[dataType] = true;
-            jQuery.each(structure[dataType] || [], function(_, prefilterOrFactory) {
+            jQuery2.each(structure[dataType] || [], function(_, prefilterOrFactory) {
               var dataTypeOrTransport = prefilterOrFactory(options, originalOptions, jqXHR);
               if (typeof dataTypeOrTransport === "string" && !seekingTransport && !inspected[dataTypeOrTransport]) {
                 options.dataTypes.unshift(dataTypeOrTransport);
@@ -24692,14 +24692,14 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           return inspect(options.dataTypes[0]) || !inspected["*"] && inspect("*");
         }
         function ajaxExtend(target, src) {
-          var key, deep, flatOptions = jQuery.ajaxSettings.flatOptions || {};
+          var key, deep, flatOptions = jQuery2.ajaxSettings.flatOptions || {};
           for (key in src) {
             if (src[key] !== void 0) {
               (flatOptions[key] ? target : deep || (deep = {}))[key] = src[key];
             }
           }
           if (deep) {
-            jQuery.extend(true, target, deep);
+            jQuery2.extend(true, target, deep);
           }
           return target;
         }
@@ -24798,7 +24798,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           return { state: "success", data: response };
         }
-        jQuery.extend({
+        jQuery2.extend({
           active: 0,
           lastModified: {},
           etag: {},
@@ -24831,7 +24831,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               "* text": String,
               "text html": true,
               "text json": JSON.parse,
-              "text xml": jQuery.parseXML
+              "text xml": jQuery2.parseXML
             },
             flatOptions: {
               url: true,
@@ -24839,7 +24839,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           },
           ajaxSetup: function(target, settings) {
-            return settings ? ajaxExtend(ajaxExtend(target, jQuery.ajaxSettings), settings) : ajaxExtend(jQuery.ajaxSettings, target);
+            return settings ? ajaxExtend(ajaxExtend(target, jQuery2.ajaxSettings), settings) : ajaxExtend(jQuery2.ajaxSettings, target);
           },
           ajaxPrefilter: addToPrefiltersOrTransports(prefilters),
           ajaxTransport: addToPrefiltersOrTransports(transports),
@@ -24849,7 +24849,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               url = void 0;
             }
             options = options || {};
-            var transport, cacheURL, responseHeadersString, responseHeaders, timeoutTimer, urlAnchor, completed2, fireGlobals, i, uncached, s = jQuery.ajaxSetup({}, options), callbackContext = s.context || s, globalEventContext = s.context && (callbackContext.nodeType || callbackContext.jquery) ? jQuery(callbackContext) : jQuery.event, deferred = jQuery.Deferred(), completeDeferred = jQuery.Callbacks("once memory"), statusCode = s.statusCode || {}, requestHeaders = {}, requestHeadersNames = {}, strAbort = "canceled", jqXHR = {
+            var transport, cacheURL, responseHeadersString, responseHeaders, timeoutTimer, urlAnchor, completed2, fireGlobals, i, uncached, s = jQuery2.ajaxSetup({}, options), callbackContext = s.context || s, globalEventContext = s.context && (callbackContext.nodeType || callbackContext.jquery) ? jQuery2(callbackContext) : jQuery2.event, deferred = jQuery2.Deferred(), completeDeferred = jQuery2.Callbacks("once memory"), statusCode = s.statusCode || {}, requestHeaders = {}, requestHeadersNames = {}, strAbort = "canceled", jqXHR = {
               readyState: 0,
               getResponseHeader: function(key) {
                 var match;
@@ -24917,15 +24917,15 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               }
             }
             if (s.data && s.processData && typeof s.data !== "string") {
-              s.data = jQuery.param(s.data, s.traditional);
+              s.data = jQuery2.param(s.data, s.traditional);
             }
             inspectPrefiltersOrTransports(prefilters, s, options, jqXHR);
             if (completed2) {
               return jqXHR;
             }
-            fireGlobals = jQuery.event && s.global;
-            if (fireGlobals && jQuery.active++ === 0) {
-              jQuery.event.trigger("ajaxStart");
+            fireGlobals = jQuery2.event && s.global;
+            if (fireGlobals && jQuery2.active++ === 0) {
+              jQuery2.event.trigger("ajaxStart");
             }
             s.type = s.type.toUpperCase();
             s.hasContent = !rnoContent.test(s.type);
@@ -24945,11 +24945,11 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               s.data = s.data.replace(r20, "+");
             }
             if (s.ifModified) {
-              if (jQuery.lastModified[cacheURL]) {
-                jqXHR.setRequestHeader("If-Modified-Since", jQuery.lastModified[cacheURL]);
+              if (jQuery2.lastModified[cacheURL]) {
+                jqXHR.setRequestHeader("If-Modified-Since", jQuery2.lastModified[cacheURL]);
               }
-              if (jQuery.etag[cacheURL]) {
-                jqXHR.setRequestHeader("If-None-Match", jQuery.etag[cacheURL]);
+              if (jQuery2.etag[cacheURL]) {
+                jqXHR.setRequestHeader("If-None-Match", jQuery2.etag[cacheURL]);
               }
             }
             if (s.data && s.hasContent && s.contentType !== false || options.contentType) {
@@ -25011,7 +25011,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               if (responses) {
                 response = ajaxHandleResponses(s, jqXHR, responses);
               }
-              if (!isSuccess && jQuery.inArray("script", s.dataTypes) > -1 && jQuery.inArray("json", s.dataTypes) < 0) {
+              if (!isSuccess && jQuery2.inArray("script", s.dataTypes) > -1 && jQuery2.inArray("json", s.dataTypes) < 0) {
                 s.converters["text script"] = function() {
                 };
               }
@@ -25020,11 +25020,11 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                 if (s.ifModified) {
                   modified = jqXHR.getResponseHeader("Last-Modified");
                   if (modified) {
-                    jQuery.lastModified[cacheURL] = modified;
+                    jQuery2.lastModified[cacheURL] = modified;
                   }
                   modified = jqXHR.getResponseHeader("etag");
                   if (modified) {
-                    jQuery.etag[cacheURL] = modified;
+                    jQuery2.etag[cacheURL] = modified;
                   }
                 }
                 if (status === 204 || s.type === "HEAD") {
@@ -25064,37 +25064,37 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               completeDeferred.fireWith(callbackContext, [jqXHR, statusText]);
               if (fireGlobals) {
                 globalEventContext.trigger("ajaxComplete", [jqXHR, s]);
-                if (!--jQuery.active) {
-                  jQuery.event.trigger("ajaxStop");
+                if (!--jQuery2.active) {
+                  jQuery2.event.trigger("ajaxStop");
                 }
               }
             }
             return jqXHR;
           },
           getJSON: function(url, data, callback) {
-            return jQuery.get(url, data, callback, "json");
+            return jQuery2.get(url, data, callback, "json");
           },
           getScript: function(url, callback) {
-            return jQuery.get(url, void 0, callback, "script");
+            return jQuery2.get(url, void 0, callback, "script");
           }
         });
-        jQuery.each(["get", "post"], function(_i, method) {
-          jQuery[method] = function(url, data, callback, type) {
+        jQuery2.each(["get", "post"], function(_i, method) {
+          jQuery2[method] = function(url, data, callback, type) {
             if (isFunction2(data)) {
               type = type || callback;
               callback = data;
               data = void 0;
             }
-            return jQuery.ajax(jQuery.extend({
+            return jQuery2.ajax(jQuery2.extend({
               url,
               type: method,
               dataType: type,
               data,
               success: callback
-            }, jQuery.isPlainObject(url) && url));
+            }, jQuery2.isPlainObject(url) && url));
           };
         });
-        jQuery.ajaxPrefilter(function(s) {
+        jQuery2.ajaxPrefilter(function(s) {
           var i;
           for (i in s.headers) {
             if (i.toLowerCase() === "content-type") {
@@ -25102,8 +25102,8 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           }
         });
-        jQuery._evalUrl = function(url, options, doc) {
-          return jQuery.ajax({
+        jQuery2._evalUrl = function(url, options, doc) {
+          return jQuery2.ajax({
             url,
             type: "GET",
             dataType: "script",
@@ -25115,18 +25115,18 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               }
             },
             dataFilter: function(response) {
-              jQuery.globalEval(response, options, doc);
+              jQuery2.globalEval(response, options, doc);
             }
           });
         };
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           wrapAll: function(html) {
             var wrap;
             if (this[0]) {
               if (isFunction2(html)) {
                 html = html.call(this[0]);
               }
-              wrap = jQuery(html, this[0].ownerDocument).eq(0).clone(true);
+              wrap = jQuery2(html, this[0].ownerDocument).eq(0).clone(true);
               if (this[0].parentNode) {
                 wrap.insertBefore(this[0]);
               }
@@ -25143,11 +25143,11 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           wrapInner: function(html) {
             if (isFunction2(html)) {
               return this.each(function(i) {
-                jQuery(this).wrapInner(html.call(this, i));
+                jQuery2(this).wrapInner(html.call(this, i));
               });
             }
             return this.each(function() {
-              var self2 = jQuery(this), contents = self2.contents();
+              var self2 = jQuery2(this), contents = self2.contents();
               if (contents.length) {
                 contents.wrapAll(html);
               } else {
@@ -25158,23 +25158,23 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           wrap: function(html) {
             var htmlIsFunction = isFunction2(html);
             return this.each(function(i) {
-              jQuery(this).wrapAll(htmlIsFunction ? html.call(this, i) : html);
+              jQuery2(this).wrapAll(htmlIsFunction ? html.call(this, i) : html);
             });
           },
           unwrap: function(selector) {
             this.parent(selector).not("body").each(function() {
-              jQuery(this).replaceWith(this.childNodes);
+              jQuery2(this).replaceWith(this.childNodes);
             });
             return this;
           }
         });
-        jQuery.expr.pseudos.hidden = function(elem) {
-          return !jQuery.expr.pseudos.visible(elem);
+        jQuery2.expr.pseudos.hidden = function(elem) {
+          return !jQuery2.expr.pseudos.visible(elem);
         };
-        jQuery.expr.pseudos.visible = function(elem) {
+        jQuery2.expr.pseudos.visible = function(elem) {
           return !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
         };
-        jQuery.ajaxSettings.xhr = function() {
+        jQuery2.ajaxSettings.xhr = function() {
           try {
             return new window2.XMLHttpRequest();
           } catch (e) {
@@ -25183,10 +25183,10 @@ For more info, visit https://fb.me/react-mock-scheduler`);
         var xhrSuccessStatus = {
           0: 200,
           1223: 204
-        }, xhrSupported = jQuery.ajaxSettings.xhr();
+        }, xhrSupported = jQuery2.ajaxSettings.xhr();
         support.cors = !!xhrSupported && "withCredentials" in xhrSupported;
         support.ajax = xhrSupported = !!xhrSupported;
-        jQuery.ajaxTransport(function(options) {
+        jQuery2.ajaxTransport(function(options) {
           var callback, errorCallback;
           if (support.cors || xhrSupported && !options.crossDomain) {
             return {
@@ -25271,12 +25271,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             };
           }
         });
-        jQuery.ajaxPrefilter(function(s) {
+        jQuery2.ajaxPrefilter(function(s) {
           if (s.crossDomain) {
             s.contents.script = false;
           }
         });
-        jQuery.ajaxSetup({
+        jQuery2.ajaxSetup({
           accepts: {
             script: "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript"
           },
@@ -25285,12 +25285,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           },
           converters: {
             "text script": function(text) {
-              jQuery.globalEval(text);
+              jQuery2.globalEval(text);
               return text;
             }
           }
         });
-        jQuery.ajaxPrefilter("script", function(s) {
+        jQuery2.ajaxPrefilter("script", function(s) {
           if (s.cache === void 0) {
             s.cache = false;
           }
@@ -25298,12 +25298,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             s.type = "GET";
           }
         });
-        jQuery.ajaxTransport("script", function(s) {
+        jQuery2.ajaxTransport("script", function(s) {
           if (s.crossDomain || s.scriptAttrs) {
             var script, callback;
             return {
               send: function(_, complete) {
-                script = jQuery("<script>").attr(s.scriptAttrs || {}).prop({ charset: s.scriptCharset, src: s.url }).on("load error", callback = function(evt) {
+                script = jQuery2("<script>").attr(s.scriptAttrs || {}).prop({ charset: s.scriptCharset, src: s.url }).on("load error", callback = function(evt) {
                   script.remove();
                   callback = null;
                   if (evt) {
@@ -25321,15 +25321,15 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
         });
         var oldCallbacks = [], rjsonp = /(=)\?(?=&|$)|\?\?/;
-        jQuery.ajaxSetup({
+        jQuery2.ajaxSetup({
           jsonp: "callback",
           jsonpCallback: function() {
-            var callback = oldCallbacks.pop() || jQuery.expando + "_" + nonce.guid++;
+            var callback = oldCallbacks.pop() || jQuery2.expando + "_" + nonce.guid++;
             this[callback] = true;
             return callback;
           }
         });
-        jQuery.ajaxPrefilter("json jsonp", function(s, originalSettings, jqXHR) {
+        jQuery2.ajaxPrefilter("json jsonp", function(s, originalSettings, jqXHR) {
           var callbackName, overwritten, responseContainer, jsonProp = s.jsonp !== false && (rjsonp.test(s.url) ? "url" : typeof s.data === "string" && (s.contentType || "").indexOf("application/x-www-form-urlencoded") === 0 && rjsonp.test(s.data) && "data");
           if (jsonProp || s.dataTypes[0] === "jsonp") {
             callbackName = s.jsonpCallback = isFunction2(s.jsonpCallback) ? s.jsonpCallback() : s.jsonpCallback;
@@ -25340,7 +25340,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
             s.converters["script json"] = function() {
               if (!responseContainer) {
-                jQuery.error(callbackName + " was not called");
+                jQuery2.error(callbackName + " was not called");
               }
               return responseContainer[0];
             };
@@ -25351,7 +25351,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             };
             jqXHR.always(function() {
               if (overwritten === void 0) {
-                jQuery(window2).removeProp(callbackName);
+                jQuery2(window2).removeProp(callbackName);
               } else {
                 window2[callbackName] = overwritten;
               }
@@ -25372,7 +25372,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           body.innerHTML = "<form></form><form></form>";
           return body.childNodes.length === 2;
         }();
-        jQuery.parseHTML = function(data, context, keepScripts) {
+        jQuery2.parseHTML = function(data, context, keepScripts) {
           if (typeof data !== "string") {
             return [];
           }
@@ -25398,11 +25398,11 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           parsed = buildFragment([data], context, scripts);
           if (scripts && scripts.length) {
-            jQuery(scripts).remove();
+            jQuery2(scripts).remove();
           }
-          return jQuery.merge([], parsed.childNodes);
+          return jQuery2.merge([], parsed.childNodes);
         };
-        jQuery.fn.load = function(url, params, callback) {
+        jQuery2.fn.load = function(url, params, callback) {
           var selector, type, response, self2 = this, off = url.indexOf(" ");
           if (off > -1) {
             selector = stripAndCollapse(url.slice(off));
@@ -25415,14 +25415,14 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             type = "POST";
           }
           if (self2.length > 0) {
-            jQuery.ajax({
+            jQuery2.ajax({
               url,
               type: type || "GET",
               dataType: "html",
               data: params
             }).done(function(responseText) {
               response = arguments;
-              self2.html(selector ? jQuery("<div>").append(jQuery.parseHTML(responseText)).find(selector) : responseText);
+              self2.html(selector ? jQuery2("<div>").append(jQuery2.parseHTML(responseText)).find(selector) : responseText);
             }).always(callback && function(jqXHR, status) {
               self2.each(function() {
                 callback.apply(this, response || [jqXHR.responseText, status, jqXHR]);
@@ -25431,20 +25431,20 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           }
           return this;
         };
-        jQuery.expr.pseudos.animated = function(elem) {
-          return jQuery.grep(jQuery.timers, function(fn) {
+        jQuery2.expr.pseudos.animated = function(elem) {
+          return jQuery2.grep(jQuery2.timers, function(fn) {
             return elem === fn.elem;
           }).length;
         };
-        jQuery.offset = {
+        jQuery2.offset = {
           setOffset: function(elem, options, i) {
-            var curPosition, curLeft, curCSSTop, curTop, curOffset, curCSSLeft, calculatePosition, position = jQuery.css(elem, "position"), curElem = jQuery(elem), props = {};
+            var curPosition, curLeft, curCSSTop, curTop, curOffset, curCSSLeft, calculatePosition, position = jQuery2.css(elem, "position"), curElem = jQuery2(elem), props = {};
             if (position === "static") {
               elem.style.position = "relative";
             }
             curOffset = curElem.offset();
-            curCSSTop = jQuery.css(elem, "top");
-            curCSSLeft = jQuery.css(elem, "left");
+            curCSSTop = jQuery2.css(elem, "top");
+            curCSSLeft = jQuery2.css(elem, "left");
             calculatePosition = (position === "absolute" || position === "fixed") && (curCSSTop + curCSSLeft).indexOf("auto") > -1;
             if (calculatePosition) {
               curPosition = curElem.position();
@@ -25455,7 +25455,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               curLeft = parseFloat(curCSSLeft) || 0;
             }
             if (isFunction2(options)) {
-              options = options.call(elem, i, jQuery.extend({}, curOffset));
+              options = options.call(elem, i, jQuery2.extend({}, curOffset));
             }
             if (options.top != null) {
               props.top = options.top - curOffset.top + curTop;
@@ -25470,11 +25470,11 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           }
         };
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           offset: function(options) {
             if (arguments.length) {
               return options === void 0 ? this : this.each(function(i) {
-                jQuery.offset.setOffset(this, options, i);
+                jQuery2.offset.setOffset(this, options, i);
               });
             }
             var rect, win, elem = this[0];
@@ -25496,39 +25496,39 @@ For more info, visit https://fb.me/react-mock-scheduler`);
               return;
             }
             var offsetParent, offset, doc, elem = this[0], parentOffset = { top: 0, left: 0 };
-            if (jQuery.css(elem, "position") === "fixed") {
+            if (jQuery2.css(elem, "position") === "fixed") {
               offset = elem.getBoundingClientRect();
             } else {
               offset = this.offset();
               doc = elem.ownerDocument;
               offsetParent = elem.offsetParent || doc.documentElement;
-              while (offsetParent && (offsetParent === doc.body || offsetParent === doc.documentElement) && jQuery.css(offsetParent, "position") === "static") {
+              while (offsetParent && (offsetParent === doc.body || offsetParent === doc.documentElement) && jQuery2.css(offsetParent, "position") === "static") {
                 offsetParent = offsetParent.parentNode;
               }
               if (offsetParent && offsetParent !== elem && offsetParent.nodeType === 1) {
-                parentOffset = jQuery(offsetParent).offset();
-                parentOffset.top += jQuery.css(offsetParent, "borderTopWidth", true);
-                parentOffset.left += jQuery.css(offsetParent, "borderLeftWidth", true);
+                parentOffset = jQuery2(offsetParent).offset();
+                parentOffset.top += jQuery2.css(offsetParent, "borderTopWidth", true);
+                parentOffset.left += jQuery2.css(offsetParent, "borderLeftWidth", true);
               }
             }
             return {
-              top: offset.top - parentOffset.top - jQuery.css(elem, "marginTop", true),
-              left: offset.left - parentOffset.left - jQuery.css(elem, "marginLeft", true)
+              top: offset.top - parentOffset.top - jQuery2.css(elem, "marginTop", true),
+              left: offset.left - parentOffset.left - jQuery2.css(elem, "marginLeft", true)
             };
           },
           offsetParent: function() {
             return this.map(function() {
               var offsetParent = this.offsetParent;
-              while (offsetParent && jQuery.css(offsetParent, "position") === "static") {
+              while (offsetParent && jQuery2.css(offsetParent, "position") === "static") {
                 offsetParent = offsetParent.offsetParent;
               }
               return offsetParent || documentElement;
             });
           }
         });
-        jQuery.each({ scrollLeft: "pageXOffset", scrollTop: "pageYOffset" }, function(method, prop) {
+        jQuery2.each({ scrollLeft: "pageXOffset", scrollTop: "pageYOffset" }, function(method, prop) {
           var top = "pageYOffset" === prop;
-          jQuery.fn[method] = function(val) {
+          jQuery2.fn[method] = function(val) {
             return access(this, function(elem, method2, val2) {
               var win;
               if (isWindow(elem)) {
@@ -25550,24 +25550,24 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }, method, val, arguments.length);
           };
         });
-        jQuery.each(["top", "left"], function(_i, prop) {
-          jQuery.cssHooks[prop] = addGetHookIf(
+        jQuery2.each(["top", "left"], function(_i, prop) {
+          jQuery2.cssHooks[prop] = addGetHookIf(
             support.pixelPosition,
             function(elem, computed) {
               if (computed) {
                 computed = curCSS(elem, prop);
-                return rnumnonpx.test(computed) ? jQuery(elem).position()[prop] + "px" : computed;
+                return rnumnonpx.test(computed) ? jQuery2(elem).position()[prop] + "px" : computed;
               }
             }
           );
         });
-        jQuery.each({ Height: "height", Width: "width" }, function(name, type) {
-          jQuery.each({
+        jQuery2.each({ Height: "height", Width: "width" }, function(name, type) {
+          jQuery2.each({
             padding: "inner" + name,
             content: type,
             "": "outer" + name
           }, function(defaultExtra, funcName) {
-            jQuery.fn[funcName] = function(margin, value) {
+            jQuery2.fn[funcName] = function(margin, value) {
               var chainable = arguments.length && (defaultExtra || typeof margin !== "boolean"), extra = defaultExtra || (margin === true || value === true ? "margin" : "border");
               return access(this, function(elem, type2, value2) {
                 var doc;
@@ -25584,12 +25584,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
                     doc["client" + name]
                   );
                 }
-                return value2 === void 0 ? jQuery.css(elem, type2, extra) : jQuery.style(elem, type2, value2, extra);
+                return value2 === void 0 ? jQuery2.css(elem, type2, extra) : jQuery2.style(elem, type2, value2, extra);
               }, type, chainable ? margin : void 0, chainable);
             };
           });
         });
-        jQuery.each([
+        jQuery2.each([
           "ajaxStart",
           "ajaxStop",
           "ajaxComplete",
@@ -25597,11 +25597,11 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           "ajaxSuccess",
           "ajaxSend"
         ], function(_i, type) {
-          jQuery.fn[type] = function(fn) {
+          jQuery2.fn[type] = function(fn) {
             return this.on(type, fn);
           };
         });
-        jQuery.fn.extend({
+        jQuery2.fn.extend({
           bind: function(types, data, fn) {
             return this.on(types, null, data, fn);
           },
@@ -25618,16 +25618,16 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             return this.on("mouseenter", fnOver).on("mouseleave", fnOut || fnOver);
           }
         });
-        jQuery.each(
+        jQuery2.each(
           "blur focus focusin focusout resize scroll click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup contextmenu".split(" "),
           function(_i, name) {
-            jQuery.fn[name] = function(data, fn) {
+            jQuery2.fn[name] = function(data, fn) {
               return arguments.length > 0 ? this.on(name, null, data, fn) : this.trigger(name);
             };
           }
         );
         var rtrim = /^[\s\uFEFF\xA0]+|([^\s\uFEFF\xA0])[\s\uFEFF\xA0]+$/g;
-        jQuery.proxy = function(fn, context) {
+        jQuery2.proxy = function(fn, context) {
           var tmp, args, proxy;
           if (typeof context === "string") {
             tmp = fn[context];
@@ -25641,50 +25641,50 @@ For more info, visit https://fb.me/react-mock-scheduler`);
           proxy = function() {
             return fn.apply(context || this, args.concat(slice.call(arguments)));
           };
-          proxy.guid = fn.guid = fn.guid || jQuery.guid++;
+          proxy.guid = fn.guid = fn.guid || jQuery2.guid++;
           return proxy;
         };
-        jQuery.holdReady = function(hold) {
+        jQuery2.holdReady = function(hold) {
           if (hold) {
-            jQuery.readyWait++;
+            jQuery2.readyWait++;
           } else {
-            jQuery.ready(true);
+            jQuery2.ready(true);
           }
         };
-        jQuery.isArray = Array.isArray;
-        jQuery.parseJSON = JSON.parse;
-        jQuery.nodeName = nodeName;
-        jQuery.isFunction = isFunction2;
-        jQuery.isWindow = isWindow;
-        jQuery.camelCase = camelCase;
-        jQuery.type = toType;
-        jQuery.now = Date.now;
-        jQuery.isNumeric = function(obj) {
-          var type = jQuery.type(obj);
+        jQuery2.isArray = Array.isArray;
+        jQuery2.parseJSON = JSON.parse;
+        jQuery2.nodeName = nodeName;
+        jQuery2.isFunction = isFunction2;
+        jQuery2.isWindow = isWindow;
+        jQuery2.camelCase = camelCase;
+        jQuery2.type = toType;
+        jQuery2.now = Date.now;
+        jQuery2.isNumeric = function(obj) {
+          var type = jQuery2.type(obj);
           return (type === "number" || type === "string") && !isNaN(obj - parseFloat(obj));
         };
-        jQuery.trim = function(text) {
+        jQuery2.trim = function(text) {
           return text == null ? "" : (text + "").replace(rtrim, "$1");
         };
         if (typeof define === "function" && define.amd) {
           define("jquery", [], function() {
-            return jQuery;
+            return jQuery2;
           });
         }
         var _jQuery = window2.jQuery, _$ = window2.$;
-        jQuery.noConflict = function(deep) {
-          if (window2.$ === jQuery) {
+        jQuery2.noConflict = function(deep) {
+          if (window2.$ === jQuery2) {
             window2.$ = _$;
           }
-          if (deep && window2.jQuery === jQuery) {
+          if (deep && window2.jQuery === jQuery2) {
             window2.jQuery = _jQuery;
           }
-          return jQuery;
+          return jQuery2;
         };
         if (typeof noGlobal === "undefined") {
-          window2.jQuery = window2.$ = jQuery;
+          window2.jQuery = window2.$ = jQuery2;
         }
-        return jQuery;
+        return jQuery2;
       });
     }
   });
@@ -37723,6 +37723,947 @@ For more info, visit https://fb.me/react-mock-scheduler`);
     }
   });
 
+  // app/javascript/packs/scripts.js
+  var require_scripts = __commonJS({
+    "app/javascript/packs/scripts.js"() {
+      window.mr = window.mr || {};
+      mr = function(mr2, $5, window2, document2) {
+        "use strict";
+        mr2 = mr2 || {};
+        var components = { documentReady: [], documentReadyDeferred: [], windowLoad: [], windowLoadDeferred: [] };
+        mr2.status = { documentReadyRan: false, windowLoadPending: false };
+        $5(document2).ready(documentReady);
+        $5(window2).on("load", windowLoad);
+        function documentReady(context) {
+          context = typeof context === "undefined" ? $5 : context;
+          components.documentReady.concat(components.documentReadyDeferred).forEach(function(component) {
+            component(context);
+          });
+          mr2.status.documentReadyRan = true;
+          if (mr2.status.windowLoadPending) {
+            windowLoad(mr2.setContext());
+          }
+        }
+        function windowLoad(context) {
+          if (mr2.status.documentReadyRan) {
+            mr2.status.windowLoadPending = false;
+            context = typeof context === "object" ? $5 : context;
+            components.windowLoad.concat(components.windowLoadDeferred).forEach(function(component) {
+              component(context);
+            });
+          } else {
+            mr2.status.windowLoadPending = true;
+          }
+        }
+        mr2.setContext = function(contextSelector) {
+          var context = $5;
+          if (typeof contextSelector !== "undefined") {
+            return function(selector) {
+              return $5(contextSelector).find(selector);
+            };
+          }
+          return context;
+        };
+        mr2.components = components;
+        mr2.documentReady = documentReady;
+        mr2.windowLoad = windowLoad;
+        return mr2;
+      }(window.mr, jQuery, window, document);
+      mr = function(mr2, $5, window2, document2) {
+        "use strict";
+        mr2.util = {};
+        mr2.util.requestAnimationFrame = window2.requestAnimationFrame || window2.mozRequestAnimationFrame || window2.webkitRequestAnimationFrame || window2.msRequestAnimationFrame;
+        mr2.util.documentReady = function($6) {
+          var today = new Date();
+          var year = today.getFullYear();
+          $6(".update-year").text(year);
+        };
+        mr2.util.windowLoad = function($6) {
+          $6("[data-delay-src]").each(function() {
+            var $el = $6(this);
+            $el.attr("src", $el.attr("data-delay-src"));
+            $el.removeAttr("data-delay-src");
+          });
+        };
+        mr2.util.getURLParameter = function(name) {
+          return decodeURIComponent((new RegExp("[?|&]" + name + "=([^&;]+?)(&|#|;|$)").exec(location.search) || [void 0, ""])[1].replace(/\+/g, "%20")) || null;
+        };
+        mr2.util.capitaliseFirstLetter = function(string) {
+          return string.charAt(0).toUpperCase() + string.slice(1);
+        };
+        mr2.util.slugify = function(text, spacesOnly) {
+          if (typeof spacesOnly !== "undefined") {
+            return text.replace(/ +/g, "");
+          } else {
+            return text.toLowerCase().replace(/[\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\]\[\}\{\'\"\;\\\:\?\/\>\<\.\,]+/g, "").replace(/ +/g, "-");
+          }
+        };
+        mr2.util.sortChildrenByText = function(parentElement, reverse) {
+          var $parentElement = $5(parentElement);
+          var items = $parentElement.children().get();
+          var order = -1;
+          var order2 = 1;
+          if (typeof reverse !== "undefined") {
+            order = 1;
+            order2 = -1;
+          }
+          items.sort(function(a, b) {
+            var keyA = $5(a).text();
+            var keyB = $5(b).text();
+            if (keyA < keyB)
+              return order;
+            if (keyA > keyB)
+              return order2;
+            return 0;
+          });
+          $parentElement.empty();
+          $5(items).each(function(i, itm) {
+            $parentElement.append(itm);
+          });
+        };
+        mr2.util.idleSrc = function(context, selector) {
+          selector = typeof selector !== "undefined" ? selector : "";
+          var elems = context.is(selector + "[src]") ? context : context.find(selector + "[src]");
+          elems.each(function(index, elem) {
+            elem = $5(elem);
+            var currentSrc = elem.attr("src"), dataSrc = elem.attr("data-src");
+            if (typeof dataSrc === "undefined") {
+              elem.attr("data-src", currentSrc);
+            }
+            elem.attr("src", "");
+          });
+        };
+        mr2.util.activateIdleSrc = function(context, selector) {
+          selector = typeof selector !== "undefined" ? selector : "";
+          var elems = context.is(selector + "[data-src]") ? context : context.find(selector + "[data-src]");
+          elems.each(function(index, elem) {
+            elem = $5(elem);
+            var dataSrc = elem.attr("data-src");
+            elem.attr("src", dataSrc);
+          });
+        };
+        mr2.util.pauseVideo = function(context) {
+          var elems = context.is("video") ? context : context.find("video");
+          elems.each(function(index, video) {
+            var playingVideo = $5(video).get(0);
+            playingVideo.pause();
+          });
+        };
+        mr2.util.parsePixels = function(text) {
+          var windowHeight = $5(window2).height(), value;
+          if (/^[1-9]{1}[0-9]*[p][x]$/.test(text)) {
+            return parseInt(text.replace("px", ""), 10);
+          } else if (/^[1-9]{1}[0-9]*[v][h]$/.test(text)) {
+            value = parseInt(text.replace("vh", ""), 10);
+            return windowHeight * (value / 100);
+          } else {
+            return -1;
+          }
+        };
+        mr2.util.removeHash = function() {
+          history.pushState("", document2.title, window2.location.pathname + window2.location.search);
+        };
+        mr2.components.documentReady.push(mr2.util.documentReady);
+        mr2.components.windowLoad.push(mr2.util.windowLoad);
+        return mr2;
+      }(mr, jQuery, window, document);
+      mr = function(mr2, $5, window2, document2) {
+        "use strict";
+        mr2.window = {};
+        mr2.window.height = $5(window2).height();
+        mr2.window.width = $5(window2).width();
+        $5(window2).on("resize", function() {
+          mr2.window.height = $5(window2).height();
+          mr2.window.width = $5(window2).width();
+        });
+        return mr2;
+      }(mr, jQuery, window, document);
+      mr = function(mr2, $5, window2, document2) {
+        "use strict";
+        mr2.alerts = mr2.alerts || {};
+        mr2.alerts.documentReady = function($6) {
+          $6(".alert__close").on("click touchstart", function() {
+            jQuery(this).closest(".alert").addClass("alert--dismissed");
+          });
+        };
+        mr2.components.documentReady.push(mr2.alerts.documentReady);
+        return mr2;
+      }(mr, jQuery, window, document);
+      mr = function(mr2, $5, window2, document2) {
+        "use strict";
+        mr2.backgrounds = mr2.backgrounds || {};
+        mr2.backgrounds.documentReady = function($6) {
+          $6(".background-image-holder").each(function() {
+            var imgSrc = $6(this).children("img").attr("src");
+            $6(this).css("background", 'url("' + imgSrc + '")').css("background-position", "initial").css("opacity", "1");
+          });
+        };
+        mr2.components.documentReady.push(mr2.backgrounds.documentReady);
+        return mr2;
+      }(mr, jQuery, window, document);
+      mr = function(mr2, $5, window2, document2) {
+        "use strict";
+        mr2.bars = mr2.bars || {};
+        mr2.bars.documentReady = function($6) {
+          $6('.nav-container .bar[data-scroll-class*="fixed"]:not(.bar--absolute)').each(function() {
+            var bar = $6(this), barHeight = bar.outerHeight(true);
+            bar.closest(".nav-container").css("min-height", barHeight);
+          });
+        };
+        mr2.components.documentReady.push(mr2.bars.documentReady);
+        return mr2;
+      }(mr, jQuery, window, document);
+      mr = function(mr2, $5, window2, document2) {
+        "use strict";
+        mr2.datepicker = mr2.datepicker || {};
+        var options = mr2.datepicker.options || {
+          selectYears: 100,
+          min: [1930, 1, 1],
+          max: [2030, 1, 1],
+          format: "yyyy/mm/dd"
+        };
+        mr2.datepicker.documentReady = function($6) {
+          if ($6(".datepicker").length) {
+            $6(".datepicker").pickadate(options);
+          }
+        };
+        mr2.components.documentReadyDeferred.push(mr2.datepicker.documentReady);
+        return mr2;
+      }(mr, jQuery, window, document);
+      mr = function(mr2, $5, window2, document2) {
+        "use strict";
+        mr2.dropdowns = mr2.dropdowns || {};
+        mr2.dropdowns.done = false;
+        mr2.dropdowns.documentReady = function($6) {
+          var rtl = false;
+          if ($6('html[dir="rtl"]').length) {
+            rtl = true;
+          }
+          if (!mr2.dropdowns.done) {
+            jQuery(document2).on("click", "body:not(.dropdowns--hover) .dropdown, body.dropdowns--hover .dropdown.dropdown--click", function(event) {
+              var dropdown = jQuery(this);
+              if (jQuery(event.target).is(".dropdown--active > .dropdown__trigger")) {
+                dropdown.siblings().removeClass("dropdown--active").find(".dropdown").removeClass("dropdown--active");
+                dropdown.toggleClass("dropdown--active");
+              } else {
+                $6(".dropdown--active").removeClass("dropdown--active");
+                dropdown.addClass("dropdown--active");
+              }
+            });
+            jQuery(document2).on("click touchstart", "body:not(.dropdowns--hover)", function(event) {
+              if (!jQuery(event.target).is('[class*="dropdown"], [class*="dropdown"] *')) {
+                $6(".dropdown--active").removeClass("dropdown--active");
+              }
+            });
+            jQuery("body.dropdowns--hover .dropdown").on("click", function(event) {
+              event.stopPropagation();
+              var hoverDropdown = jQuery(this);
+              hoverDropdown.toggleClass("dropdown--active");
+            });
+            jQuery("body").append('<div class="container containerMeasure" style="opacity:0;pointer-events:none;"></div>');
+            if (rtl === false) {
+              mr2.dropdowns.repositionDropdowns($6);
+              jQuery(window2).on("resize", function() {
+                mr2.dropdowns.repositionDropdowns($6);
+              });
+            } else {
+              mr2.dropdowns.repositionDropdownsRtl($6);
+              jQuery(window2).on("resize", function() {
+                mr2.dropdowns.repositionDropdownsRtl($6);
+              });
+            }
+            mr2.dropdowns.done = true;
+          }
+        };
+        mr2.dropdowns.repositionDropdowns = function($6) {
+          $6(".dropdown__container").each(function() {
+            var container, containerOffset, masterOffset, menuItem, content;
+            jQuery(this).css("left", "");
+            container = jQuery(this);
+            containerOffset = container.offset().left;
+            masterOffset = jQuery(".containerMeasure").offset().left;
+            menuItem = container.closest(".dropdown").offset().left;
+            content = null;
+            container.css("left", -containerOffset + masterOffset);
+            if (container.find('.dropdown__content:not([class*="lg-12"])').length) {
+              content = container.find(".dropdown__content");
+              content.css("left", menuItem - masterOffset);
+            }
+          });
+          $6(".dropdown__content").each(function() {
+            var dropdown, offset, width, offsetRight, winWidth, leftCorrect;
+            dropdown = jQuery(this);
+            offset = dropdown.offset().left;
+            width = dropdown.outerWidth(true);
+            offsetRight = offset + width;
+            winWidth = jQuery(window2).outerWidth(true);
+            leftCorrect = jQuery(".containerMeasure").outerWidth() - width;
+            if (offsetRight > winWidth) {
+              dropdown.css("left", leftCorrect);
+            }
+          });
+        };
+        mr2.dropdowns.repositionDropdownsRtl = function($6) {
+          var windowWidth = jQuery(window2).width();
+          $6(".dropdown__container").each(function() {
+            var container, containerOffset, masterOffset, menuItem, content;
+            jQuery(this).css("left", "");
+            container = jQuery(this);
+            containerOffset = windowWidth - (container.offset().left + container.outerWidth(true));
+            masterOffset = jQuery(".containerMeasure").offset().left;
+            menuItem = windowWidth - (container.closest(".dropdown").offset().left + container.closest(".dropdown").outerWidth(true));
+            content = null;
+            container.css("right", -containerOffset + masterOffset);
+            if (container.find('.dropdown__content:not([class*="lg-12"])').length) {
+              content = container.find(".dropdown__content");
+              content.css("right", menuItem - masterOffset);
+            }
+          });
+          $6(".dropdown__content").each(function() {
+            var dropdown, offset, width, offsetRight, winWidth, rightCorrect;
+            dropdown = jQuery(this);
+            offset = windowWidth - (dropdown.offset().left + dropdown.outerWidth(true));
+            width = dropdown.outerWidth(true);
+            offsetRight = offset + width;
+            winWidth = jQuery(window2).outerWidth(true);
+            rightCorrect = jQuery(".containerMeasure").outerWidth() - width;
+            if (offsetRight > winWidth) {
+              dropdown.css("right", rightCorrect);
+            }
+          });
+        };
+        mr2.components.documentReady.push(mr2.dropdowns.documentReady);
+        return mr2;
+      }(mr, jQuery, window, document);
+      mr = function(mr2, $5, window2, document2) {
+        "use strict";
+        mr2.forms = mr2.forms || {};
+        mr2.forms.captcha = {};
+        mr2.forms.captcha.widgets = [];
+        mr2.forms.captcha.done = false;
+        mr2.forms.documentReady = function($6) {
+          mr2.forms.captcha.widgets = [];
+          $6('.input-checkbox input[type="checkbox"], .input-radio input[type="radio"]').each(function(index) {
+            var input = $6(this), label = input.siblings("label"), id2 = "input-assigned-" + index;
+            if (typeof input.attr("id") === "undefined" || input.attr("id") === "") {
+              input.attr("id", id2);
+              label.attr("for", id2);
+            } else {
+              id2 = input.attr("id");
+              label.attr("for", id2);
+            }
+          });
+          $6(".input-number__controls > span").off("click.mr").on("click.mr", function() {
+            var control = jQuery(this), parent = control.closest(".input-number"), input = parent.find('input[type="number"]'), max = input.attr("max"), min = input.attr("min"), step = 1, current = parseInt(input.val(), 10);
+            if (parent.is("[data-step]")) {
+              step = parseInt(parent.attr("data-step"), 10);
+            }
+            if (control.hasClass("input-number__increase")) {
+              if (current + step <= max) {
+                input.val(current + step);
+              }
+            } else {
+              if (current - step >= min) {
+                input.val(current - step);
+              }
+            }
+          });
+          $6(".input-file .btn").off("click.mr").on("click.mr", function() {
+            $6(this).siblings("input").trigger("click");
+            return false;
+          });
+          $6('form.form-email, form[action*="list-manage.com"], form[action*="createsend.com"]').attr("novalidate", true).off("submit").on("submit", mr2.forms.submit);
+          $6(document2).on("change, input, paste, keyup", ".attempted-submit .field-error", function() {
+            $6(this).removeClass("field-error");
+          });
+          $6('form[data-recaptcha-sitekey]:not([data-recaptcha-sitekey=""])').each(function() {
+            var $thisForm = jQuery(this), $captchaDiv = $thisForm.find("div.recaptcha"), $insertBefore, $column, widgetObject, $script, scriptSrc, widgetColourTheme, widgetSize;
+            widgetColourTheme = $thisForm.attr("data-recaptcha-theme");
+            widgetColourTheme = typeof widgetColourTheme !== "undefined" ? widgetColourTheme : "";
+            widgetSize = $thisForm.attr("data-recaptcha-size");
+            widgetSize = typeof widgetSize !== "undefined" ? widgetSize : "";
+            mr2.forms.captcha.sitekey = $thisForm.attr("data-recaptcha-sitekey");
+            if ($captchaDiv.length) {
+            } else {
+              $insertBefore = $thisForm.find("button[type=submit]").closest('[class*="col-"]');
+              $captchaDiv = jQuery("<div>").addClass("recaptcha");
+              $column = jQuery("<div>").addClass("col-xs-12").append($captchaDiv);
+              $column.insertBefore($insertBefore);
+            }
+            widgetObject = {
+              element: $captchaDiv.get(0),
+              parentForm: $thisForm,
+              theme: widgetColourTheme,
+              size: widgetSize
+            };
+            mr2.forms.captcha.widgets.push(widgetObject);
+            if (mr2.forms.captcha.done === false) {
+              if (!jQuery('script[src*="recaptcha/api.js"]').length) {
+                $script = jQuery("<script async defer>");
+                scriptSrc = "https://www.google.com/recaptcha/api.js?onload=mrFormsCaptchaInit&render=explicit";
+                $script.attr("src", scriptSrc);
+                jQuery("body").append($script);
+                mr2.forms.captcha.done = true;
+              }
+            } else {
+              if (typeof grecaptcha !== "undefined") {
+                mr2.forms.captcha.renderWidgets();
+              }
+            }
+          });
+        };
+        mr2.forms.submit = function(e) {
+          if (e.preventDefault)
+            e.preventDefault();
+          else
+            e.returnValue = false;
+          var body = $5("body"), thisForm = $5(e.target).closest("form"), formAction = typeof thisForm.attr("action") !== "undefined" ? thisForm.attr("action") : "", submitButton = thisForm.find('button[type="submit"], input[type="submit"]'), error = 0, originalError = thisForm.attr("original-error"), captchaUsed = thisForm.find("div.recaptcha").length ? true : false, successRedirect, formError, formSuccess, errorText, successText;
+          body.find(".form-error, .form-success").remove();
+          submitButton.attr("data-text", submitButton.text());
+          errorText = thisForm.attr("data-error") ? thisForm.attr("data-error") : "Please fill all fields correctly";
+          successText = thisForm.attr("data-success") ? thisForm.attr("data-success") : "Thanks, we'll be in touch shortly";
+          body.append('<div class="form-error" style="display: none;">' + errorText + "</div>");
+          body.append('<div class="form-success" style="display: none;">' + successText + "</div>");
+          formError = body.find(".form-error");
+          formSuccess = body.find(".form-success");
+          thisForm.addClass("attempted-submit");
+          if (formAction.indexOf("createsend.com") !== -1 || formAction.indexOf("list-manage.com") !== -1) {
+            console.log("Mail list form signup detected.");
+            if (typeof originalError !== "undefined" && originalError !== false) {
+              formError.html(originalError);
+            }
+            if (mr2.forms.validateFields(thisForm) !== 1) {
+              thisForm.removeClass("attempted-submit");
+              formError.fadeOut(200);
+              submitButton.addClass("btn--loading");
+              try {
+                $5.ajax({
+                  url: thisForm.attr("action"),
+                  crossDomain: true,
+                  data: thisForm.serialize(),
+                  method: "GET",
+                  cache: false,
+                  dataType: "json",
+                  contentType: "application/json; charset=utf-8",
+                  success: function(data) {
+                    if (data.result !== "success" && data.Status !== 200) {
+                      formError.attr("original-error", formError.text());
+                      formError.html(data.msg).stop(true).fadeIn(1e3);
+                      formSuccess.stop(true).fadeOut(1e3);
+                      submitButton.removeClass("btn--loading");
+                    } else {
+                      submitButton.removeClass("btn--loading");
+                      successRedirect = thisForm.attr("data-success-redirect");
+                      if (typeof successRedirect !== "undefined" && successRedirect !== false && successRedirect !== "") {
+                        window2.location = successRedirect;
+                      } else {
+                        mr2.forms.resetForm(thisForm);
+                        mr2.forms.showFormSuccess(formSuccess, formError, 1e3, 5e3, 500);
+                      }
+                    }
+                  }
+                });
+              } catch (err) {
+                formError.attr("original-error", formError.text());
+                formError.html(err.message);
+                mr2.forms.showFormError(formSuccess, formError, 1e3, 5e3, 500);
+                submitButton.removeClass("btn--loading");
+              }
+            } else {
+              mr2.forms.showFormError(formSuccess, formError, 1e3, 5e3, 500);
+            }
+          } else {
+            if (typeof originalError !== "undefined" && originalError !== false) {
+              formError.text(originalError);
+            }
+            error = mr2.forms.validateFields(thisForm);
+            if (error === 1) {
+              mr2.forms.showFormError(formSuccess, formError, 1e3, 5e3, 500);
+            } else {
+              thisForm.removeClass("attempted-submit");
+              formError.fadeOut(200);
+              submitButton.addClass("btn--loading");
+              jQuery.ajax({
+                type: "POST",
+                url: formAction !== "" ? formAction : "mail/mail.php",
+                data: thisForm.serialize() + "&url=" + window2.location.href + "&captcha=" + captchaUsed,
+                success: function(response) {
+                  submitButton.removeClass("btn--loading");
+                  if ($5.isNumeric(response)) {
+                    if (parseInt(response, 10) > 0) {
+                      successRedirect = thisForm.attr("data-success-redirect");
+                      if (typeof successRedirect !== "undefined" && successRedirect !== false && successRedirect !== "") {
+                        window2.location = successRedirect;
+                      }
+                      mr2.forms.resetForm(thisForm);
+                      mr2.forms.showFormSuccess(formSuccess, formError, 1e3, 5e3, 500);
+                      mr2.forms.captcha.resetWidgets();
+                    }
+                  } else {
+                    formError.attr("original-error", formError.text());
+                    formError.text(response).stop(true).fadeIn(1e3);
+                    formSuccess.stop(true).fadeOut(1e3);
+                  }
+                },
+                error: function(errorObject, errorText2, errorHTTP) {
+                  formError.attr("original-error", formError.text());
+                  formError.text(errorHTTP).stop(true).fadeIn(1e3);
+                  formSuccess.stop(true).fadeOut(1e3);
+                  submitButton.removeClass("btn--loading");
+                }
+              });
+            }
+          }
+          return false;
+        };
+        mr2.forms.validateFields = function(form) {
+          var body = $5(body), error = false, originalErrorMessage, name, thisElement;
+          form = $5(form);
+          form.find('.validate-required[type="checkbox"]').each(function() {
+            var checkbox = $5(this);
+            if (!$5('[name="' + $5(this).attr("name") + '"]:checked').length) {
+              error = 1;
+              name = $5(this).attr("data-name") || "check";
+              checkbox.parent().addClass("field-error");
+            }
+          });
+          form.find(".validate-required, .required, [required]").not('input[type="checkbox"]').each(function() {
+            if ($5(this).val() === "") {
+              $5(this).addClass("field-error");
+              error = 1;
+            } else {
+              $5(this).removeClass("field-error");
+            }
+          });
+          form.find('.validate-email, .email, [name*="cm-"][type="email"]').each(function() {
+            if (!/(.+)@(.+){2,}\.(.+){2,}/.test($5(this).val())) {
+              $5(this).addClass("field-error");
+              error = 1;
+            } else {
+              $5(this).removeClass("field-error");
+            }
+          });
+          form.find(".validate-number-dash").each(function() {
+            if (!/^[0-9][0-9-]+[0-9]$/.test($5(this).val())) {
+              $5(this).addClass("field-error");
+              error = 1;
+            } else {
+              $5(this).removeClass("field-error");
+            }
+          });
+          if (form.find("div.recaptcha").length && typeof form.attr("data-recaptcha-sitekey") !== "undefined") {
+            thisElement = $5(form.find("div.recaptcha"));
+            if (grecaptcha.getResponse(form.data("recaptchaWidgetID")) !== "") {
+              thisElement.removeClass("field-error");
+            } else {
+              thisElement.addClass("field-error");
+              error = 1;
+            }
+          }
+          if (!form.find(".field-error").length) {
+            body.find(".form-error").fadeOut(1e3);
+          } else {
+            var firstError = $5(form).find(".field-error:first");
+            if (firstError.length) {
+              $5("html, body").stop(true).animate({
+                scrollTop: firstError.offset().top - 100
+              }, 1200, function() {
+                firstError.focus();
+              });
+            }
+          }
+          return error;
+        };
+        mr2.forms.showFormSuccess = function(formSuccess, formError, fadeOutError, wait, fadeOutSuccess) {
+          formSuccess.stop(true).fadeIn(fadeOutError);
+          formError.stop(true).fadeOut(fadeOutError);
+          setTimeout(function() {
+            formSuccess.stop(true).fadeOut(fadeOutSuccess);
+          }, wait);
+        };
+        mr2.forms.showFormError = function(formSuccess, formError, fadeOutSuccess, wait, fadeOutError) {
+          formError.stop(true).fadeIn(fadeOutSuccess);
+          formSuccess.stop(true).fadeOut(fadeOutSuccess);
+          setTimeout(function() {
+            formError.stop(true).fadeOut(fadeOutError);
+          }, wait);
+        };
+        mr2.forms.resetForm = function(form) {
+          form = $5(form);
+          form.get(0).reset();
+          form.find(".input-radio, .input-checkbox").removeClass("checked");
+          form.find("[data-default-value]").filter('[type="text"],[type="number"],[type="email"],[type="url"],[type="search"],[type="tel"]').each(function() {
+            var elem = jQuery(this);
+            elem.val(elem.attr("data-default-value"));
+          });
+        };
+        window2.mrFormsCaptchaInit = function() {
+          mr2.forms.captcha.renderWidgets();
+        };
+        mr2.forms.captcha.renderWidgets = function() {
+          mr2.forms.captcha.widgets.forEach(function(widget) {
+            if (widget.element.innerHTML.replace(/[\s\xA0]+/g, "") === "") {
+              widget.id = grecaptcha.render(widget.element, {
+                "sitekey": mr2.forms.captcha.sitekey,
+                "theme": widget.theme,
+                "size": widget.size,
+                "callback": mr2.forms.captcha.setHuman
+              });
+              widget.parentForm.data("recaptchaWidgetID", widget.id);
+            }
+          });
+        };
+        mr2.forms.captcha.resetWidgets = function() {
+          mr2.forms.captcha.widgets.forEach(function(widget) {
+            grecaptcha.reset(widget.id);
+          });
+        };
+        mr2.forms.captcha.setHuman = function() {
+          jQuery("div.recaptcha.field-error").removeClass("field-error");
+        };
+        mr2.components.documentReadyDeferred.push(mr2.forms.documentReady);
+        return mr2;
+      }(mr, jQuery, window, document);
+      mr = function(mr2, $5, window2, document2) {
+        "use strict";
+        mr2.modals = mr2.modals || {};
+        mr2.modals.documentReady = function($6) {
+          var allPageModals = '<div class="all-page-modals"></div>', mainContainer = $6("div.main-container");
+          if (mainContainer.length) {
+            jQuery(allPageModals).insertAfter(mainContainer);
+            mr2.modals.allModalsContainer = $6("div.all-page-modals");
+          } else {
+            jQuery("body").append(allPageModals);
+            mr2.modals.allModalsContainer = jQuery("body div.all-page-modals");
+          }
+          $6(".modal-container").each(function() {
+            var modal = $6(this), $window = $6(window2), modalContent = modal.find(".modal-content");
+            if (!modal.find(".modal-close").length) {
+              modal.find(".modal-content").append('<div class="modal-close modal-close-cross"></div>');
+            }
+            if (modalContent.attr("data-width") !== void 0) {
+              var modalWidth = modalContent.attr("data-width").substr(0, modalContent.attr("data-width").indexOf("%")) * 1;
+              modalContent.css("width", modalWidth + "%");
+            }
+            if (modalContent.attr("data-height") !== void 0) {
+              var modalHeight = modalContent.attr("data-height").substr(0, modalContent.attr("data-height").indexOf("%")) * 1;
+              modalContent.css("height", modalHeight + "%");
+            }
+            mr2.util.idleSrc(modal, "iframe");
+          });
+          $6(".modal-instance").each(function(index) {
+            var modalInstance = $6(this);
+            var modal = modalInstance.find(".modal-container");
+            var modalContent = modalInstance.find(".modal-content");
+            var trigger = modalInstance.find(".modal-trigger");
+            trigger.attr("data-modal-index", index);
+            modal.attr("data-modal-index", index);
+            if (typeof modal.attr("data-modal-id") !== "undefined") {
+              trigger.attr("data-modal-id", modal.attr("data-modal-id"));
+            }
+            modal = modal.detach();
+            mr2.modals.allModalsContainer.append(modal);
+          });
+          $6(".modal-trigger").on("click", function() {
+            var modalTrigger = $6(this);
+            var uniqueID, targetModal;
+            if (typeof modalTrigger.attr("data-modal-id") !== "undefined") {
+              uniqueID = modalTrigger.attr("data-modal-id");
+              targetModal = mr2.modals.allModalsContainer.find('.modal-container[data-modal-id="' + uniqueID + '"]');
+            } else {
+              uniqueID = $6(this).attr("data-modal-index");
+              targetModal = mr2.modals.allModalsContainer.find('.modal-container[data-modal-index="' + uniqueID + '"]');
+            }
+            mr2.util.activateIdleSrc(targetModal, "iframe");
+            mr2.modals.autoplayVideo(targetModal);
+            mr2.modals.showModal(targetModal);
+            return false;
+          });
+          jQuery(document2).on("click", ".modal-close", mr2.modals.closeActiveModal);
+          jQuery(document2).keyup(function(e) {
+            if (e.keyCode === 27) {
+              mr2.modals.closeActiveModal();
+            }
+          });
+          $6(".modal-container:not(.modal--prevent-close)").on("click", function(e) {
+            if (e.target !== this)
+              return;
+            mr2.modals.closeActiveModal();
+          });
+          $6(".modal-container[data-autoshow]").each(function() {
+            var modal = $6(this);
+            var millisecondsDelay = modal.attr("data-autoshow") * 1;
+            mr2.util.activateIdleSrc(modal);
+            mr2.modals.autoplayVideo(modal);
+            if (typeof modal.attr("data-cookie") !== "undefined") {
+              if (!mr2.cookies.hasItem(modal.attr("data-cookie"))) {
+                mr2.modals.showModal(modal, millisecondsDelay);
+              }
+            } else {
+              mr2.modals.showModal(modal, millisecondsDelay);
+            }
+          });
+          $6(".modal-container[data-show-on-exit]").each(function() {
+            var modal = jQuery(this), exitSelector = modal.attr("data-show-on-exit"), delay = 0;
+            if (modal.attr("data-delay")) {
+              delay = parseInt(modal.attr("data-delay"), 10) || 0;
+            }
+            if ($6(exitSelector).length) {
+              modal.prepend($6('<i class="ti-close close-modal">'));
+              jQuery(document2).on("mouseleave", exitSelector, function() {
+                if (!$6(".modal-active").length) {
+                  if (typeof modal.attr("data-cookie") !== "undefined") {
+                    if (!mr2.cookies.hasItem(modal.attr("data-cookie"))) {
+                      mr2.modals.showModal(modal, delay);
+                    }
+                  } else {
+                    mr2.modals.showModal(modal, delay);
+                  }
+                }
+              });
+            }
+          });
+          if (window2.location.href.split("#").length === 2) {
+            var modalID = window2.location.href.split("#").pop();
+            if ($6('[data-modal-id="' + modalID + '"]').length) {
+              mr2.modals.closeActiveModal();
+              mr2.modals.showModal($6('[data-modal-id="' + modalID + '"]'));
+            }
+          }
+          jQuery(document2).on("click", 'a[href^="#"]', function() {
+            var modalID2 = $6(this).attr("href").replace("#", "");
+            if ($6('[data-modal-id="' + modalID2 + '"]').length) {
+              mr2.modals.closeActiveModal();
+              setTimeout(mr2.modals.showModal, 500, '[data-modal-id="' + modalID2 + '"]', 0);
+            }
+          });
+          jQuery(document2).on("wheel mousewheel scroll", ".modal-content, .modal-content .scrollable", function(evt) {
+            if (evt.preventDefault) {
+              evt.preventDefault();
+            }
+            if (evt.stopPropagation) {
+              evt.stopPropagation();
+            }
+            this.scrollTop += evt.originalEvent.deltaY;
+          });
+        };
+        mr2.modals.showModal = function(modal, millisecondsDelay) {
+          var delay = typeof millisecondsDelay !== "undefined" ? 1 * millisecondsDelay : 0, $modal = $5(modal);
+          if ($modal.length) {
+            setTimeout(function() {
+              var openEvent = document2.createEvent("Event");
+              openEvent.initEvent("modalOpened.modals.mr", true, true);
+              $5(modal).addClass("modal-active").trigger("modalOpened.modals.mr").get(0).dispatchEvent(openEvent);
+            }, delay);
+          }
+        };
+        mr2.modals.closeActiveModal = function() {
+          var modal = jQuery("body div.modal-active"), closeEvent = document2.createEvent("Event");
+          mr2.util.idleSrc(modal, "iframe");
+          mr2.util.pauseVideo(modal);
+          if (typeof modal.attr("data-cookie") !== "undefined") {
+            mr2.cookies.setItem(modal.attr("data-cookie"), "true", Infinity, "/");
+          }
+          if (modal.length) {
+            if (modal.is("[data-modal-id]") && window2.location.hash === "#" + modal.attr("data-modal-id")) {
+              mr2.util.removeHash();
+            }
+            closeEvent.initEvent("modalClosed.modals.mr", true, true);
+            modal.removeClass("modal-active").trigger("modalClosed.modals.mr").get(0).dispatchEvent(closeEvent);
+          }
+        };
+        mr2.modals.autoplayVideo = function(modal) {
+          if (modal.find("video[autoplay]").length) {
+            var video = modal.find("video").get(0);
+            video.play();
+          }
+        };
+        mr2.components.documentReady.push(mr2.modals.documentReady);
+        return mr2;
+      }(mr, jQuery, window, document);
+      mr = function(mr2, $5, window2, document2) {
+        "use strict";
+        mr2.progressHorizontal = mr2.progressHorizontal || {};
+        mr2.progressHorizontal.documentReady = function($6) {
+          var progressBars = [];
+          $6(".progress-horizontal").each(function() {
+            var bar = jQuery(this).find(".progress-horizontal__bar"), barObject = {}, progress = jQuery('<div class="progress-horizontal__progress"></div>');
+            bar.prepend(progress);
+            barObject.element = bar;
+            barObject.progress = progress;
+            barObject.value = parseInt(bar.attr("data-value"), 10) + "%";
+            barObject.offsetTop = bar.offset().top;
+            barObject.animate = false;
+            if (jQuery(this).hasClass("progress-horizontal--animate")) {
+              barObject.animate = true;
+            } else {
+              progress.css("width", barObject.value);
+            }
+            progressBars.push(barObject);
+          });
+        };
+        mr2.components.documentReady.push(mr2.progressHorizontal.documentReady);
+        return mr2;
+      }(mr, jQuery, window, document);
+      mr = function(mr2, $5, window2, document2) {
+        "use strict";
+        mr2.easypiecharts = mr2.easypiecharts || {};
+        mr2.easypiecharts.pies = [];
+        mr2.easypiecharts.options = mr2.easypiecharts.options || {};
+        mr2.easypiecharts.documentReady = function($6) {
+          $6(".radial").each(function() {
+            var chart = jQuery(this), value = 0, color = "#000000", time = 2e3, pieSize = 110, barWidth = 3, defaults = {}, attributeOverrides = {}, options;
+            defaults = {
+              animate: { duration: time, enabled: true },
+              barColor: color,
+              scaleColor: false,
+              size: pieSize,
+              lineWidth: barWidth
+            };
+            if (typeof mr2.easypiecharts.options.size !== "undefined") {
+              pieSize = mr2.easypiecharts.options.size;
+            }
+            if (typeof chart.attr("data-timing") !== "undefined") {
+              attributeOverrides.animate = { duration: parseInt(chart.attr("data-timing"), 10), enabled: true };
+            }
+            if (typeof chart.attr("data-color") !== "undefined") {
+              attributeOverrides.barColor = chart.attr("data-color");
+            }
+            if (typeof chart.attr("data-size") !== "undefined") {
+              pieSize = attributeOverrides.size = parseInt(chart.attr("data-size"), 10);
+            }
+            if (typeof chart.attr("data-bar-width") !== "undefined") {
+              attributeOverrides.lineWidth = parseInt(chart.attr("data-bar-width"), 10);
+            }
+            chart.css("height", pieSize).css("width", pieSize);
+            if (typeof mr2.easypiecharts.options === "object") {
+              options = jQuery.extend({}, defaults, mr2.easypiecharts.options, attributeOverrides);
+            }
+            chart.easyPieChart(options);
+            chart.data("easyPieChart").update(0);
+          });
+          if ($6(".radial").length) {
+            mr2.easypiecharts.init();
+            mr2.easypiecharts.activate();
+            mr2.scroll.listeners.push(mr2.easypiecharts.activate);
+          }
+        };
+        mr2.easypiecharts.init = function() {
+          mr2.easypiecharts.pies = [];
+          $5(".radial").each(function() {
+            var pieObject = {}, currentPie = jQuery(this);
+            pieObject.element = currentPie;
+            pieObject.value = parseInt(currentPie.attr("data-value"), 10);
+            pieObject.top = currentPie.offset().top;
+            pieObject.height = currentPie.height() / 2;
+            pieObject.active = false;
+            mr2.easypiecharts.pies.push(pieObject);
+          });
+        };
+        mr2.easypiecharts.activate = function() {
+          mr2.easypiecharts.pies.forEach(function(pie) {
+            if (Math.round(mr2.scroll.y + mr2.window.height) >= Math.round(pie.top + pie.height)) {
+              if (pie.active === false) {
+                pie.element.data("easyPieChart").enableAnimation();
+                pie.element.data("easyPieChart").update(pie.value);
+                pie.element.addClass("radial--active");
+                pie.active = true;
+              }
+            }
+          });
+        };
+        mr2.components.documentReadyDeferred.push(mr2.easypiecharts.documentReady);
+        return mr2;
+      }(mr, jQuery, window, document);
+      mr = function(mr2, $5, window2, document2) {
+        "use strict";
+        mr2.tabs = mr2.tabs || {};
+        mr2.tabs.documentReady = function($6) {
+          $6(".tabs").each(function() {
+            var tabs = $6(this);
+            tabs.after('<ul class="tabs-content">');
+            tabs.find("li").each(function() {
+              var currentTab = $6(this), tabContent = currentTab.find(".tab__content").wrap("<li></li>").parent(), tabContentClone = tabContent.clone(true, true);
+              tabContent.remove();
+              currentTab.closest(".tabs-container").find(".tabs-content").append(tabContentClone);
+            });
+          });
+          $6(".tabs > li").on("click", function() {
+            var clickedTab = $6(this), hash;
+            mr2.tabs.activateTab(clickedTab);
+            if (clickedTab.is("[id]")) {
+              hash = "#" + clickedTab.attr("id");
+              if (history.pushState) {
+                history.pushState(null, null, hash);
+              } else {
+                location.hash = hash;
+              }
+            }
+          });
+          $6(".tabs li.active").each(function() {
+            mr2.tabs.activateTab(this);
+          });
+          if (window2.location.hash !== "") {
+            mr2.tabs.activateTabById(window2.location.hash);
+          }
+          $6('a[href^="#"]').on("click", function() {
+            mr2.tabs.activateTabById($6(this).attr("href"));
+          });
+        };
+        mr2.tabs.activateTab = function(tab) {
+          var clickedTab = $5(tab), tabContainer = clickedTab.closest(".tabs-container"), activeIndex = clickedTab.index() * 1 + 1, activeContent = tabContainer.find("> .tabs-content > li:nth-of-type(" + activeIndex + ")"), openEvent = document2.createEvent("Event"), iframe, radial;
+          openEvent.initEvent("tabOpened.tabs.mr", true, true);
+          tabContainer.find("> .tabs > li").removeClass("active");
+          tabContainer.find("> .tabs-content > li").removeClass("active");
+          clickedTab.addClass("active").trigger("tabOpened.tabs.mr").get(0).dispatchEvent(openEvent);
+          activeContent.addClass("active");
+          iframe = activeContent.find("iframe");
+          if (iframe.length) {
+            iframe.attr("src", iframe.attr("src"));
+          }
+        };
+        mr2.tabs.activateTabById = function(id2) {
+          if (id2 !== "" && id2 !== "#" && id2.match(/#\/.*/) === null) {
+            if ($5(".tabs > li#" + id2.replace("#", "")).length) {
+              $5(".tabs > li#" + id2.replace("#", "")).click();
+            }
+          }
+        };
+        mr2.components.documentReady.push(mr2.tabs.documentReady);
+        return mr2;
+      }(mr, jQuery, window, document);
+      mr = function(mr2, $5, window2, document2) {
+        "use strict";
+        mr2.toggleClass = mr2.toggleClass || {};
+        mr2.toggleClass.documentReady = function($6) {
+          $6("[data-toggle-class]").each(function() {
+            var element = $6(this), data = element.attr("data-toggle-class").split("|");
+            $6(data).each(function() {
+              var candidate = element, dataArray = [], toggleClass = "", toggleElement = "", dataArray = this.split(";");
+              if (dataArray.length === 2) {
+                toggleElement = dataArray[0];
+                toggleClass = dataArray[1];
+                $6(candidate).on("click", function() {
+                  if (!candidate.hasClass("toggled-class")) {
+                    candidate.toggleClass("toggled-class");
+                  } else {
+                    candidate.removeClass("toggled-class");
+                  }
+                  $6(toggleElement).toggleClass(toggleClass);
+                  return false;
+                });
+              } else {
+                console.log('Error in [data-toggle-class] attribute. This attribute accepts an element, or comma separated elements terminated witha ";" followed by a class name to toggle');
+              }
+            });
+          });
+        };
+        mr2.components.documentReady.push(mr2.toggleClass.documentReady);
+        return mr2;
+      }(mr, jQuery, window, document);
+    }
+  });
+
   // app/javascript/packs/application.js
   var import_react6 = __toESM(require_react());
   var import_react_dom = __toESM(require_react_dom());
@@ -44053,7 +44994,9 @@ For more info, visit https://fb.me/react-mock-scheduler`);
   addEventListener("turbo:before-fetch-request", encodeMethodIntoRequestBody);
 
   // app/javascript/packs/application.js
+  window.jQuery = import_jquery4.default;
   init_actiontext();
+  require_scripts();
   window.Turbo = turbo_es2017_esm_exports;
   document.addEventListener("DOMContentLoaded", loadReact);
   document.addEventListener("turbo:render", loadReact);
