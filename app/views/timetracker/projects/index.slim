@@ -13,7 +13,7 @@
         - @active_projects.each do |project|
           tr
             td
-              = link_to project.title, timetracker_project_tasks_url(project), data: { turbo: false }
+              = link_to project.title, timetracker_project_tasks_url(project)
             td
               =< link_to 'close', timetracker_project_close_url(project), method: :post
 

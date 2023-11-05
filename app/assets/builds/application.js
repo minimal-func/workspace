@@ -36478,6 +36478,8 @@ For more info, visit https://fb.me/react-mock-scheduler`);
   // app/javascript/packs/application.js
   init_actiontext();
   window.Turbo = turbo_es2017_esm_exports;
+  document.addEventListener("DOMContentLoaded", loadReact);
+  document.addEventListener("turbo:render", loadReact);
   import_jquery4.default.ajaxSetup({
     headers: {
       "X-CSRF-Token": (0, import_jquery4.default)('meta[name="csrf-token"]').attr("content")
@@ -36492,7 +36494,6 @@ For more info, visit https://fb.me/react-mock-scheduler`);
     }
   }
   (0, import_jquery4.default)(function() {
-    loadReact();
     var element = document.querySelector("trix-editor");
     if (element) {
       var editor = element.editor;

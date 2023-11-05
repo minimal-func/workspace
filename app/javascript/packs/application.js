@@ -9,6 +9,9 @@ require("@rails/actiontext")
 import { Turbo } from "@hotwired/turbo-rails";
 window.Turbo = Turbo;
 
+document.addEventListener('DOMContentLoaded', loadReact)
+document.addEventListener('turbo:render', loadReact)
+
 $.ajaxSetup({
   headers: {
     "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
@@ -25,8 +28,6 @@ function loadReact(){
 }
 
 $(function() {
-  loadReact();
-
   var element = document.querySelector("trix-editor")
 
   if(element) {
