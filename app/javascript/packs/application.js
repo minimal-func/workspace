@@ -2,12 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TaskBox from '../components/TaskBox';
 
-const rootElement = document.getElementById('root');
-if (rootElement) {
-  const presenter = JSON.parse(rootElement.dataset.presenter);
-  console.log(presenter);
-  ReactDOM.render(<TaskBox presenter={presenter} />, rootElement);
+window.onload = loadReact;
+
+function loadReact(){
+  const rootElement = document.getElementById('root');
+  if (rootElement) {
+    const presenter = JSON.parse(rootElement.dataset.presenter);
+    console.log(presenter);
+    ReactDOM.render(<TaskBox presenter={presenter} />, rootElement);
+  }
 }
+
 
 import Trix from "trix";
 require("@rails/actiontext")

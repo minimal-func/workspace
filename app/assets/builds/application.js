@@ -19362,8 +19362,8 @@ For more info, visit https://fb.me/react-mock-scheduler`);
             }
           }
           function shouldHydrateDueToLegacyHeuristic(container) {
-            var rootElement2 = getReactRootElementInContainer(container);
-            return !!(rootElement2 && rootElement2.nodeType === ELEMENT_NODE && rootElement2.hasAttribute(ROOT_ATTRIBUTE_NAME));
+            var rootElement = getReactRootElementInContainer(container);
+            return !!(rootElement && rootElement.nodeType === ELEMENT_NODE && rootElement.hasAttribute(ROOT_ATTRIBUTE_NAME));
           }
           function legacyCreateRootFromDOMContainer(container, forceHydrate) {
             var shouldHydrate = forceHydrate || shouldHydrateDueToLegacyHeuristic(container);
@@ -36476,11 +36476,14 @@ For more info, visit https://fb.me/react-mock-scheduler`);
 
   // app/javascript/packs/application.js
   var import_jquery4 = __toESM(require_jquery());
-  var rootElement = document.getElementById("root");
-  if (rootElement) {
-    const presenter = JSON.parse(rootElement.dataset.presenter);
-    console.log(presenter);
-    import_react_dom.default.render(/* @__PURE__ */ import_react6.default.createElement(TaskBox_default, { presenter }), rootElement);
+  window.onload = main;
+  function main() {
+    const rootElement = document.getElementById("root");
+    if (rootElement) {
+      const presenter = JSON.parse(rootElement.dataset.presenter);
+      console.log(presenter);
+      import_react_dom.default.render(/* @__PURE__ */ import_react6.default.createElement(TaskBox_default, { presenter }), rootElement);
+    }
   }
   init_actiontext();
   window.Turbo = turbo_es2017_esm_exports;
