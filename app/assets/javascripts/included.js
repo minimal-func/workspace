@@ -12,9 +12,7 @@
 //
 //= require jquery
 //= require rails-ujs
-//= require highcharts
 //= require datepicker
-//= require chartkick
 //= require scripts
 
 $(function() {

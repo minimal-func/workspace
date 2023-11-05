@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TaskBox from '../components/TaskBox';
 import $ from "jquery";
+import "chartkick";
+import "chartkick/highcharts";
 
 import Trix from "trix";
 require("@rails/actiontext")

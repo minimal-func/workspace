@@ -151,8 +151,6 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashdiff (1.0.1)
-    highcharts-rails (6.0.3)
-      railties (>= 3.1)
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
@@ -452,7 +450,6 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   fuubar
-  highcharts-rails
   image_processing (~> 1.2)
   jasmine
   jasmine-jquery-rails

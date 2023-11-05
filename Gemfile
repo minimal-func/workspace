@@ -6,7 +6,6 @@ ruby "3.2.0"
 gem "rails", '>= 7.0'
 gem "pg"
 gem "chartkick"
-gem "highcharts-rails"
 
 gem "aws-sdk-s3", require: false
 
