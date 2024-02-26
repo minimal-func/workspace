@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_29_135733) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -120,12 +120,32 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_29_135733) do
     t.index ["user_id"], name: "index_main_tasks_on_user_id"
   end
 
+  create_table "materials", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "short_description"
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_materials_on_project_id"
+  end
+
   create_table "moods", force: :cascade do |t|
     t.integer "value"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_moods_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "short_description", null: false
+    t.text "content"
+    t.boolean "public", default: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_posts_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -142,6 +162,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_29_135733) do
     t.index ["user_id"], name: "index_reflections_on_user_id"
   end
 
+  create_table "saved_links", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "short_description"
+    t.string "url", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_saved_links_on_project_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.text "content", null: false
     t.bigint "project_id", null: false
@@ -150,6 +180,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_29_135733) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_tasks_on_project_id"
+  end
+
+  create_table "todos", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "project_id", null: false
+    t.boolean "finished", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_todos_on_project_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -177,8 +216,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_29_135733) do
   add_foreign_key "day_ratings", "users"
   add_foreign_key "energy_levels", "users"
   add_foreign_key "main_tasks", "users"
+  add_foreign_key "materials", "projects"
   add_foreign_key "moods", "users"
+  add_foreign_key "posts", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "reflections", "users"
+  add_foreign_key "saved_links", "projects"
   add_foreign_key "tasks", "projects"
+  add_foreign_key "todos", "projects"
 end

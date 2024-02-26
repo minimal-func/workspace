@@ -1,0 +1,14 @@
+.content
+  h1 Study Materials on #{@project.title}
+
+.content
+  - @materials.each do |material|
+    ul
+      li
+        -if material.file.attached?
+          = link_to material.title, material.file
+        - else
+          = material.title
+
+  - if current_user
+    = link_to 'New Study Material', new_project_material_url(@project)

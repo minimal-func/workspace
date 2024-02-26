@@ -1,0 +1,16 @@
+.content
+  h1 New post on studying topic
+
+.content
+  .form
+    = simple_form_for [@project, @post] do |f|
+      .row
+        = f.input :title, label: false, placeholder: "Title"
+      .row
+        = f.input :featured_image, label: false
+      .row
+        = f.input :short_description, label: false, placeholder: "Short Description"
+      .row
+        = f.input :content, label: false, as: :rich_text_area, input_html: { data: { embeds_path: embeds_path(@post, format: :json) } }
+      .row
+        = f.button :submit, "Add Post", class: 'button'

@@ -25,6 +25,15 @@ Rails.application.routes.draw do
     end
   end
 
+  scope module: :projects do
+    resources :projects, only: [] do
+      resources :posts, only: %i[index new create show]
+      resources :todos
+      resources :saved_links
+      resources :materials
+    end
+  end
+
   resources :embeds
 
   devise_for :users, controllers: {

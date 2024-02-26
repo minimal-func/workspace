@@ -1,0 +1,14 @@
+.content
+  h1 New Material
+
+.content
+  .form
+    = simple_form_for [@project, @material] do |f|
+      .row
+        = f.input :title, label: false, placeholder: "Title"
+      .row
+        = f.input :short_description, label: false, placeholder: "Short Description"
+      .row
+        = f.input :file, label: false
+      .row
+        = f.button :submit, "Add new material", class: 'button'

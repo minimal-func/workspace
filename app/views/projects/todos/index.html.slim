@@ -1,0 +1,11 @@
+.content
+  h1 Tasks on Studying Topic
+
+.content
+  - @todos.each do |todo|
+    ul
+      li
+        = todo.name
+
+  - if current_user
+    = link_to 'New task', new_project_todo_url(@project)

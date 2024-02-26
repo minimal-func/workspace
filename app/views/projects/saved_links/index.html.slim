@@ -1,0 +1,11 @@
+.content
+  h1 Useful links on #{@project.title}
+
+.content
+  - @saved_links.each do |saved_link|
+    ul
+      li
+        = link_to saved_link.title, saved_link.url, target: :_blank
+
+  - if current_user
+    = link_to 'New link', new_project_saved_link_url(@project)

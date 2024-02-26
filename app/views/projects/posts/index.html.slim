@@ -1,0 +1,11 @@
+.content
+  h1 My posts on #{@project.title}
+
+.content
+  - @posts.each do |post|
+    = link_to project_post_path(@project, post) do
+      h4
+        = post.title
+
+  - if current_user
+    = link_to 'New Post', new_project_post_path(@project)

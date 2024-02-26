@@ -1,0 +1,14 @@
+.content
+  h1 Add the useful Link on #{@project.title}
+
+.content
+  .form
+    = simple_form_for [@project, @saved_link] do |f|
+      .row
+        = f.input :title, label: false, placeholder: "Link title"
+      .row
+        = f.input :short_description, label: false, placeholder: "Short Description"
+      .row
+        = f.input :url, label: false, placeholder: "URL"
+      .row
+        = f.submit "Save link", label: false, class: 'button'

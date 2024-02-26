@@ -1,0 +1,13 @@
+.content
+  h1 New task on studying topic
+
+.content
+  .form
+    = simple_form_for [@workspace, @todo] do |f|
+      .row
+        = f.input :name, label: false, placeholder: "Task"
+      .row
+        span Finished?
+        = f.input :finished, label: false
+      .row
+        = f.button :submit, "Add task", class: 'button'

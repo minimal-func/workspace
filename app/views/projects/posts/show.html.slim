@@ -1,0 +1,9 @@
+.content
+  h2
+    = @post.title
+
+  - if @post.featured_image.present?
+    .content
+      = image_tag @post.featured_image.url, class: 'img-responsive'
+.content.trix-content
+  =h @post.content
