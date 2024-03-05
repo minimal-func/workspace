@@ -4,7 +4,7 @@ module Projects
     before_action :set_project, only: %i[new create index]
 
     def new
-      @post = @workspace.posts.build
+      @post = @project.posts.build
     end
 
     def create
@@ -19,7 +19,7 @@ module Projects
 
     def show
       @post = Post.find(params[:id])
-      @workspace = @post.postable
+      @project = @post.project
     end
 
     private
