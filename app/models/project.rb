@@ -5,7 +5,7 @@ class Project < ApplicationRecord
   has_many :tasks, dependent: :destroy
 
   has_many :todos, dependent: :destroy
-  has_many :posts, as: :postable, dependent: :destroy
+  has_many :posts, dependent: :destroy
   has_many :saved_links, dependent: :destroy
   has_many :materials, dependent: :destroy
 end
