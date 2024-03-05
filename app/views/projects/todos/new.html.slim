@@ -3,7 +3,7 @@
 
 .content
   .form
-    = simple_form_for [@workspace, @todo] do |f|
+    = simple_form_for [@project, @todo] do |f|
       .row
         = f.input :name, label: false, placeholder: "Task"
       .row
