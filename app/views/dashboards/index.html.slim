@@ -1,5 +1,12 @@
 .d-flex.justify-content-center
+
   .col-sm-12
+    div id="conversation"
+    button id="recordButton" Record
+    form id="chatForm"
+      input type="text" id="textInput" placeholder="Type your message"
+      button type="submit" id="sendButton" Send
+
     = simple_form_for(@user, url: dashboards_url, method: :post, html: { class: 'row' }) do |f|
       .col-sm-12
         span

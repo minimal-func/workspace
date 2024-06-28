@@ -10,8 +10,6 @@ window.jQuery = $;
 import Trix from "trix";
 require("@rails/actiontext")
 
-require('./scripts')
-
 import { Turbo } from "@hotwired/turbo-rails";
 window.Turbo = Turbo;
 
@@ -104,6 +102,69 @@ $(function() {
 });
 
 $(function() {
+  const recordButton = document.getElementById('recordButton');
+  const chatForm = document.getElementById('chatForm');
+  const textInput = document.getElementById('textInput');
+  const conversation = document.getElementById('conversation');
+
+  let recognition;
+  if ('webkitSpeechRecognition' in window) {
+    recognition = new webkitSpeechRecognition();
+  } else {
+    recognition = new SpeechRecognition();
+  }
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.lang = 'en-US';
+
+  recordButton.addEventListener('click', () => {
+    recognition.start();
+  });
+
+  recognition.onresult = (event) => {
+    const speechResult = event.results[0][0].transcript;
+    textInput.value = speechResult;
+  };
+
+  recognition.onerror = (event) => {
+    console.error('Speech recognition error', event);
+  };
+
+  chatForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const userMessage = textInput.value;
+    if (userMessage) {
+      addMessageToConversation('User', userMessage);
+      await sendMessageToChatGPT(userMessage);
+      textInput.value = '';
+    }
+  });
+
+  function addMessageToConversation(sender, message) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message';
+    messageDiv.innerHTML = `<span class="${sender.toLowerCase()}">${sender}:</span> ${message}`;
+    conversation.appendChild(messageDiv);
+    conversation.scrollTop = conversation.scrollHeight;
+  }
+
+  async function sendMessageToChatGPT(message) {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    const response = await fetch('/chatgpt', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrfToken
+      },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await response.json();
+    const chatGPTMessage = data.message;
+    addMessageToConversation('ChatGPT', chatGPTMessage);
+  }
+
   $(".embed").each(function(i, embed) {
     const $embed = $(embed);
     $embed
@@ -113,3 +174,5 @@ $(function() {
 });
 
 require("trix")
+
+require('./scripts')

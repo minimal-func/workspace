@@ -44996,7 +44996,6 @@ For more info, visit https://fb.me/react-mock-scheduler`);
   // app/javascript/packs/application.js
   window.jQuery = import_jquery4.default;
   init_actiontext();
-  require_scripts();
   window.Turbo = turbo_es2017_esm_exports;
   document.addEventListener("DOMContentLoaded", loadReact);
   document.addEventListener("turbo:render", loadReact);
@@ -45075,12 +45074,68 @@ For more info, visit https://fb.me/react-mock-scheduler`);
     }
   });
   (0, import_jquery4.default)(function() {
+    const recordButton = document.getElementById("recordButton");
+    const chatForm = document.getElementById("chatForm");
+    const textInput = document.getElementById("textInput");
+    const conversation = document.getElementById("conversation");
+    let recognition;
+    if ("webkitSpeechRecognition" in window) {
+      recognition = new webkitSpeechRecognition();
+    } else {
+      recognition = new SpeechRecognition();
+    }
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = "en-US";
+    recordButton.addEventListener("click", () => {
+      recognition.start();
+    });
+    recognition.onresult = (event) => {
+      const speechResult = event.results[0][0].transcript;
+      textInput.value = speechResult;
+    };
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error", event);
+    };
+    chatForm.addEventListener("submit", (event) => __async(this, null, function* () {
+      event.preventDefault();
+      const userMessage = textInput.value;
+      if (userMessage) {
+        addMessageToConversation("User", userMessage);
+        yield sendMessageToChatGPT(userMessage);
+        textInput.value = "";
+      }
+    }));
+    function addMessageToConversation(sender, message) {
+      const messageDiv = document.createElement("div");
+      messageDiv.className = "message";
+      messageDiv.innerHTML = `<span class="${sender.toLowerCase()}">${sender}:</span> ${message}`;
+      conversation.appendChild(messageDiv);
+      conversation.scrollTop = conversation.scrollHeight;
+    }
+    function sendMessageToChatGPT(message) {
+      return __async(this, null, function* () {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+        const response = yield fetch("/chatgpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken
+          },
+          body: JSON.stringify({ message })
+        });
+        const data = yield response.json();
+        const chatGPTMessage = data.message;
+        addMessageToConversation("ChatGPT", chatGPTMessage);
+      });
+    }
     (0, import_jquery4.default)(".embed").each(function(i, embed) {
       const $embed = (0, import_jquery4.default)(embed);
       $embed.find(".content").replaceWith($embed.find(".embed-html").text());
     });
   });
   require_trix_umd_min();
+  require_scripts();
 })();
 /*
 object-assign

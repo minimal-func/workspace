@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resources :daily_lessons, only: [:index]
   resources :daily_gratitudes, only: [:index]
   resources :main_task, only: [:new, :create]
+  resources :chatgpt, only: [:index]
+
+  post 'chatgpt', to: 'chatgpt#create'
 
   namespace :timetracker do
     resources :projects, only: %i[new create index destroy] do
