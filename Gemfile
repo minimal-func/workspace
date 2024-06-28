@@ -41,6 +41,7 @@ group :test do
   gem "timecop"
   gem "webmock", require: false
   gem "selenium-webdriver"
+  gem 'rails-controller-testing'
 end
 
 group :development, :test do
