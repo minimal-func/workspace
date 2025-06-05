@@ -158,6 +158,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Also initialize components when Turbo renders a new page
 document.addEventListener('turbo:render', function() {
+  // Reset the done flag to allow re-initialization
+  mr.dropdowns.done = false;
   mr.components.documentReady.forEach(function(component) {
     component();
   });
