@@ -15,7 +15,6 @@
     "chartkick": "^5.0.1",
     "esbuild": "^0.15.5",
     "highcharts": "^11.2.0",
-    "jquery": ">=3.7.1",
     "prop-types": "^15.7.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",

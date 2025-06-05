@@ -15,6 +15,8 @@ gem 'image_processing', '~> 1.2'
 gem "puma"
 # Use SCSS for stylesheets
 gem "sass-rails"
+# Use jsbundling-rails for JavaScript bundling with esbuild
+gem "jsbundling-rails"
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", ">= 1.3.0"
 # See https://github.com/rails/execjs#readme for more supported runtimes
