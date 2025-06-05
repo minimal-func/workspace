@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem "rest-client"
 
-gem "jquery-rails"
+# gem "jquery-rails" # Removed in favor of vanilla JavaScript
 
 gem "devise"
 gem "slim"
@@ -56,7 +56,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "fuubar"
   gem "jasmine"
-  gem "jasmine-jquery-rails"
+  # gem "jasmine-jquery-rails" # Removed in favor of vanilla JavaScript
   gem "pry-rails"
   gem "rails_best_practices"
   gem "rspec-rails"

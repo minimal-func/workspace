@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TaskBox from '../components/TaskBox';
-import $ from "jquery";
 import "chartkick";
 import "chartkick/highcharts";
-
-window.jQuery = $;
 
 import Trix from "trix";
 require("@rails/actiontext")
@@ -16,11 +13,22 @@ window.Turbo = Turbo;
 document.addEventListener('DOMContentLoaded', loadReact)
 document.addEventListener('turbo:render', loadReact)
 
-$.ajaxSetup({
-  headers: {
-    "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
-  },
-});
+// Function to get CSRF token from meta tag
+function getCSRFToken() {
+  return document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+}
+
+// Add CSRF token to all fetch requests
+const originalFetch = window.fetch;
+window.fetch = function(url, options = {}) {
+  if (!options.headers) {
+    options.headers = {};
+  }
+  if (options.method && options.method !== 'GET') {
+    options.headers["X-CSRF-Token"] = getCSRFToken();
+  }
+  return originalFetch.call(this, url, options);
+};
 
 function loadReact(){
   const rootElement = document.getElementById('root');
@@ -31,7 +39,7 @@ function loadReact(){
   }
 }
 
-$(function() {
+document.addEventListener('DOMContentLoaded', function() {
   var element = document.querySelector("trix-editor")
 
   if(element) {
@@ -78,30 +86,33 @@ $(function() {
       .addEventListener("click", event => {
         const content = document.querySelector('[name="embed"]').value;
         if (content) {
-          $.ajax({
+          fetch(document.querySelector("[data-embeds-path]").dataset.embedsPath, {
             method: "POST",
-            url: document.querySelector("[data-embeds-path]").dataset
-              .embedsPath,
-            data: {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
               embed: {
                 content,
               },
-            },
-            success: ({content, sgid}) => {
-              const attachment = new Trix.Attachment({
-                content,
-                sgid,
-              });
-              editor.insertAttachment(attachment);
-              editor.insertLineBreak();
-            },
-          });
+            }),
+          })
+          .then(response => response.json())
+          .then(({content, sgid}) => {
+            const attachment = new Trix.Attachment({
+              content,
+              sgid,
+            });
+            editor.insertAttachment(attachment);
+            editor.insertLineBreak();
+          })
+          .catch(error => console.error('Error:', error));
         }
       });
   }
 });
 
-$(function() {
+document.addEventListener('DOMContentLoaded', function() {
   const recordButton = document.getElementById('recordButton');
   const chatForm = document.getElementById('chatForm');
   const textInput = document.getElementById('textInput');
@@ -117,9 +128,11 @@ $(function() {
   recognition.interimResults = false;
   recognition.lang = 'en-US';
 
-  recordButton.addEventListener('click', () => {
-    recognition.start();
-  });
+  if (recordButton) {
+    recordButton.addEventListener('click', () => {
+      recognition.start();
+    });
+  }
 
   recognition.onresult = (event) => {
     const speechResult = event.results[0][0].transcript;
@@ -130,22 +143,26 @@ $(function() {
     console.error('Speech recognition error', event);
   };
 
-  chatForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const userMessage = textInput.value;
-    if (userMessage) {
-      addMessageToConversation('User', userMessage);
-      await sendMessageToChatGPT(userMessage);
-      textInput.value = '';
-    }
-  });
+  if (chatForm) {
+    chatForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const userMessage = textInput.value;
+      if (userMessage) {
+        addMessageToConversation('User', userMessage);
+        await sendMessageToChatGPT(userMessage);
+        textInput.value = '';
+      }
+    });
+  }
 
   function addMessageToConversation(sender, message) {
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message';
     messageDiv.innerHTML = `<span class="${sender.toLowerCase()}">${sender}:</span> ${message}`;
-    conversation.appendChild(messageDiv);
-    conversation.scrollTop = conversation.scrollHeight;
+    if (conversation) {
+      conversation.appendChild(messageDiv);
+      conversation.scrollTop = conversation.scrollHeight;
+    }
   }
 
   async function sendMessageToChatGPT(message) {
@@ -165,11 +182,13 @@ $(function() {
     addMessageToConversation('ChatGPT', chatGPTMessage);
   }
 
-  $(".embed").each(function(i, embed) {
-    const $embed = $(embed);
-    $embed
-      .find(".content")
-      .replaceWith($embed.find(".embed-html").text());
+  // Replace jQuery embed handling with vanilla JS
+  document.querySelectorAll(".embed").forEach(embed => {
+    const content = embed.querySelector(".content");
+    const embedHtml = embed.querySelector(".embed-html");
+    if (content && embedHtml) {
+      content.outerHTML = embedHtml.textContent;
+    }
   });
 });
 

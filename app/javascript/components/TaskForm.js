@@ -1,5 +1,4 @@
 import React from "react"
-import $ from "jquery";
 
 class TaskForm extends React.Component {
   handleSubmit (event) {
@@ -9,7 +8,8 @@ class TaskForm extends React.Component {
     if (!text)
       return false;
     // submit
-    var formData = $(this.refs.form).serialize();
+    const form = this.refs.form;
+    const formData = new URLSearchParams(new FormData(form)).toString();
     this.props.onTaskSubmit( formData, this.props.form.action );
   }
 
