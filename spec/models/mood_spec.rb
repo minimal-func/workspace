@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe EnergyLevel, type: :model do
+RSpec.describe Mood, type: :model do
   describe "associations" do
     it { is_expected.to belong_to(:user) }
   end
@@ -16,11 +16,11 @@ RSpec.describe EnergyLevel, type: :model do
         Timecop.freeze(Time.local(2018, 1, 1, 10))
       end
 
-      let!(:today_energy_level) { FactoryBot.create :energy_level, created_at: Time.local(2018, 1, 1, 10) }
-      let!(:yesterday_energy_level) { FactoryBot.create :energy_level, created_at: Time.local(2018, 1, 2, 10) }
+      let!(:today_mood) { FactoryBot.create :mood, created_at: Time.local(2018, 1, 1, 10) }
+      let!(:yesterday_mood) { FactoryBot.create :mood, created_at: Time.local(2017, 12, 31, 10) }
 
       it 'returns right values' do
-        expect(EnergyLevel.today()).to eq([today_energy_level])
+        expect(Mood.today()).to eq([today_mood])
       end
     end
   end

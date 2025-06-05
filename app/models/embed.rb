@@ -18,6 +18,8 @@ class Embed < ApplicationRecord
         "https://soundcloud.com/oembed?url=#{content}&format=json"
       when /twitter/
         "https://publish.twitter.com/oembed?url=#{content}"
+      else
+        ENV["APP_URL"]
       end
     res = RestClient.get url
     json = JSON.parse(res.body, object_class: OpenStruct)
