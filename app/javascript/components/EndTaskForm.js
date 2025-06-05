@@ -1,11 +1,11 @@
 import React from "react"
-import $ from "jquery";
 
 class EndTaskForm extends React.Component {
   handleSubmit (event) {
     event.preventDefault();
     // submit
-    var formData = $(this.refs.end_form).serialize();
+    const form = this.refs.end_form;
+    const formData = new URLSearchParams(new FormData(form)).toString();
     this.props.onTaskSubmit( formData, this.props.action );
   }
 

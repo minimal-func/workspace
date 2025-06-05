@@ -1,5 +1,4 @@
 import React from "react"
-import $ from "jquery";
 import EndTaskForm from './EndTaskForm'
 import TaskForm from './TaskForm'
 import TasksList from './TasksList'
@@ -20,37 +19,43 @@ class TaskBox extends React.Component {
   }
 
   handleTaskSubmit ( formData, action ) {
-    $.ajax({
-      data: formData,
-      url: action,
-      type: "POST",
-      dataType: "json",
-      success: function ( data ) {
-        console.log(data)
-        this.setState({ current_task: data });
-        this.setState({ task_ended: false });
-        this.setState({ end_action: "/timetracker/tasks/" + this.state.current_task.id + "/finish" });
-        this.startTimer(Date.parse(new Date()));
-      }.bind(this)
-    });
+    fetch(action, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      this.setState({ current_task: data });
+      this.setState({ task_ended: false });
+      this.setState({ end_action: "/timetracker/tasks/" + data.id + "/finish" });
+      this.startTimer(Date.parse(new Date()));
+    })
+    .catch(error => console.error('Error:', error));
   }
 
   handleEndTaskSubmit ( formData, action ) {
-    $.ajax({
-      data: formData,
-      url: action,
-      type: "POST",
-      dataType: "json",
-      success: function ( data ) {
-        var tasks = this.state.tasks;
-        tasks.push(data);
-        this.setState({ task_ended: true });
-        this.setState({ tasks: tasks });
+    fetch(action, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      var tasks = this.state.tasks;
+      tasks.push(data);
+      this.setState({ task_ended: true });
+      this.setState({ tasks: tasks });
 
-        this.setState({ timer_string: "00:00:00" });
-        clearInterval(this.state.timer_function);
-      }.bind(this)
-    });
+      this.setState({ timer_string: "00:00:00" });
+      clearInterval(this.state.timer_function);
+    })
+    .catch(error => console.error('Error:', error));
   }
 
   startTimer (startTime) {

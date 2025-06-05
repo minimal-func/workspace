@@ -10,13 +10,16 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
 //= require rails-ujs
-//= require datepicker
+//= require vanilla-datepicker
 
-$(function() {
-  $(".conclusion-popup").on("click", function(e){
-    e.preventDefault();
-    $('.ui.modal').modal('show');
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll(".conclusion-popup").forEach(popup => {
+    popup.addEventListener("click", function(e){
+      e.preventDefault();
+      // Assuming 'modal' is a function from a UI library
+      // If it's a custom implementation, you'll need to replace it accordingly
+      document.querySelector('.ui.modal').classList.add('show');
+    });
   });
 });

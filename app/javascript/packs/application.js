@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TaskBox from '../components/TaskBox';
-import $ from "jquery";
 import "chartkick";
 import "chartkick/highcharts";
-
-window.jQuery = $;
 
 import Trix from "trix";
 require("@rails/actiontext")
@@ -16,11 +13,22 @@ window.Turbo = Turbo;
 document.addEventListener('DOMContentLoaded', loadReact)
 document.addEventListener('turbo:render', loadReact)
 
-$.ajaxSetup({
-  headers: {
-    "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
-  },
-});
+// Function to get CSRF token from meta tag
+function getCSRFToken() {
+  return document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+}
+
+// Add CSRF token to all fetch requests
+const originalFetch = window.fetch;
+window.fetch = function(url, options = {}) {
+  if (!options.headers) {
+    options.headers = {};
+  }
+  if (options.method && options.method !== 'GET') {
+    options.headers["X-CSRF-Token"] = getCSRFToken();
+  }
+  return originalFetch.call(this, url, options);
+};
 
 function loadReact(){
   const rootElement = document.getElementById('root');
@@ -31,10 +39,11 @@ function loadReact(){
   }
 }
 
-$(function() {
+// Function to initialize Trix editor with custom embed functionality
+function initTrixEditor() {
   var element = document.querySelector("trix-editor")
 
-  if(element) {
+  if(element && element.toolbarElement) {
     var editor = element.editor;
 
     const buttonHTML =
@@ -53,13 +62,20 @@ $(function() {
     const dialogGroup = element.toolbarElement.querySelector(
       ".trix-dialogs"
     );
-    buttonGroup.insertAdjacentHTML("beforeend", buttonHTML);
-    dialogGroup.insertAdjacentHTML("beforeend", dialogHml);
-    document
-      .querySelector('[data-trix-action="embed"]')
-      .addEventListener("click", event => {
+    if (buttonGroup && dialogGroup) {
+      buttonGroup.insertAdjacentHTML("beforeend", buttonHTML);
+      dialogGroup.insertAdjacentHTML("beforeend", dialogHml);
+    } else {
+      return; // Exit if required elements are not found
+    }
+    const embedButton = document.querySelector('[data-trix-action="embed"]');
+    if (embedButton) {
+      embedButton.addEventListener("click", event => {
         const dialog = document.querySelector('[data-trix-dialog="embed"]');
         const embedInput = document.querySelector('[name="embed"]');
+
+        if (!dialog || !embedInput) return; // Exit if required elements are not found
+
         if (event.target.classList.contains("trix-active")) {
           event.target.classList.remove("trix-active");
           dialog.classList.remove("trix-active");
@@ -73,35 +89,52 @@ $(function() {
           embedInput.focus();
         }
       });
-    document
-      .querySelector('[data-trix-custom="add-embed"]')
-      .addEventListener("click", event => {
-        const content = document.querySelector('[name="embed"]').value;
-        if (content) {
-          $.ajax({
+    }
+    const addEmbedButton = document.querySelector('[data-trix-custom="add-embed"]');
+    if (addEmbedButton) {
+      addEmbedButton.addEventListener("click", event => {
+        const embedInput = document.querySelector('[name="embed"]');
+        if (!embedInput) return; // Exit if required element is not found
+
+        const content = embedInput.value;
+        const embedsPathElement = document.querySelector("[data-embeds-path]");
+
+        if (content && embedsPathElement) {
+          fetch(embedsPathElement.dataset.embedsPath, {
             method: "POST",
-            url: document.querySelector("[data-embeds-path]").dataset
-              .embedsPath,
-            data: {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
               embed: {
                 content,
               },
-            },
-            success: ({content, sgid}) => {
-              const attachment = new Trix.Attachment({
-                content,
-                sgid,
-              });
-              editor.insertAttachment(attachment);
-              editor.insertLineBreak();
-            },
-          });
+            }),
+          })
+          .then(response => response.json())
+          .then(({content, sgid}) => {
+            const attachment = new Trix.Attachment({
+              content,
+              sgid,
+            });
+            editor.insertAttachment(attachment);
+            editor.insertLineBreak();
+          })
+          .catch(error => console.error('Error:', error));
         }
       });
+    }
   }
-});
+}
 
-$(function() {
+// Initialize Trix editor on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', initTrixEditor);
+
+// Also initialize Trix editor on Turbo navigation
+document.addEventListener('turbo:render', initTrixEditor);
+
+// Function to initialize speech recognition, chat form, and embed handling
+function initChatAndEmbeds() {
   const recordButton = document.getElementById('recordButton');
   const chatForm = document.getElementById('chatForm');
   const textInput = document.getElementById('textInput');
@@ -110,42 +143,53 @@ $(function() {
   let recognition;
   if ('webkitSpeechRecognition' in window) {
     recognition = new webkitSpeechRecognition();
-  } else {
+  } else if ('SpeechRecognition' in window) {
     recognition = new SpeechRecognition();
+  } else {
+    console.warn('Speech recognition not supported in this browser');
+    return;
   }
   recognition.continuous = false;
   recognition.interimResults = false;
   recognition.lang = 'en-US';
 
-  recordButton.addEventListener('click', () => {
-    recognition.start();
-  });
+  if (recordButton) {
+    recordButton.addEventListener('click', () => {
+      recognition.start();
+    });
+  }
 
   recognition.onresult = (event) => {
     const speechResult = event.results[0][0].transcript;
-    textInput.value = speechResult;
+    if (textInput) {
+      textInput.value = speechResult;
+    }
   };
 
   recognition.onerror = (event) => {
     console.error('Speech recognition error', event);
   };
 
-  chatForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const userMessage = textInput.value;
-    if (userMessage) {
-      addMessageToConversation('User', userMessage);
-      await sendMessageToChatGPT(userMessage);
-      textInput.value = '';
-    }
-  });
+  if (chatForm) {
+    chatForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const userMessage = textInput.value;
+      if (userMessage) {
+        addMessageToConversation('User', userMessage);
+        await sendMessageToChatGPT(userMessage);
+        textInput.value = '';
+      }
+    });
+  }
 
   function addMessageToConversation(sender, message) {
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message';
     messageDiv.innerHTML = `<span class="${sender.toLowerCase()}">${sender}:</span> ${message}`;
-    conversation.appendChild(messageDiv);
-    conversation.scrollTop = conversation.scrollHeight;
+    if (conversation) {
+      conversation.appendChild(messageDiv);
+      conversation.scrollTop = conversation.scrollHeight;
+    }
   }
 
   async function sendMessageToChatGPT(message) {
@@ -165,14 +209,23 @@ $(function() {
     addMessageToConversation('ChatGPT', chatGPTMessage);
   }
 
-  $(".embed").each(function(i, embed) {
-    const $embed = $(embed);
-    $embed
-      .find(".content")
-      .replaceWith($embed.find(".embed-html").text());
+  // Replace jQuery embed handling with vanilla JS
+  document.querySelectorAll(".embed").forEach(embed => {
+    const content = embed.querySelector(".content");
+    const embedHtml = embed.querySelector(".embed-html");
+    if (content && embedHtml) {
+      content.outerHTML = embedHtml.textContent;
+    }
   });
-});
+}
+
+// Initialize chat and embeds on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', initChatAndEmbeds);
+
+// Also initialize chat and embeds on Turbo navigation
+document.addEventListener('turbo:render', initChatAndEmbeds);
 
 require("trix")
 
-require('./scripts')
+// Import our custom scripts
+import './scripts'

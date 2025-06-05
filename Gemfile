@@ -15,6 +15,8 @@ gem 'image_processing', '~> 1.2'
 gem "puma"
 # Use SCSS for stylesheets
 gem "sass-rails"
+# Use jsbundling-rails for JavaScript bundling with esbuild
+gem "jsbundling-rails"
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", ">= 1.3.0"
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -23,7 +25,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem "rest-client"
 
-gem "jquery-rails"
+# gem "jquery-rails" # Removed in favor of vanilla JavaScript
 
 gem "devise"
 gem "slim"
@@ -56,7 +58,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "fuubar"
   gem "jasmine"
-  gem "jasmine-jquery-rails"
+  # gem "jasmine-jquery-rails" # Removed in favor of vanilla JavaScript
   gem "pry-rails"
   gem "rails_best_practices"
   gem "rspec-rails"
