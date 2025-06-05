@@ -31660,948 +31660,6 @@ For more info, visit https://fb.me/react-mock-scheduler`);
     }
   });
 
-  // app/javascript/packs/scripts.js
-  var require_scripts = __commonJS({
-    "app/javascript/packs/scripts.js"() {
-      window.mr = window.mr || {};
-      mr = function(mr2, $, window2, document2) {
-        "use strict";
-        mr2 = mr2 || {};
-        var components = { documentReady: [], documentReadyDeferred: [], windowLoad: [], windowLoadDeferred: [] };
-        mr2.status = { documentReadyRan: false, windowLoadPending: false };
-        $(document2).ready(documentReady);
-        $(window2).on("load", windowLoad);
-        function documentReady(context) {
-          context = typeof context === "undefined" ? $ : context;
-          components.documentReady.concat(components.documentReadyDeferred).forEach(function(component) {
-            component(context);
-          });
-          mr2.status.documentReadyRan = true;
-          if (mr2.status.windowLoadPending) {
-            windowLoad(mr2.setContext());
-          }
-        }
-        function windowLoad(context) {
-          if (mr2.status.documentReadyRan) {
-            mr2.status.windowLoadPending = false;
-            context = typeof context === "object" ? $ : context;
-            components.windowLoad.concat(components.windowLoadDeferred).forEach(function(component) {
-              component(context);
-            });
-          } else {
-            mr2.status.windowLoadPending = true;
-          }
-        }
-        mr2.setContext = function(contextSelector) {
-          var context = $;
-          if (typeof contextSelector !== "undefined") {
-            return function(selector) {
-              return $(contextSelector).find(selector);
-            };
-          }
-          return context;
-        };
-        mr2.components = components;
-        mr2.documentReady = documentReady;
-        mr2.windowLoad = windowLoad;
-        return mr2;
-      }(window.mr, jQuery, window, document);
-      mr = function(mr2, $, window2, document2) {
-        "use strict";
-        mr2.util = {};
-        mr2.util.requestAnimationFrame = window2.requestAnimationFrame || window2.mozRequestAnimationFrame || window2.webkitRequestAnimationFrame || window2.msRequestAnimationFrame;
-        mr2.util.documentReady = function($2) {
-          var today = new Date();
-          var year = today.getFullYear();
-          $2(".update-year").text(year);
-        };
-        mr2.util.windowLoad = function($2) {
-          $2("[data-delay-src]").each(function() {
-            var $el = $2(this);
-            $el.attr("src", $el.attr("data-delay-src"));
-            $el.removeAttr("data-delay-src");
-          });
-        };
-        mr2.util.getURLParameter = function(name) {
-          return decodeURIComponent((new RegExp("[?|&]" + name + "=([^&;]+?)(&|#|;|$)").exec(location.search) || [void 0, ""])[1].replace(/\+/g, "%20")) || null;
-        };
-        mr2.util.capitaliseFirstLetter = function(string) {
-          return string.charAt(0).toUpperCase() + string.slice(1);
-        };
-        mr2.util.slugify = function(text, spacesOnly) {
-          if (typeof spacesOnly !== "undefined") {
-            return text.replace(/ +/g, "");
-          } else {
-            return text.toLowerCase().replace(/[\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\]\[\}\{\'\"\;\\\:\?\/\>\<\.\,]+/g, "").replace(/ +/g, "-");
-          }
-        };
-        mr2.util.sortChildrenByText = function(parentElement, reverse) {
-          var $parentElement = $(parentElement);
-          var items = $parentElement.children().get();
-          var order = -1;
-          var order2 = 1;
-          if (typeof reverse !== "undefined") {
-            order = 1;
-            order2 = -1;
-          }
-          items.sort(function(a, b) {
-            var keyA = $(a).text();
-            var keyB = $(b).text();
-            if (keyA < keyB)
-              return order;
-            if (keyA > keyB)
-              return order2;
-            return 0;
-          });
-          $parentElement.empty();
-          $(items).each(function(i, itm) {
-            $parentElement.append(itm);
-          });
-        };
-        mr2.util.idleSrc = function(context, selector) {
-          selector = typeof selector !== "undefined" ? selector : "";
-          var elems = context.is(selector + "[src]") ? context : context.find(selector + "[src]");
-          elems.each(function(index, elem) {
-            elem = $(elem);
-            var currentSrc = elem.attr("src"), dataSrc = elem.attr("data-src");
-            if (typeof dataSrc === "undefined") {
-              elem.attr("data-src", currentSrc);
-            }
-            elem.attr("src", "");
-          });
-        };
-        mr2.util.activateIdleSrc = function(context, selector) {
-          selector = typeof selector !== "undefined" ? selector : "";
-          var elems = context.is(selector + "[data-src]") ? context : context.find(selector + "[data-src]");
-          elems.each(function(index, elem) {
-            elem = $(elem);
-            var dataSrc = elem.attr("data-src");
-            elem.attr("src", dataSrc);
-          });
-        };
-        mr2.util.pauseVideo = function(context) {
-          var elems = context.is("video") ? context : context.find("video");
-          elems.each(function(index, video) {
-            var playingVideo = $(video).get(0);
-            playingVideo.pause();
-          });
-        };
-        mr2.util.parsePixels = function(text) {
-          var windowHeight = $(window2).height(), value;
-          if (/^[1-9]{1}[0-9]*[p][x]$/.test(text)) {
-            return parseInt(text.replace("px", ""), 10);
-          } else if (/^[1-9]{1}[0-9]*[v][h]$/.test(text)) {
-            value = parseInt(text.replace("vh", ""), 10);
-            return windowHeight * (value / 100);
-          } else {
-            return -1;
-          }
-        };
-        mr2.util.removeHash = function() {
-          history.pushState("", document2.title, window2.location.pathname + window2.location.search);
-        };
-        mr2.components.documentReady.push(mr2.util.documentReady);
-        mr2.components.windowLoad.push(mr2.util.windowLoad);
-        return mr2;
-      }(mr, jQuery, window, document);
-      mr = function(mr2, $, window2, document2) {
-        "use strict";
-        mr2.window = {};
-        mr2.window.height = $(window2).height();
-        mr2.window.width = $(window2).width();
-        $(window2).on("resize", function() {
-          mr2.window.height = $(window2).height();
-          mr2.window.width = $(window2).width();
-        });
-        return mr2;
-      }(mr, jQuery, window, document);
-      mr = function(mr2, $, window2, document2) {
-        "use strict";
-        mr2.alerts = mr2.alerts || {};
-        mr2.alerts.documentReady = function($2) {
-          $2(".alert__close").on("click touchstart", function() {
-            jQuery(this).closest(".alert").addClass("alert--dismissed");
-          });
-        };
-        mr2.components.documentReady.push(mr2.alerts.documentReady);
-        return mr2;
-      }(mr, jQuery, window, document);
-      mr = function(mr2, $, window2, document2) {
-        "use strict";
-        mr2.backgrounds = mr2.backgrounds || {};
-        mr2.backgrounds.documentReady = function($2) {
-          $2(".background-image-holder").each(function() {
-            var imgSrc = $2(this).children("img").attr("src");
-            $2(this).css("background", 'url("' + imgSrc + '")').css("background-position", "initial").css("opacity", "1");
-          });
-        };
-        mr2.components.documentReady.push(mr2.backgrounds.documentReady);
-        return mr2;
-      }(mr, jQuery, window, document);
-      mr = function(mr2, $, window2, document2) {
-        "use strict";
-        mr2.bars = mr2.bars || {};
-        mr2.bars.documentReady = function($2) {
-          $2('.nav-container .bar[data-scroll-class*="fixed"]:not(.bar--absolute)').each(function() {
-            var bar = $2(this), barHeight = bar.outerHeight(true);
-            bar.closest(".nav-container").css("min-height", barHeight);
-          });
-        };
-        mr2.components.documentReady.push(mr2.bars.documentReady);
-        return mr2;
-      }(mr, jQuery, window, document);
-      mr = function(mr2, $, window2, document2) {
-        "use strict";
-        mr2.datepicker = mr2.datepicker || {};
-        var options = mr2.datepicker.options || {
-          selectYears: 100,
-          min: [1930, 1, 1],
-          max: [2030, 1, 1],
-          format: "yyyy/mm/dd"
-        };
-        mr2.datepicker.documentReady = function($2) {
-        };
-        mr2.components.documentReadyDeferred.push(mr2.datepicker.documentReady);
-        return mr2;
-      }(mr, jQuery, window, document);
-      mr = function(mr2, $, window2, document2) {
-        "use strict";
-        mr2.dropdowns = mr2.dropdowns || {};
-        mr2.dropdowns.done = false;
-        mr2.dropdowns.documentReady = function($2) {
-          var rtl = false;
-          if ($2('html[dir="rtl"]').length) {
-            rtl = true;
-          }
-          if (!mr2.dropdowns.done) {
-            jQuery(document2).on("click", "body:not(.dropdowns--hover) .dropdown, body.dropdowns--hover .dropdown.dropdown--click", function(event) {
-              var dropdown = jQuery(this);
-              if (jQuery(event.target).is(".dropdown--active > .dropdown__trigger")) {
-                dropdown.siblings().removeClass("dropdown--active").find(".dropdown").removeClass("dropdown--active");
-                dropdown.toggleClass("dropdown--active");
-              } else {
-                $2(".dropdown--active").removeClass("dropdown--active");
-                dropdown.addClass("dropdown--active");
-              }
-            });
-            jQuery(document2).on("click touchstart", "body:not(.dropdowns--hover)", function(event) {
-              if (!jQuery(event.target).is('[class*="dropdown"], [class*="dropdown"] *')) {
-                $2(".dropdown--active").removeClass("dropdown--active");
-              }
-            });
-            jQuery("body.dropdowns--hover .dropdown").on("click", function(event) {
-              event.stopPropagation();
-              var hoverDropdown = jQuery(this);
-              hoverDropdown.toggleClass("dropdown--active");
-            });
-            jQuery("body").append('<div class="container containerMeasure" style="opacity:0;pointer-events:none;"></div>');
-            if (rtl === false) {
-              mr2.dropdowns.repositionDropdowns($2);
-              jQuery(window2).on("resize", function() {
-                mr2.dropdowns.repositionDropdowns($2);
-              });
-            } else {
-              mr2.dropdowns.repositionDropdownsRtl($2);
-              jQuery(window2).on("resize", function() {
-                mr2.dropdowns.repositionDropdownsRtl($2);
-              });
-            }
-            mr2.dropdowns.done = true;
-          }
-        };
-        mr2.dropdowns.repositionDropdowns = function($2) {
-          $2(".dropdown__container").each(function() {
-            var container, containerOffset, masterOffset, menuItem, content;
-            var containerMeasure = jQuery(".containerMeasure");
-            jQuery(this).css("left", "");
-            container = jQuery(this);
-            containerOffset = container.offset().left;
-            masterOffset = containerMeasure.length ? containerMeasure.offset() ? containerMeasure.offset().left : 0 : 0;
-            menuItem = container.closest(".dropdown").offset().left;
-            content = null;
-            container.css("left", -containerOffset + masterOffset);
-            if (container.find('.dropdown__content:not([class*="lg-12"])').length) {
-              content = container.find(".dropdown__content");
-              content.css("left", menuItem - masterOffset);
-            }
-          });
-          $2(".dropdown__content").each(function() {
-            var dropdown, offset, width, offsetRight, winWidth, leftCorrect;
-            dropdown = jQuery(this);
-            offset = dropdown.offset().left;
-            width = dropdown.outerWidth(true);
-            offsetRight = offset + width;
-            winWidth = jQuery(window2).outerWidth(true);
-            var containerMeasure = jQuery(".containerMeasure");
-            leftCorrect = containerMeasure.length ? (containerMeasure.outerWidth() || 0) - width : 0;
-            if (offsetRight > winWidth) {
-              dropdown.css("left", leftCorrect);
-            }
-          });
-        };
-        mr2.dropdowns.repositionDropdownsRtl = function($2) {
-          var windowWidth = jQuery(window2).width();
-          $2(".dropdown__container").each(function() {
-            var container, containerOffset, masterOffset, menuItem, content;
-            var containerMeasure = jQuery(".containerMeasure");
-            jQuery(this).css("left", "");
-            container = jQuery(this);
-            containerOffset = windowWidth - (container.offset().left + container.outerWidth(true));
-            masterOffset = containerMeasure.length ? containerMeasure.offset() ? containerMeasure.offset().left : 0 : 0;
-            menuItem = windowWidth - (container.closest(".dropdown").offset().left + container.closest(".dropdown").outerWidth(true));
-            content = null;
-            container.css("right", -containerOffset + masterOffset);
-            if (container.find('.dropdown__content:not([class*="lg-12"])').length) {
-              content = container.find(".dropdown__content");
-              content.css("right", menuItem - masterOffset);
-            }
-          });
-          $2(".dropdown__content").each(function() {
-            var dropdown, offset, width, offsetRight, winWidth, rightCorrect;
-            dropdown = jQuery(this);
-            offset = windowWidth - (dropdown.offset().left + dropdown.outerWidth(true));
-            width = dropdown.outerWidth(true);
-            offsetRight = offset + width;
-            winWidth = jQuery(window2).outerWidth(true);
-            var containerMeasure = jQuery(".containerMeasure");
-            rightCorrect = containerMeasure.length ? (containerMeasure.outerWidth() || 0) - width : 0;
-            if (offsetRight > winWidth) {
-              dropdown.css("right", rightCorrect);
-            }
-          });
-        };
-        mr2.components.documentReady.push(mr2.dropdowns.documentReady);
-        return mr2;
-      }(mr, jQuery, window, document);
-      mr = function(mr2, $, window2, document2) {
-        "use strict";
-        mr2.forms = mr2.forms || {};
-        mr2.forms.captcha = {};
-        mr2.forms.captcha.widgets = [];
-        mr2.forms.captcha.done = false;
-        mr2.forms.documentReady = function($2) {
-          mr2.forms.captcha.widgets = [];
-          $2('.input-checkbox input[type="checkbox"], .input-radio input[type="radio"]').each(function(index) {
-            var input = $2(this), label = input.siblings("label"), id2 = "input-assigned-" + index;
-            if (typeof input.attr("id") === "undefined" || input.attr("id") === "") {
-              input.attr("id", id2);
-              label.attr("for", id2);
-            } else {
-              id2 = input.attr("id");
-              label.attr("for", id2);
-            }
-          });
-          $2(".input-number__controls > span").off("click.mr").on("click.mr", function() {
-            var control = jQuery(this), parent = control.closest(".input-number"), input = parent.find('input[type="number"]'), max = input.attr("max"), min = input.attr("min"), step = 1, current = parseInt(input.val(), 10);
-            if (parent.is("[data-step]")) {
-              step = parseInt(parent.attr("data-step"), 10);
-            }
-            if (control.hasClass("input-number__increase")) {
-              if (current + step <= max) {
-                input.val(current + step);
-              }
-            } else {
-              if (current - step >= min) {
-                input.val(current - step);
-              }
-            }
-          });
-          $2(".input-file .btn").off("click.mr").on("click.mr", function() {
-            $2(this).siblings("input").trigger("click");
-            return false;
-          });
-          $2('form.form-email, form[action*="list-manage.com"], form[action*="createsend.com"]').attr("novalidate", true).off("submit").on("submit", mr2.forms.submit);
-          $2(document2).on("change, input, paste, keyup", ".attempted-submit .field-error", function() {
-            $2(this).removeClass("field-error");
-          });
-          $2('form[data-recaptcha-sitekey]:not([data-recaptcha-sitekey=""])').each(function() {
-            var $thisForm = jQuery(this), $captchaDiv = $thisForm.find("div.recaptcha"), $insertBefore, $column, widgetObject, $script, scriptSrc, widgetColourTheme, widgetSize;
-            widgetColourTheme = $thisForm.attr("data-recaptcha-theme");
-            widgetColourTheme = typeof widgetColourTheme !== "undefined" ? widgetColourTheme : "";
-            widgetSize = $thisForm.attr("data-recaptcha-size");
-            widgetSize = typeof widgetSize !== "undefined" ? widgetSize : "";
-            mr2.forms.captcha.sitekey = $thisForm.attr("data-recaptcha-sitekey");
-            if ($captchaDiv.length) {
-            } else {
-              $insertBefore = $thisForm.find("button[type=submit]").closest('[class*="col-"]');
-              $captchaDiv = jQuery("<div>").addClass("recaptcha");
-              $column = jQuery("<div>").addClass("col-xs-12").append($captchaDiv);
-              $column.insertBefore($insertBefore);
-            }
-            widgetObject = {
-              element: $captchaDiv.get(0),
-              parentForm: $thisForm,
-              theme: widgetColourTheme,
-              size: widgetSize
-            };
-            mr2.forms.captcha.widgets.push(widgetObject);
-            if (mr2.forms.captcha.done === false) {
-              if (!jQuery('script[src*="recaptcha/api.js"]').length) {
-                $script = jQuery("<script async defer>");
-                scriptSrc = "https://www.google.com/recaptcha/api.js?onload=mrFormsCaptchaInit&render=explicit";
-                $script.attr("src", scriptSrc);
-                jQuery("body").append($script);
-                mr2.forms.captcha.done = true;
-              }
-            } else {
-              if (typeof grecaptcha !== "undefined") {
-                mr2.forms.captcha.renderWidgets();
-              }
-            }
-          });
-        };
-        mr2.forms.submit = function(e) {
-          if (e.preventDefault)
-            e.preventDefault();
-          else
-            e.returnValue = false;
-          var body = $("body"), thisForm = $(e.target).closest("form"), formAction = typeof thisForm.attr("action") !== "undefined" ? thisForm.attr("action") : "", submitButton = thisForm.find('button[type="submit"], input[type="submit"]'), error = 0, originalError = thisForm.attr("original-error"), captchaUsed = thisForm.find("div.recaptcha").length ? true : false, successRedirect, formError, formSuccess, errorText, successText;
-          body.find(".form-error, .form-success").remove();
-          submitButton.attr("data-text", submitButton.text());
-          errorText = thisForm.attr("data-error") ? thisForm.attr("data-error") : "Please fill all fields correctly";
-          successText = thisForm.attr("data-success") ? thisForm.attr("data-success") : "Thanks, we'll be in touch shortly";
-          body.append('<div class="form-error" style="display: none;">' + errorText + "</div>");
-          body.append('<div class="form-success" style="display: none;">' + successText + "</div>");
-          formError = body.find(".form-error");
-          formSuccess = body.find(".form-success");
-          thisForm.addClass("attempted-submit");
-          if (formAction.indexOf("createsend.com") !== -1 || formAction.indexOf("list-manage.com") !== -1) {
-            console.log("Mail list form signup detected.");
-            if (typeof originalError !== "undefined" && originalError !== false) {
-              formError.html(originalError);
-            }
-            if (mr2.forms.validateFields(thisForm) !== 1) {
-              thisForm.removeClass("attempted-submit");
-              formError.fadeOut(200);
-              submitButton.addClass("btn--loading");
-              try {
-                $.ajax({
-                  url: thisForm.attr("action"),
-                  crossDomain: true,
-                  data: thisForm.serialize(),
-                  method: "GET",
-                  cache: false,
-                  dataType: "json",
-                  contentType: "application/json; charset=utf-8",
-                  success: function(data) {
-                    if (data.result !== "success" && data.Status !== 200) {
-                      formError.attr("original-error", formError.text());
-                      formError.html(data.msg).stop(true).fadeIn(1e3);
-                      formSuccess.stop(true).fadeOut(1e3);
-                      submitButton.removeClass("btn--loading");
-                    } else {
-                      submitButton.removeClass("btn--loading");
-                      successRedirect = thisForm.attr("data-success-redirect");
-                      if (typeof successRedirect !== "undefined" && successRedirect !== false && successRedirect !== "") {
-                        window2.location = successRedirect;
-                      } else {
-                        mr2.forms.resetForm(thisForm);
-                        mr2.forms.showFormSuccess(formSuccess, formError, 1e3, 5e3, 500);
-                      }
-                    }
-                  }
-                });
-              } catch (err) {
-                formError.attr("original-error", formError.text());
-                formError.html(err.message);
-                mr2.forms.showFormError(formSuccess, formError, 1e3, 5e3, 500);
-                submitButton.removeClass("btn--loading");
-              }
-            } else {
-              mr2.forms.showFormError(formSuccess, formError, 1e3, 5e3, 500);
-            }
-          } else {
-            if (typeof originalError !== "undefined" && originalError !== false) {
-              formError.text(originalError);
-            }
-            error = mr2.forms.validateFields(thisForm);
-            if (error === 1) {
-              mr2.forms.showFormError(formSuccess, formError, 1e3, 5e3, 500);
-            } else {
-              thisForm.removeClass("attempted-submit");
-              formError.fadeOut(200);
-              submitButton.addClass("btn--loading");
-              jQuery.ajax({
-                type: "POST",
-                url: formAction !== "" ? formAction : "mail/mail.php",
-                data: thisForm.serialize() + "&url=" + window2.location.href + "&captcha=" + captchaUsed,
-                success: function(response) {
-                  submitButton.removeClass("btn--loading");
-                  if ($.isNumeric(response)) {
-                    if (parseInt(response, 10) > 0) {
-                      successRedirect = thisForm.attr("data-success-redirect");
-                      if (typeof successRedirect !== "undefined" && successRedirect !== false && successRedirect !== "") {
-                        window2.location = successRedirect;
-                      }
-                      mr2.forms.resetForm(thisForm);
-                      mr2.forms.showFormSuccess(formSuccess, formError, 1e3, 5e3, 500);
-                      mr2.forms.captcha.resetWidgets();
-                    }
-                  } else {
-                    formError.attr("original-error", formError.text());
-                    formError.text(response).stop(true).fadeIn(1e3);
-                    formSuccess.stop(true).fadeOut(1e3);
-                  }
-                },
-                error: function(errorObject, errorText2, errorHTTP) {
-                  formError.attr("original-error", formError.text());
-                  formError.text(errorHTTP).stop(true).fadeIn(1e3);
-                  formSuccess.stop(true).fadeOut(1e3);
-                  submitButton.removeClass("btn--loading");
-                }
-              });
-            }
-          }
-          return false;
-        };
-        mr2.forms.validateFields = function(form) {
-          var body = $(body), error = false, originalErrorMessage, name, thisElement;
-          form = $(form);
-          form.find('.validate-required[type="checkbox"]').each(function() {
-            var checkbox = $(this);
-            if (!$('[name="' + $(this).attr("name") + '"]:checked').length) {
-              error = 1;
-              name = $(this).attr("data-name") || "check";
-              checkbox.parent().addClass("field-error");
-            }
-          });
-          form.find(".validate-required, .required, [required]").not('input[type="checkbox"]').each(function() {
-            if ($(this).val() === "") {
-              $(this).addClass("field-error");
-              error = 1;
-            } else {
-              $(this).removeClass("field-error");
-            }
-          });
-          form.find('.validate-email, .email, [name*="cm-"][type="email"]').each(function() {
-            if (!/(.+)@(.+){2,}\.(.+){2,}/.test($(this).val())) {
-              $(this).addClass("field-error");
-              error = 1;
-            } else {
-              $(this).removeClass("field-error");
-            }
-          });
-          form.find(".validate-number-dash").each(function() {
-            if (!/^[0-9][0-9-]+[0-9]$/.test($(this).val())) {
-              $(this).addClass("field-error");
-              error = 1;
-            } else {
-              $(this).removeClass("field-error");
-            }
-          });
-          if (form.find("div.recaptcha").length && typeof form.attr("data-recaptcha-sitekey") !== "undefined") {
-            thisElement = $(form.find("div.recaptcha"));
-            if (grecaptcha.getResponse(form.data("recaptchaWidgetID")) !== "") {
-              thisElement.removeClass("field-error");
-            } else {
-              thisElement.addClass("field-error");
-              error = 1;
-            }
-          }
-          if (!form.find(".field-error").length) {
-            body.find(".form-error").fadeOut(1e3);
-          } else {
-            var firstError = $(form).find(".field-error:first");
-            if (firstError.length) {
-              $("html, body").stop(true).animate({
-                scrollTop: firstError.offset().top - 100
-              }, 1200, function() {
-                firstError.focus();
-              });
-            }
-          }
-          return error;
-        };
-        mr2.forms.showFormSuccess = function(formSuccess, formError, fadeOutError, wait, fadeOutSuccess) {
-          formSuccess.stop(true).fadeIn(fadeOutError);
-          formError.stop(true).fadeOut(fadeOutError);
-          setTimeout(function() {
-            formSuccess.stop(true).fadeOut(fadeOutSuccess);
-          }, wait);
-        };
-        mr2.forms.showFormError = function(formSuccess, formError, fadeOutSuccess, wait, fadeOutError) {
-          formError.stop(true).fadeIn(fadeOutSuccess);
-          formSuccess.stop(true).fadeOut(fadeOutSuccess);
-          setTimeout(function() {
-            formError.stop(true).fadeOut(fadeOutError);
-          }, wait);
-        };
-        mr2.forms.resetForm = function(form) {
-          form = $(form);
-          form.get(0).reset();
-          form.find(".input-radio, .input-checkbox").removeClass("checked");
-          form.find("[data-default-value]").filter('[type="text"],[type="number"],[type="email"],[type="url"],[type="search"],[type="tel"]').each(function() {
-            var elem = jQuery(this);
-            elem.val(elem.attr("data-default-value"));
-          });
-        };
-        window2.mrFormsCaptchaInit = function() {
-          mr2.forms.captcha.renderWidgets();
-        };
-        mr2.forms.captcha.renderWidgets = function() {
-          mr2.forms.captcha.widgets.forEach(function(widget) {
-            if (widget.element.innerHTML.replace(/[\s\xA0]+/g, "") === "") {
-              widget.id = grecaptcha.render(widget.element, {
-                "sitekey": mr2.forms.captcha.sitekey,
-                "theme": widget.theme,
-                "size": widget.size,
-                "callback": mr2.forms.captcha.setHuman
-              });
-              widget.parentForm.data("recaptchaWidgetID", widget.id);
-            }
-          });
-        };
-        mr2.forms.captcha.resetWidgets = function() {
-          mr2.forms.captcha.widgets.forEach(function(widget) {
-            grecaptcha.reset(widget.id);
-          });
-        };
-        mr2.forms.captcha.setHuman = function() {
-          jQuery("div.recaptcha.field-error").removeClass("field-error");
-        };
-        mr2.components.documentReadyDeferred.push(mr2.forms.documentReady);
-        return mr2;
-      }(mr, jQuery, window, document);
-      mr = function(mr2, $, window2, document2) {
-        "use strict";
-        mr2.modals = mr2.modals || {};
-        mr2.modals.documentReady = function($2) {
-          var allPageModals = '<div class="all-page-modals"></div>', mainContainer = $2("div.main-container");
-          if (mainContainer.length) {
-            jQuery(allPageModals).insertAfter(mainContainer);
-            mr2.modals.allModalsContainer = $2("div.all-page-modals");
-          } else {
-            jQuery("body").append(allPageModals);
-            mr2.modals.allModalsContainer = jQuery("body div.all-page-modals");
-          }
-          $2(".modal-container").each(function() {
-            var modal = $2(this), $window = $2(window2), modalContent = modal.find(".modal-content");
-            if (!modal.find(".modal-close").length) {
-              modal.find(".modal-content").append('<div class="modal-close modal-close-cross"></div>');
-            }
-            if (modalContent.attr("data-width") !== void 0) {
-              var modalWidth = modalContent.attr("data-width").substr(0, modalContent.attr("data-width").indexOf("%")) * 1;
-              modalContent.css("width", modalWidth + "%");
-            }
-            if (modalContent.attr("data-height") !== void 0) {
-              var modalHeight = modalContent.attr("data-height").substr(0, modalContent.attr("data-height").indexOf("%")) * 1;
-              modalContent.css("height", modalHeight + "%");
-            }
-            mr2.util.idleSrc(modal, "iframe");
-          });
-          $2(".modal-instance").each(function(index) {
-            var modalInstance = $2(this);
-            var modal = modalInstance.find(".modal-container");
-            var modalContent = modalInstance.find(".modal-content");
-            var trigger = modalInstance.find(".modal-trigger");
-            trigger.attr("data-modal-index", index);
-            modal.attr("data-modal-index", index);
-            if (typeof modal.attr("data-modal-id") !== "undefined") {
-              trigger.attr("data-modal-id", modal.attr("data-modal-id"));
-            }
-            modal = modal.detach();
-            mr2.modals.allModalsContainer.append(modal);
-          });
-          $2(".modal-trigger").on("click", function() {
-            var modalTrigger = $2(this);
-            var uniqueID, targetModal;
-            if (typeof modalTrigger.attr("data-modal-id") !== "undefined") {
-              uniqueID = modalTrigger.attr("data-modal-id");
-              targetModal = mr2.modals.allModalsContainer.find('.modal-container[data-modal-id="' + uniqueID + '"]');
-            } else {
-              uniqueID = $2(this).attr("data-modal-index");
-              targetModal = mr2.modals.allModalsContainer.find('.modal-container[data-modal-index="' + uniqueID + '"]');
-            }
-            mr2.util.activateIdleSrc(targetModal, "iframe");
-            mr2.modals.autoplayVideo(targetModal);
-            mr2.modals.showModal(targetModal);
-            return false;
-          });
-          jQuery(document2).on("click", ".modal-close", mr2.modals.closeActiveModal);
-          jQuery(document2).keyup(function(e) {
-            if (e.keyCode === 27) {
-              mr2.modals.closeActiveModal();
-            }
-          });
-          $2(".modal-container:not(.modal--prevent-close)").on("click", function(e) {
-            if (e.target !== this)
-              return;
-            mr2.modals.closeActiveModal();
-          });
-          $2(".modal-container[data-autoshow]").each(function() {
-            var modal = $2(this);
-            var millisecondsDelay = modal.attr("data-autoshow") * 1;
-            mr2.util.activateIdleSrc(modal);
-            mr2.modals.autoplayVideo(modal);
-            if (typeof modal.attr("data-cookie") !== "undefined") {
-              if (!mr2.cookies.hasItem(modal.attr("data-cookie"))) {
-                mr2.modals.showModal(modal, millisecondsDelay);
-              }
-            } else {
-              mr2.modals.showModal(modal, millisecondsDelay);
-            }
-          });
-          $2(".modal-container[data-show-on-exit]").each(function() {
-            var modal = jQuery(this), exitSelector = modal.attr("data-show-on-exit"), delay = 0;
-            if (modal.attr("data-delay")) {
-              delay = parseInt(modal.attr("data-delay"), 10) || 0;
-            }
-            if ($2(exitSelector).length) {
-              modal.prepend($2('<i class="ti-close close-modal">'));
-              jQuery(document2).on("mouseleave", exitSelector, function() {
-                if (!$2(".modal-active").length) {
-                  if (typeof modal.attr("data-cookie") !== "undefined") {
-                    if (!mr2.cookies.hasItem(modal.attr("data-cookie"))) {
-                      mr2.modals.showModal(modal, delay);
-                    }
-                  } else {
-                    mr2.modals.showModal(modal, delay);
-                  }
-                }
-              });
-            }
-          });
-          if (window2.location.href.split("#").length === 2) {
-            var modalID = window2.location.href.split("#").pop();
-            if ($2('[data-modal-id="' + modalID + '"]').length) {
-              mr2.modals.closeActiveModal();
-              mr2.modals.showModal($2('[data-modal-id="' + modalID + '"]'));
-            }
-          }
-          jQuery(document2).on("click", 'a[href^="#"]', function() {
-            var modalID2 = $2(this).attr("href").replace("#", "");
-            if ($2('[data-modal-id="' + modalID2 + '"]').length) {
-              mr2.modals.closeActiveModal();
-              setTimeout(mr2.modals.showModal, 500, '[data-modal-id="' + modalID2 + '"]', 0);
-            }
-          });
-          jQuery(document2).on("wheel mousewheel scroll", ".modal-content, .modal-content .scrollable", function(evt) {
-            if (evt.preventDefault) {
-              evt.preventDefault();
-            }
-            if (evt.stopPropagation) {
-              evt.stopPropagation();
-            }
-            this.scrollTop += evt.originalEvent.deltaY;
-          });
-        };
-        mr2.modals.showModal = function(modal, millisecondsDelay) {
-          var delay = typeof millisecondsDelay !== "undefined" ? 1 * millisecondsDelay : 0, $modal = $(modal);
-          if ($modal.length) {
-            setTimeout(function() {
-              var openEvent = document2.createEvent("Event");
-              openEvent.initEvent("modalOpened.modals.mr", true, true);
-              $(modal).addClass("modal-active").trigger("modalOpened.modals.mr").get(0).dispatchEvent(openEvent);
-            }, delay);
-          }
-        };
-        mr2.modals.closeActiveModal = function() {
-          var modal = jQuery("body div.modal-active"), closeEvent = document2.createEvent("Event");
-          mr2.util.idleSrc(modal, "iframe");
-          mr2.util.pauseVideo(modal);
-          if (typeof modal.attr("data-cookie") !== "undefined") {
-            mr2.cookies.setItem(modal.attr("data-cookie"), "true", Infinity, "/");
-          }
-          if (modal.length) {
-            if (modal.is("[data-modal-id]") && window2.location.hash === "#" + modal.attr("data-modal-id")) {
-              mr2.util.removeHash();
-            }
-            closeEvent.initEvent("modalClosed.modals.mr", true, true);
-            modal.removeClass("modal-active").trigger("modalClosed.modals.mr").get(0).dispatchEvent(closeEvent);
-          }
-        };
-        mr2.modals.autoplayVideo = function(modal) {
-          if (modal.find("video[autoplay]").length) {
-            var video = modal.find("video").get(0);
-            video.play();
-          }
-        };
-        mr2.components.documentReady.push(mr2.modals.documentReady);
-        return mr2;
-      }(mr, jQuery, window, document);
-      mr = function(mr2, $, window2, document2) {
-        "use strict";
-        mr2.progressHorizontal = mr2.progressHorizontal || {};
-        mr2.progressHorizontal.documentReady = function($2) {
-          var progressBars = [];
-          $2(".progress-horizontal").each(function() {
-            var bar = jQuery(this).find(".progress-horizontal__bar"), barObject = {}, progress = jQuery('<div class="progress-horizontal__progress"></div>');
-            bar.prepend(progress);
-            barObject.element = bar;
-            barObject.progress = progress;
-            barObject.value = parseInt(bar.attr("data-value"), 10) + "%";
-            barObject.offsetTop = bar.offset().top;
-            barObject.animate = false;
-            if (jQuery(this).hasClass("progress-horizontal--animate")) {
-              barObject.animate = true;
-            } else {
-              progress.css("width", barObject.value);
-            }
-            progressBars.push(barObject);
-          });
-        };
-        mr2.components.documentReady.push(mr2.progressHorizontal.documentReady);
-        return mr2;
-      }(mr, jQuery, window, document);
-      mr = function(mr2, $, window2, document2) {
-        "use strict";
-        mr2.easypiecharts = mr2.easypiecharts || {};
-        mr2.easypiecharts.pies = [];
-        mr2.easypiecharts.options = mr2.easypiecharts.options || {};
-        mr2.easypiecharts.documentReady = function($2) {
-          $2(".radial").each(function() {
-            var chart = jQuery(this), value = 0, color = "#000000", time = 2e3, pieSize = 110, barWidth = 3, defaults = {}, attributeOverrides = {}, options;
-            defaults = {
-              animate: { duration: time, enabled: true },
-              barColor: color,
-              scaleColor: false,
-              size: pieSize,
-              lineWidth: barWidth
-            };
-            if (typeof mr2.easypiecharts.options.size !== "undefined") {
-              pieSize = mr2.easypiecharts.options.size;
-            }
-            if (typeof chart.attr("data-timing") !== "undefined") {
-              attributeOverrides.animate = { duration: parseInt(chart.attr("data-timing"), 10), enabled: true };
-            }
-            if (typeof chart.attr("data-color") !== "undefined") {
-              attributeOverrides.barColor = chart.attr("data-color");
-            }
-            if (typeof chart.attr("data-size") !== "undefined") {
-              pieSize = attributeOverrides.size = parseInt(chart.attr("data-size"), 10);
-            }
-            if (typeof chart.attr("data-bar-width") !== "undefined") {
-              attributeOverrides.lineWidth = parseInt(chart.attr("data-bar-width"), 10);
-            }
-            chart.css("height", pieSize).css("width", pieSize);
-            if (typeof mr2.easypiecharts.options === "object") {
-              options = jQuery.extend({}, defaults, mr2.easypiecharts.options, attributeOverrides);
-            }
-            chart.easyPieChart(options);
-            chart.data("easyPieChart").update(0);
-          });
-          if ($2(".radial").length) {
-            mr2.easypiecharts.init();
-            mr2.easypiecharts.activate();
-            mr2.scroll.listeners.push(mr2.easypiecharts.activate);
-          }
-        };
-        mr2.easypiecharts.init = function() {
-          mr2.easypiecharts.pies = [];
-          $(".radial").each(function() {
-            var pieObject = {}, currentPie = jQuery(this);
-            pieObject.element = currentPie;
-            pieObject.value = parseInt(currentPie.attr("data-value"), 10);
-            pieObject.top = currentPie.offset().top;
-            pieObject.height = currentPie.height() / 2;
-            pieObject.active = false;
-            mr2.easypiecharts.pies.push(pieObject);
-          });
-        };
-        mr2.easypiecharts.activate = function() {
-          mr2.easypiecharts.pies.forEach(function(pie) {
-            if (Math.round(mr2.scroll.y + mr2.window.height) >= Math.round(pie.top + pie.height)) {
-              if (pie.active === false) {
-                pie.element.data("easyPieChart").enableAnimation();
-                pie.element.data("easyPieChart").update(pie.value);
-                pie.element.addClass("radial--active");
-                pie.active = true;
-              }
-            }
-          });
-        };
-        mr2.components.documentReadyDeferred.push(mr2.easypiecharts.documentReady);
-        return mr2;
-      }(mr, jQuery, window, document);
-      mr = function(mr2, $, window2, document2) {
-        "use strict";
-        mr2.tabs = mr2.tabs || {};
-        mr2.tabs.documentReady = function($2) {
-          $2(".tabs").each(function() {
-            var tabs = $2(this);
-            tabs.after('<ul class="tabs-content">');
-            tabs.find("li").each(function() {
-              var currentTab = $2(this), tabContent = currentTab.find(".tab__content").wrap("<li></li>").parent(), tabContentClone = tabContent.clone(true, true);
-              tabContent.remove();
-              currentTab.closest(".tabs-container").find(".tabs-content").append(tabContentClone);
-            });
-          });
-          $2(".tabs > li").on("click", function() {
-            var clickedTab = $2(this), hash;
-            mr2.tabs.activateTab(clickedTab);
-            if (clickedTab.is("[id]")) {
-              hash = "#" + clickedTab.attr("id");
-              if (history.pushState) {
-                history.pushState(null, null, hash);
-              } else {
-                location.hash = hash;
-              }
-            }
-          });
-          $2(".tabs li.active").each(function() {
-            mr2.tabs.activateTab(this);
-          });
-          if (window2.location.hash !== "") {
-            mr2.tabs.activateTabById(window2.location.hash);
-          }
-          $2('a[href^="#"]').on("click", function() {
-            mr2.tabs.activateTabById($2(this).attr("href"));
-          });
-        };
-        mr2.tabs.activateTab = function(tab) {
-          var clickedTab = $(tab), tabContainer = clickedTab.closest(".tabs-container"), activeIndex = clickedTab.index() * 1 + 1, activeContent = tabContainer.find("> .tabs-content > li:nth-of-type(" + activeIndex + ")"), openEvent = document2.createEvent("Event"), iframe, radial;
-          openEvent.initEvent("tabOpened.tabs.mr", true, true);
-          tabContainer.find("> .tabs > li").removeClass("active");
-          tabContainer.find("> .tabs-content > li").removeClass("active");
-          clickedTab.addClass("active").trigger("tabOpened.tabs.mr").get(0).dispatchEvent(openEvent);
-          activeContent.addClass("active");
-          iframe = activeContent.find("iframe");
-          if (iframe.length) {
-            iframe.attr("src", iframe.attr("src"));
-          }
-        };
-        mr2.tabs.activateTabById = function(id2) {
-          if (id2 !== "" && id2 !== "#" && id2.match(/#\/.*/) === null) {
-            if ($(".tabs > li#" + id2.replace("#", "")).length) {
-              $(".tabs > li#" + id2.replace("#", "")).click();
-            }
-          }
-        };
-        mr2.components.documentReady.push(mr2.tabs.documentReady);
-        return mr2;
-      }(mr, jQuery, window, document);
-      mr = function(mr2, $, window2, document2) {
-        "use strict";
-        mr2.toggleClass = mr2.toggleClass || {};
-        mr2.toggleClass.documentReady = function($2) {
-          $2("[data-toggle-class]").each(function() {
-            var element = $2(this), data = element.attr("data-toggle-class").split("|");
-            $2(data).each(function() {
-              var candidate = element, dataArray = [], toggleClass = "", toggleElement = "", dataArray = this.split(";");
-              if (dataArray.length === 2) {
-                toggleElement = dataArray[0];
-                toggleClass = dataArray[1];
-                $2(candidate).on("click", function() {
-                  if (!candidate.hasClass("toggled-class")) {
-                    candidate.toggleClass("toggled-class");
-                  } else {
-                    candidate.removeClass("toggled-class");
-                  }
-                  $2(toggleElement).toggleClass(toggleClass);
-                  return false;
-                });
-              } else {
-                console.log('Error in [data-toggle-class] attribute. This attribute accepts an element, or comma separated elements terminated witha ";" followed by a class name to toggle');
-              }
-            });
-          });
-        };
-        mr2.components.documentReady.push(mr2.toggleClass.documentReady);
-        return mr2;
-      }(mr, jQuery, window, document);
-    }
-  });
-
   // app/javascript/packs/application.js
   var import_react6 = __toESM(require_react());
   var import_react_dom = __toESM(require_react_dom());
@@ -38927,6 +37985,114 @@ For more info, visit https://fb.me/react-mock-scheduler`);
   // node_modules/@hotwired/turbo-rails/app/javascript/turbo/index.js
   addEventListener("turbo:before-fetch-request", encodeMethodIntoRequestBody);
 
+  // app/javascript/packs/scripts.js
+  var mr = {};
+  mr.dropdowns = {
+    done: false,
+    documentReady: function() {
+      if (!mr.dropdowns.done) {
+        document.querySelectorAll(".dropdown__trigger").forEach((trigger) => {
+          trigger.addEventListener("click", function(e) {
+            e.preventDefault();
+            const dropdown = this.closest(".dropdown");
+            if (dropdown.classList.contains("dropdown--active")) {
+              dropdown.classList.remove("dropdown--active");
+            } else {
+              document.querySelectorAll(".dropdown--active").forEach((activeDropdown) => {
+                if (activeDropdown !== dropdown) {
+                  activeDropdown.classList.remove("dropdown--active");
+                }
+              });
+              dropdown.classList.add("dropdown--active");
+              mr.dropdowns.repositionDropdowns();
+            }
+          });
+        });
+        document.addEventListener("click", function(e) {
+          if (!e.target.closest(".dropdown")) {
+            document.querySelectorAll(".dropdown--active").forEach((dropdown) => {
+              dropdown.classList.remove("dropdown--active");
+            });
+          }
+        });
+        window.addEventListener("resize", function() {
+          mr.dropdowns.repositionDropdowns();
+        });
+        mr.dropdowns.repositionDropdowns();
+        if (document.querySelector('body[data-direction="rtl"]')) {
+          mr.dropdowns.repositionDropdownsRtl();
+          window.addEventListener("resize", function() {
+            mr.dropdowns.repositionDropdownsRtl();
+          });
+        }
+        mr.dropdowns.done = true;
+      }
+    },
+    repositionDropdowns: function() {
+      document.querySelectorAll(".dropdown__container").forEach((container) => {
+        let containerOffset, masterOffset, menuItem, content;
+        const containerMeasure = document.querySelector(".containerMeasure");
+        container.style.left = "";
+        containerOffset = container.getBoundingClientRect().left;
+        masterOffset = containerMeasure ? containerMeasure.getBoundingClientRect().left : 0;
+        menuItem = container.closest(".dropdown").getBoundingClientRect().left;
+        content = null;
+        container.style.left = menuItem - containerOffset + "px";
+        const dropdown = container.querySelector(".dropdown__content");
+        if (dropdown) {
+          dropdown.style.left = "";
+          const offset = dropdown.getBoundingClientRect().left;
+          const width = dropdown.offsetWidth;
+          const offsetRight = offset + width;
+          const winWidth = window.innerWidth;
+          const leftCorrect = containerMeasure ? (containerMeasure.offsetWidth || 0) - width : 0;
+          if (offsetRight > winWidth) {
+            dropdown.style.left = leftCorrect + "px";
+          }
+        }
+      });
+    },
+    repositionDropdownsRtl: function() {
+      const windowWidth = window.innerWidth;
+      document.querySelectorAll(".dropdown__container").forEach((container) => {
+        let containerOffset, masterOffset, menuItem, content;
+        const containerMeasure = document.querySelector(".containerMeasure");
+        container.style.left = "";
+        containerOffset = windowWidth - (container.getBoundingClientRect().left + container.offsetWidth);
+        masterOffset = containerMeasure ? containerMeasure.getBoundingClientRect().left : 0;
+        menuItem = windowWidth - (container.closest(".dropdown").getBoundingClientRect().left + container.closest(".dropdown").offsetWidth);
+        content = null;
+        container.style.right = menuItem - containerOffset + "px";
+        const dropdown = container.querySelector(".dropdown__content");
+        if (dropdown) {
+          dropdown.style.right = "";
+          const offset = dropdown.getBoundingClientRect().left;
+          const width = dropdown.offsetWidth;
+          const offsetRight = offset + width;
+          const winWidth = window.innerWidth;
+          const rightCorrect = containerMeasure ? (containerMeasure.offsetWidth || 0) - width : 0;
+          if (offsetRight > winWidth) {
+            dropdown.style.right = rightCorrect + "px";
+          }
+        }
+      });
+    }
+  };
+  mr.components = {
+    documentReady: []
+  };
+  mr.components.documentReady.push(mr.dropdowns.documentReady);
+  document.addEventListener("DOMContentLoaded", function() {
+    mr.components.documentReady.forEach(function(component) {
+      component();
+    });
+  });
+  document.addEventListener("turbo:render", function() {
+    mr.components.documentReady.forEach(function(component) {
+      component();
+    });
+  });
+
   // app/javascript/packs/application.js
   init_actiontext();
   window.Turbo = turbo_es2017_esm_exports;
@@ -38953,9 +38119,9 @@ For more info, visit https://fb.me/react-mock-scheduler`);
       import_react_dom.default.render(/* @__PURE__ */ import_react6.default.createElement(TaskBox_default, { presenter }), rootElement);
     }
   }
-  document.addEventListener("DOMContentLoaded", function() {
+  function initTrixEditor() {
     var element = document.querySelector("trix-editor");
-    if (element) {
+    if (element && element.toolbarElement) {
       var editor = element.editor;
       const buttonHTML = '<button type="button" class="trix-button" data-trix-attribute="embed" data-trix-action="embed" title="Embed" tabindex="-1">Media</button>';
       const buttonGroup = element.toolbarElement.querySelector(
@@ -38972,50 +38138,68 @@ For more info, visit https://fb.me/react-mock-scheduler`);
       const dialogGroup = element.toolbarElement.querySelector(
         ".trix-dialogs"
       );
-      buttonGroup.insertAdjacentHTML("beforeend", buttonHTML);
-      dialogGroup.insertAdjacentHTML("beforeend", dialogHml);
-      document.querySelector('[data-trix-action="embed"]').addEventListener("click", (event) => {
-        const dialog = document.querySelector('[data-trix-dialog="embed"]');
-        const embedInput = document.querySelector('[name="embed"]');
-        if (event.target.classList.contains("trix-active")) {
-          event.target.classList.remove("trix-active");
-          dialog.classList.remove("trix-active");
-          delete dialog.dataset.trixActive;
-          embedInput.setAttribute("disabled", "disabled");
-        } else {
-          event.target.classList.add("trix-active");
-          dialog.classList.add("trix-active");
-          dialog.dataset.trixActive = "";
-          embedInput.removeAttribute("disabled");
-          embedInput.focus();
-        }
-      });
-      document.querySelector('[data-trix-custom="add-embed"]').addEventListener("click", (event) => {
-        const content = document.querySelector('[name="embed"]').value;
-        if (content) {
-          fetch(document.querySelector("[data-embeds-path]").dataset.embedsPath, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              embed: {
-                content
-              }
-            })
-          }).then((response) => response.json()).then(({ content: content2, sgid }) => {
-            const attachment = new import_trix.default.Attachment({
-              content: content2,
-              sgid
-            });
-            editor.insertAttachment(attachment);
-            editor.insertLineBreak();
-          }).catch((error) => console.error("Error:", error));
-        }
-      });
+      if (buttonGroup && dialogGroup) {
+        buttonGroup.insertAdjacentHTML("beforeend", buttonHTML);
+        dialogGroup.insertAdjacentHTML("beforeend", dialogHml);
+      } else {
+        return;
+      }
+      const embedButton = document.querySelector('[data-trix-action="embed"]');
+      if (embedButton) {
+        embedButton.addEventListener("click", (event) => {
+          const dialog = document.querySelector('[data-trix-dialog="embed"]');
+          const embedInput = document.querySelector('[name="embed"]');
+          if (!dialog || !embedInput)
+            return;
+          if (event.target.classList.contains("trix-active")) {
+            event.target.classList.remove("trix-active");
+            dialog.classList.remove("trix-active");
+            delete dialog.dataset.trixActive;
+            embedInput.setAttribute("disabled", "disabled");
+          } else {
+            event.target.classList.add("trix-active");
+            dialog.classList.add("trix-active");
+            dialog.dataset.trixActive = "";
+            embedInput.removeAttribute("disabled");
+            embedInput.focus();
+          }
+        });
+      }
+      const addEmbedButton = document.querySelector('[data-trix-custom="add-embed"]');
+      if (addEmbedButton) {
+        addEmbedButton.addEventListener("click", (event) => {
+          const embedInput = document.querySelector('[name="embed"]');
+          if (!embedInput)
+            return;
+          const content = embedInput.value;
+          const embedsPathElement = document.querySelector("[data-embeds-path]");
+          if (content && embedsPathElement) {
+            fetch(embedsPathElement.dataset.embedsPath, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                embed: {
+                  content
+                }
+              })
+            }).then((response) => response.json()).then(({ content: content2, sgid }) => {
+              const attachment = new import_trix.default.Attachment({
+                content: content2,
+                sgid
+              });
+              editor.insertAttachment(attachment);
+              editor.insertLineBreak();
+            }).catch((error) => console.error("Error:", error));
+          }
+        });
+      }
     }
-  });
-  document.addEventListener("DOMContentLoaded", function() {
+  }
+  document.addEventListener("DOMContentLoaded", initTrixEditor);
+  document.addEventListener("turbo:render", initTrixEditor);
+  function initChatAndEmbeds() {
     const recordButton = document.getElementById("recordButton");
     const chatForm = document.getElementById("chatForm");
     const textInput = document.getElementById("textInput");
@@ -39023,8 +38207,11 @@ For more info, visit https://fb.me/react-mock-scheduler`);
     let recognition;
     if ("webkitSpeechRecognition" in window) {
       recognition = new webkitSpeechRecognition();
-    } else {
+    } else if ("SpeechRecognition" in window) {
       recognition = new SpeechRecognition();
+    } else {
+      console.warn("Speech recognition not supported in this browser");
+      return;
     }
     recognition.continuous = false;
     recognition.interimResults = false;
@@ -39036,7 +38223,9 @@ For more info, visit https://fb.me/react-mock-scheduler`);
     }
     recognition.onresult = (event) => {
       const speechResult = event.results[0][0].transcript;
-      textInput.value = speechResult;
+      if (textInput) {
+        textInput.value = speechResult;
+      }
     };
     recognition.onerror = (event) => {
       console.error("Speech recognition error", event);
@@ -39084,9 +38273,10 @@ For more info, visit https://fb.me/react-mock-scheduler`);
         content.outerHTML = embedHtml.textContent;
       }
     });
-  });
+  }
+  document.addEventListener("DOMContentLoaded", initChatAndEmbeds);
+  document.addEventListener("turbo:render", initChatAndEmbeds);
   require_trix_umd_min();
-  require_scripts();
 })();
 /*
 object-assign

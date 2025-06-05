@@ -39,10 +39,11 @@ function loadReact(){
   }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+// Function to initialize Trix editor with custom embed functionality
+function initTrixEditor() {
   var element = document.querySelector("trix-editor")
 
-  if(element) {
+  if(element && element.toolbarElement) {
     var editor = element.editor;
 
     const buttonHTML =
@@ -61,13 +62,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const dialogGroup = element.toolbarElement.querySelector(
       ".trix-dialogs"
     );
-    buttonGroup.insertAdjacentHTML("beforeend", buttonHTML);
-    dialogGroup.insertAdjacentHTML("beforeend", dialogHml);
-    document
-      .querySelector('[data-trix-action="embed"]')
-      .addEventListener("click", event => {
+    if (buttonGroup && dialogGroup) {
+      buttonGroup.insertAdjacentHTML("beforeend", buttonHTML);
+      dialogGroup.insertAdjacentHTML("beforeend", dialogHml);
+    } else {
+      return; // Exit if required elements are not found
+    }
+    const embedButton = document.querySelector('[data-trix-action="embed"]');
+    if (embedButton) {
+      embedButton.addEventListener("click", event => {
         const dialog = document.querySelector('[data-trix-dialog="embed"]');
         const embedInput = document.querySelector('[name="embed"]');
+
+        if (!dialog || !embedInput) return; // Exit if required elements are not found
+
         if (event.target.classList.contains("trix-active")) {
           event.target.classList.remove("trix-active");
           dialog.classList.remove("trix-active");
@@ -81,12 +89,18 @@ document.addEventListener('DOMContentLoaded', function() {
           embedInput.focus();
         }
       });
-    document
-      .querySelector('[data-trix-custom="add-embed"]')
-      .addEventListener("click", event => {
-        const content = document.querySelector('[name="embed"]').value;
-        if (content) {
-          fetch(document.querySelector("[data-embeds-path]").dataset.embedsPath, {
+    }
+    const addEmbedButton = document.querySelector('[data-trix-custom="add-embed"]');
+    if (addEmbedButton) {
+      addEmbedButton.addEventListener("click", event => {
+        const embedInput = document.querySelector('[name="embed"]');
+        if (!embedInput) return; // Exit if required element is not found
+
+        const content = embedInput.value;
+        const embedsPathElement = document.querySelector("[data-embeds-path]");
+
+        if (content && embedsPathElement) {
+          fetch(embedsPathElement.dataset.embedsPath, {
             method: "POST",
             headers: {
               'Content-Type': 'application/json',
@@ -109,10 +123,18 @@ document.addEventListener('DOMContentLoaded', function() {
           .catch(error => console.error('Error:', error));
         }
       });
+    }
   }
-});
+}
 
-document.addEventListener('DOMContentLoaded', function() {
+// Initialize Trix editor on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', initTrixEditor);
+
+// Also initialize Trix editor on Turbo navigation
+document.addEventListener('turbo:render', initTrixEditor);
+
+// Function to initialize speech recognition, chat form, and embed handling
+function initChatAndEmbeds() {
   const recordButton = document.getElementById('recordButton');
   const chatForm = document.getElementById('chatForm');
   const textInput = document.getElementById('textInput');
@@ -121,8 +143,11 @@ document.addEventListener('DOMContentLoaded', function() {
   let recognition;
   if ('webkitSpeechRecognition' in window) {
     recognition = new webkitSpeechRecognition();
-  } else {
+  } else if ('SpeechRecognition' in window) {
     recognition = new SpeechRecognition();
+  } else {
+    console.warn('Speech recognition not supported in this browser');
+    return;
   }
   recognition.continuous = false;
   recognition.interimResults = false;
@@ -136,7 +161,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   recognition.onresult = (event) => {
     const speechResult = event.results[0][0].transcript;
-    textInput.value = speechResult;
+    if (textInput) {
+      textInput.value = speechResult;
+    }
   };
 
   recognition.onerror = (event) => {
@@ -190,8 +217,15 @@ document.addEventListener('DOMContentLoaded', function() {
       content.outerHTML = embedHtml.textContent;
     }
   });
-});
+}
+
+// Initialize chat and embeds on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', initChatAndEmbeds);
+
+// Also initialize chat and embeds on Turbo navigation
+document.addEventListener('turbo:render', initChatAndEmbeds);
 
 require("trix")
 
-require('./scripts')
+// Import our custom scripts
+import './scripts'
