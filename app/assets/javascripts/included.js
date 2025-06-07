@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require vanilla-datepicker
 
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll(".conclusion-popup").forEach(popup => {

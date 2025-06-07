@@ -229,3 +229,6 @@ require("trix")
 
 // Import our custom scripts
 import './scripts'
+
+// Import and initialize datepicker
+import './datepicker'
