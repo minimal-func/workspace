@@ -1,14 +1,14 @@
-.content
+.d-flex.justify-content-center
   h1 Add the useful Link on #{@project.title}
 
-.content
+.d-flex.justify-content-center
   .form
     = simple_form_for [@project, @saved_link] do |f|
-      .row
+      .col-sm-12
         = f.input :title, label: false, placeholder: "Link title"
-      .row
+      .col-sm-12
         = f.input :short_description, label: false, placeholder: "Short Description"
-      .row
+      .col-sm-12
         = f.input :url, label: false, placeholder: "URL"
-      .row
+      .col-sm-12
         = f.submit "Save link", label: false, class: 'button'
