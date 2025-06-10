@@ -4,8 +4,8 @@
     <title>Daily Reflections</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= stylesheet_link_tag 'included', media: 'all' %>
+
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
@@ -13,12 +13,8 @@
   <body>
     <div class="main-container">
         <section class="height-100 imagebg text-center" data-overlay="4">
-            <div class="background-image-holder">
-                <%= image_tag "inner-6.jpg" %>
-            </div>
             <%= yield %>
         </section>
     </div>
-    <%= javascript_include_tag 'application' %>
   </body>
 </html>
