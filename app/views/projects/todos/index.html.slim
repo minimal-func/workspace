@@ -4,7 +4,11 @@
   - @todos.each do |todo|
     ul
       li
-        = todo.name
+        p
+          = todo.name
+        p
+          = todo.finished? ? 'Finished' : 'Not finished'
+
 
   - if current_user
     = link_to 'New task', new_project_todo_url(@project)
