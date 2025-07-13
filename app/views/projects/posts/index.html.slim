@@ -1,11 +1,39 @@
-.d-flex.justify-content-center
-  h1 My posts on #{@project.title}
+.container.blog-index
+  .row.mb-4
+    .col-md-10.offset-md-1
+      .d-flex.justify-content-between.align-items-center
+        h1.blog-index-title My posts on #{@project.title}
+        - if current_user
+          = link_to new_project_post_path(@project), class: 'btn btn-primary' do
+            i.material-icons.align-middle.mr-1 add
+            | New Post
 
-.d-flex.justify-content-center
-  - @posts.each do |post|
-    = link_to project_post_path(@project, post) do
-      h4
-        = post.title
-
-  - if current_user
-    = link_to 'New Post', new_project_post_path(@project)
+  .row
+    .col-md-10.offset-md-1
+      - if @posts.empty?
+        .alert.alert-info.text-center
+          p No posts yet. 
+          - if current_user
+            p 
+              = link_to 'Create your first post', new_project_post_path(@project), class: 'btn btn-outline-primary mt-2'
+      - else
+        .row
+          - @posts.each do |post|
+            .col-md-6.mb-4
+              .card.blog-card.h-100
+                - if post.featured_image.present?
+                  = image_tag post.featured_image.url, class: 'card-img-top blog-card-image'
+                .card-body
+                  h4.card-title= post.title
+                  .card-text.text-muted.small.mb-2
+                    span.mr-2
+                      i.material-icons.align-middle.mr-1 calendar_today
+                      = post.created_at.strftime("%B %d, %Y")
+                  .card-text.blog-excerpt.mb-3
+                    - if post.respond_to?(:excerpt) && post.excerpt.present?
+                      = post.excerpt
+                    - else
+                      = truncate(strip_tags(post.content.to_s), length: 150)
+                  = link_to project_post_path(@project, post), class: 'btn btn-outline-primary btn-sm' do
+                    | Read more
+                    i.material-icons.align-middle.ml-1 arrow_forward

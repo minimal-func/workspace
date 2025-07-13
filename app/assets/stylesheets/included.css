@@ -15,6 +15,7 @@
  *= require theme
  *= require custom
  *= require actiontext
+ *= require blog
 
  *= require_self
  */
