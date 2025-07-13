@@ -1,7 +1,7 @@
 .container.resource-index
   .row.mb-4
-    .col-md-10.offset-md-1
-      .d-flex.justify-content-between.align-items-center
+    .col-md-10.offset-md-1.col-sm-12.px-sm-2
+      .d-flex.justify-content-between.align-items-center.flex-wrap
         h1.resource-index-title Tasks for #{@project.title}
         - if current_user
           = link_to new_project_todo_path(@project), class: 'btn btn-primary' do
@@ -9,7 +9,7 @@
             | New Task
 
   .row
-    .col-md-10.offset-md-1
+    .col-md-10.offset-md-1.col-sm-12.col-12.px-sm-2
       - if @todos.empty?
         .empty-state
           .empty-state-icon
@@ -22,10 +22,10 @@
               | Add Your First Task
       - else
         = turbo_frame_tag "todos" do
-          .row
+          .row.flex-direction-column
             - @todos.each do |todo|
               = turbo_frame_tag dom_id(todo) do
-                .col-md-12.mb-4 style="width: 100%;"
+                .col-12.col-sm-12.col-md-12.mb-4
                   .resource-card.todo-card class=("completed" if todo.finished?)
                     h4.todo-name
                       i.material-icons.align-middle.mr-1 = todo.finished? ? "check_circle" : "radio_button_unchecked"
@@ -34,10 +34,10 @@
                       = todo.finished? ? "Completed" : "In Progress"
                     - if current_user
                       - if todo.finished?
-                        = button_to project_todo_path(@project, todo), method: :patch, params: { todo: { finished: false } }, class: 'btn btn-outline-secondary btn-sm', form: { data: { turbo: true } } do
+                        = button_to project_todo_path(@project, todo), method: :patch, params: { todo: { finished: false } }, class: 'btn btn-outline-secondary btn-sm todo-action-btn', form: { data: { turbo: true } } do
                           i.material-icons.align-middle.mr-1 undo
                           | Mark as Incomplete
                       - else
-                        = button_to project_todo_path(@project, todo), method: :patch, params: { todo: { finished: true } }, class: 'btn btn-outline-success btn-sm', form: { data: { turbo: true } } do
+                        = button_to project_todo_path(@project, todo), method: :patch, params: { todo: { finished: true } }, class: 'btn btn-outline-success btn-sm todo-action-btn', form: { data: { turbo: true } } do
                           i.material-icons.align-middle.mr-1 check
                           | Mark as Complete

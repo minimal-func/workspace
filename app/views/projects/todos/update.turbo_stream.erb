@@ -1,6 +1,6 @@
 <%= turbo_stream.replace dom_id(@todo) do %>
   <%= turbo_frame_tag dom_id(@todo) do %>
-    <div class="col-md-12 mb-4" style="width: 100%;">
+    <div class="col-12 col-sm-12 col-md-12 mb-4">
       <div class="resource-card todo-card <%= 'completed' if @todo.finished? %>">
         <h4 class="todo-name">
           <i class="material-icons align-middle mr-1"><%= @todo.finished? ? "check_circle" : "radio_button_unchecked" %></i>
@@ -11,12 +11,12 @@
         </div>
         <% if current_user %>
           <% if @todo.finished? %>
-            <%= button_to project_todo_path(@project, @todo), method: :patch, params: { todo: { finished: false } }, class: 'btn btn-outline-secondary btn-sm', form: { data: { turbo: true } } do %>
+            <%= button_to project_todo_path(@project, @todo), method: :patch, params: { todo: { finished: false } }, class: 'btn btn-outline-secondary btn-sm todo-action-btn', form: { data: { turbo: true } } do %>
               <i class="material-icons align-middle mr-1">undo</i>
               Mark as Incomplete
             <% end %>
           <% else %>
-            <%= button_to project_todo_path(@project, @todo), method: :patch, params: { todo: { finished: true } }, class: 'btn btn-outline-success btn-sm', form: { data: { turbo: true } } do %>
+            <%= button_to project_todo_path(@project, @todo), method: :patch, params: { todo: { finished: true } }, class: 'btn btn-outline-success btn-sm todo-action-btn', form: { data: { turbo: true } } do %>
               <i class="material-icons align-middle mr-1">check</i>
               Mark as Complete
             <% end %>
