@@ -69,6 +69,25 @@
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
+  min-height: 100vh; /* Ensure minimum height is full viewport */
+}
+
+@media (max-width: 767px) {
+  .imagebg {
+    min-height: 100vh;
+    height: 100vh;
+    position: fixed; /* Fix the background to cover the entire screen */
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Place it behind the content */
+  }
+
+  /* Ensure the content container has proper spacing */
+  .main-container {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 /* Project dropdown styles */
