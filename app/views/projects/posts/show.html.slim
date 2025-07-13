@@ -13,7 +13,7 @@
 
       - if @post.featured_image.present?
         .blog-post-featured-image.mb-4
-          = image_tag @post.featured_image.url, class: 'img-fluid rounded w-100'
+          = image_tag @post.featured_image, class: 'img-fluid rounded w-100'
 
       .blog-post-content.trix-content.mb-5
         =h @post.content
@@ -22,3 +22,7 @@
         = link_to project_posts_path(@project), class: 'btn btn-outline-primary' do
           i.material-icons.align-middle.mr-1 arrow_back
           | Back to Posts
+        - if current_user && current_user.can_update_resource?(@post)
+          = link_to edit_project_post_path(@project, @post), class: 'btn btn-outline-secondary' do
+            i.material-icons.align-middle.mr-1 edit
+            | Edit Post

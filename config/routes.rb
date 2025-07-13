@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   scope module: :projects do
     resources :projects, only: [] do
-      resources :posts, only: %i[index new create show]
+      resources :posts, only: %i[index new create show edit update]
       resources :todos
       resources :saved_links
       resources :materials

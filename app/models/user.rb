@@ -38,5 +38,9 @@ class User < ApplicationRecord
   has_many :concept_learnings, class_name: 'Wiki::ConceptLearning', foreign_key: 'wiki_concept_id'
   has_many :concepts, through: :concept_learnings, class_name: 'Wiki::Concept'
 
-  has_many :created_topics, class_name: 'Wiki::Topic', foreign_key: :created_by
+  def can_update_resource?(resource)
+    return false unless resource&.project
+
+    resource.project.user == self
+  end
 end

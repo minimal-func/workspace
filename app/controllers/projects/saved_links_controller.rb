@@ -28,7 +28,7 @@ module Projects
 
     def update
       @project = @saved_link.project
-      if @saved_link.update(saved_link_params)
+      if can_update_resource?(@saved_link) && @saved_link.update(saved_link_params)
         redirect_to project_saved_links_path(@project), notice: 'Saved link was successfully updated.'
       else
         render :edit

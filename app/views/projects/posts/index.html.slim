@@ -22,7 +22,7 @@
             .col-md-6.mb-4
               .card.blog-card.h-100
                 - if post.featured_image.present?
-                  = image_tag post.featured_image.url, class: 'card-img-top blog-card-image'
+                  = image_tag post.featured_image, class: 'card-img-top blog-card-image'
                 .card-body
                   h4.card-title= post.title
                   .card-text.text-muted.small.mb-2
@@ -34,6 +34,11 @@
                       = post.excerpt
                     - else
                       = truncate(strip_tags(post.content.to_s), length: 150)
-                  = link_to project_post_path(@project, post), class: 'btn btn-outline-primary btn-sm' do
-                    | Read more
-                    i.material-icons.align-middle.ml-1 arrow_forward
+                  .d-flex.flex-wrap.gap-2
+                    = link_to project_post_path(@project, post), class: 'btn btn-outline-primary btn-sm' do
+                      | Read more
+                      i.material-icons.align-middle.ml-1 arrow_forward
+                    - if current_user && current_user.can_update_resource?(post)
+                      = link_to edit_project_post_path(@project, post), class: 'btn btn-outline-secondary btn-sm' do
+                        i.material-icons.align-middle.mr-1 edit
+                        | Edit

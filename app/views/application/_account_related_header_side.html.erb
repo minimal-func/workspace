@@ -18,34 +18,21 @@
                 </div>
               </div>
           </li>
-<!--           <li class="dropdown">
-              <span class="dropdown__trigger">
-                  <i class="stack-interface stack-bell"></i> Alerts
-              </span>
-          </li> -->
       </ul>
   </div>
-<!--   <div class="bar__module">
-      <a class="btn btn--primary btn--sm type--uppercase" href="#">
-          <span class="btn__text">
-              Upgrade
-          </span>
-      </a>
-  </div> -->
 
 <% else %>
   <div class="bar__module">
-    <a class="btn btn--sm type--uppercase" href="#">
+    <%= link_to new_user_session_path, class: "btn btn--sm type--uppercase" do %>
       <span class="btn__text">
           Login
       </span>
-    </a>
-    <a class="btn btn--sm btn--primary type--uppercase" href="#">
+    <% end %>
+
+    <%= link_to new_user_registration_path, class: "btn btn--sm btn--primary type--uppercase" do %>
       <span class="btn__text">
          Signup
       </span>
-    </a>
+    <% end %>
   </div>
 <% end %>
-
-<!--end module-->

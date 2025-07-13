@@ -1,7 +1,8 @@
 module Projects
   class PostsController < ApplicationController
-    before_action :authenticate_user!, only: %i[new create learn]
-    before_action :set_project, only: %i[new create index]
+    before_action :authenticate_user!, only: %i[new create edit update learn]
+    before_action :set_project, only: %i[new create index edit update]
+    before_action :set_post, only: %i[show edit update]
 
     def new
       @post = @project.posts.build
@@ -18,14 +19,28 @@ module Projects
     end
 
     def show
-      @post = Post.find(params[:id])
       @project = @post.project
+    end
+
+    def edit
+    end
+
+    def update
+      if can_update_resource?(@post) && @post.update(post_params)
+        redirect_to project_post_path(@project, @post), notice: 'Post was successfully updated.'
+      else
+        render :edit
+      end
     end
 
     private
 
     def set_project
       @project = Project.find(params[:project_id])
+    end
+
+    def set_post
+      @post = Post.find(params[:id])
     end
 
     def post_params
