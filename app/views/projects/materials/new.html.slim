@@ -1,14 +1,8 @@
-.d-flex.justify-content-center
-  h1 New Material
-
-.content
-  .form
-    = simple_form_for [@project, @material] do |f|
-      .col-sm-12
-        = f.input :title, label: false, placeholder: "Title"
-      .col-sm-12
-        = f.input :short_description, label: false, placeholder: "Short Description"
-      .col-sm-12
-        = f.input :file, label: false
-      .col-sm-12
-        = f.button :submit, "Add new material", class: 'button'
+.container.mt-4
+  .row
+    .col-md-8.offset-md-2
+      .card
+        .card-header
+          h2.mb-0 New Material
+        .card-body
+          = render 'form'
