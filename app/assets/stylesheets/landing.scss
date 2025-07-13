@@ -128,4 +128,26 @@
   .cta-content {
     padding: 1.5rem;
   }
+
+  .landing-cta {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+
+  .landing-cta .btn {
+    white-space: nowrap;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-bottom: 0;
+  }
+}
+
+/* Extra small devices (phones) */
+@media (max-width: 576px) {
+  .landing-cta .btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
 }
