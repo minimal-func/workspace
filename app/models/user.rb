@@ -38,12 +38,6 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :today_daily_gratitudes, allow_destroy: true
   accepts_nested_attributes_for :today_biggest_challenges, allow_destroy: true
 
-  has_many :topic_subscriptions, class_name: 'Wiki::TopicSubscription', foreign_key: 'wiki_topic_id'
-  has_many :topics, through: :topic_subscriptions, class_name: 'Wiki::Topic'
-
-  has_many :concept_learnings, class_name: 'Wiki::ConceptLearning', foreign_key: 'wiki_concept_id'
-  has_many :concepts, through: :concept_learnings, class_name: 'Wiki::Concept'
-
   # Gamification methods
   def update_total_points
     update(total_points: points.sum(:value))
