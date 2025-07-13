@@ -1,11 +1,35 @@
-.content
-  h1 Useful links on #{@project.title}
+.container.resource-index
+  .row.mb-4
+    .col-md-10.offset-md-1
+      .d-flex.justify-content-between.align-items-center
+        h1.resource-index-title Useful Links on #{@project.title}
+        - if current_user
+          = link_to new_project_saved_link_path(@project), class: 'btn btn-primary' do
+            i.material-icons.align-middle.mr-1 add
+            | New Link
 
-.content
-  - @saved_links.each do |saved_link|
-    ul
-      li
-        = link_to saved_link.title, saved_link.url, target: :_blank
-
-  - if current_user
-    = link_to 'New link', new_project_saved_link_url(@project)
+  .row
+    .col-md-10.offset-md-1
+      - if @saved_links.empty?
+        .empty-state
+          .empty-state-icon
+            i.material-icons link_off
+          h3 No saved links yet
+          p.empty-state-text Save useful links related to this project for quick access.
+          - if current_user
+            = link_to new_project_saved_link_path(@project), class: 'btn btn-outline-primary' do
+              i.material-icons.align-middle.mr-1 add
+              | Add Your First Link
+      - else
+        .row
+          - @saved_links.each do |saved_link|
+            .col-md-6.mb-4
+              .resource-card.link-card
+                h4.link-title
+                  i.material-icons.link-icon link
+                  = saved_link.title
+                .link-url
+                  = truncate(saved_link.url, length: 50)
+                = link_to saved_link.url, target: :_blank, class: 'btn btn-outline-primary btn-sm' do
+                  | Visit Link
+                  i.material-icons.align-middle.ml-1 open_in_new

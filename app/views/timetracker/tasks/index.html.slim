@@ -1,19 +1,36 @@
-ul
-  li
-    => link_to project_saved_links_path(@current_project) do
-      span My links
-  li
-    => link_to project_materials_path(@current_project) do
-      span My materials
-  li
-    => link_to project_posts_path(@current_project) do
-      span My Posts
-  li
-    => link_to project_todos_path(@current_project) do
-      span Tasks I'm doing
+.container.timetracker-dashboard
+  .row
+    .col-md-10.offset-md-1
+      .timetracker-header
+        h1.timetracker-title = @current_project.title
+        p.timetracker-subtitle Track time spent on tasks and manage your project resources
 
-.col-md-12
-  h1
-    = @current_project.title
-  div id="root" data-presenter="#{@tasks_presenter.to_json}"
-  == pagy_nav(@pagy) if @pagy.pages > 1
+      .task-navigation
+        ul
+          li
+            => link_to timetracker_project_tasks_path(@current_project) do
+              i.material-icons timer
+              span Time Tracker
+          li
+            => link_to project_posts_path(@current_project) do
+              i.material-icons description
+              span Posts
+          li
+            => link_to project_materials_path(@current_project) do
+              i.material-icons book
+              span Materials
+          li
+            => link_to project_saved_links_path(@current_project) do
+              i.material-icons link
+              span Links
+          li
+            => link_to project_todos_path(@current_project) do
+              i.material-icons check_circle
+              span Tasks
+
+      .task-tracker
+        div id="root" data-presenter="#{@tasks_presenter.to_json}"
+
+      - if @pagy.pages > 1
+        .d-flex.justify-content-center.mt-4
+          == pagy_nav(@pagy)

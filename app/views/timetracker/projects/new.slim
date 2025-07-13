@@ -1,3 +1,13 @@
-= simple_form_for @project, url: timetracker_projects_path do |f|
-  = f.input :title
-  = f.submit
+.container.timetracker-dashboard
+  .row
+    .col-md-8.offset-md-2
+      .card
+        .card-header
+          h2.timetracker-title Create New Project
+          p.timetracker-subtitle Start tracking time on a new project
+        .card-body
+          = simple_form_for @project, url: timetracker_projects_path do |f|
+            = f.input :title, label: 'Project Title', placeholder: 'Enter a descriptive name for your project'
+            .form-group.mt-4
+              = f.button :submit, 'Create Project', class: 'btn btn-primary'
+              = link_to 'Cancel', timetracker_projects_path, class: 'btn btn-outline-secondary ml-2'

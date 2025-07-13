@@ -1,0 +1,132 @@
+/* Project Resources Styles */
+
+/* Common styles for project resources pages */
+.resource-index {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+.resource-index-title {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.resource-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  background-color: #fff;
+}
+
+.resource-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Saved Links specific styles */
+.link-card {
+  padding: 1.25rem;
+}
+
+.link-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.link-url {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  word-break: break-all;
+}
+
+.link-icon {
+  margin-right: 0.5rem;
+  color: #007bff;
+}
+
+/* Materials specific styles */
+.material-card {
+  padding: 1.25rem;
+}
+
+.material-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.material-info {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.material-icon {
+  margin-right: 0.5rem;
+  color: #28a745;
+}
+
+/* Todos specific styles */
+.todo-card {
+  padding: 1.25rem;
+  border-left: 4px solid #ffc107;
+}
+
+.todo-card.completed {
+  border-left: 4px solid #28a745;
+}
+
+.todo-name {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.todo-status {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.todo-status.pending {
+  background-color: rgba(255, 193, 7, 0.2);
+  color: #856404;
+}
+
+.todo-status.completed {
+  background-color: rgba(40, 167, 69, 0.2);
+  color: #155724;
+}
+
+/* Empty state styles */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  color: #dee2e6;
+  margin-bottom: 1rem;
+}
+
+.empty-state-text {
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+/* Action buttons */
+.resource-action {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}

@@ -1,14 +1,41 @@
-.d-flex.justify-content-center
-  h1 Study Materials on #{@project.title}
+.container.resource-index
+  .row.mb-4
+    .col-md-10.offset-md-1
+      .d-flex.justify-content-between.align-items-center
+        h1.resource-index-title Study Materials on #{@project.title}
+        - if current_user
+          = link_to new_project_material_path(@project), class: 'btn btn-primary' do
+            i.material-icons.align-middle.mr-1 add
+            | New Material
 
-.d-flex.justify-content-center
-  - @materials.each do |material|
-    ul
-      li
-        -if material.file.attached?
-          = link_to material.title, material.file
-        - else
-          = material.title
-
-  - if current_user
-    = link_to 'New Study Material', new_project_material_url(@project)
+  .row
+    .col-md-10.offset-md-1
+      - if @materials.empty?
+        .empty-state
+          .empty-state-icon
+            i.material-icons description_off
+          h3 No study materials yet
+          p.empty-state-text Upload study materials related to this project for easy access.
+          - if current_user
+            = link_to new_project_material_path(@project), class: 'btn btn-outline-primary' do
+              i.material-icons.align-middle.mr-1 add
+              | Add Your First Material
+      - else
+        .row
+          - @materials.each do |material|
+            .col-md-6.mb-4
+              .resource-card.material-card
+                h4.material-title
+                  i.material-icons.material-icon description
+                  = material.title
+                - if material.file.attached?
+                  .material-info
+                    i.material-icons.align-middle.mr-1 attach_file
+                    | File attached
+                  = link_to material.file, class: 'btn btn-outline-success btn-sm', target: '_blank' do
+                    | Download
+                    i.material-icons.align-middle.ml-1 file_download
+                - else
+                  .material-info.text-muted
+                    i.material-icons.align-middle.mr-1 info
+                    | No file attached

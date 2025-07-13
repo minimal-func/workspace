@@ -80,6 +80,9 @@
                                 <div class="project-dropdown__content">
                                   <ul class="menu-vertical">
                                     <li>
+                                      <%= link_to "Timetracker", timetracker_project_tasks_path(project) %>
+                                    </li>
+                                    <li>
                                       <%= link_to "Posts", project_posts_path(project) %>
                                     </li>
                                     <li>

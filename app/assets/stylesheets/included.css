@@ -16,6 +16,8 @@
  *= require custom
  *= require actiontext
  *= require blog
+ *= require project_resources
+ *= require timetracker
 
  *= require_self
  */
