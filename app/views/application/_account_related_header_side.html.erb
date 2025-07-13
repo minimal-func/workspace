@@ -3,17 +3,32 @@
       <ul class="menu-horizontal">
           <li class="dropdown">
               <span class="dropdown__trigger">
-                <%= image_tag "avatar-round-1.png", class: "avatar image--xxs round" %><%= current_user.email %>
+                <%= image_tag "avatar-round-1.png", class: "avatar image--xxs round" %>
+                <%= current_user.email %>
+                <% if current_user.level.present? %>
+                  <span class="badge badge-primary ml-2">Level <%= current_user.level.level_number %></span>
+                <% end %>
               </span>
               <div class="dropdown__container">
                 <div class="container">
                   <div class="row">
                     <div class="dropdown__content col-lg-2">
                       <ul class="menu-vertical">
+                        <% if current_user.level.present? %>
+                          <li>
+                            <span class="text-primary">
+                              <strong><%= current_user.total_points %> Points</strong>
+                            </span>
+                          </li>
+                        <% end %>
                         <li>
-                            <%= link_to "Log out", destroy_user_session_url, method: :delete %>
+                          <%= link_to "My Achievements", gamification_path %>
+                        </li>
+                        <li>
+                          <%= link_to "Log out", destroy_user_session_url, method: :delete %>
                         </li>
                       </ul>
+                    </div>
                   </div>
                 </div>
               </div>

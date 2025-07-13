@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :main_task, only: [:new, :create]
   resources :chatgpt, only: [:index]
 
+  get 'gamification', to: 'gamification#index'
+
   post 'chatgpt', to: 'chatgpt#create'
 
   namespace :timetracker do

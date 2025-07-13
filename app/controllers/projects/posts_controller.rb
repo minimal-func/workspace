@@ -10,8 +10,14 @@ module Projects
 
     def create
       @post = @project.posts.build(post_params)
-      @post.save!
-      redirect_to project_posts_path(@project)
+
+      if @post.save
+        # Award points for creating a post
+        GamificationService.award_points_for(:create_post, current_user, @post) if current_user
+        redirect_to project_posts_path(@project), notice: 'Post was successfully created.'
+      else
+        render :new
+      end
     end
 
     def index

@@ -14,6 +14,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "achievements", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.string "badge_image"
+    t.integer "points_required", default: 0
+    t.string "achievement_type"
+    t.integer "threshold", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -111,6 +122,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
     t.index ["user_id"], name: "index_energy_levels_on_user_id"
   end
 
+  create_table "levels", force: :cascade do |t|
+    t.integer "level_number", null: false
+    t.integer "points_required", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "main_tasks", force: :cascade do |t|
     t.string "name"
     t.datetime "planned_finish", precision: nil
@@ -135,6 +154,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_moods_on_user_id"
+  end
+
+  create_table "points", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "value", default: 0, null: false
+    t.string "action", null: false
+    t.string "pointable_type"
+    t.bigint "pointable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pointable_type", "pointable_id"], name: "index_points_on_pointable_type_and_pointable_id"
+    t.index ["user_id"], name: "index_points_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -191,6 +222,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
     t.index ["project_id"], name: "index_todos_on_project_id"
   end
 
+  create_table "user_achievements", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "achievement_id", null: false
+    t.datetime "earned_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["achievement_id"], name: "index_user_achievements_on_achievement_id"
+    t.index ["user_id"], name: "index_user_achievements_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -204,6 +245,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.integer "total_points", default: 0
+    t.bigint "level_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -218,10 +261,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
   add_foreign_key "main_tasks", "users"
   add_foreign_key "materials", "projects"
   add_foreign_key "moods", "users"
+  add_foreign_key "points", "users"
   add_foreign_key "posts", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "reflections", "users"
   add_foreign_key "saved_links", "projects"
   add_foreign_key "tasks", "projects"
   add_foreign_key "todos", "projects"
+  add_foreign_key "user_achievements", "achievements"
+  add_foreign_key "user_achievements", "users"
+  add_foreign_key "users", "levels"
 end

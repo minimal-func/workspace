@@ -23,7 +23,7 @@
       - else
         .row
           - @saved_links.each do |saved_link|
-            .col-md-6.col-xs-12.mb-4
+            .col-md-6.col-sm-12.mb-4
               .resource-card.link-card
                 h4.link-title
                   i.material-icons.link-icon link
@@ -35,7 +35,7 @@
                     | Visit Link
                     i.material-icons.align-middle.ml-1 open_in_new
 
-                  - if (current_user.can_update_resource?(saved_link))
+                  - if current_user.can_update_resource?(saved_link)
                     = link_to edit_project_saved_link_path(@project, saved_link), class: 'btn btn-outline-secondary btn-sm' do
                       i.material-icons.align-middle.mr-1 edit
                       | Edit

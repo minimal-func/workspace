@@ -24,6 +24,12 @@ class User < ApplicationRecord
 
   has_many :projects
 
+  # Gamification associations
+  has_many :points, dependent: :destroy
+  has_many :user_achievements, dependent: :destroy
+  has_many :achievements, through: :user_achievements
+  belongs_to :level, optional: true
+
   accepts_nested_attributes_for :today_day_ratings, allow_destroy: true
   accepts_nested_attributes_for :today_energy_levels, allow_destroy: true
   accepts_nested_attributes_for :today_moods, allow_destroy: true
@@ -37,6 +43,30 @@ class User < ApplicationRecord
 
   has_many :concept_learnings, class_name: 'Wiki::ConceptLearning', foreign_key: 'wiki_concept_id'
   has_many :concepts, through: :concept_learnings, class_name: 'Wiki::Concept'
+
+  # Gamification methods
+  def update_total_points
+    update(total_points: points.sum(:value))
+    update_level
+    check_achievements
+  end
+
+  def update_level
+    new_level = Level.for_points(total_points)
+    update(level: new_level) if new_level && level != new_level
+  end
+
+  def check_achievements
+    Achievement.where(achievement_type: 'points').each do |achievement|
+      if total_points >= achievement.points_required && !achievements.include?(achievement)
+        achievement.award_to(self)
+      end
+    end
+  end
+
+  def award_points(value, action, pointable = nil)
+    points.create!(value: value, action: action, pointable: pointable)
+  end
 
   def can_update_resource?(resource)
     return false unless resource&.project

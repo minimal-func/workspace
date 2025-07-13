@@ -1,0 +1,76 @@
+.container
+  .row.mb-4
+    .col-md-10.offset-md-1
+      h1.text-center Your Achievements
+
+  .row
+    .col-md-4
+      .card.mb-4
+        .card-header
+          h4.mb-0 Your Level
+        .card-body.text-center
+          - if @level
+            h2.display-4= @level.level_number
+            h3= @level.name
+            - if @next_level
+              .progress.mt-3
+                .progress-bar.bg-success[
+                  role="progressbar"
+                  style="width: #{((@level.points_required.to_f / @next_level.points_required) * 100).round}%"
+                  aria-valuenow="#{((@level.points_required.to_f / @next_level.points_required) * 100).round}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ]
+              p.mt-2
+                | #{@points_to_next_level} points to level #{@next_level.level_number}
+          - else
+            p.text-muted You haven't reached any level yet. Start earning points!
+
+      .card
+        .card-header
+          h4.mb-0 Recent Points
+        .card-body
+          - if @points.any?
+            ul.list-group
+              - @points.each do |point|
+                li.list-group-item.d-flex.justify-content-between.align-items-center
+                  span= point.action.humanize
+                  span.badge.badge-primary.badge-pill= "+#{point.value}"
+          - else
+            p.text-muted No points earned yet. Start completing actions to earn points!
+
+    .col-md-8
+      .card
+        .card-header
+          h4.mb-0 Your Achievements
+        .card-body
+          - if @achievements.any?
+            .row
+              - @achievements.each do |achievement|
+                .col-md-6.mb-4
+                  .card.achievement-card
+                    .card-body
+                      h5.card-title= achievement.name
+                      p.card-text= achievement.description
+                      .text-muted.small
+                        | Earned on #{achievement.user_achievements.find_by(user: current_user).earned_at.strftime("%B %d, %Y")}
+          - else
+            p.text-muted No achievements earned yet. Keep using the app to unlock achievements!
+
+      .card.mt-4
+        .card-header
+          h4.mb-0 Available Achievements
+        .card-body
+          - if @available_achievements.any?
+            .row
+              - @available_achievements.each do |achievement|
+                .col-md-6.mb-4
+                  .card.achievement-card.locked
+                    .card-body
+                      h5.card-title= achievement.name
+                      p.card-text= achievement.description
+                      - if achievement.threshold > 1
+                        p.text-muted.small
+                          | Complete this action #{achievement.threshold} times to unlock
+          - else
+            p.text-muted You've earned all available achievements. Congratulations!
