@@ -57,16 +57,54 @@
               <!--end dropdown container-->
             </li>
             <li class="dropdown">
-              <span class="dropdown__trigger">Learning</span>
+              <span class="dropdown__trigger">Projects</span>
               <div class="dropdown__container">
                 <div class="container">
                   <div class="row">
-                    <div class="dropdown__content col-lg-2 col-md-4">
-                      <ul class="menu-vertical">
-                        <li>
-                          <%= link_to "Reflections", "#" %>
-                        </li>
-                      </ul>
+                    <div class="dropdown__content col-lg-4 col-md-6">
+                      <% if current_user && current_user.projects.any? %>
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <h5 class="mb-2">Projects</h5>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <% current_user.projects.where(closed: false).each do |project| %>
+                            <div class="col-lg-12">
+                              <div class="project-dropdown">
+                                <div class="project-dropdown__trigger">
+                                  <h6 class="mb-1">
+                                    <%= link_to project.title, timetracker_project_tasks_path(project), class: "project-title-link" %>
+                                  </h6>
+                                </div>
+                                <div class="project-dropdown__content">
+                                  <ul class="menu-vertical">
+                                    <li>
+                                      <%= link_to "Posts", project_posts_path(project) %>
+                                    </li>
+                                    <li>
+                                      <%= link_to "Materials", project_materials_path(project) %></li>
+                                    <li>
+                                      <%= link_to "Saved Links", project_saved_links_path(project) %>
+                                    </li>
+                                    <li>
+                                      <%= link_to "Todos", project_todos_path(project) %>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          <% end %>
+                        </div>
+                        <div class="row mt-2">
+                          <div class="col-lg-12">
+                            <%= link_to "All Projects", timetracker_projects_path, class: "btn btn-sm btn-primary" %>
+                          </div>
+                        </div>
+                      <% else %>
+                        <p>No projects yet.</p>
+                        <%= link_to "Create your first project", new_timetracker_project_path, class: "btn btn-sm btn-primary" %>
+                      <% end %>
                     </div>
                     <!--end dropdown content-->
                   </div>
