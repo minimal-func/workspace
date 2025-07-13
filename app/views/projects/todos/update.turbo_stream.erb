@@ -1,0 +1,28 @@
+<%= turbo_stream.replace dom_id(@todo) do %>
+  <%= turbo_frame_tag dom_id(@todo) do %>
+    <div class="col-md-12 mb-4" style="width: 100%;">
+      <div class="resource-card todo-card <%= 'completed' if @todo.finished? %>">
+        <h4 class="todo-name">
+          <i class="material-icons align-middle mr-1"><%= @todo.finished? ? "check_circle" : "radio_button_unchecked" %></i>
+          <%= @todo.name %>
+        </h4>
+        <div class="todo-status <%= @todo.finished? ? 'completed' : 'pending' %>">
+          <%= @todo.finished? ? "Completed" : "In Progress" %>
+        </div>
+        <% if current_user %>
+          <% if @todo.finished? %>
+            <%= button_to project_todo_path(@project, @todo), method: :patch, params: { todo: { finished: false } }, class: 'btn btn-outline-secondary btn-sm', form: { data: { turbo: true } } do %>
+              <i class="material-icons align-middle mr-1">undo</i>
+              Mark as Incomplete
+            <% end %>
+          <% else %>
+            <%= button_to project_todo_path(@project, @todo), method: :patch, params: { todo: { finished: true } }, class: 'btn btn-outline-success btn-sm', form: { data: { turbo: true } } do %>
+              <i class="material-icons align-middle mr-1">check</i>
+              Mark as Complete
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

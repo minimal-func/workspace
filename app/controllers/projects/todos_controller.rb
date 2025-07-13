@@ -1,7 +1,8 @@
 module Projects
   class TodosController < ApplicationController
-    before_action :authenticate_user!, only: %i[new create index]
+    before_action :authenticate_user!, only: %i[new create index update]
     before_action :set_project, only: %i[new create index]
+    before_action :set_todo, only: %i[update show]
 
     def new
       @todo = @project.todos.build
@@ -18,14 +19,27 @@ module Projects
     end
 
     def show
-      @todo = Todo.find(params[:id])
       @project = @todo.project
+    end
+
+    def update
+      @project = @todo.project
+      @todo.update(todo_params)
+
+      respond_to do |format|
+        format.html { redirect_to project_todos_path(@project) }
+        format.turbo_stream
+      end
     end
 
     private
 
     def set_project
       @project = Project.find(params[:project_id])
+    end
+
+    def set_todo
+      @todo = Todo.find(params[:id])
     end
 
     def todo_params

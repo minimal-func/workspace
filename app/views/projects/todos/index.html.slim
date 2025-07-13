@@ -21,16 +21,23 @@
               i.material-icons.align-middle.mr-1 add_task
               | Add Your First Task
       - else
-        .row
-          - @todos.each do |todo|
-            .col-md-6.mb-4
-              .resource-card.todo-card class=("completed" if todo.finished?)
-                h4.todo-name
-                  i.material-icons.align-middle.mr-1 = todo.finished? ? "check_circle" : "radio_button_unchecked"
-                  = todo.name
-                .todo-status class=(todo.finished? ? "completed" : "pending")
-                  = todo.finished? ? "Completed" : "In Progress"
-                - if current_user && !todo.finished?
-                  = link_to project_todo_path(@project, todo), method: :patch, class: 'btn btn-outline-success btn-sm' do
-                    i.material-icons.align-middle.mr-1 check
-                    | Mark as Complete
+        = turbo_frame_tag "todos" do
+          .row
+            - @todos.each do |todo|
+              = turbo_frame_tag dom_id(todo) do
+                .col-md-12.mb-4 style="width: 100%;"
+                  .resource-card.todo-card class=("completed" if todo.finished?)
+                    h4.todo-name
+                      i.material-icons.align-middle.mr-1 = todo.finished? ? "check_circle" : "radio_button_unchecked"
+                      = todo.name
+                    .todo-status class=(todo.finished? ? "completed" : "pending")
+                      = todo.finished? ? "Completed" : "In Progress"
+                    - if current_user
+                      - if todo.finished?
+                        = button_to project_todo_path(@project, todo), method: :patch, params: { todo: { finished: false } }, class: 'btn btn-outline-secondary btn-sm', form: { data: { turbo: true } } do
+                          i.material-icons.align-middle.mr-1 undo
+                          | Mark as Incomplete
+                      - else
+                        = button_to project_todo_path(@project, todo), method: :patch, params: { todo: { finished: true } }, class: 'btn btn-outline-success btn-sm', form: { data: { turbo: true } } do
+                          i.material-icons.align-middle.mr-1 check
+                          | Mark as Complete
