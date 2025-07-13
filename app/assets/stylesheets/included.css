@@ -18,6 +18,7 @@
  *= require blog
  *= require project_resources
  *= require timetracker
+ *= require landing
 
  *= require_self
  */

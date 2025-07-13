@@ -65,7 +65,10 @@
 }
 
 .imagebg {
-  background-image: asset-url('inner-6.jpg') !important;
+  background-image: asset-url('inner-6.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
 }
 
 /* Project dropdown styles */

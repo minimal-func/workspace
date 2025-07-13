@@ -45,6 +45,9 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     confirmations: "users/confirmations"
   }
+  # Landing page
+  get 'landing', to: 'landing#index'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: "dashboards#index"
+  root to: "landing#index"
 end
