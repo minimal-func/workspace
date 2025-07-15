@@ -1,5 +1,5 @@
 class MoodsController < ApplicationController
   def index
-    @moods = current_user.moods.order(created_at: :desc)
+    @pagy, @moods = pagy(current_user.moods.order(created_at: :desc), items: 30)
   end
 end
