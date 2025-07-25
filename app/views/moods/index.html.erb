@@ -1,3 +1,5 @@
+<%= line_chart @moods.pluck(:created_at, :value) %>
+
 <table class="border--round table--alternate-row">
   <thead>
     <tr>
@@ -20,5 +22,3 @@
     <%= pagy_nav(@pagy).html_safe %>
   </div>
 <% end %>
-
-<%= line_chart @moods.pluck(:created_at, :value) %>
