@@ -6,7 +6,11 @@
                 <%= image_tag "avatar-round-1.png", class: "avatar image--xxs round" %>
                 <%= current_user.email %>
                 <% if current_user.level.present? %>
-                  <span class="badge badge-primary ml-2">Level <%= current_user.level.level_number %></span>
+                  <span class="badge-level">
+                    <i class="icon-Trophy" style="margin-right: 4px;"></i>
+                    <%= current_user.level.name %> 
+                    <small>(Lvl <%= current_user.level.level_number %>)</small>
+                  </span>
                 <% end %>
               </span>
               <div class="dropdown__container">
@@ -16,10 +20,27 @@
                       <ul class="menu-vertical">
                         <% if current_user.level.present? %>
                           <li>
-                            <span class="text-primary">
-                              <strong><%= current_user.total_points %> Points</strong>
-                            </span>
+                            <div class="points-display">
+                              <i class="icon-Star" style="margin-right: 4px;"></i>
+                              <%= current_user.total_points %> Points
+                            </div>
                           </li>
+                          <% if current_user.level.next_level %>
+                            <li>
+                              <small class="text-muted">
+                                <%= current_user.level.points_to_next_level(current_user.total_points) %> points to 
+                                <%= current_user.level.next_level.name %>
+                              </small>
+                              <% 
+                                current_points = current_user.total_points - current_user.level.points_required
+                                next_level_points = current_user.level.next_level.points_required - current_user.level.points_required
+                                progress_percentage = (current_points.to_f / next_level_points * 100).round(1)
+                              %>
+                              <div class="progress mt-1" style="height: 4px;">
+                                <div class="progress-bar" style="width: <%= progress_percentage %>%"></div>
+                              </div>
+                            </li>
+                          <% end %>
                         <% end %>
                         <li>
                           <%= link_to "My Achievements", gamification_path %>

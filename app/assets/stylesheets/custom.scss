@@ -247,12 +247,27 @@
 }
 
 .badge-level {
-  background-color: #007bff;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
   color: white;
-  font-size: 0.8rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
+  border-radius: 1rem;
   margin-left: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+  }
+  
+  small {
+    opacity: 0.8;
+    margin-left: 0.25rem;
+  }
 }
 
 .points-display {
