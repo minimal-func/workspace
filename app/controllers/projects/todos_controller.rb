@@ -11,6 +11,10 @@ module Projects
     def create
       @todo = @project.todos.build(todo_params)
       @todo.save!
+      
+      # Award points for creating a todo
+      GamificationService.award_points_for(:create_todo, current_user, @todo) if current_user
+      
       redirect_to project_todos_path(@project)
     end
 
@@ -24,7 +28,13 @@ module Projects
 
     def update
       @project = @todo.project
+      was_finished = @todo.finished?
       @todo.update(todo_params)
+
+      # Award points for completing a todo (only when marking as finished)
+      if !was_finished && @todo.finished? && current_user
+        GamificationService.award_points_for(:complete_todo, current_user, @todo)
+      end
 
       respond_to do |format|
         format.html { redirect_to project_todos_path(@project) }

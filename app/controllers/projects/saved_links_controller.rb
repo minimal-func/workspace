@@ -11,6 +11,10 @@ module Projects
     def create
       @saved_link = @project.saved_links.build(saved_link_params)
       @saved_link.save!
+      
+      # Award points for creating a saved link
+      GamificationService.award_points_for(:create_saved_link, current_user, @saved_link) if current_user
+      
       redirect_to project_saved_links_path(@project)
     end
 

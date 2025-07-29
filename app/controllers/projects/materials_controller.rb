@@ -11,6 +11,10 @@ module Projects
     def create
       @material = @project.materials.build(material_params)
       @material.save!
+      
+      # Award points for creating a material
+      GamificationService.award_points_for(:create_material, current_user, @material) if current_user
+      
       redirect_to project_materials_path(@project)
     end
 
