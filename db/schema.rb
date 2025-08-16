@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_16_175601) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -145,6 +145,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "parent_id"
+    t.boolean "is_folder", default: false, null: false
+    t.index ["parent_id", "is_folder"], name: "index_materials_on_parent_id_and_is_folder"
+    t.index ["parent_id"], name: "index_materials_on_parent_id"
     t.index ["project_id"], name: "index_materials_on_project_id"
   end
 
@@ -259,6 +263,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
   add_foreign_key "day_ratings", "users"
   add_foreign_key "energy_levels", "users"
   add_foreign_key "main_tasks", "users"
+  add_foreign_key "materials", "materials", column: "parent_id"
   add_foreign_key "materials", "projects"
   add_foreign_key "moods", "users"
   add_foreign_key "points", "users"

@@ -35,7 +35,12 @@ Rails.application.routes.draw do
       resources :posts, only: %i[index new create show edit update]
       resources :todos
       resources :saved_links
-      resources :materials
+      resources :materials do
+        collection do
+          get :new_folder
+          post :create_folder
+        end
+      end
     end
   end
 
