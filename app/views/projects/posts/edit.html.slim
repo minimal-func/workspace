@@ -12,5 +12,7 @@
     .col-sm-12
       = f.input :content, label: false, as: :rich_text_area, input_html: { data: { embeds_path: embeds_path(@post, format: :json) } }
     .col-sm-12
+      = f.input :public, as: :boolean, label: "Make this post public", wrapper_html: { class: 'form-check' }
+    .col-sm-12
       = f.button :submit, "Update Post", class: 'button'
       = link_to "Cancel", project_post_path(@project, @post), class: 'btn btn-outline-secondary ml-2'
