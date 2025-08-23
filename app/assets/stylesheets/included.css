@@ -19,6 +19,7 @@
  *= require project_resources
  *= require timetracker
  *= require landing
+ *= require simple_form_fix
 
  *= require_self
  */

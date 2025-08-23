@@ -56,6 +56,17 @@ SimpleForm.setup do |config|
     # b.use :full_error, wrap_with: { tag: :span, class: :error }
   end
 
+  # Bootstrap 4 compatible boolean wrapper
+  config.wrappers :boolean, tag: 'div', class: 'form-check', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
+    b.use :html5
+    b.wrapper tag: 'div', class: 'form-check' do |ba|
+      ba.use :input, class: 'form-check-input'
+      ba.use :label, class: 'form-check-label'
+    end
+    b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+    b.use :error, wrap_with: { tag: 'div', class: 'invalid-feedback d-block' }
+  end
+
   # The default wrapper to be used by the FormBuilder.
   config.default_wrapper = :default
 
@@ -63,7 +74,7 @@ SimpleForm.setup do |config|
   # Defaults to :nested for bootstrap config.
   #   inline: input + label
   #   nested: label > input
-  config.boolean_style = :inline
+  config.boolean_style = :nested
 
   # Default class for buttons
   config.button_class = 'btn'
@@ -159,7 +170,7 @@ SimpleForm.setup do |config|
   # config.input_class = nil
 
   # Define the default class of the input wrapper of the boolean input.
-  config.boolean_label_class = 'checkbox'
+  config.boolean_label_class = 'form-check-label'
 
   # Defines if the default input wrapper class should be included in radio
   # collection wrappers.

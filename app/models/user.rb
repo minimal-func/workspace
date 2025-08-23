@@ -63,8 +63,14 @@ class User < ApplicationRecord
   end
 
   def can_update_resource?(resource)
-    return false unless resource&.project
+    project = if resource.is_a?(Project)
+                resource
+              else
+                resource.project
+              end
 
-    resource.project.user == self
+    return false unless project
+
+   project.user == self
   end
 end

@@ -21,7 +21,7 @@ module Projects
     end
 
     def index
-      if current_user && can_update_resource?(@project)
+      if current_user&.can_update_resource?(@project)
         # Show all posts to project owner/collaborators
         @posts = @project.posts.with_rich_text_content_and_embeds
       else
@@ -34,7 +34,7 @@ module Projects
       @project = @post.project
       
       # Check if user can view private posts
-      unless @post.public || (current_user && can_update_resource?(@project))
+      unless @post.public || (current_user && current_user.can_update_resource?(@project))
         redirect_to project_posts_path(@project), alert: 'You do not have permission to view this private post.'
         return
       end
@@ -44,7 +44,7 @@ module Projects
     end
 
     def update
-      if can_update_resource?(@post) && @post.update(post_params)
+      if current_user&.can_update_resource?(@post) && @post.update(post_params)
         redirect_to project_post_path(@project, @post), notice: 'Post was successfully updated.'
       else
         render :edit
