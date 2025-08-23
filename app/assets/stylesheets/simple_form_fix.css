@@ -1,15 +1,5 @@
 /* Fix for SimpleForm boolean checkboxes being hidden and styled by theme.css */
 
-/* Override the theme.css aggressive styling for form-check inputs */
-.form-check-input[type="checkbox"] {
-  opacity: 1 !important;
-  height: 1em !important;
-  width: 1em !important;
-  position: relative !important;
-  display: inline-block !important;
-  visibility: visible !important;
-}
-
 /* Reset theme.css label styling specifically for Bootstrap form-check labels */
 .form-check .form-check-label {
   width: auto !important;
@@ -94,4 +84,15 @@
 .simple_form .form-check .form-check-label {
   display: inline !important;
   cursor: pointer !important;
+}
+
+/* Ensure mood selection labels remain clickable and properly associated */
+.input-radio--innerlabel label {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure hidden radio inputs can still receive clicks from their labels */
+.input-radio input[type="radio"] {
+  pointer-events: auto !important;
 }
