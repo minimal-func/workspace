@@ -1,4 +1,5 @@
 class Point < ApplicationRecord
+  include Notifiable
   belongs_to :user
   belongs_to :pointable, polymorphic: true, optional: true
 

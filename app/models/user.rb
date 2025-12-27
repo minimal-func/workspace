@@ -23,6 +23,7 @@ class User < ApplicationRecord
   has_one :main_task
 
   has_many :projects
+  has_many :notifications, dependent: :destroy
 
   # Gamification associations
   has_many :points, dependent: :destroy
@@ -47,7 +48,13 @@ class User < ApplicationRecord
 
   def update_level
     new_level = Level.for_points(total_points)
-    update(level: new_level) if new_level && level != new_level
+    if new_level && level != new_level
+      update(level: new_level)
+      notifications.create!(
+        message: "Congratulations! You've reached Level #{new_level.level_number}: #{new_level.name}!",
+        notifiable: new_level
+      )
+    end
   end
 
   def check_achievements

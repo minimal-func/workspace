@@ -33,4 +33,22 @@ RSpec.describe User, type: :model do
       end
     end
   end
+  describe "gamification" do
+    let(:user) { FactoryBot.create :user }
+
+    it "creates a notification when a user levels up" do
+      level1 = FactoryBot.create(:level, level_number: 1, points_required: 0, name: "Beginner")
+      FactoryBot.create(:level, level_number: 2, points_required: 100, name: "Novice")
+      
+      user.update(level: level1, total_points: 0)
+
+      expect {
+        user.award_points(100, "large_bonus")
+      }.to change { user.notifications.count }.by(2) # 1 for points, 1 for level up
+
+      level_notification = user.notifications.find_by("message LIKE ?", "%reached Level 2%")
+      expect(level_notification).to be_present
+      expect(level_notification.message).to include("Novice")
+    end
+  end
 end

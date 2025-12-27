@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  include Notifiable
   belongs_to :project
 
   has_rich_text :content

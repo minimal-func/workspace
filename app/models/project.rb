@@ -1,4 +1,5 @@
 class Project < ApplicationRecord
+  include Notifiable
   validates :title, presence: true, allow_blank: false
 
   belongs_to :user

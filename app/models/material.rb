@@ -1,4 +1,5 @@
 class Material < ApplicationRecord
+  include Notifiable
   validates :title, presence: true
   validate :file_attachment_for_non_folders
 

@@ -3,6 +3,41 @@
       <ul class="menu-horizontal">
           <li class="dropdown">
               <span class="dropdown__trigger">
+                <i class="icon-Bell"></i>
+                <% if current_user.notifications.unread.any? %>
+                  <span class="badge badge-danger" style="position: absolute; top: -5px; right: -5px; padding: 2px 4px; font-size: 10px;"><%= current_user.notifications.unread.count %></span>
+                <% end %>
+              </span>
+              <div class="dropdown__container" style="width: 300px;">
+                <div class="container">
+                  <div class="row">
+                    <div class="dropdown__content col-lg-12">
+                      <ul class="menu-vertical">
+                        <% if current_user.notifications.any? %>
+                          <% current_user.notifications.recent.each do |notification| %>
+                            <li style="<%= 'background-color: #f8f9fa;' unless notification.read? %>">
+                              <%= link_to notification_path(notification), method: :patch, class: "notification-item" do %>
+                                <div class="notification-message <%= 'font-weight-bold' unless notification.read? %>">
+                                  <%= notification.message %>
+                                </div>
+                                <small class="text-muted"><%= time_ago_in_words(notification.created_at) %> ago</small>
+                              <% end %>
+                            </li>
+                          <% end %>
+                          <li class="text-center pt-2">
+                            <%= link_to "View all notifications", notifications_path, class: "small" %>
+                          </li>
+                        <% else %>
+                          <li class="text-center">No new notifications</li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </li>
+          <li class="dropdown">
+              <span class="dropdown__trigger">
                 <%= image_tag "avatar-round-1.png", class: "avatar image--xxs round" %>
                 <%= current_user.email %>
                 <% if current_user.level.present? %>

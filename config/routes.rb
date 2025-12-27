@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :notifications, only: [:index, :update]
   resources :dashboards
 
   resources :reflections, only: [:index]
