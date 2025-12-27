@@ -32,7 +32,13 @@ Rails.application.routes.draw do
 
   scope module: :projects do
     resources :projects, only: [] do
-      resources :posts, only: %i[index new create show edit update]
+      resources :posts, only: %i[index new create show edit update] do
+        resources :images, only: [:create], controller: 'post_images' do
+          collection do
+            post :fetch_url
+          end
+        end
+      end
       resources :todos
       resources :saved_links
       resources :materials do

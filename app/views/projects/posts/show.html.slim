@@ -15,8 +15,12 @@
         .blog-post-featured-image.mb-4
           = image_tag @post.featured_image, class: 'img-fluid rounded w-100'
 
-      .blog-post-content.trix-content.mb-5
-        =h @post.content
+      .blog-post-content.mb-5
+        - if @post.body_json.present?
+          = render_editorjs_blocks(@post.body_json)
+        - else
+          .trix-content
+            =h @post.content
 
       .blog-post-navigation.d-flex.justify-content-between.mt-5.pt-4.border-top
         = link_to project_posts_path(@project), class: 'btn btn-outline-primary' do
