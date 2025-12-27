@@ -9,14 +9,14 @@ module Notifiable
   private
 
   def creation_notification
-    generation_notification('created')
+    generate_notification('created')
   end
 
   def update_notification
-    generation_notification('updated')
+    generate_notification('updated')
   end
 
-  def generation_notification(action)
+  def generate_notification(action)
     user = notification_recipient
     return unless user
 
