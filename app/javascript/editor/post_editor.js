@@ -12,6 +12,7 @@ import Warning from '@editorjs/warning';
 import Checklist from '@editorjs/checklist';
 import Delimiter from '@editorjs/delimiter';
 import Raw from '@editorjs/raw';
+import Embed from '@editorjs/embed';
 
 export default class PostEditor {
   constructor(containerId, initialData, options = {}) {
@@ -27,55 +28,58 @@ export default class PostEditor {
   init() {
     const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
     
+    const tools = {
+      header: {
+        class: Header,
+        inlineToolbar: ['link']
+      },
+      list: {
+        class: List,
+        inlineToolbar: true,
+        config: {
+          defaultStyle: 'unordered'
+        }
+      },
+      checklist: {
+        class: Checklist,
+        inlineToolbar: true
+      },
+      quote: {
+        class: Quote,
+        inlineToolbar: true,
+        config: {
+          quotePlaceholder: 'Enter a quote',
+          captionPlaceholder: 'Quote\'s author',
+        },
+      },
+      warning: Warning,
+      marker: Marker,
+      code: Code,
+      inlineCode: InlineCode,
+      delimiter: Delimiter,
+      linkTool: LinkTool,
+      table: Table,
+      raw: Raw,
+      embed: Embed,
+      image: {
+        class: Image,
+        config: {
+          endpoints: {
+            byFile: this.projectId ? `/projects/${this.projectId}/posts/${this.postId || 'new'}/images` : '/notifications/images', // Placeholder for non-project uploads
+            byUrl: this.projectId ? `/projects/${this.projectId}/posts/${this.postId || 'new'}/images/fetch_url` : '/notifications/images/fetch_url',
+          },
+          additionalRequestHeaders: csrfToken ? {
+            'X-CSRF-Token': csrfToken
+          } : {}
+        }
+      }
+    };
+    
     this.editor = new EditorJS({
       holder: this.containerId,
       data: this.initialData,
       placeholder: 'Let`s write an awesome story!',
-      tools: {
-        header: {
-          class: Header,
-          inlineToolbar: ['link']
-        },
-        list: {
-          class: List,
-          inlineToolbar: true,
-          config: {
-            defaultStyle: 'unordered'
-          }
-        },
-        checklist: {
-          class: Checklist,
-          inlineToolbar: true
-        },
-        quote: {
-          class: Quote,
-          inlineToolbar: true,
-          config: {
-            quotePlaceholder: 'Enter a quote',
-            captionPlaceholder: 'Quote\'s author',
-          },
-        },
-        warning: Warning,
-        marker: Marker,
-        code: Code,
-        inlineCode: InlineCode,
-        delimiter: Delimiter,
-        linkTool: LinkTool,
-        table: Table,
-        raw: Raw,
-        image: {
-          class: Image,
-          config: {
-            endpoints: {
-              byFile: `/projects/${this.projectId}/posts/${this.postId || 'new'}/images`,
-              byUrl: `/projects/${this.projectId}/posts/${this.postId || 'new'}/images/fetch_url`,
-            },
-            additionalRequestHeaders: csrfToken ? {
-              'X-CSRF-Token': csrfToken
-            } : {}
-          }
-        }
-      },
+      tools: tools,
       onChange: async () => {
         try {
           const data = await this.editor.save();

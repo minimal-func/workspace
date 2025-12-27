@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :notifications, only: [:index, :update]
+  resources :notifications, only: [:index, :update] do
+    collection do
+      post :images, controller: 'notifications/images', action: 'create'
+      post 'images/fetch_url', controller: 'notifications/images', action: 'fetch_url'
+    end
+  end
   resources :dashboards
 
   resources :reflections, only: [:index]

@@ -53,9 +53,12 @@
         = f.simple_fields_for :today_daily_gratitudes do |daily_gratitude|
           = daily_gratitude.input :content, placeholder: "Today I am grateful for ...", label: "Today I am grateful for:", required: true, input_html: { rows: 2 }
 
-      .col-sm-12
+      .col-sm-12.mb-4
         = f.simple_fields_for :today_reflections do |reflection|
-          = reflection.input :content, as: :rich_text_area, label: "I didn't have time today but tomorrow I will...", required: true, input_html: { data: { embeds_path: embeds_path(reflection.object, format: :json) } }
+          label I didn't have time today but tomorrow I will...
+          #reflection-editor data-reflection-id=reflection.object.id
+          = reflection.input :body_json, as: :hidden, input_html: { id: 'reflection_body_json', value: reflection.object.body_json.to_json }
+          / = reflection.input :content, as: :rich_text_area, label: "I didn't have time today but tomorrow I will...", required: true, input_html: { data: { embeds_path: embeds_path(reflection.object, format: :json) } }
 
       .col-sm-12
         = f.button :submit, "Save my day"

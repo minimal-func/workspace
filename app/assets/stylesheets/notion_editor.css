@@ -1,4 +1,4 @@
-#post-editor {
+#post-editor, #reflection-editor {
   background: white;
   padding: 40px;
   min-height: 400px;
@@ -86,4 +86,35 @@
 .checklist-item--checked .checklist-item__text {
   text-decoration: line-through;
   color: #888;
+}
+
+.ce-block--stretched .ce-block__content {
+  max-width: 100%;
+}
+
+.embed-wrapper {
+  margin: 2rem 0;
+}
+
+.embed-container iframe {
+  border-radius: 8px;
+}
+
+figure.stretched img {
+  width: 100%;
+}
+
+figure.with-border img {
+  border: 1px solid #eee;
+}
+
+figure.with-background {
+  background: #f8f9fa;
+  padding: 20px;
+  text-align: center;
+}
+
+figure.with-background img {
+  max-width: 60%;
+  margin: 0 auto;
 }

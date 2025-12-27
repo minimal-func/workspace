@@ -280,7 +280,41 @@ function initPostEditor() {
   if (form) {
     form.addEventListener('submit', async (e) => {
       const data = await editor.save();
-      hiddenInput.value = JSON.stringify(data);
+      if (hiddenInput) {
+        hiddenInput.value = JSON.stringify(data);
+      }
+    });
+  }
+}
+
+function initReflectionEditor() {
+  const editorContainer = document.getElementById('reflection-editor');
+  if (!editorContainer || editorContainer.dataset.editorInitialized) return;
+  editorContainer.dataset.editorInitialized = "true";
+
+  const hiddenInput = document.getElementById('reflection_body_json');
+  let initialData = {};
+  try {
+    initialData = (hiddenInput && hiddenInput.value && hiddenInput.value !== 'null' && hiddenInput.value !== '') ? JSON.parse(hiddenInput.value) : {};
+  } catch (e) {
+    console.error('Error parsing initial data', e);
+  }
+
+  const editor = new PostEditor('reflection-editor', initialData, {
+    onChange: (data) => {
+      if (hiddenInput) {
+        hiddenInput.value = JSON.stringify(data);
+      }
+    }
+  });
+
+  const form = editorContainer.closest('form');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      const data = await editor.save();
+      if (hiddenInput) {
+        hiddenInput.value = JSON.stringify(data);
+      }
     });
   }
 }
@@ -290,6 +324,7 @@ function initApp() {
   initTrixEditor();
   initChatAndEmbeds();
   initPostEditor();
+  initReflectionEditor();
 }
 
 document.addEventListener('turbo:load', initApp);
