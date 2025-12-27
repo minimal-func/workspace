@@ -55,10 +55,35 @@
 
 .checklist-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 0.5rem;
+  font-size: 1.1rem;
 }
 
-.checklist-item input[type="checkbox"] {
-  margin-right: 0.5rem;
+.checklist-item__checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 10px;
+  margin-top: 4px;
+  flex-shrink: 0;
+  font-size: 14px;
+  color: transparent;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.checklist-item--checked .checklist-item__checkbox {
+  background: #388ae5;
+  border-color: #388ae5;
+  color: white;
+}
+
+.checklist-item--checked .checklist-item__text {
+  text-decoration: line-through;
+  color: #888;
 }

@@ -14,29 +14,49 @@ module PostsHelper
 
   private
 
+  def render_list_items(items)
+    items.map do |item|
+      if item.is_a?(Hash)
+        content_tag(:li) do
+          content = item["content"].to_s.html_safe
+          if item["items"].present?
+            content += content_tag(:ul) do
+              render_list_items(item["items"])
+            end
+          end
+          content
+        end
+      else
+        content_tag(:li, item.to_s.html_safe)
+      end
+    end.join.html_safe
+  end
+
   def render_block(block)
     case block["type"]
     when "header"
-      content_tag("h#{block['data']['level']}", block["data"]["text"].html_safe)
+      content_tag("h#{block['data']['level']}", block["data"]["text"].to_s.html_safe)
     when "paragraph"
-      content_tag(:p, block["data"]["text"].html_safe)
+      content_tag(:p, block["data"]["text"].to_s.html_safe)
     when "list"
       list_type = block["data"]["style"] == "ordered" ? :ol : :ul
       content_tag(list_type) do
-        block["data"]["items"].map { |item| content_tag(:li, item.html_safe) }.join.html_safe
+        render_list_items(block["data"]["items"])
       end
     when "checklist"
       content_tag(:div, class: 'editorjs-checklist') do
         block["data"]["items"].map do |item|
-          content_tag(:div, class: 'checklist-item') do
-            check_box_tag(nil, nil, item["checked"], disabled: true) + " " + item["text"].html_safe
+          content_tag(:div, class: "checklist-item #{item['checked'] ? 'checklist-item--checked' : ''}") do
+            content_tag(:span, class: 'checklist-item__checkbox') do
+              item["checked"] ? "✓" : ""
+            end + " " + content_tag(:span, item["text"].to_s.html_safe, class: 'checklist-item__text')
           end
         end.join.html_safe
       end
     when "quote"
       content_tag(:figure) do
-        content_tag(:blockquote, block["data"]["text"].html_safe) +
-          content_tag(:figcaption, block["data"]["caption"].html_safe)
+        content_tag(:blockquote, block["data"]["text"].to_s.html_safe) +
+          content_tag(:figcaption, block["data"]["caption"].to_s.html_safe)
       end
     when "code"
       content_tag(:pre) do
@@ -52,14 +72,14 @@ module PostsHelper
       
       content_tag(:figure, class: classes.join(" ")) do
         image_tag(url, class: 'img-fluid') +
-          (caption.present? ? content_tag(:figcaption, caption.html_safe) : "")
+          (caption.present? ? content_tag(:figcaption, caption.to_s.html_safe) : "")
       end
     when "table"
       content_tag(:table, class: 'table') do
         content_tag(:tbody) do
           block["data"]["content"].map do |row|
             content_tag(:tr) do
-              row.map { |cell| content_tag(:td, cell.html_safe) }.join.html_safe
+              row.map { |cell| content_tag(:td, cell.to_s.html_safe) }.join.html_safe
             end
           end.join.html_safe
         end
