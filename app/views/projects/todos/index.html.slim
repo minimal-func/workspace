@@ -1,43 +1,54 @@
 .container.resource-index
-  .row.mb-4
-    .col-md-10.offset-md-1.col-sm-12.px-sm-2
-      .d-flex.justify-content-between.align-items-center.flex-wrap
-        h1.resource-index-title Tasks for #{@project.title}
+  .row.mb-5
+    .col-md-10.offset-md-1
+      .d-flex.justify-content-between.align-items-end.border-bottom.pb-3
+        div
+          h1.resource-index-title.display-4.font-weight-bold.mb-0 Tasks
+          p.text-muted.mb-0 Action items for #{@project.title}
         - if current_user
-          = link_to new_project_todo_path(@project), class: 'btn btn-primary' do
+          = link_to new_project_todo_path(@project), class: 'btn btn-primary rounded-pill px-4' do
             i.material-icons.align-middle.mr-1 add_task
             | New Task
 
   .row
-    .col-md-10.offset-md-1.col-sm-12.col-12.px-sm-2
+    .col-md-10.offset-md-1
       - if @todos.empty?
-        .empty-state
-          .empty-state-icon
-            i.material-icons assignment_late
-          h3 No tasks yet
-          p.empty-state-text Create tasks to track your progress on this project.
+        .text-center.py-5.bg-light.rounded-lg.shadow-sm
+          i.material-icons.display-1.text-muted.mb-3 assignment_late
+          h3.text-secondary No tasks yet
+          p.text-muted.mb-4 Create tasks to track your progress on this project.
           - if current_user
-            = link_to new_project_todo_path(@project), class: 'btn btn-outline-primary' do
+            = link_to new_project_todo_path(@project), class: 'btn btn-primary rounded-pill' do
               i.material-icons.align-middle.mr-1 add_task
               | Add Your First Task
       - else
         = turbo_frame_tag "todos" do
-          .row.flex-direction-column
+          .row
             - @todos.each do |todo|
-              = turbo_frame_tag dom_id(todo) do
-                .col-12.col-sm-12.col-md-12.mb-4
-                  .resource-card.todo-card class=("completed" if todo.finished?)
-                    h4.todo-name
-                      i.material-icons.align-middle.mr-1 = todo.finished? ? "check_circle" : "radio_button_unchecked"
-                      = todo.name
-                    .todo-status class=(todo.finished? ? "completed" : "pending")
-                      = todo.finished? ? "Completed" : "In Progress"
-                    - if current_user
-                      - if todo.finished?
-                        = button_to project_todo_path(@project, todo), method: :patch, params: { todo: { finished: false } }, class: 'btn btn-outline-secondary btn-sm todo-action-btn', form: { data: { turbo: true } } do
-                          i.material-icons.align-middle.mr-1 undo
-                          | Mark as Incomplete
-                      - else
-                        = button_to project_todo_path(@project, todo), method: :patch, params: { todo: { finished: true } }, class: 'btn btn-outline-success btn-sm todo-action-btn', form: { data: { turbo: true } } do
-                          i.material-icons.align-middle.mr-1 check
-                          | Mark as Complete
+              .col-12.mb-3
+                = turbo_frame_tag dom_id(todo) do
+                  .card.border-0.shadow-sm.rounded-lg.todo-card-modern class=(todo.finished? ? 'bg-light opacity-75' : '')
+                    .card-body.p-3
+                      .d-flex.align-items-center.justify-content-between
+                        .d-flex.align-items-center
+                          - if current_user
+                            - if todo.finished?
+                              = button_to project_todo_path(@project, todo), method: :patch, params: { todo: { finished: false } }, class: 'btn btn-link p-0 mr-3 text-success', form: { data: { turbo: true } } do
+                                i.material-icons.display-4 check_circle
+                            - else
+                              = button_to project_todo_path(@project, todo), method: :patch, params: { todo: { finished: true } }, class: 'btn btn-link p-0 mr-3 text-muted', form: { data: { turbo: true } } do
+                                i.material-icons.display-4 radio_button_unchecked
+                          - else
+                            i.material-icons.mr-3 class=(todo.finished? ? 'text-success' : 'text-muted')
+                              = todo.finished? ? 'check_circle' : 'radio_button_unchecked'
+                          
+                          div
+                            h4.h5.mb-0 class=(todo.finished? ? 'text-muted text-decoration-line-through' : 'font-weight-bold')
+                              = todo.name
+                            - if todo.finished?
+                              span.badge.badge-pill.badge-success-light.px-2.py-1.small.mt-1 Completed
+                        
+                        .actions
+                          - if current_user
+                            = link_to edit_project_todo_path(@project, todo), class: 'btn btn-link text-muted p-0', title: 'Edit Task' do
+                              i.material-icons edit

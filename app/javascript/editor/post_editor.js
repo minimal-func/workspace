@@ -31,7 +31,10 @@ export default class PostEditor {
     const tools = {
       header: {
         class: Header,
-        inlineToolbar: ['link']
+        inlineToolbar: true
+      },
+      paragraph: {
+        inlineToolbar: true
       },
       list: {
         class: List,
@@ -52,13 +55,24 @@ export default class PostEditor {
           captionPlaceholder: 'Quote\'s author',
         },
       },
-      warning: Warning,
+      warning: {
+        class: Warning,
+        inlineToolbar: true
+      },
       marker: Marker,
       code: Code,
       inlineCode: InlineCode,
       delimiter: Delimiter,
-      linkTool: LinkTool,
-      table: Table,
+      linkTool: {
+        class: LinkTool,
+        config: {
+          endpoint: this.projectId ? `/projects/${this.projectId}/link_metadata/fetch` : '/notifications/link_metadata/fetch',
+        }
+      },
+      table: {
+        class: Table,
+        inlineToolbar: true
+      },
       raw: Raw,
       embed: Embed,
       image: {

@@ -1,44 +1,52 @@
 .container.blog-index
-  .row.mb-4
+  .row.mb-5
     .col-md-10.offset-md-1
-      .d-flex.justify-content-between.align-items-center
-        h1.blog-index-title My posts on #{@project.title}
+      .d-flex.justify-content-between.align-items-end.border-bottom.pb-3
+        div
+          h1.blog-index-title.display-4.font-weight-bold My posts
+          p.text-muted.mb-0 Thoughts and updates on #{@project.title}
         - if current_user
-          = link_to new_project_post_path(@project), class: 'btn btn-primary' do
+          = link_to new_project_post_path(@project), class: 'btn btn-primary rounded-pill px-4' do
             i.material-icons.align-middle.mr-1 add
             | New Post
 
   .row
     .col-md-10.offset-md-1
       - if @posts.empty?
-        .alert.alert-info.text-center
-          p No posts yet. 
+        .text-center.py-5.bg-light.rounded-lg.shadow-sm
+          i.material-icons.display-1.text-muted.mb-3 post_add
+          h3.text-secondary No posts yet
+          p.text-muted.mb-4 Start sharing your thoughts and progress.
           - if current_user
-            p 
-              = link_to 'Create your first post', new_project_post_path(@project), class: 'btn btn-outline-primary mt-2'
+            = link_to 'Create your first post', new_project_post_path(@project), class: 'btn btn-primary rounded-pill'
       - else
         .row
           - @posts.each do |post|
-            .col-md-6.mb-4
-              .card.blog-card.h-100
+            .col-md-6.mb-5
+              article.card.blog-card.h-100.border-0.shadow-sm.rounded-lg
                 - if post.featured_image.present?
-                  = image_tag post.featured_image, class: 'card-img-top blog-card-image'
-                .card-body
-                  h4.card-title= post.title
-                  .card-text.text-muted.small.mb-2
-                    span.mr-2
-                      i.material-icons.align-middle.mr-1 calendar_today
+                  = link_to project_post_path(@project, post) do
+                    = image_tag post.featured_image, class: 'card-img-top blog-card-image rounded-top'
+                .card-body.p-4
+                  .mb-3
+                    span.badge.badge-pill.badge-light.text-muted.px-3.py-2
+                      i.material-icons.align-middle.mr-1 style='font-size: 14px;' calendar_today
                       = post.created_at.strftime("%B %d, %Y")
-                  .card-text.blog-excerpt.mb-3
+                  
+                  h3.card-title.h4.font-weight-bold.mb-3
+                    = link_to post.title, project_post_path(@project, post), class: 'text-dark text-decoration-none'
+                  
+                  .card-text.blog-excerpt.text-secondary.mb-4
                     - if post.respond_to?(:excerpt) && post.excerpt.present?
                       = post.excerpt
                     - else
-                      = truncate(strip_tags(post.content.to_s), length: 150)
-                  .d-flex.flex-wrap.gap-2
-                    = link_to project_post_path(@project, post), class: 'btn btn-outline-primary btn-sm' do
-                      | Read more
+                      = truncate(strip_tags(post.content.to_s), length: 140)
+                  
+                  .d-flex.justify-content-between.align-items-center.mt-auto
+                    = link_to project_post_path(@project, post), class: 'font-weight-bold text-primary text-decoration-none' do
+                      | Read article
                       i.material-icons.align-middle.ml-1 arrow_forward
+                    
                     - if current_user && current_user.can_update_resource?(post)
-                      = link_to edit_project_post_path(@project, post), class: 'btn btn-outline-secondary btn-sm' do
-                        i.material-icons.align-middle.mr-1 edit
-                        | Edit
+                      = link_to edit_project_post_path(@project, post), class: 'btn btn-link text-muted p-0', title: 'Edit Post' do
+                        i.material-icons.align-middle edit

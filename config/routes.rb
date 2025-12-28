@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     collection do
       post :images, controller: 'notifications/images', action: 'create'
       post 'images/fetch_url', controller: 'notifications/images', action: 'fetch_url'
+      get 'link_metadata/fetch', controller: 'projects/link_metadata', action: 'fetch'
     end
   end
   resources :dashboards
@@ -38,6 +39,11 @@ Rails.application.routes.draw do
 
   scope module: :projects do
     resources :projects, only: [] do
+      resources :link_metadata, only: [] do
+        collection do
+          get :fetch
+        end
+      end
       resources :posts, only: %i[index new create show edit update] do
         resources :images, only: [:create], controller: 'post_images' do
           collection do

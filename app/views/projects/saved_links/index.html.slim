@@ -1,41 +1,45 @@
 .container.resource-index
-  .row.mb-4
+  .row.mb-5
     .col-md-10.offset-md-1
-      .d-flex.justify-content-between.align-items-center
-        h1.resource-index-title Useful Links on #{@project.title}
+      .d-flex.justify-content-between.align-items-end.border-bottom.pb-3
+        div
+          h1.resource-index-title.display-4.font-weight-bold.mb-0 Saved Links
+          p.text-muted.mb-0 Curated resources for #{@project.title}
         - if current_user
-          = link_to new_project_saved_link_path(@project), class: 'btn btn-primary' do
+          = link_to new_project_saved_link_path(@project), class: 'btn btn-primary rounded-pill px-4' do
             i.material-icons.align-middle.mr-1 add
             | New Link
 
   .row
     .col-md-10.offset-md-1
       - if @saved_links.empty?
-        .empty-state
-          .empty-state-icon
-            i.material-icons link_off
-          h3 No saved links yet
-          p.empty-state-text Save useful links related to this project for quick access.
+        .text-center.py-5.bg-light.rounded-lg.shadow-sm
+          i.material-icons.display-1.text-muted.mb-3 link_off
+          h3.text-secondary No saved links yet
+          p.text-muted.mb-4 Keep all your project references in one place.
           - if current_user
-            = link_to new_project_saved_link_path(@project), class: 'btn btn-outline-primary' do
+            = link_to new_project_saved_link_path(@project), class: 'btn btn-primary rounded-pill' do
               i.material-icons.align-middle.mr-1 add
               | Add Your First Link
       - else
         .row
           - @saved_links.each do |saved_link|
-            .col-md-6.col-sm-12.mb-4
-              .resource-card.link-card
-                h4.link-title
-                  i.material-icons.link-icon link
-                  = saved_link.title
-                .link-url
-                  = truncate(saved_link.url, length: 50)
-                .d-flex.flex-wrap.gap-2.mt-2
-                  = link_to saved_link.url, target: :_blank, class: 'btn btn-outline-primary btn-sm' do
-                    | Visit Link
-                    i.material-icons.align-middle.ml-1 open_in_new
-
-                  - if current_user.can_update_resource?(saved_link)
-                    = link_to edit_project_saved_link_path(@project, saved_link), class: 'btn btn-outline-secondary btn-sm' do
-                      i.material-icons.align-middle.mr-1 edit
-                      | Edit
+            .col-md-6.mb-4
+              .card.h-100.border-0.shadow-sm.rounded-lg.link-card-modern
+                .card-body.p-4
+                  .d-flex.align-items-start.mb-3
+                    .bg-light.rounded.p-3.mr-3
+                      i.material-icons.text-primary link
+                    div
+                      h4.h5.font-weight-bold.mb-1 = saved_link.title
+                      .small.text-muted.text-break = truncate(saved_link.url, length: 60)
+                
+                .card-footer.bg-white.border-0.px-4.pb-4.pt-0
+                  .d-flex.justify-content-between.align-items-center
+                    = link_to saved_link.url, target: :_blank, class: 'btn btn-outline-primary btn-sm rounded-pill px-3' do
+                      | Visit Link
+                      i.material-icons.align-middle.ml-1.font-size-sm open_in_new
+                    
+                    - if current_user.can_update_resource?(saved_link)
+                      = link_to edit_project_saved_link_path(@project, saved_link), class: 'btn btn-link text-muted p-0', title: 'Edit Link' do
+                        i.material-icons.align-middle edit
