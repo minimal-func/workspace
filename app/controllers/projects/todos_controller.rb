@@ -1,11 +1,15 @@
 module Projects
   class TodosController < ApplicationController
-    before_action :authenticate_user!, only: %i[new create index update]
+    before_action :authenticate_user!
     before_action :set_project, only: %i[new create index]
-    before_action :set_todo, only: %i[update show]
+    before_action :set_todo, only: %i[update show edit destroy]
 
     def new
       @todo = @project.todos.build
+    end
+
+    def edit
+      @project = @todo.project
     end
 
     def create
@@ -40,6 +44,12 @@ module Projects
         format.html { redirect_to project_todos_path(@project) }
         format.turbo_stream
       end
+    end
+
+    def destroy
+      @project = @todo.project
+      @todo.destroy
+      redirect_to project_todos_path(@project)
     end
 
     private

@@ -1,8 +1,6 @@
-.container.mt-4
-  .row
-    .col-md-8.offset-md-2
-      .card
-        .card-header
-          h2.mb-0 Edit Task
-        .card-body
-          = render 'form'
+= turbo_frame_tag dom_id(@todo) do
+  .card.border-0.shadow-sm.rounded-lg.mb-3
+    .card-header.bg-white.border-0.pt-4.px-4
+      h3.h5.mb-0.font-weight-bold Edit Task
+    .card-body.p-4
+      = render 'form'
