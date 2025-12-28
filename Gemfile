@@ -43,6 +43,7 @@ group :test do
   gem "timecop"
   gem "webmock", require: false
   gem "selenium-webdriver"
+  gem "capybara"
   gem 'rails-controller-testing'
 end
 
