@@ -55,6 +55,17 @@ mr.dropdowns = {
       // Initial positioning
       mr.dropdowns.repositionDropdowns();
 
+      // Add containerMeasure if it doesn't exist
+      if (!document.querySelector('.containerMeasure')) {
+        const measure = document.createElement('div');
+        measure.className = 'container containerMeasure';
+        measure.style.opacity = '0';
+        measure.style.pointerEvents = 'none';
+        measure.style.position = 'absolute';
+        measure.style.top = '0';
+        document.body.appendChild(measure);
+      }
+
       // Handle RTL layouts if needed
       if (document.querySelector('body[data-direction="rtl"]')) {
         mr.dropdowns.repositionDropdownsRtl();
@@ -86,18 +97,18 @@ mr.dropdowns = {
       container.style.left = (menuItem - containerOffset) + 'px';
 
       // Position dropdown content
-      const dropdown = container.querySelector('.dropdown__content');
-      if (dropdown) {
-        dropdown.style.left = '';
+      const dropdownContent = container.querySelector('.dropdown__content');
+      if (dropdownContent) {
+        dropdownContent.style.left = '';
 
-        const offset = dropdown.getBoundingClientRect().left;
-        const width = dropdown.offsetWidth;
+        const offset = dropdownContent.getBoundingClientRect().left;
+        const width = dropdownContent.offsetWidth;
         const offsetRight = offset + width;
         const winWidth = window.innerWidth;
         const leftCorrect = containerMeasure ? (containerMeasure.offsetWidth || 0) - width : 0;
 
         if (offsetRight > winWidth) {
-          dropdown.style.left = leftCorrect + 'px';
+          dropdownContent.style.left = leftCorrect + 'px';
         }
       }
     });
@@ -123,18 +134,18 @@ mr.dropdowns = {
       container.style.right = (menuItem - containerOffset) + 'px';
 
       // Position dropdown content for RTL
-      const dropdown = container.querySelector('.dropdown__content');
-      if (dropdown) {
-        dropdown.style.right = '';
+      const dropdownContentRtl = container.querySelector('.dropdown__content');
+      if (dropdownContentRtl) {
+        dropdownContentRtl.style.right = '';
 
-        const offset = dropdown.getBoundingClientRect().left;
-        const width = dropdown.offsetWidth;
+        const offset = dropdownContentRtl.getBoundingClientRect().left;
+        const width = dropdownContentRtl.offsetWidth;
         const offsetRight = offset + width;
         const winWidth = window.innerWidth;
         const rightCorrect = containerMeasure ? (containerMeasure.offsetWidth || 0) - width : 0;
 
         if (offsetRight > winWidth) {
-          dropdown.style.right = rightCorrect + 'px';
+          dropdownContentRtl.style.right = rightCorrect + 'px';
         }
       }
     });
