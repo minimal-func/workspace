@@ -11,36 +11,36 @@ mr.dropdowns = {
 
   // Function to run when the document is ready
   documentReady: function() {
-    // Only initialize once
+    // Only initialize once for the initial load if not using Turbo
+    // But with Turbo, we want to ensure listeners are set up
     if (!mr.dropdowns.done) {
-      // Set up click handlers for dropdown triggers
-      document.querySelectorAll('.dropdown__trigger').forEach(trigger => {
-        trigger.addEventListener('click', function(e) {
-          e.preventDefault();
-          const dropdown = this.closest('.dropdown');
-
-          // Toggle active class on the dropdown
-          if (dropdown.classList.contains('dropdown--active')) {
-            dropdown.classList.remove('dropdown--active');
-          } else {
-            // Close any other open dropdowns
-            document.querySelectorAll('.dropdown--active').forEach(activeDropdown => {
-              if (activeDropdown !== dropdown) {
-                activeDropdown.classList.remove('dropdown--active');
-              }
-            });
-
-            dropdown.classList.add('dropdown--active');
-
-            // Position the dropdown
-            mr.dropdowns.repositionDropdowns();
-          }
-        });
-      });
-
-      // Close dropdowns when clicking outside
+      // Use event delegation for dropdown triggers to be Turbo-friendly
       document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown')) {
+        const trigger = e.target.closest('.dropdown__trigger');
+        if (trigger) {
+          e.preventDefault();
+          const dropdown = trigger.closest('.dropdown');
+
+          if (dropdown) {
+            // Toggle active class on the dropdown
+            if (dropdown.classList.contains('dropdown--active')) {
+              dropdown.classList.remove('dropdown--active');
+            } else {
+              // Close any other open dropdowns
+              document.querySelectorAll('.dropdown--active').forEach(activeDropdown => {
+                if (activeDropdown !== dropdown) {
+                  activeDropdown.classList.remove('dropdown--active');
+                }
+              });
+
+              dropdown.classList.add('dropdown--active');
+
+              // Position the dropdown
+              mr.dropdowns.repositionDropdowns();
+            }
+          }
+        } else if (!e.target.closest('.dropdown')) {
+          // Close dropdowns when clicking outside
           document.querySelectorAll('.dropdown--active').forEach(dropdown => {
             dropdown.classList.remove('dropdown--active');
           });
@@ -169,8 +169,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Also initialize components when Turbo renders a new page
 document.addEventListener('turbo:render', function() {
-  // Reset the done flag to allow re-initialization
-  mr.dropdowns.done = false;
+  mr.dropdowns.repositionDropdowns();
+  if (document.querySelector('body[data-direction="rtl"]')) {
+    mr.dropdowns.repositionDropdownsRtl();
+  }
+});
+
+document.addEventListener('turbo:load', function() {
+  // Reset the done flag to allow re-initialization if needed
+  // But since we use event delegation on document, we don't need to re-add listeners.
+  // We still want to run other initializations if they are not idempotent.
   mr.components.documentReady.forEach(function(component) {
     component();
   });

@@ -5,8 +5,8 @@
     "build": "node esbuild.config.js"
   },
   "engines": {
-    "npm": "11.6.2",
-    "node": "24.12.0"
+    "npm": ">=10.0.0",
+    "node": ">=18.17.1"
   },
   "dependencies": {
     "@editorjs/checklist": "^1.6.0",
