@@ -8,10 +8,10 @@
                   <span class="badge badge-danger" style="position: absolute; top: -5px; right: -5px; padding: 2px 4px; font-size: 10px;"><%= current_user.notifications.unread.count %></span>
                 <% end %>
               </span>
-              <div class="dropdown__container" style="width: 300px;">
+              <div class="dropdown__container" style="right: 0; left: auto; min-width: 300px;">
                 <div class="container">
                   <div class="row">
-                    <div class="dropdown__content col-lg-12">
+                    <div class="dropdown__content col-lg-2">
                       <ul class="menu-vertical">
                         <% if current_user.notifications.any? %>
                           <% current_user.notifications.recent.each do |notification| %>
@@ -48,7 +48,7 @@
                   </span>
                 <% end %>
               </span>
-              <div class="dropdown__container">
+              <div class="dropdown__container" style="right: 0; left: auto;">
                 <div class="container">
                   <div class="row">
                     <div class="dropdown__content col-lg-2">
@@ -72,7 +72,7 @@
                                 progress_percentage = (current_points.to_f / next_level_points * 100).round(1)
                               %>
                               <div class="progress mt-1" style="height: 4px;">
-                                <div class="progress-bar" style="width: <%= progress_percentage %>%"></div>
+                                <div class="progress-bar" style="width: <%= progress_percentage %>%;" data-none="none"></div>
                               </div>
                             </li>
                           <% end %>
