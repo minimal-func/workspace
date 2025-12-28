@@ -38,18 +38,5 @@ function showDatepicker(event) {
   }
 }
 
-// Initialize datepickers when the DOM is loaded
-document.addEventListener('DOMContentLoaded', initDatepickers);
-
-// Also initialize datepickers when navigating with Turbo
-document.addEventListener('turbo:render', initDatepickers);
-
-// Add a click event listener to the document to handle clicks on datepicker inputs
-document.addEventListener('click', function(event) {
-  if (event.target.classList.contains('datepicker') && event.target.tagName.toLowerCase() === 'input') {
-    showDatepicker(event);
-  }
-});
-
 // Export the Datepicker class and initialization function
 export { Datepicker, initDatepickers };

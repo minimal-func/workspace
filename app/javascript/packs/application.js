@@ -226,6 +226,8 @@ require("trix")
 import './scripts'
 import PostEditor from '../editor/post_editor';
 import { initDashboard } from '../dashboard';
+import { initNotifications } from '../notifications';
+import { initDatepickers } from './datepicker';
 
 function initPostEditor() {
   const editorContainer = document.getElementById('post-editor');
@@ -327,6 +329,8 @@ function initApp() {
   initPostEditor();
   initReflectionEditor();
   initDashboard();
+  initNotifications();
+  initDatepickers();
 }
 
 document.addEventListener('turbo:load', initApp);
