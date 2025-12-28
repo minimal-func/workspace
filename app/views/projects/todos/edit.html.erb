@@ -1,0 +1,10 @@
+<%= turbo_frame_tag dom_id(@todo) do %>
+  <div class="card border-0 shadow-sm rounded-lg mb-3">
+    <div class="card-header bg-white border-0 pt-4 px-4">
+      <h3 class="h5 mb-0 font-weight-bold">Edit Task</h3>
+    </div>
+    <div class="card-body p-4">
+      <%= render 'form' %>
+    </div>
+  </div>
+<% end %>

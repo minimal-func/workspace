@@ -1,0 +1,55 @@
+<div class="container timetracker-dashboard">
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <div class="timetracker-header">
+        <h1 class="timetracker-title"><%= @current_project.title %></h1>
+        <p class="timetracker-subtitle">Track time spent on tasks and manage your project resources</p>
+      </div>
+
+      <div class="task-navigation">
+        <ul>
+          <li>
+            <%= link_to timetracker_project_tasks_path(@current_project) do %>
+              <i class="material-icons">timer</i>
+              <span>Time Tracker</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to project_posts_path(@current_project) do %>
+              <i class="material-icons">description</i>
+              <span>Posts</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to project_materials_path(@current_project) do %>
+              <i class="material-icons">book</i>
+              <span>Materials</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to project_saved_links_path(@current_project) do %>
+              <i class="material-icons">link</i>
+              <span>Links</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to project_todos_path(@current_project) do %>
+              <i class="material-icons">check_circle</i>
+              <span>Tasks</span>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+
+      <div class="task-tracker">
+        <div id="root" data-presenter="<%= @tasks_presenter.to_json %>"></div>
+      </div>
+
+      <% if @pagy.pages > 1 %>
+        <div class="d-flex justify-content-center mt-4">
+          <%== pagy_nav(@pagy) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
