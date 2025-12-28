@@ -6,6 +6,12 @@ class ApplicationController < ActionController::Base
 
   include Pagy::Backend
 
+  helper_method :turbo_native_app?
+
+  def turbo_native_app?
+    request.user_agent&.include?("MyDayTurboNative")
+  end
+
   def set_app_title
     @app_title = 'Diary'
   end
