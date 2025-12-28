@@ -225,6 +225,7 @@ require("trix")
 // Import our custom scripts
 import './scripts'
 import PostEditor from '../editor/post_editor';
+import { initDashboard } from '../dashboard';
 
 function initPostEditor() {
   const editorContainer = document.getElementById('post-editor');
@@ -325,6 +326,7 @@ function initApp() {
   initChatAndEmbeds();
   initPostEditor();
   initReflectionEditor();
+  initDashboard();
 }
 
 document.addEventListener('turbo:load', initApp);

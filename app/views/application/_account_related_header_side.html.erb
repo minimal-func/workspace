@@ -2,17 +2,15 @@
   <div class="bar__module">
       <ul class="menu-horizontal">
           <li class="dropdown">
-              <span class="dropdown__trigger">
+              <span class="dropdown__trigger" style="position: relative; display: flex; align-items: center;">
                 <i class="icon-Bell"></i>
                 <% if current_user.notifications.unread.any? %>
-                  <span class="badge badge-danger" style="position: absolute; top: -5px; right: -5px; padding: 2px 4px; font-size: 10px;"><%= current_user.notifications.unread.count %></span>
+                  <span class="badge badge-danger" style="position: absolute; top: -10px; right: -10px; padding: 2px 4px; font-size: 10px; border-radius: 50%;"><%= current_user.notifications.unread.count %></span>
                 <% end %>
               </span>
-              <div class="dropdown__container" style="min-width: 600px;">
-                <div class="container">
-                  <div class="row">
-                    <div class="dropdown__content">
-                      <ul class="menu-vertical">
+              <div class="dropdown__container" style="min-width: 350px;">
+                <div class="dropdown__content p-3">
+                  <ul class="menu-vertical">
                         <% if current_user.notifications.any? %>
                           <% current_user.notifications.recent.each do |notification| %>
                             <li style="<%= 'background-color: #f8f9fa;' unless notification.read? %>">
@@ -30,16 +28,14 @@
                         <% else %>
                           <li class="text-center">No new notifications</li>
                         <% end %>
-                      </ul>
-                    </div>
-                  </div>
+                  </ul>
                 </div>
               </div>
           </li>
           <li class="dropdown">
-              <span class="dropdown__trigger">
+              <span class="dropdown__trigger" style="display: flex; align-items: center; gap: 8px;">
                 <%= image_tag "avatar-round-1.png", class: "avatar image--xxs round" %>
-                <%= current_user.email %>
+                <span class="user-email"><%= current_user.email %></span>
                 <% if current_user.level.present? %>
                   <span class="badge-level">
                     <i class="icon-Trophy" style="margin-right: 4px;"></i>
@@ -48,11 +44,9 @@
                   </span>
                 <% end %>
               </span>
-              <div class="dropdown__container">
-                <div class="container">
-                  <div class="row">
-                    <div class="dropdown__content col-lg-2">
-                      <ul class="menu-vertical">
+              <div class="dropdown__container" style="min-width: 250px;">
+                <div class="dropdown__content p-3">
+                  <ul class="menu-vertical">
                         <% if current_user.level.present? %>
                           <li>
                             <div class="points-display">
@@ -72,7 +66,7 @@
                                 progress_percentage = (current_points.to_f / next_level_points * 100).round(1)
                               %>
                               <div class="progress mt-1" style="height: 4px;">
-                                <div class="progress-bar" style="width: <%= progress_percentage %>%"></div>
+                                <div class="progress-bar" style="width: <%= progress_percentage %>%;"></div>
                               </div>
                             </li>
                           <% end %>
@@ -83,9 +77,7 @@
                         <li>
                           <%= link_to "Log out", destroy_user_session_url, method: :delete %>
                         </li>
-                      </ul>
-                    </div>
-                  </div>
+                  </ul>
                 </div>
               </div>
           </li>
