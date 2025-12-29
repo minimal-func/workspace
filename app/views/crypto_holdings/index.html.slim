@@ -1,0 +1,96 @@
+.container.mt-4
+  .d-flex.justify-content-between.align-items-center.mb-4
+    h1 Crypto Portfolio
+
+  .row.mb-4
+    .col-md-4
+      .card
+        .card-body
+          h5.card-title Total Cost
+          p.card-text.h3 = number_to_currency(@total_cost)
+    .col-md-4
+      .card
+        .card-body
+          h5.card-title Total Value
+          p.card-text.h3 = number_to_currency(@total_value)
+    .col-md-4
+      .card
+        .card-body
+          h5.card-title Total P&L
+          p.card-text.h3 class = (@total_profit_loss >= 0 ? 'text-success' : 'text-danger')
+            span = number_to_currency(@total_profit_loss)
+            small.ms-2 = "(#{number_to_percentage(@total_profit_loss_percentage, precision: 2)})"
+
+  .table-responsive
+    table.table.table-hover
+      thead
+        tr
+          th Symbol
+          th Amount
+          th Avg Buy Price
+          th Current Price
+          th Total Cost
+          th Current Value
+          th P&L
+          th Actions
+      tbody
+        - @crypto_holdings.each do |holding|
+          tr
+            td = holding.symbol.upcase
+            td = holding.amount
+            td = number_to_currency(holding.buy_price)
+            td = number_to_currency(holding.current_price)
+            td = number_to_currency(holding.total_cost)
+            td = number_to_currency(holding.current_value)
+            td class = (holding.profit_loss >= 0 ? 'text-success' : 'text-danger')
+              = number_to_currency(holding.profit_loss)
+              br
+              small = "(#{number_to_percentage(holding.profit_loss_percentage, precision: 2)})"
+            td
+              / - Calculated from transactions, manual edit/delete disabled
+
+  .mt-5
+    .d-flex.justify-content-between.align-items-center.mb-3
+      h2 Recent Transactions
+      - if current_user.eth_wallet_address.present?
+        = button_to 'Sync Portfolio from Wallet', sync_wallet_crypto_holdings_path, method: :post, class: 'btn btn-outline-primary btn-sm'
+    .card.mb-4
+      .card-body
+        = form_with model: current_user, url: update_wallet_crypto_holdings_path, method: :patch, local: true do |f|
+          .row.align-items-end
+            .col-md-8
+              .form-group
+                = f.label :eth_wallet_address, 'Ethereum Wallet Address'
+                = f.text_field :eth_wallet_address, class: 'form-control', placeholder: '0x...'
+            .col-md-4
+              = f.submit 'Update Wallet', class: 'btn btn-secondary w-100'
+
+    - if @erc20_activity.present?
+      .table-responsive
+        table.table.table-sm
+          thead
+            tr
+              th Date
+              th Type
+              th Token
+              th From
+              th To
+              th Value
+          tbody
+            - @erc20_activity.each do |tx|
+              tr
+                td = tx.block_timestamp.strftime('%Y-%m-%d %H:%M')
+                td
+                  span.badge class=(tx.transaction_type == 'ETH' ? 'bg-primary' : 'bg-info')
+                    = tx.transaction_type
+                td = tx.token_symbol
+                td
+                  small = tx.from_address.truncate(12)
+                td
+                  small = tx.to_address.truncate(12)
+                td
+                  = tx.value.round(4)
+    - elsif current_user.eth_wallet_address.present?
+      p No activity found or Etherscan API key missing.
+    - else
+      p Enter your Ethereum wallet address to see your activity.

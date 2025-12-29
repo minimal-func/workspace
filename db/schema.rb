@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_27_160358) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_29_105233) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,29 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_27_160358) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_biggest_challenges_on_user_id"
+  end
+
+  create_table "crypto_transactions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "transaction_hash"
+    t.integer "block_number"
+    t.datetime "block_timestamp"
+    t.string "from_address"
+    t.string "to_address"
+    t.decimal "value", precision: 36, scale: 18
+    t.string "token_symbol"
+    t.string "token_name"
+    t.string "token_address"
+    t.string "transaction_type"
+    t.decimal "gas_used", precision: 36, scale: 18
+    t.decimal "gas_price", precision: 36, scale: 18
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_address"], name: "index_crypto_transactions_on_from_address"
+    t.index ["to_address"], name: "index_crypto_transactions_on_to_address"
+    t.index ["token_address"], name: "index_crypto_transactions_on_token_address"
+    t.index ["transaction_hash"], name: "index_crypto_transactions_on_transaction_hash"
+    t.index ["user_id"], name: "index_crypto_transactions_on_user_id"
   end
 
   create_table "daily_gratitudes", force: :cascade do |t|
@@ -265,6 +288,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_27_160358) do
     t.datetime "updated_at", precision: nil, null: false
     t.integer "total_points", default: 0
     t.bigint "level_id"
+    t.string "eth_wallet_address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -272,6 +296,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_27_160358) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "biggest_challenges", "users"
+  add_foreign_key "crypto_transactions", "users"
   add_foreign_key "daily_gratitudes", "users"
   add_foreign_key "daily_lessons", "users"
   add_foreign_key "day_ratings", "users"
