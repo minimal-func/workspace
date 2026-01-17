@@ -1,0 +1,85 @@
+.container.resource-index
+  .row.mb-5
+    .col-md-10.offset-md-1
+      .d-flex.justify-content-between.align-items-end.border-bottom.pb-3
+        div
+          h1.resource-index-title.display-4.font-weight-bold.mb-0 Tasks
+          p.text-muted.mb-0 Action items for #{@project.title}
+        - if current_user
+          = link_to new_project_todo_path(@project), class: 'btn btn-primary rounded-pill px-4 shadow-sm' do
+            i.material-icons.align-middle.mr-1 add_task
+            | New Task
+
+  .row
+    .col-md-10.offset-md-1
+      - if @todos.empty?
+        .text-center.py-5.bg-light.rounded-lg.shadow-sm.border-0
+          i.material-icons.display-1.text-muted.mb-3 assignment_late
+          h3.text-secondary No tasks yet
+          p.text-muted.mb-4 Create tasks to track your progress on this project.
+          - if current_user
+            = link_to new_project_todo_path(@project), class: 'btn btn-primary rounded-pill px-4' do
+              i.material-icons.align-middle.mr-1 add_task
+              | Add Your First Task
+      - else
+        = turbo_frame_tag "todos" do
+          - pending_todos = @todos.reject(&:finished?)
+          - completed_todos = @todos.select(&:finished?)
+
+          - if pending_todos.any?
+            .mb-5
+              h2.h4.font-weight-bold.mb-4.d-flex.align-items-center
+                span.badge.badge-primary.mr-2 = pending_todos.count
+                | In Progress
+              
+              .todo-list
+                - pending_todos.each do |todo|
+                  = turbo_frame_tag dom_id(todo) do
+                    .card.border-0.shadow-sm.rounded-lg.mb-3.todo-card-modern.todo-item-interactive
+                      .card-body.p-3
+                        .d-flex.align-items-center.justify-content-between
+                          .d-flex.align-items-center.flex-grow-1
+                            - if current_user
+                              = button_to project_todo_path(@project, todo), method: :patch, params: { todo: { finished: true } }, class: 'btn btn-link p-0 mr-3 text-muted todo-check-icon', form: { data: { turbo: true } } do
+                                i.material-icons radio_button_unchecked
+                            - else
+                              i.material-icons.mr-3.text-muted radio_button_unchecked
+                            
+                            div.flex-grow-1
+                              h4.h5.mb-0.font-weight-bold = todo.name
+                          
+                          .actions.d-flex.align-items-center
+                            - if current_user
+                              = link_to edit_project_todo_path(@project, todo), class: 'btn btn-link text-muted p-2 hover-primary', title: 'Edit Task' do
+                                i.material-icons.font-size-md edit
+                              = link_to project_todo_path(@project, todo), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-link text-danger p-2', title: 'Delete Task' do
+                                i.material-icons.font-size-md delete
+
+          - if completed_todos.any?
+            .mt-5
+              .d-flex.justify-content-between.align-items-center.mb-4
+                h2.h4.font-weight-bold.text-muted.mb-0 Completed
+                span.badge.badge-pill.badge-light.text-muted = completed_todos.count
+              
+              .todo-list.completed-list
+                - completed_todos.each do |todo|
+                  = turbo_frame_tag dom_id(todo) do
+                    .card.border-0.shadow-sm.rounded-lg.mb-2.todo-card-modern.bg-light.opacity-75
+                      .card-body.p-3
+                        .d-flex.align-items-center.justify-content-between
+                          .d-flex.align-items-center.flex-grow-1
+                            - if current_user
+                              = button_to project_todo_path(@project, todo), method: :patch, params: { todo: { finished: false } }, class: 'btn btn-link p-0 mr-3 text-success todo-check-icon', form: { data: { turbo: true } } do
+                                i.material-icons check_circle
+                            - else
+                              i.material-icons.mr-3.text-success check_circle
+                            
+                            div.flex-grow-1
+                              h4.h5.mb-0.text-muted.text-decoration-line-through = todo.name
+                          
+                          .actions.d-flex.align-items-center
+                            - if current_user
+                              = link_to edit_project_todo_path(@project, todo), class: 'btn btn-link text-muted p-2 hover-primary', title: 'Edit Task' do
+                                i.material-icons.font-size-md edit
+                              = link_to project_todo_path(@project, todo), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-link text-danger p-2', title: 'Delete Task' do
+                                i.material-icons.font-size-md delete

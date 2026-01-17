@@ -2,50 +2,100 @@
   <div class="bar__module">
       <ul class="menu-horizontal">
           <li class="dropdown">
-              <span class="dropdown__trigger">
-                <%= image_tag "avatar-round-1.png", class: "avatar image--xxs round" %><%= current_user.email %>
+              <span class="dropdown__trigger" style="position: relative; display: flex; align-items: center; padding: 0 10px; cursor: pointer; height: 100%;">
+                <i class="icon-Bell" style="font-size: 20px;"></i>
+                <% if current_user.notifications.unread.any? %>
+                  <span class="badge badge-danger" style="position: absolute; top: 10px; right: 5px; padding: 0; font-size: 10px; border-radius: 50%; width: 15px; height: 15px; display: flex; align-items: center; justify-content: center; line-height: 1;"><%= current_user.notifications.unread.count %></span>
+                <% end %>
               </span>
-              <div class="dropdown__container">
-                <div class="container">
-                  <div class="row">
-                    <div class="dropdown__content col-lg-2">
-                      <ul class="menu-vertical">
-                        <li>
-                            <%= link_to "Log out", destroy_user_session_url, method: :delete %>
-                        </li>
-                      </ul>
-                  </div>
+              <div class="dropdown__container" style="min-width: 350px;">
+                <div class="dropdown__content" style="padding: 0;">
+                  <ul class="menu-vertical">
+                        <% if current_user.notifications.any? %>
+                          <% current_user.notifications.recent.each do |notification| %>
+                            <li style="<%= 'background-color: #f8f9fa;' unless notification.read? %>">
+                              <%= link_to notification_path(notification), data: { turbo_method: :patch }, class: "notification-item d-block" do %>
+                                <div class="notification-message <%= 'font-weight-bold' unless notification.read? %>">
+                                  <%= notification.message %>
+                                </div>
+                                <small class="text-muted"><%= time_ago_in_words(notification.created_at) %> ago</small>
+                              <% end %>
+                            </li>
+                          <% end %>
+                          <li class="text-center py-3">
+                            <%= link_to "View all notifications", notifications_path, class: "small" %>
+                          </li>
+<% else %>
+                          <li class="text-center py-4">No new notifications</li>
+                        <% end %>
+                  </ul>
                 </div>
               </div>
           </li>
-<!--           <li class="dropdown">
-              <span class="dropdown__trigger">
-                  <i class="stack-interface stack-bell"></i> Alerts
+          <li class="dropdown">
+              <span class="dropdown__trigger" style="display: flex; align-items: center; gap: 8px;">
+                <%= image_tag "avatar-round-1.png", class: "avatar image--xxs round" %>
+                <span class="user-email"><%= current_user.email %></span>
+                <% if current_user.level.present? %>
+                  <span class="badge-level">
+                    <i class="icon-Trophy" style="margin-right: 4px;"></i>
+                    <%= current_user.level.name %> 
+                    <small>(Lvl <%= current_user.level.level_number %>)</small>
+                  </span>
+                <% end %>
               </span>
-          </li> -->
+              <div class="dropdown__container" style="min-width: 250px;">
+                <div class="dropdown__content p-3">
+                  <ul class="menu-vertical">
+                        <% if current_user.level.present? %>
+                          <li>
+                            <div class="points-display">
+                              <i class="icon-Star" style="margin-right: 4px;"></i>
+                              <%= current_user.total_points %> Points
+                            </div>
+                          </li>
+                          <% if current_user.level.next_level %>
+                            <li>
+                              <small class="text-muted">
+                                <%= current_user.level.points_to_next_level(current_user.total_points) %> points to 
+                                <%= current_user.level.next_level.name %>
+                              </small>
+                              <% 
+                                current_points = current_user.total_points - current_user.level.points_required
+                                next_level_points = current_user.level.next_level.points_required - current_user.level.points_required
+                                progress_percentage = (current_points.to_f / next_level_points * 100).round(1)
+                              %>
+                              <div class="progress mt-1" style="height: 4px;">
+                                <div class="progress-bar" style="width: <%= progress_percentage %>%;"></div>
+                              </div>
+                            </li>
+                          <% end %>
+                        <% end %>
+                        <li>
+                          <%= link_to "My Achievements", gamification_path %>
+                        </li>
+                        <li>
+                          <%= link_to "Log out", destroy_user_session_url, data: { turbo_method: :delete } %>
+                        </li>
+                  </ul>
+                </div>
+              </div>
+          </li>
       </ul>
   </div>
-<!--   <div class="bar__module">
-      <a class="btn btn--primary btn--sm type--uppercase" href="#">
-          <span class="btn__text">
-              Upgrade
-          </span>
-      </a>
-  </div> -->
 
 <% else %>
   <div class="bar__module">
-    <a class="btn btn--sm type--uppercase" href="#">
+    <%= link_to new_user_session_path, class: "btn btn--sm type--uppercase" do %>
       <span class="btn__text">
           Login
       </span>
-    </a>
-    <a class="btn btn--sm btn--primary type--uppercase" href="#">
+    <% end %>
+
+    <%= link_to new_user_registration_path, class: "btn btn--sm btn--primary type--uppercase" do %>
       <span class="btn__text">
          Signup
       </span>
-    </a>
+    <% end %>
   </div>
 <% end %>
-
-<!--end module-->

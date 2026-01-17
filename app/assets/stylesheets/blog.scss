@@ -1,0 +1,81 @@
+/* Blog styles */
+
+/* Blog Index */
+.blog-index {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+.blog-index-title {
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.blog-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  overflow: hidden;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.blog-card-image {
+  height: 200px;
+  object-fit: cover;
+}
+
+.blog-excerpt {
+  color: #6c757d;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-height: 4.5em;
+  overflow: hidden;
+}
+
+/* Blog Post */
+.blog-post {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+.blog-post-title {
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-post-meta {
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.blog-post-featured-image img {
+  max-height: 500px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.blog-post-content {
+  font-family: 'Merriweather', serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+.blog-post-content p {
+  margin-bottom: 1.5rem;
+}
+
+.blog-post-content h2, 
+.blog-post-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.blog-post-navigation {
+  margin-top: 3rem;
+}

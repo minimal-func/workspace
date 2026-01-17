@@ -1,5 +1,0 @@
-.col-md-12
-  h1
-    = @current_project.title
-  = react_component("TaskBox", { presenter: @tasks_presenter.to_json, prerender: true})
-  == pagy_nav(@pagy) if @pagy.pages > 1

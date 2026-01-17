@@ -1,0 +1,86 @@
+<div class="container resource-index">
+  <div class="row mb-5">
+    <div class="col-md-10 offset-md-1">
+      <div class="d-flex justify-content-between align-items-end border-bottom pb-3">
+        <div>
+          <h1 class="resource-index-title display-4 font-weight-bold mb-0">Saved Links</h1>
+          <p class="text-muted mb-0">Curated resources for <%= @project.title %></p>
+        </div>
+        <% if current_user %>
+          <%= link_to new_project_saved_link_path(@project), class: 'btn btn-primary rounded-pill px-4' do %>
+            <i class="material-icons align-middle mr-1">add</i>
+            New Link
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <% if @saved_links.empty? %>
+        <div class="text-center py-5 bg-light rounded-lg shadow-sm border">
+          <i class="material-icons display-1 text-muted mb-3">link_off</i>
+          <h3 class="text-secondary">No saved links yet</h3>
+          <p class="text-muted mb-4">Keep all your project references in one place.</p>
+          <% if current_user %>
+            <%= link_to new_project_saved_link_path(@project), class: 'btn btn-primary rounded-pill' do %>
+              <i class="material-icons align-middle mr-1">add</i>
+              Add Your First Link
+            <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="row">
+          <% @saved_links.each do |saved_link| %>
+            <div class="col-md-6 mb-4">
+              <div class="card h-100 border-0 shadow-sm rounded-lg link-card-modern overflow-hidden">
+                <div class="card-body p-0">
+                  <div class="d-flex flex-column h-100">
+                    <div class="p-4 flex-grow-1">
+                      <div class="d-flex align-items-center mb-3">
+                        <div class="bg-primary-light text-primary rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 48px; height: 48px;">
+                          <i class="material-icons">link</i>
+                        </div>
+                        <div class="overflow-hidden">
+                          <h4 class="h5 font-weight-bold mb-0 text-truncate" title="<%= saved_link.title %>"><%= saved_link.title %></h4>
+                          <span class="badge badge-light font-weight-normal text-muted"><%= URI.parse(saved_link.url).host rescue 'External Link' %></span>
+                        </div>
+                      </div>
+                      
+                      <% if saved_link.short_description.present? %>
+                        <p class="text-muted small mb-0 line-clamp-2"><%= saved_link.short_description %></p>
+                      <% else %>
+                        <p class="text-muted small mb-0 font-italic">No description provided.</p>
+                      <% end %>
+                    </div>
+
+                    <div class="px-4 py-3 bg-light d-flex justify-content-between align-items-center">
+                      <div class="d-flex align-items-center">
+                        <%= link_to saved_link.url, target: :_blank, class: 'btn btn-primary btn-sm rounded-pill px-3 d-inline-flex align-items-center hover-lift' do %>
+                          <span>Visit</span>
+                          <i class="material-icons font-size-sm ml-1">open_in_new</i>
+                        <% end %>
+                      </div>
+                      
+                      <div class="d-flex align-items-center gap-2">
+                        <% if current_user.can_update_resource?(saved_link) %>
+                          <%= link_to edit_project_saved_link_path(@project, saved_link), class: 'btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center p-0', style: 'width: 32px; height: 32px;', title: 'Edit' do %>
+                            <i class="material-icons font-size-sm">edit</i>
+                          <% end %>
+                          <%= link_to project_saved_link_path(@project, saved_link), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-outline-danger btn-sm rounded-circle d-flex align-items-center justify-content-center p-0', style: 'width: 32px; height: 32px;', title: 'Delete' do %>
+                            <i class="material-icons font-size-sm">delete</i>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
