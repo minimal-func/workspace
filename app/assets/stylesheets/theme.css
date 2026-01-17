@@ -1193,6 +1193,7 @@ ul:last-child {
 }
 .dropdown.dropdown--active > .dropdown__container {
   opacity: 1;
+  pointer-events: all;
 }
 .dropdown.dropdown--active > .dropdown__container > .container > .row > .dropdown__content {
   pointer-events: all;

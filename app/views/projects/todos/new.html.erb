@@ -1,0 +1,17 @@
+<div class="content">
+  <h1>New task on studying topic</h1>
+  <div class="form">
+    <%= simple_form_for [@project, @todo] do |f| %>
+      <div class="col-sm-12">
+        <%= f.input :name, label: false, placeholder: "Task" %>
+      </div>
+      <div class="col-sm-12 checkbox-wrapper">
+        <span>Finished?</span>
+        <%= f.check_box :finished, class: 'input-checkbox' %>
+      </div>
+      <div class="col-sm-12">
+        <%= f.button :submit, "Add task", class: 'button' %>
+      </div>
+    <% end %>
+  </div>
+</div>

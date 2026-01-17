@@ -11,4 +11,11 @@ RSpec.describe Post, type: :model do
     it { is_expected.to validate_presence_of(:short_description) }
     it { is_expected.to validate_presence_of(:title) }
   end
+
+  describe "body_json" do
+    it "can store json data" do
+      post = Post.new(title: "Test", short_description: "Desc", body_json: { blocks: [] })
+      expect(post.body_json).to eq({ "blocks" => [] })
+    end
+  end
 end

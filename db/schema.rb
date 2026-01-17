@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_27_160358) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -145,6 +145,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "parent_id"
+    t.boolean "is_folder", default: false, null: false
+    t.index ["parent_id", "is_folder"], name: "index_materials_on_parent_id_and_is_folder"
+    t.index ["parent_id"], name: "index_materials_on_parent_id"
     t.index ["project_id"], name: "index_materials_on_project_id"
   end
 
@@ -154,6 +158,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_moods_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "message"
+    t.datetime "read_at"
+    t.string "notifiable_type"
+    t.bigint "notifiable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "points", force: :cascade do |t|
@@ -176,6 +192,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "body_json"
     t.index ["project_id"], name: "index_posts_on_project_id"
   end
 
@@ -190,6 +207,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.jsonb "body_json"
     t.index ["user_id"], name: "index_reflections_on_user_id"
   end
 
@@ -259,8 +277,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_185949) do
   add_foreign_key "day_ratings", "users"
   add_foreign_key "energy_levels", "users"
   add_foreign_key "main_tasks", "users"
+  add_foreign_key "materials", "materials", column: "parent_id"
   add_foreign_key "materials", "projects"
   add_foreign_key "moods", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "points", "users"
   add_foreign_key "posts", "projects"
   add_foreign_key "projects", "users"

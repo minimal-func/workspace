@@ -1,4 +1,5 @@
 class EnergyLevel < ApplicationRecord
+  include Notifiable
   belongs_to :user
 
   validates :value, presence: true
