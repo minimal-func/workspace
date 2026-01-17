@@ -1,15 +1,15 @@
-<section class="cover imagebg height-40 text-center">
+<section class="cover imagebg-hero height-60 text-center">
   <div class="container">
     <div class="row">
       <div class="col-md-8 offset-md-2">
-        <h1 class="landing-title">Track Your Personal Growth</h1>
-        <p class="lead mb-4">MyDay helps you track your daily reflections, manage projects, and boost your productivity.</p>
+        <h1 class="landing-title text-white">Master Your Focus, Elevate Your Life</h1>
+        <p class="lead mb-4 text-white">The all-in-one personal growth OS. Track your mood, manage high-impact projects, and unlock your potential with data-driven reflections.</p>
         <div class="landing-cta">
           <% if current_user %>
             <%= link_to "Go to Dashboard", dashboards_path, class: "btn btn-lg btn-primary mr-2" %>
           <% else %>
-            <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary mr-2" %>
-            <%= link_to "Log In", new_user_session_path, class: "btn btn-lg btn-outline-primary" %>
+            <%= link_to "Get Started for Free", new_user_registration_path, class: "btn btn-lg btn-primary mr-2" %>
+            <%= link_to "Sign In", new_user_session_path, class: "btn btn-lg btn-outline-primary" %>
           <% end %>
         </div>
       </div>
@@ -29,25 +29,61 @@
     <div class="row mt-5">
       <div class="col-md-4 text-center">
         <div class="feature-box">
-          <i class="material-icons feature-icon">today</i>
-          <h4 class="feature-title">Daily Tracking</h4>
-          <p class="feature-text">Track your mood, energy levels, challenges, and reflections every day to build self-awareness.</p>
+          <i class="material-icons feature-icon">emoji_events</i>
+          <h4 class="feature-title">Gamification</h4>
+          <p class="feature-text">Earn points and unlock achievements as you build consistent habits and hit milestones.</p>
         </div>
       </div>
 
       <div class="col-md-4 text-center">
         <div class="feature-box">
-          <i class="material-icons feature-icon">work</i>
-          <h4 class="feature-title">Project Management</h4>
-          <p class="feature-text">Organize your work into projects with tasks, materials, links, and notes all in one place.</p>
+          <i class="material-icons feature-icon">assignment</i>
+          <h4 class="feature-title">Projects</h4>
+          <p class="feature-text">Organize tasks, materials, and links into streamlined projects for maximum focus.</p>
         </div>
       </div>
 
       <div class="col-md-4 text-center">
         <div class="feature-box">
-          <i class="material-icons feature-icon">timer</i>
-          <h4 class="feature-title">Time Tracking</h4>
-          <p class="feature-text">Monitor how you spend your time on different tasks to improve your productivity.</p>
+          <i class="material-icons feature-icon">monitoring</i>
+          <h4 class="feature-title">Reflections</h4>
+          <p class="feature-text">Daily mood, energy, and gratitude tracking to foster deep self-awareness and growth.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="space--sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h2 class="landing-section-title">Stay Motivated with Gamification</h2>
+        <p class="landing-section-text">
+          Build lasting habits with our gamification engine. Every positive action brings you closer to your next achievement.
+        </p>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-4 text-center">
+        <div class="feature-box">
+          <i class="material-icons feature-icon">military_tech</i>
+          <h4 class="feature-title">Earn Points</h4>
+          <p class="feature-text">Get rewarded for completing tasks, projects, and maintaining your daily consistency.</p>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="feature-box">
+          <i class="material-icons feature-icon">workspace_premium</i>
+          <h4 class="feature-title">Unlock Achievements</h4>
+          <p class="feature-text">Collect exclusive badges as you hit major milestones in your personal growth journey.</p>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="feature-box">
+          <i class="material-icons feature-icon">leaderboard</i>
+          <h4 class="feature-title">Level Up</h4>
+          <p class="feature-text">Watch your level rise as you accumulate experience and master new productivity habits.</p>
         </div>
       </div>
     </div>
@@ -136,18 +172,18 @@
   </div>
 </section>
 
-<section class="cta-section text-center">
+<section class="cta-section text-center bg-dark text-white">
   <div class="container">
     <div class="row">
       <div class="col-md-8 offset-md-2">
         <div class="cta-content">
-          <h2 class="landing-section-title">Start Your Productivity Journey Today</h2>
-          <p class="landing-section-subtitle">Join thousands of users who have improved their productivity and well-being</p>
+          <h2 class="landing-section-title text-white">Ready to Design Your Best Self?</h2>
+          <p class="landing-section-subtitle text-white opacity-75">Start tracking, building, and growing today with MyDay.</p>
           <div class="mt-4">
             <% if current_user %>
               <%= link_to "Go to Dashboard", dashboards_path, class: "btn btn-lg btn-primary" %>
             <% else %>
-              <%= link_to "Sign Up Now", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+              <%= link_to "Start for Free", new_user_registration_path, class: "btn btn-lg btn-primary" %>
             <% end %>
           </div>
         </div>

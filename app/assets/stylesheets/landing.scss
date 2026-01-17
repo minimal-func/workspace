@@ -7,14 +7,40 @@
 }
 
 .landing-title {
-  font-size: 3rem;
-  font-weight: 700;
+  font-size: 3.5rem;
+  font-weight: 800;
   margin-bottom: 1.5rem;
-  color: #333;
+  letter-spacing: -0.02em;
+}
+
+.bg-dark {
+  background-color: #212529 !important;
+}
+
+.opacity-75 {
+  opacity: 0.75;
 }
 
 .landing-cta {
   margin-top: 2rem;
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    box-shadow: 0 4px 14px 0 rgba(0,123,255,0.39);
+    &:hover {
+      background-color: #0069d9;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0,123,255,0.23);
+    }
+  }
+  .btn-outline-primary {
+    color: #fff;
+    border-color: #fff;
+    &:hover {
+      background-color: #fff;
+      color: #007bff;
+    }
+  }
 }
 
 /* Section Styles */
@@ -43,10 +69,14 @@
   padding: 2rem;
   margin-bottom: 2rem;
   border-radius: 8px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .feature-box:hover {
-  /* Simple hover effect without shadows or transforms */
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
 }
 
 .feature-icon {
@@ -98,6 +128,8 @@
   padding: 5rem 0;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 12px;
 }
 
 .cta-content {

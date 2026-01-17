@@ -16,8 +16,9 @@ Features:
 
 ![Screenshot](/app/assets/images/dashboard_page.png)
 
+![Screenshot](/app/assets/images/achievements.png)
 
-![Screenshot](/app/assets/images/plot_energy_level.png)
+![Screenshot](/app/assets/images/project.png)
 
 Roadmap:
 ---------
