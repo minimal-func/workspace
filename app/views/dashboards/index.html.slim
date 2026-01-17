@@ -30,7 +30,7 @@
               .mood-drag-wrapper.mt-3.w-100
                 = f.simple_fields_for :today_moods do |mood|
                   .d-flex.justify-content-between.align-items-center.mb-2
-                    .mood-icon-display.text-primary
+                    .mood-icon-display
                       i#mood-icon.icon-Happy style="font-size: 2.5rem;"
                     span#mood-value-display.badge.badge-primary.font-weight-bold style="font-size: 1.1rem;"= mood.object.value || 10
                   input#mood-slider.form-range.w-100 type="range" min="1" max="10" step="1" value=(mood.object.value || 10)
@@ -58,7 +58,7 @@
               .energy-drag-wrapper.mt-3.w-100
                 = f.simple_fields_for :today_energy_levels do |energy_level|
                   .d-flex.justify-content-between.align-items-center.mb-2
-                    .energy-icon-display.text-primary
+                    .energy-icon-display
                       i#energy-icon.icon-Battery-100 style="font-size: 2.5rem;"
                     span#energy-value-display.badge.badge-primary.font-weight-bold style="font-size: 1.1rem;"= energy_level.object.value || 10
                   input#energy-slider.form-range.w-100 type="range" min="1" max="10" step="1" value=(energy_level.object.value || 10)

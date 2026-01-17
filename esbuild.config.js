@@ -27,7 +27,6 @@ let opts = {
 }
 if (mode === 'watch') {
     opts = {
-        watch: true,
         sourcemap: 'inline',
         ...opts
     }
@@ -39,13 +38,12 @@ if (mode === 'production') {
     }
 }
 
-// Start esbuild with previously defined options
-// Stop the watcher when STDIN gets closed (no zombies please!)
-esbuild.build(opts).then((result) => {
-    if (mode === 'watch') {
-        process.stdin.pipe(process.stdout)
-        process.stdin.on('end', () => { result.stop() })
-    }
-}).catch((error) => {
-    process.exit(1)
-})
+if (mode === 'watch') {
+  esbuild.context(opts).then((context) => {
+    context.watch()
+    process.stdin.pipe(process.stdout)
+    process.stdin.on('end', () => { context.dispose() })
+  }).catch(() => process.exit(1))
+} else {
+  esbuild.build(opts).catch(() => process.exit(1))
+}

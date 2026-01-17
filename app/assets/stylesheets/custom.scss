@@ -258,6 +258,20 @@
       color: #6c757d;
     }
   }
+
+  &:not(.locked) {
+    background: linear-gradient(135deg, #fff7e6 0%, #ffeb3b 100%);
+    border: 1px solid #ffd700;
+    
+    .card-title {
+      color: #856404;
+      font-weight: bold;
+    }
+
+    .card-text {
+      color: #997404;
+    }
+  }
 }
 
 .badge-level {
@@ -359,6 +373,26 @@
   i {
     display: inline-block;
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  &.text-primary {
+    color: #007bff !important; // Maintain original if needed elsewhere
+  }
+
+  #mood-icon {
+    &.icon-Angry { color: #dc3545 !important; }    // Red
+    &.icon-Crying { color: #007bff !important; }   // Blue
+    &.icon-Smile { color: #ffc107 !important; }    // Yellow
+    &.icon-Happy { color: #28a745 !important; }    // Green
+    &.icon-Laughing { color: #fd7e14 !important; } // Orange
+  }
+
+  i.icon-Smile {
+    color: #ffc107 !important; // Yellow
+  }
+
+  #energy-icon[class^="icon-Battery-"], #energy-icon[class*=" icon-Battery-"] {
+    color: #28a745 !important; // Green
   }
 }
 
