@@ -23,6 +23,13 @@ class User < ApplicationRecord
   has_one :main_task
 
   has_many :projects
+  has_many :notifications, dependent: :destroy
+
+  # Gamification associations
+  has_many :points, dependent: :destroy
+  has_many :user_achievements, dependent: :destroy
+  has_many :achievements, through: :user_achievements
+  belongs_to :level, optional: true
 
   accepts_nested_attributes_for :today_day_ratings, allow_destroy: true
   accepts_nested_attributes_for :today_energy_levels, allow_destroy: true
@@ -32,11 +39,45 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :today_daily_gratitudes, allow_destroy: true
   accepts_nested_attributes_for :today_biggest_challenges, allow_destroy: true
 
-  has_many :topic_subscriptions, class_name: 'Wiki::TopicSubscription', foreign_key: 'wiki_topic_id'
-  has_many :topics, through: :topic_subscriptions, class_name: 'Wiki::Topic'
+  # Gamification methods
+  def update_total_points
+    update(total_points: points.sum(:value))
+    update_level
+    check_achievements
+  end
 
-  has_many :concept_learnings, class_name: 'Wiki::ConceptLearning', foreign_key: 'wiki_concept_id'
-  has_many :concepts, through: :concept_learnings, class_name: 'Wiki::Concept'
+  def update_level
+    new_level = Level.for_points(total_points)
+    if new_level && level != new_level
+      update(level: new_level)
+      notifications.create!(
+        message: "Congratulations! You've reached Level #{new_level.level_number}: #{new_level.name}!",
+        notifiable: new_level
+      )
+    end
+  end
 
-  has_many :created_topics, class_name: 'Wiki::Topic', foreign_key: :created_by
+  def check_achievements
+    Achievement.where(achievement_type: 'points').each do |achievement|
+      if total_points >= achievement.points_required && !achievements.include?(achievement)
+        achievement.award_to(self)
+      end
+    end
+  end
+
+  def award_points(value, action, pointable = nil)
+    points.create!(value: value, action: action, pointable: pointable)
+  end
+
+  def can_update_resource?(resource)
+    project = if resource.is_a?(Project)
+                resource
+              else
+                resource.project
+              end
+
+    return false unless project
+
+   project.user == self
+  end
 end

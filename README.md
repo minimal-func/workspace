@@ -28,10 +28,45 @@ Roadmap:
 System Dependencies
 -------------------
 
-- Ruby >= 2.3.0 (install with [rbenv](https://github.com/sstephenson/rbenv))
+- Ruby >= 3.2.0 (install with [rbenv](https://github.com/sstephenson/rbenv))
 - Rubygems
 - Bundler (`gem install bundler`)
 - PostgreSQL
+- Node.js >= 18.17.1
+- Yarn >= 1.22.19
+
+Development Setup
+----------------
+
+To start the development server:
+
+```bash
+# Install dependencies
+bundle install
+yarn install
+
+# Start the development server
+bin/dev
+```
+
+This will start both the Rails server and the esbuild watcher.
+
+JavaScript Bundling
+------------------
+
+This project uses esbuild for JavaScript bundling. The main entry point is `app/javascript/packs/application.js`.
+
+To build the JavaScript files:
+
+```bash
+yarn build
+```
+
+To watch for changes and rebuild automatically:
+
+```bash
+yarn build --watch
+```
 
 Guidelines
 ----------

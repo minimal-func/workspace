@@ -1,0 +1,10 @@
+= simple_form_for [@project, @todo], html: { class: 'form-container' } do |f|
+  .form-group.mb-3
+    = f.input :name, label: 'Task Name', input_html: { class: 'form-control' }, wrapper_html: { class: 'mb-3' }
+  .form-group.mb-3
+    .checkbox-wrapper
+      = f.check_box :finished, class: 'input-checkbox'
+      span Finished?
+  .form-actions.mt-4
+    = f.button :submit, class: 'btn btn-primary'
+    = link_to 'Cancel', project_todos_path(@project), class: 'btn btn-secondary ml-2'

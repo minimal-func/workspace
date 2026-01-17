@@ -16,8 +16,8 @@ RSpec.describe EnergyLevel, type: :model do
         Timecop.freeze(Time.local(2018, 1, 1, 10))
       end
 
-      let!(:today_energy_level) { create :energy_level, created_at: Time.local(2018, 1, 1, 10) }
-      let!(:yesterday_energy_level) { create :energy_level, created_at: Time.local(2018, 1, 2, 10) }
+      let!(:today_energy_level) { FactoryBot.create :energy_level, created_at: Time.local(2018, 1, 1, 10) }
+      let!(:yesterday_energy_level) { FactoryBot.create :energy_level, created_at: Time.local(2018, 1, 2, 10) }
 
       it 'returns right values' do
         expect(EnergyLevel.today()).to eq([today_energy_level])

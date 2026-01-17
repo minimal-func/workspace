@@ -11,8 +11,8 @@ RSpec.describe DailyLesson, type: :model do
         Timecop.freeze(Time.local(2018, 1, 1, 10))
       end
 
-      let!(:today_daily_lesson) { create :daily_lesson, created_at: Time.local(2018, 1, 1, 10) }
-      let!(:yesterday_daily_lesson) { create :daily_lesson, created_at: Time.local(2018, 1, 2, 10) }
+      let!(:today_daily_lesson) { FactoryBot.create :daily_lesson, created_at: Time.local(2018, 1, 1, 10) }
+      let!(:yesterday_daily_lesson) { FactoryBot.create :daily_lesson, created_at: Time.local(2018, 1, 2, 10) }
 
       it 'returns right values' do
         expect(DailyLesson.today()).to eq([today_daily_lesson])

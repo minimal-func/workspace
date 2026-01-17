@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="mb-0">New Folder</h2>
+        </div>
+        <div class="card-body">
+          <%= simple_form_for [@project, @folder], url: create_folder_project_materials_path(@project), html: { class: 'form-container' } do |f| %>
+            <div class="form-group mb-3">
+              <%= f.input :title, label: 'Folder Name', input_html: { class: 'form-control' }, wrapper_html: { class: 'mb-3' } %>
+            </div>
+            <div class="form-group mb-3">
+              <%= f.input :short_description, label: 'Description (optional)', input_html: { class: 'form-control' }, wrapper_html: { class: 'mb-3' } %>
+            </div>
+            <div class="form-actions mt-4">
+              <%= f.button :submit, 'Create Folder', class: 'btn btn-primary' %>
+              <%= link_to 'Cancel', project_materials_path(@project, folder_id: @current_folder&.id), class: 'btn btn-secondary ml-2' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

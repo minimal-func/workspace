@@ -16,6 +16,10 @@ module Timetracker
 
     def create
       @project = current_user.projects.create(project_params)
+      
+      # Award points for creating a project
+      GamificationService.award_points_for(:create_project, current_user, @project) if current_user
+      
       redirect_to timetracker_project_tasks_url(@project)
     end
 

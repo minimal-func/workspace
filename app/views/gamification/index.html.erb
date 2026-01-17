@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="row mb-4">
+    <div class="col-md-10 offset-md-1">
+      <h1 class="text-center">Your Achievements</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h4 class="mb-0">Your Level</h4>
+        </div>
+        <div class="card-body text-center">
+          <% if @level %>
+            <h2 class="display-4"><%= @level.level_number %></h2>
+            <h3><%= @level.name %></h3>
+            <% if @next_level %>
+              <div class="progress mt-3">
+                <% percent = ((@level.points_required.to_f / @next_level.points_required) * 100).round %>
+                <div class="progress-bar bg-success"
+                  role="progressbar"
+                  style="width: <%= percent %>%"
+                  aria-valuenow="<%= percent %>"
+                  aria-valuemin="0"
+                  aria-valuemax="100">
+                </div>
+              </div>
+              <p class="mt-2">
+                <%= @points_to_next_level %> points to level <%= @next_level.level_number %>
+              </p>
+            <% end %>
+          <% else %>
+            <p class="text-muted">You haven't reached any level yet. Start earning points!</p>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h4 class="mb-0">Recent Points</h4>
+        </div>
+        <div class="card-body">
+          <% if @points.any? %>
+            <ul class="list-group">
+              <% @points.each do |point| %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span><%= point.action.humanize %></span>
+                  <span class="badge badge-primary badge-pill"><%= "+#{point.value}" %></span>
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p class="text-muted">No points earned yet. Start completing actions to earn points!</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="mb-0">Your Achievements</h4>
+        </div>
+        <div class="card-body">
+          <% if @achievements.any? %>
+            <div class="row">
+              <% @achievements.each do |achievement| %>
+                <div class="col-md-6 mb-4">
+                  <div class="card achievement-card">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= achievement.name %></h5>
+                      <p class="card-text"><%= achievement.description %></p>
+                      <div class="text-muted small">
+                        Earned on <%= achievement.user_achievements.find_by(user: current_user).earned_at.strftime("%B %d, %Y") %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <p class="text-muted">No achievements earned yet. Keep using the app to unlock achievements!</p>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="card mt-4">
+        <div class="card-header">
+          <h4 class="mb-0">Available Achievements</h4>
+        </div>
+        <div class="card-body">
+          <% if @available_achievements.any? %>
+            <div class="row">
+              <% @available_achievements.each do |achievement| %>
+                <div class="col-md-6 mb-4">
+                  <div class="card achievement-card locked">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= achievement.name %></h5>
+                      <p class="card-text"><%= achievement.description %></p>
+                      <% if achievement.threshold > 1 %>
+                        <p class="text-muted small">
+                          Complete this action <%= achievement.threshold %> times to unlock
+                        </p>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <p class="text-muted">You've earned all available achievements. Congratulations!</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

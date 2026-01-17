@@ -1,0 +1,15 @@
+<%= simple_form_for [@project, @saved_link], html: { class: 'form-container' } do |f| %>
+  <div class="form-group mb-3">
+    <%= f.input :title, label: 'Link Title', input_html: { class: 'form-control' }, wrapper_html: { class: 'mb-3' } %>
+  </div>
+  <div class="form-group mb-3">
+    <%= f.input :short_description, label: 'Short Description', input_html: { class: 'form-control' }, wrapper_html: { class: 'mb-3' } %>
+  </div>
+  <div class="form-group mb-3">
+    <%= f.input :url, label: 'URL', input_html: { class: 'form-control' }, wrapper_html: { class: 'mb-3' } %>
+  </div>
+  <div class="form-actions mt-4">
+    <%= f.button :submit, class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', project_saved_links_path(@project), class: 'btn btn-secondary ml-2' %>
+  </div>
+<% end %>
