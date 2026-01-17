@@ -44,13 +44,13 @@
               .confidence-drag-wrapper.mt-3.w-100
                 = f.simple_fields_for :today_day_ratings do |day_rating|
                   .d-flex.justify-content-between.align-items-center.mb-2
-                    .confidence-icon-display.text-primary
+                    .confidence-icon-display
                       i#confidence-icon.icon-Trophy style="font-size: 2.5rem;"
                     span#confidence-value-display.badge.badge-primary.font-weight-bold style="font-size: 1.1rem;"= day_rating.object.value || 10
                   input#confidence-slider.form-range.w-100 type="range" min="1" max="10" step="1" value=(day_rating.object.value || 10)
                   .d-flex.justify-content-between.mt-1.small.text-muted
-                    span Lowest
-                    span Highest
+                    span Doubtful
+                    span Unstoppable
                   = day_rating.input :value, as: :hidden, input_html: { id: 'confidence-hidden-input', value: day_rating.object.value || 10 }
 
             .form-group.mb-5

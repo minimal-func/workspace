@@ -387,12 +387,22 @@
     &.icon-Laughing { color: #fd7e14 !important; } // Orange
   }
 
+  #confidence-icon {
+    &.icon-Seed { color: #8b4513 !important; }   // Brown/SaddleBrown
+    &.icon-Plant { color: #28a745 !important; }  // Green
+    &.icon-Ribbon { color: #17a2b8 !important; } // Cyan
+    &.icon-Medal { color: #c0c0c0 !important; }  // Silver
+    &.icon-Trophy { color: #ffd700 !important; } // Gold
+  }
+
   i.icon-Smile {
     color: #ffc107 !important; // Yellow
   }
 
-  #energy-icon[class^="icon-Battery-"], #energy-icon[class*=" icon-Battery-"] {
-    color: #28a745 !important; // Green
+  #energy-icon {
+    &.icon-Battery-0 { color: #dc3545 !important; }   // Red
+    &.icon-Battery-25, &.icon-Battery-50, &.icon-Battery-75 { color: #ffc107 !important; } // Yellow
+    &.icon-Battery-100 { color: #28a745 !important; } // Green
   }
 }
 

@@ -59,7 +59,7 @@ export const initDashboard = () => {
             ['icon-Angry', 'icon-Crying', 'icon-Smile', 'icon-Happy', 'icon-Laughing'])
         
         setupSlider('confidence-slider', 'confidence-icon', 'confidence-value-display', 'confidence-hidden-input',
-            ['icon-Target', 'icon-Shield', 'icon-Check', 'icon-Medal', 'icon-Trophy'])
+            ['icon-Seed', 'icon-Plant', 'icon-Ribbon', 'icon-Medal', 'icon-Trophy'])
 
         setupSlider('energy-slider', 'energy-icon', 'energy-value-display', 'energy-hidden-input',
             ['icon-Battery-0', 'icon-Battery-25', 'icon-Battery-50', 'icon-Battery-75', 'icon-Battery-100'])
