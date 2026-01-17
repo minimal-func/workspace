@@ -51,7 +51,7 @@
                         </a>
                         <div class="dropdown__container">
                           <div class="dropdown__content dropdown-menu dropdown-menu-right border-0 shadow-sm">
-                            <%= link_to timetracker_project_close_url(project), method: :post, class: 'dropdown-item text-muted' do %>
+                            <%= link_to timetracker_project_close_url(project), data: { turbo_method: :post }, class: 'dropdown-item text-muted' do %>
                               <i class="material-icons align-middle mr-2 font-size-sm">archive</i>
                               Archive Project
                             <% end %>
@@ -111,11 +111,11 @@
                         <div class="dropdown__container">
                           <div class="dropdown__content dropdown-menu border-0 shadow-sm">
                             <div class="d-flex gap-2 p-3">
-                              <%= link_to timetracker_project_open_url(project), method: :post, class: 'btn btn-outline-secondary btn-sm rounded-pill px-3' do %>
+                              <%= link_to timetracker_project_open_url(project), data: { turbo_method: :post }, class: 'btn btn-outline-secondary btn-sm rounded-pill px-3' do %>
                                 <i class="material-icons align-middle mr-1 font-size-sm">unarchive</i>
                                 Restore
                               <% end %>
-                              <%= link_to timetracker_project_url(project), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-link text-danger btn-sm p-0 ml-3' do %>
+                              <%= link_to timetracker_project_url(project), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-link text-danger btn-sm p-0 ml-3' do %>
                                 <i class="material-icons align-middle">delete</i>
                               <% end %>
                             </div>
