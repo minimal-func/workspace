@@ -1,12 +1,11 @@
 source "https://rubygems.org"
 
-ruby "2.6.6"
+ruby "3.2.9"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
-gem "rails", '>= 6.0'
+gem "rails", '>= 7.0'
 gem "pg"
 gem "chartkick"
-gem "highcharts-rails"
 
 gem "aws-sdk-s3", require: false
 
@@ -16,6 +15,8 @@ gem 'image_processing', '~> 1.2'
 gem "puma"
 # Use SCSS for stylesheets
 gem "sass-rails"
+# Use jsbundling-rails for JavaScript bundling with esbuild
+gem "jsbundling-rails"
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", ">= 1.3.0"
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -24,7 +25,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem "rest-client"
 
-gem "jquery-rails"
+# gem "jquery-rails" # Removed in favor of vanilla JavaScript
 
 gem "devise"
 gem "slim"
@@ -32,10 +33,8 @@ gem "simple_form"
 
 gem "redcarpet"
 
-gem "react-rails"
-gem 'webpacker', '~> 4.x'
-
 gem 'pagy'
+gem 'turbo-rails'
 
 group :test do
   gem "simplecov", require: false
@@ -44,6 +43,8 @@ group :test do
   gem "timecop"
   gem "webmock", require: false
   gem "selenium-webdriver"
+  gem "capybara"
+  gem 'rails-controller-testing'
 end
 
 group :development, :test do
@@ -58,7 +59,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "fuubar"
   gem "jasmine"
-  gem "jasmine-jquery-rails"
+  # gem "jasmine-jquery-rails" # Removed in favor of vanilla JavaScript
   gem "pry-rails"
   gem "rails_best_practices"
   gem "rspec-rails"
@@ -80,3 +81,8 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
 end
 
+
+# Use Redis for Action Cable
+gem "redis", "~> 4.0"
+
+gem "metainspector", "~> 5.15"

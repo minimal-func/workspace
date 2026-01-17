@@ -1,0 +1,1 @@
+Do not use parentheses in the method call without arguments

@@ -24,6 +24,9 @@ module Timetracker
       task.started_at = DateTime.current
       task.save
 
+      # Award points for creating a task
+      GamificationService.award_points_for(:create_task, current_user, task) if current_user
+
       render json: task
     end
 
@@ -31,6 +34,9 @@ module Timetracker
       @task = Task.find(params[:task_id])
 
       @task.update(finished_at: DateTime.current)
+
+      # Award points for completing a task
+      GamificationService.award_points_for(:complete_task, current_user, @task) if current_user
 
       render json: @task
     end

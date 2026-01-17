@@ -8,14 +8,15 @@ class TaskForm extends React.Component {
     if (!text)
       return false;
     // submit
-    var formData = $(this.refs.form).serialize();
+    const form = this.refs.form;
+    const formData = new URLSearchParams(new FormData(form)).toString();
     this.props.onTaskSubmit( formData, this.props.form.action );
   }
 
   render () {
     return (
       <div className="form">
-        <form ref="form" className="row" action="" action={ this.props.form.action } acceptCharset="UTF-8" method="post" onSubmit={ this.handleSubmit.bind(this) } >
+        <form ref="form" className="row" action={ this.props.form.action } acceptCharset="UTF-8" method="post" onSubmit={ this.handleSubmit.bind(this) } >
           <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
           <div className="col-md-8">
             <div className="row">

@@ -16,8 +16,8 @@ RSpec.describe DayRating, type: :model do
         Timecop.freeze(Time.local(2018, 1, 1, 10))
       end
 
-      let!(:today_day_rating) { create :day_rating, created_at: Time.local(2018, 1, 1, 10) }
-      let!(:yesterday_day_rating) { create :day_rating, created_at: Time.local(2018, 1, 2, 10) }
+      let!(:today_day_rating) { FactoryBot.create :day_rating, created_at: Time.local(2018, 1, 1, 10) }
+      let!(:yesterday_day_rating) { FactoryBot.create :day_rating, created_at: Time.local(2018, 1, 2, 10) }
 
       it 'returns right values' do
         expect(DayRating.today()).to eq([today_day_rating])

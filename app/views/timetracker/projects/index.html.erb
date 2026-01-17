@@ -1,0 +1,139 @@
+<div class="container timetracker-dashboard">
+  <div class="row mb-5">
+    <div class="col-md-10 offset-md-1">
+      <div class="d-flex justify-content-between align-items-end border-bottom pb-3">
+        <div class="timetracker-header mb-0">
+          <h1 class="timetracker-title display-4 font-weight-bold">Project Dashboard</h1>
+          <p class="timetracker-subtitle mb-0">Manage your projects and track time spent on tasks</p>
+        </div>
+        
+        <div class="timetracker-actions mb-0">
+          <%= link_to new_timetracker_project_url, class: 'btn btn-primary rounded-pill px-4 shadow-sm' do %>
+            <i class="material-icons align-middle mr-1">add</i>
+            New Project
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <% if @active_projects.blank? && @closed_projects.blank? %>
+        <div class="text-center py-5 bg-light rounded-lg shadow-sm">
+          <i class="material-icons display-1 text-muted mb-3">work_outline</i>
+          <h3 class="text-secondary">No projects yet</h3>
+          <p class="text-muted mb-4">Create your first project to start tracking time.</p>
+          <%= link_to new_timetracker_project_url, class: 'btn btn-primary rounded-pill px-4' do %>
+            <i class="material-icons align-middle mr-1">add</i>
+            Create Your First Project
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @active_projects.present? %>
+        <div class="mb-5">
+          <h2 class="h4 font-weight-bold mb-4 d-flex align-items-center">
+            <span class="badge badge-primary mr-2"><%= @active_projects.count %></span>
+            Active Projects
+          </h2>
+          
+          <div class="row">
+            <% @active_projects.each do |project| %>
+              <div class="col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm rounded-lg project-card-modern">
+                  <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                      <span class="badge badge-pill badge-success-light px-3 py-2">Active</span>
+                      <div class="dropdown">
+                        <a class="text-muted dropdown__trigger" href="#">
+                          <i class="material-icons">more_vert</i>
+                        </a>
+                        <div class="dropdown__container">
+                          <div class="dropdown__content dropdown-menu dropdown-menu-right border-0 shadow-sm">
+                            <%= link_to timetracker_project_close_url(project), data: { turbo_method: :post }, class: 'dropdown-item text-muted' do %>
+                              <i class="material-icons align-middle mr-2 font-size-sm">archive</i>
+                              Archive Project
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <h3 class="h5 font-weight-bold mb-3">
+                      <%= link_to project.title, timetracker_project_tasks_url(project), class: 'text-dark text-decoration-none hover-primary' %>
+                    </h3>
+                    
+                    <div class="project-stats mb-4 d-flex gap-3">
+                      <div class="small text-muted d-flex align-items-center">
+                        <i class="material-icons font-size-sm mr-1">assignment</i>
+                        <%= pluralize(project.tasks.count, 'task') %>
+                      </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-center justify-content-between">
+                      <%= link_to timetracker_project_tasks_url(project), class: 'btn btn-primary btn-sm rounded-pill px-3 shadow-sm' do %>
+                        <i class="material-icons align-middle mr-1 font-size-sm">timer</i>
+                        Track Time
+                      <% end %>
+                      
+                      <div class="project-progress-mini flex-grow-1 ml-3 mr-2">
+                        <% total = project.tasks.count %>
+                        <% completed = project.tasks.where.not(finished_at: nil).count %>
+                        <% percent = total > 0 ? (completed.to_f / total * 100).round : 0 %>
+                        <div class="progress" style="height: 4px;">
+                          <div class="progress-bar <%= percent == 100 ? 'bg-success' : 'bg-primary' %>" role="progressbar" style="width: <%= percent %>%" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @closed_projects.present? %>
+        <div class="mt-5">
+          <h2 class="h4 font-weight-bold mb-4 text-muted">Archived Projects</h2>
+          <div class="row">
+            <% @closed_projects.each do |project| %>
+              <div class="col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm rounded-lg bg-light opacity-75">
+                  <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                      <span class="badge badge-pill badge-secondary px-3 py-2">Archived</span>
+                      <div class="dropdown">
+                        <a class="text-muted dropdown__trigger" href="#">
+                          <i class="material-icons">more_vert</i>
+                        </a>
+                        <div class="dropdown__container">
+                          <div class="dropdown__content dropdown-menu border-0 shadow-sm">
+                            <div class="d-flex gap-2 p-3">
+                              <%= link_to timetracker_project_open_url(project), data: { turbo_method: :post }, class: 'btn btn-outline-secondary btn-sm rounded-pill px-3' do %>
+                                <i class="material-icons align-middle mr-1 font-size-sm">unarchive</i>
+                                Restore
+                              <% end %>
+                              <%= link_to timetracker_project_url(project), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-link text-danger btn-sm p-0 ml-3' do %>
+                                <i class="material-icons align-middle">delete</i>
+                              <% end %>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <h3 class="h5 font-weight-bold mb-4 text-muted">
+                      <%= project.title %>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

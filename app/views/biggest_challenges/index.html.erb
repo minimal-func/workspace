@@ -15,3 +15,8 @@
   </tbody>
 </table>
 
+<% if @pagy.pages > 1 %>
+  <div class="pagination">
+    <%= pagy_nav(@pagy).html_safe %>
+  </div>
+<% end %>

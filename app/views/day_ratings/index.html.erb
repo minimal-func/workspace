@@ -1,3 +1,5 @@
+<%= line_chart @day_ratings.pluck(:created_at, :value) %>
+
 <table class="border--round table--alternate-row">
   <thead>
     <tr>
@@ -12,8 +14,11 @@
         <td><%= rating.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
       </tr>
     <% end %>
-
-
-    <%= line_chart @day_ratings.pluck(:created_at, :value) %>
   </tbody>
 </table>
+
+<% if @pagy.pages > 1 %>
+  <div class="pagination">
+    <%= pagy_nav(@pagy).html_safe %>
+  </div>
+<% end %>

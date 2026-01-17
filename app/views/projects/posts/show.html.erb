@@ -1,0 +1,48 @@
+<div class="container blog-post">
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <div class="blog-post-header text-center mb-4">
+        <h1 class="blog-post-title"><%= @post.title %></h1>
+        <div class="blog-post-meta text-muted mb-3">
+          <span class="mr-3">
+            <i class="material-icons align-middle mr-1">calendar_today</i>
+            <%= @post.created_at.strftime("%B %d, %Y") %>
+          </span>
+          <span>
+            <i class="material-icons align-middle mr-1">person</i>
+            <%= @post.user.name if @post.respond_to?(:user) && @post.user %>
+          </span>
+        </div>
+      </div>
+
+      <% if @post.featured_image.present? %>
+        <div class="blog-post-featured-image mb-4">
+          <%= image_tag @post.featured_image, class: 'img-fluid rounded w-100' %>
+        </div>
+      <% end %>
+
+      <div class="blog-post-content mb-5">
+        <% if @post.body_json.present? %>
+          <%= render_editorjs_blocks(@post.body_json) %>
+        <% else %>
+          <div class="trix-content">
+            <%=h @post.content %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="blog-post-navigation d-flex justify-content-between mt-5 pt-4 border-top">
+        <%= link_to project_posts_path(@project), class: 'btn btn-outline-primary' do %>
+          <i class="material-icons align-middle mr-1">arrow_back</i>
+          Back to Posts
+        <% end %>
+        <% if current_user && current_user.can_update_resource?(@post) %>
+          <%= link_to edit_project_post_path(@project, @post), class: 'btn btn-outline-secondary' do %>
+            <i class="material-icons align-middle mr-1">edit</i>
+            Edit Post
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

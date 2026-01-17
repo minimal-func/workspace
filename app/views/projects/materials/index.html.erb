@@ -1,0 +1,131 @@
+<div class="container finder-interface resource-index">
+  <div class="row mb-5">
+    <div class="col-md-10 offset-md-1">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center border-bottom pb-3">
+        <div class="mb-3 mb-md-0">
+          <h1 class="resource-index-title display-4 font-weight-bold mb-0">Materials</h1>
+          <p class="text-muted mb-0">Documentation and files for <%= @project.title %></p>
+        </div>
+        <% if current_user %>
+          <div class="d-flex align-items-center flex-wrap">
+            <%= link_to new_project_material_path(@project, folder_id: @current_folder&.id), class: 'btn btn-primary rounded-pill px-4 d-inline-flex align-items-center mr-2 mb-2 mb-md-0' do %>
+              <i class="material-icons mr-1">description</i>
+              <span class="text-nowrap">New File</span>
+            <% end %>
+            <%= link_to new_folder_project_materials_path(@project, folder_id: @current_folder&.id), class: 'btn btn-outline-primary rounded-pill px-4 d-inline-flex align-items-center mb-2 mb-md-0' do %>
+              <i class="material-icons mr-1">folder</i>
+              <span class="text-nowrap">New Folder</span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if @breadcrumbs.any? || @current_folder %>
+    <div class="row mb-4">
+      <div class="col-md-10 offset-md-1">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-light rounded-pill px-4">
+            <li class="breadcrumb-item">
+              <%= link_to project_materials_path(@project), class: 'text-decoration-none' do %>
+                <i class="material-icons align-middle mr-1 font-size-sm">home</i>
+                Root
+              <% end %>
+            </li>
+            <% @breadcrumbs.each do |folder| %>
+              <li class="breadcrumb-item">
+                <%= link_to project_materials_path(@project, folder_id: folder.id), class: 'text-decoration-none' do %>
+                  <%= folder.title %>
+                <% end %>
+              </li>
+            <% end %>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <% if @materials.empty? %>
+        <div class="text-center py-5 bg-light rounded-lg shadow-sm">
+          <i class="material-icons display-1 text-muted mb-3">folder_open</i>
+          <h3 class="text-secondary">This folder is empty</h3>
+          <p class="text-muted mb-4">Add files or create folders to organize your materials.</p>
+          <% if current_user %>
+            <div class="d-flex justify-content-center gap-2 align-items-center flex-wrap">
+              <%= link_to new_project_material_path(@project, folder_id: @current_folder&.id), class: 'btn btn-primary rounded-pill px-4 d-inline-flex align-items-center mb-2' do %>
+                <i class="material-icons mr-1">description</i>
+                <span class="text-nowrap">Add File</span>
+              <% end %>
+              <%= link_to new_folder_project_materials_path(@project, folder_id: @current_folder&.id), class: 'btn btn-outline-primary rounded-pill px-4 d-inline-flex align-items-center mb-2' do %>
+                <i class="material-icons mr-1">folder</i>
+                <span class="text-nowrap">Create Folder</span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="row">
+          <% @materials.each do |material| %>
+            <div class="col-md-6 mb-4">
+              <div class="card h-100 border-0 shadow-sm rounded-lg resource-card-modern">
+                <div class="card-body p-4">
+                  <div class="d-flex align-items-start mb-3">
+                    <% if material.folder? %>
+                      <div class="bg-warning-light rounded p-3 mr-3">
+                        <i class="material-icons text-warning">folder</i>
+                      </div>
+                    <% else %>
+                      <div class="bg-primary-light rounded p-3 mr-3">
+                        <i class="material-icons text-primary">description</i>
+                      </div>
+                    <% end %>
+                    
+                    <div class="flex-grow-1">
+                      <h4 class="h5 font-weight-bold mb-1">
+                        <% if material.folder? %>
+                          <%= link_to material.title, project_materials_path(@project, folder_id: material.id), class: 'text-dark text-decoration-none hover-primary' %>
+                        <% else %>
+                          <%= material.title %>
+                        <% end %>
+                      </h4>
+                      
+                      <% if material.short_description.present? %>
+                        <p class="small text-muted mb-0"><%= truncate(material.short_description, length: 80) %></p>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="card-footer bg-white border-0 px-4 pb-4 pt-0">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="actions">
+                      <% if !material.folder? && material.file.attached? %>
+                        <%= link_to material.file, class: 'btn btn-outline-success btn-sm rounded-pill px-3 mr-2', target: '_blank' do %>
+                          <i class="material-icons align-middle mr-1 font-size-sm">download</i>
+                          Download
+                        <% end %>
+                      <% elsif material.folder? %>
+                        <%= link_to project_materials_path(@project, folder_id: material.id), class: 'btn btn-outline-primary btn-sm rounded-pill px-3' do %>
+                          Open Folder
+                        <% end %>
+                      <% end %>
+                    </div>
+                    
+                    <% if current_user %>
+                      <%= link_to edit_project_material_path(@project, material), class: 'btn btn-link text-muted p-0', title: 'Edit' do %>
+                        <i class="material-icons align-middle">edit</i>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
