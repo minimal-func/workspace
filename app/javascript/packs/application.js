@@ -10,8 +10,6 @@ require("@rails/actiontext")
 import { Turbo } from "@hotwired/turbo-rails";
 window.Turbo = Turbo;
 
-document.addEventListener('DOMContentLoaded', loadReact)
-document.addEventListener('turbo:render', loadReact)
 
 // Function to get CSRF token from meta tag
 function getCSRFToken() {
@@ -32,11 +30,12 @@ window.fetch = function(url, options = {}) {
 
 function loadReact(){
   const rootElement = document.getElementById('root');
-  if (rootElement) {
-    const presenter = JSON.parse(rootElement.dataset.presenter);
-    console.log(presenter);
-    ReactDOM.render(<TaskBox presenter={presenter} />, rootElement);
-  }
+  if (!rootElement || rootElement.dataset.reactInitialized) return;
+  rootElement.dataset.reactInitialized = "true";
+
+  const presenter = JSON.parse(rootElement.dataset.presenter);
+  console.log(presenter);
+  ReactDOM.render(<TaskBox presenter={presenter} />, rootElement);
 }
 
 // Function to initialize Trix editor with custom embed functionality
@@ -44,6 +43,9 @@ function initTrixEditor() {
   var element = document.querySelector("trix-editor")
 
   if(element && element.toolbarElement) {
+    if (element.dataset.trixInitialized) return;
+    element.dataset.trixInitialized = "true";
+
     var editor = element.editor;
 
     const buttonHTML =
@@ -127,16 +129,14 @@ function initTrixEditor() {
   }
 }
 
-// Initialize Trix editor on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', initTrixEditor);
-
-// Also initialize Trix editor on Turbo navigation
-document.addEventListener('turbo:render', initTrixEditor);
 
 // Function to initialize speech recognition, chat form, and embed handling
 function initChatAndEmbeds() {
-  const recordButton = document.getElementById('recordButton');
   const chatForm = document.getElementById('chatForm');
+  if (!chatForm || chatForm.dataset.chatInitialized) return;
+  chatForm.dataset.chatInitialized = "true";
+
+  const recordButton = document.getElementById('recordButton');
   const textInput = document.getElementById('textInput');
   const conversation = document.getElementById('conversation');
 
@@ -219,16 +219,118 @@ function initChatAndEmbeds() {
   });
 }
 
-// Initialize chat and embeds on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', initChatAndEmbeds);
-
-// Also initialize chat and embeds on Turbo navigation
-document.addEventListener('turbo:render', initChatAndEmbeds);
 
 require("trix")
 
 // Import our custom scripts
 import './scripts'
+import PostEditor from '../editor/post_editor';
+import { initDashboard } from '../dashboard';
+import { initNotifications } from '../notifications';
+import { initDatepickers } from './datepicker';
 
-// Import and initialize datepicker
-import './datepicker'
+function initPostEditor() {
+  const editorContainer = document.getElementById('post-editor');
+  if (!editorContainer || editorContainer.dataset.editorInitialized) return;
+  editorContainer.dataset.editorInitialized = "true";
+
+  const hiddenInput = document.getElementById('post_body_json');
+  let initialData = {};
+  try {
+    initialData = (hiddenInput.value && hiddenInput.value !== 'null') ? JSON.parse(hiddenInput.value) : {};
+  } catch (e) {
+    console.error('Error parsing initial data', e);
+  }
+  const postId = editorContainer.dataset.postId;
+  const projectId = editorContainer.dataset.projectId;
+
+  let timeout;
+  const editor = new PostEditor('post-editor', initialData, {
+    projectId: projectId,
+    postId: postId,
+    onChange: (data) => {
+      hiddenInput.value = JSON.stringify(data);
+      
+      // Auto-save
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        const url = postId ? `/projects/${projectId}/posts/${postId}` : `/projects/${projectId}/posts`;
+        const method = postId ? 'PATCH' : 'POST';
+        
+        // Only auto-save if it's an existing post for now to avoid multiple create calls
+        if (postId) {
+          fetch(url, {
+            method: method,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              post: {
+                body_json: data
+              }
+            })
+          }).then(response => {
+            if (response.ok) {
+              console.log('Auto-saved successfully');
+            }
+          });
+        }
+      }, 2000);
+    }
+  });
+
+  const form = editorContainer.closest('form');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      const data = await editor.save();
+      if (hiddenInput) {
+        hiddenInput.value = JSON.stringify(data);
+      }
+    });
+  }
+}
+
+function initReflectionEditor() {
+  const editorContainer = document.getElementById('reflection-editor');
+  if (!editorContainer || editorContainer.dataset.editorInitialized) return;
+  editorContainer.dataset.editorInitialized = "true";
+
+  const hiddenInput = document.getElementById('reflection_body_json');
+  let initialData = {};
+  try {
+    initialData = (hiddenInput && hiddenInput.value && hiddenInput.value !== 'null' && hiddenInput.value !== '') ? JSON.parse(hiddenInput.value) : {};
+  } catch (e) {
+    console.error('Error parsing initial data', e);
+  }
+
+  const editor = new PostEditor('reflection-editor', initialData, {
+    onChange: (data) => {
+      if (hiddenInput) {
+        hiddenInput.value = JSON.stringify(data);
+      }
+    }
+  });
+
+  const form = editorContainer.closest('form');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      const data = await editor.save();
+      if (hiddenInput) {
+        hiddenInput.value = JSON.stringify(data);
+      }
+    });
+  }
+}
+
+function initApp() {
+  loadReact();
+  initTrixEditor();
+  initChatAndEmbeds();
+  initPostEditor();
+  initReflectionEditor();
+  initDashboard();
+  initNotifications();
+  initDatepickers();
+}
+
+document.addEventListener('turbo:load', initApp);

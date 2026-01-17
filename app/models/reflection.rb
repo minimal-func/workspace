@@ -1,4 +1,5 @@
 class Reflection < ApplicationRecord
+  include Notifiable
   belongs_to :user
   has_rich_text :content
 

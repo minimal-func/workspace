@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.2.0"
+ruby "3.2.9"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
 gem "rails", '>= 7.0'
@@ -43,6 +43,7 @@ group :test do
   gem "timecop"
   gem "webmock", require: false
   gem "selenium-webdriver"
+  gem "capybara"
   gem 'rails-controller-testing'
 end
 
@@ -83,3 +84,5 @@ end
 
 # Use Redis for Action Cable
 gem "redis", "~> 4.0"
+
+gem "metainspector", "~> 5.15"

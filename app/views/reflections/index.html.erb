@@ -6,8 +6,14 @@
       <div class="col-md-12 mb-5">
         <div class="card shadow border bg-light">
           <div class="card-body p-4">
-            <div class="trix-content mb-4">
-              <%= reflection.content %>
+            <div class="mb-4">
+              <% if reflection.body_json.present? %>
+                <%= render_editorjs_blocks(reflection.body_json) %>
+              <% else %>
+                <div class="trix-content">
+                  <%= reflection.content %>
+                </div>
+              <% end %>
             </div>
             <div class="text-muted mt-4 text-right border-top pt-3">
               <small><%= reflection.created_at.strftime("%d.%m.%Y at %H:%M") %></small>
