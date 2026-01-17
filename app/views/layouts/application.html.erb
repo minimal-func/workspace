@@ -3,7 +3,12 @@
   <head>
     <title>MyDay.<%= @app_title %></title>
     <%= csrf_meta_tags %>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="MyDay">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= stylesheet_link_tag 'included', media: 'all' %>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i" rel="stylesheet">
@@ -12,12 +17,20 @@
   </head>
 
   <body>
+    <% flash.each do |key, value| %>
+      <div class="notification pos-right pos-top col-md-4 col-lg-3" data-animation="from-top" data-notification-link="search-box">
+        <div class="notification-close-cross"></div>
+        <div class="alert alert-<%= key %> mb-0">
+          <%= value %>
+        </div>
+      </div>
+    <% end %>
     <div class="main-container">
-      <%= render "header" %>
+      <%= render "header" unless turbo_native_app? %>
       <div class="container">
         <%= yield %>
       </div>
     </div>
-    <%= render "footer" %>
+    <%= render "footer" unless turbo_native_app? %>
   </body>
 </html>

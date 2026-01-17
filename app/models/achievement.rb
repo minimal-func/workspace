@@ -27,5 +27,9 @@ class Achievement < ApplicationRecord
     return if earned_by?(user)
     
     user_achievements.create!(user: user, earned_at: Time.current)
+    user.notifications.create!(
+      message: "You've earned the achievement: #{name}!",
+      notifiable: self
+    )
   end
 end

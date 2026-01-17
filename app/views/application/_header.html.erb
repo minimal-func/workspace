@@ -19,102 +19,69 @@
             </li>
             <li class="dropdown">
               <span class="dropdown__trigger">History</span>
-              <div class="dropdown__container">
-                <div class="container">
-                  <div class="row">
-                    <div class="dropdown__content col-lg-2 col-md-4">
-                      <ul class="menu-vertical">
-                        <li>
-                          <%= link_to "Reflections", reflections_url %>
-                        </li>
-                        <li>
-                          <%= link_to "Day Ratings", day_ratings_url %>
-                        </li>
-                        <li>
-                          <%= link_to "Energy Levels", energy_levels_url %>
-                        </li>
-                        <li>
-                          <%= link_to "Mood History", moods_url %>
-                        </li>
-                        <li>
-                          <%= link_to "Biggest Challenges", biggest_challenges_url %>
-                        </li>
-                        <li>
-                          <%= link_to "Daily Lessons", daily_lessons_url %>
-                          <span></span>
-                        </li>
-                        <li>
-                          <%= link_to "Daily Gratitudes", daily_gratitudes_url %>
-                          <span></span>
-                        </li>
-                      </ul>
-                    </div>
-                    <!--end dropdown content-->
-                  </div>
-                  <!--end row-->
+              <div class="dropdown__container" style="min-width: 200px;">
+                <div class="dropdown__content p-3">
+                  <ul class="menu-vertical">
+                    <li>
+                      <%= link_to "Reflections", reflections_url %>
+                    </li>
+                    <li>
+                      <%= link_to "Day Ratings", day_ratings_url %>
+                    </li>
+                    <li>
+                      <%= link_to "Energy Levels", energy_levels_url %>
+                    </li>
+                    <li>
+                      <%= link_to "Mood History", moods_url %>
+                    </li>
+                    <li>
+                      <%= link_to "Biggest Challenges", biggest_challenges_url %>
+                    </li>
+                    <li>
+                      <%= link_to "Daily Lessons", daily_lessons_url %>
+                    </li>
+                    <li>
+                      <%= link_to "Daily Gratitudes", daily_gratitudes_url %>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <!--end dropdown container-->
             </li>
             <li class="dropdown">
               <span class="dropdown__trigger">Projects</span>
-              <div class="dropdown__container">
-                <div class="container">
-                  <div class="row">
-                    <div class="dropdown__content col-lg-4 col-md-6">
-                      <% if current_user && current_user.projects.any? %>
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <h5 class="mb-2">Projects</h5>
+              <div class="dropdown__container" style="min-width: 300px;">
+                <div class="dropdown__content p-3">
+                  <% if current_user && current_user.projects.any? %>
+                    <h5 class="mb-2">Projects</h5>
+                    <div class="projects-list">
+                      <% current_user.projects.where(closed: false).each do |project| %>
+                        <div class="project-dropdown mb-2">
+                          <div class="project-dropdown__trigger">
+                            <h6 class="mb-0">
+                              <%= link_to project.title, timetracker_project_tasks_path(project), class: "project-title-link" %>
+                            </h6>
+                          </div>
+                          <div class="project-dropdown__content">
+                            <ul class="menu-vertical">
+                              <li><%= link_to "Timetracker", timetracker_project_tasks_path(project) %></li>
+                              <li><%= link_to "Posts", project_posts_path(project) %></li>
+                              <li><%= link_to "Materials", project_materials_path(project) %></li>
+                              <li><%= link_to "Saved Links", project_saved_links_path(project) %></li>
+                              <li><%= link_to "Todos", project_todos_path(project) %></li>
+                            </ul>
                           </div>
                         </div>
-                        <div class="row">
-                          <% current_user.projects.where(closed: false).each do |project| %>
-                            <div class="col-lg-12">
-                              <div class="project-dropdown">
-                                <div class="project-dropdown__trigger">
-                                  <h6 class="mb-1">
-                                    <%= link_to project.title, timetracker_project_tasks_path(project), class: "project-title-link" %>
-                                  </h6>
-                                </div>
-                                <div class="project-dropdown__content">
-                                  <ul class="menu-vertical">
-                                    <li>
-                                      <%= link_to "Timetracker", timetracker_project_tasks_path(project) %>
-                                    </li>
-                                    <li>
-                                      <%= link_to "Posts", project_posts_path(project) %>
-                                    </li>
-                                    <li>
-                                      <%= link_to "Materials", project_materials_path(project) %></li>
-                                    <li>
-                                      <%= link_to "Saved Links", project_saved_links_path(project) %>
-                                    </li>
-                                    <li>
-                                      <%= link_to "Todos", project_todos_path(project) %>
-                                    </li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-                          <% end %>
-                        </div>
-                        <div class="row mt-2">
-                          <div class="col-lg-12">
-                            <%= link_to "All Projects", timetracker_projects_path, class: "btn btn-sm btn-primary" %>
-                          </div>
-                        </div>
-                      <% else %>
-                        <p>No projects yet.</p>
-                        <%= link_to "Create your first project", new_timetracker_project_path, class: "btn btn-sm btn-primary" %>
                       <% end %>
                     </div>
-                    <!--end dropdown content-->
-                  </div>
-                  <!--end row-->
+                    <div class="mt-3">
+                      <%= link_to "All Projects", timetracker_projects_path, class: "btn btn-sm btn-primary" %>
+                    </div>
+                  <% else %>
+                    <p>No projects yet.</p>
+                    <%= link_to "Create your first project", new_timetracker_project_path, class: "btn btn-sm btn-primary" %>
+                  <% end %>
                 </div>
               </div>
-              <!--end dropdown container-->
             </li>
           </ul>
         </div>

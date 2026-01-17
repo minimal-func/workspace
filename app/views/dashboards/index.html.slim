@@ -1,65 +1,97 @@
-.d-flex.justify-content-center
+.container
+  .row.justify-content-center
+    .col-md-10.col-lg-8
+      .card.shadow-sm
+        .card-header.bg-white.py-3
+          .d-flex.justify-content-between.align-items-center
+            h4.mb-0= DateTime.now.strftime("%A, %d %B %Y")
+            span.text-muted= DateTime.now.strftime("%H:%M")
 
-  .col-sm-12
-    = simple_form_for(@user, url: dashboards_url, method: :post, html: { class: 'row' }) do |f|
-      .col-sm-12
-        span
-          = DateTime.now.strftime("%A, %d %B %Y, %H:%M")
-      - if @main_task
-        .col-sm-12
-          span
-            | I need to&nbsp;
-            = @main_task.name.downcase
-            | &nbsp;by&nbsp;
-            strong= @main_task.planned_finish.strftime("%A, %d %B %Y")
-            =< link_to "edit", new_main_task_url, class: 'color--dark'
+        .card-body.p-4
+          = simple_form_for(@user, url: dashboards_url, method: :post, html: { class: 'dashboard-form' }) do |f|
+            .mb-4
+              - if @main_task
+                .alert.alert-info.d-flex.justify-content-between.align-items-center
+                  div
+                    | I need to&nbsp;
+                    strong= @main_task.name.downcase
+                    | &nbsp;by&nbsp;
+                    strong= @main_task.planned_finish.strftime("%A, %d %B %Y")
+                  = link_to "edit", new_main_task_url, class: 'btn btn-sm btn-outline-info'
+                p.text-center
+                  = link_to "Track my time", timetracker_projects_url, class: 'btn btn-link'
+              - else
+                .alert.alert-warning.d-flex.justify-content-between.align-items-center
+                  span You did not set your main task yet
+                  = link_to "Set my main task", new_main_task_url, class: 'btn btn-sm btn-warning'
 
-        .col-sm-12
-          p
-            => link_to "Track my time", timetracker_projects_url, class: 'color--dark'
-      - else
-        .col-sm-12
-          span You did not set your main task yet
-        .col-sm-12
-          = link_to "Set my main task", new_main_task_url
+            .form-group.mb-5
+              label.font-weight-bold.d-block * My mood today:
+              .mood-drag-wrapper.mt-3.w-100
+                = f.simple_fields_for :today_moods do |mood|
+                  .d-flex.justify-content-between.align-items-center.mb-2
+                    .mood-icon-display.text-primary
+                      i#mood-icon.icon-Happy style="font-size: 2.5rem;"
+                    span#mood-value-display.badge.badge-primary.font-weight-bold style="font-size: 1.1rem;"= mood.object.value || 10
+                  input#mood-slider.form-range.w-100 type="range" min="1" max="10" step="1" value=(mood.object.value || 10)
+                  .d-flex.justify-content-between.mt-1.small.text-muted
+                    span Bad
+                    span Awesome
+                  = mood.input :value, as: :hidden, input_html: { id: 'mood-hidden-input', value: mood.object.value || 10 }
 
-      .col-sm-12
-        label * My mood today (1=bad 10=awesome):
-        .input-radio.input-radio--innerlabel.d-flex.justify-content-center
-          = f.simple_fields_for :today_moods do |mood|
-            = mood.input :value, as: :radio_buttons, label: false, required: true, collection: 1..10, checked: mood.object.value || 10, wrapper_html: { class: 'row' }
+            .form-group.mb-5
+              label.font-weight-bold.d-block * My level of confidence that I'm on the right track:
+              .confidence-drag-wrapper.mt-3.w-100
+                = f.simple_fields_for :today_day_ratings do |day_rating|
+                  .d-flex.justify-content-between.align-items-center.mb-2
+                    .confidence-icon-display.text-primary
+                      i#confidence-icon.icon-Trophy style="font-size: 2.5rem;"
+                    span#confidence-value-display.badge.badge-primary.font-weight-bold style="font-size: 1.1rem;"= day_rating.object.value || 10
+                  input#confidence-slider.form-range.w-100 type="range" min="1" max="10" step="1" value=(day_rating.object.value || 10)
+                  .d-flex.justify-content-between.mt-1.small.text-muted
+                    span Lowest
+                    span Highest
+                  = day_rating.input :value, as: :hidden, input_html: { id: 'confidence-hidden-input', value: day_rating.object.value || 10 }
 
-      .col-sm-12
-        label * My level of confidence that I'm on the right track (1=lowest 10=highest):
-        .input-radio.input-radio--innerlabel.d-flex.justify-content-center
-          = f.simple_fields_for :today_day_ratings do |day_rating|
-            = day_rating.input :value, as: :radio_buttons, label: false, required: true, collection: 1..10, checked: day_rating.object.value || 10, wrapper_html: { class: 'row' }
+            .form-group.mb-5
+              label.font-weight-bold.d-block * My level of energy:
+              .energy-drag-wrapper.mt-3.w-100
+                = f.simple_fields_for :today_energy_levels do |energy_level|
+                  .d-flex.justify-content-between.align-items-center.mb-2
+                    .energy-icon-display.text-primary
+                      i#energy-icon.icon-Battery-100 style="font-size: 2.5rem;"
+                    span#energy-value-display.badge.badge-primary.font-weight-bold style="font-size: 1.1rem;"= energy_level.object.value || 10
+                  input#energy-slider.form-range.w-100 type="range" min="1" max="10" step="1" value=(energy_level.object.value || 10)
+                  .d-flex.justify-content-between.mt-1.small.text-muted
+                    span Lowest
+                    span Highest
+                  = energy_level.input :value, as: :hidden, input_html: { id: 'energy-hidden-input', value: energy_level.object.value || 10 }
 
-      .col-sm-12
-        label * My level of energy (1=lowest 10=highest):
-        .input-radio.input-radio--innerlabel.d-flex.justify-content-center
-          = f.simple_fields_for :today_energy_levels do |energy_level|
-            = energy_level.input :value, as: :radio_buttons, label: false, required: true, collection: 1..10, checked: energy_level.object.value || 10, wrapper_html: { class: 'row' }
+            hr.my-4
 
-      .col-sm-12
-        = f.simple_fields_for :today_biggest_challenges do |biggest_challenge|
-          = biggest_challenge.input :content, placeholder: "To make my day successful I need to ...", label: "Today's Biggest Challenge:", required: true, input_html: { rows: 1 }
+            .form-group.mb-4
+              = f.simple_fields_for :today_biggest_challenges do |biggest_challenge|
+                = biggest_challenge.input :content, placeholder: "To make my day successful I need to ...", 
+                  label: "Today's Biggest Challenge:", required: true, 
+                  input_html: { rows: 2, class: 'form-control' }
 
-      .col-sm-12
-        = f.simple_fields_for :today_daily_lessons do |daily_lesson|
-          = daily_lesson.input :content, placeholder: "What did I learn today", label: "One Important thing I learned today:", required: true, input_html: { rows: 1 }
+            .form-group.mb-4
+              = f.simple_fields_for :today_daily_lessons do |daily_lesson|
+                = daily_lesson.input :content, placeholder: "What did I learn today", 
+                  label: "One Important thing I learned today:", required: true, 
+                  input_html: { rows: 2, class: 'form-control' }
 
-      .col-sm-12
-        = f.simple_fields_for :today_daily_gratitudes do |daily_gratitude|
-          = daily_gratitude.input :content, placeholder: "Today I am grateful for ...", label: "Today I am grateful for:", required: true, input_html: { rows: 2 }
+            .form-group.mb-4
+              = f.simple_fields_for :today_daily_gratitudes do |daily_gratitude|
+                = daily_gratitude.input :content, placeholder: "Today I am grateful for ...", 
+                  label: "Today I am grateful for:", required: true, 
+                  input_html: { rows: 2, class: 'form-control' }
 
-      .col-sm-12
-        = f.simple_fields_for :today_reflections do |reflection|
-          = reflection.input :content, as: :rich_text_area, label: "I didn't have time today but tomorrow I will...", required: true, input_html: { data: { embeds_path: embeds_path(reflection.object, format: :json) } }
+            .form-group.mb-4
+              = f.simple_fields_for :today_reflections do |reflection|
+                label.font-weight-bold I didn't have time today but tomorrow I will...
+                #reflection-editor.mt-2.border.rounded.p-3 style="min-height: 150px;" data-reflection-id=reflection.object.id
+                = reflection.input :body_json, as: :hidden, input_html: { id: 'reflection_body_json', value: reflection.object.body_json.to_json }
 
-      .col-sm-12
-        = f.button :submit, "Save my day"
-
-      / .col-sm-12
-      /   pre
-      /     = simple_format(render "formatting")
+            .form-actions.mt-5.text-center
+              = f.button :submit, "Save my day", class: "btn btn-primary btn-lg px-5"
