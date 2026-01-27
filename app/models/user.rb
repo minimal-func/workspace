@@ -24,6 +24,7 @@ class User < ApplicationRecord
 
   has_many :projects
   has_many :notifications, dependent: :destroy
+  has_many :crypto_transactions, dependent: :destroy
 
   # Gamification associations
   has_many :points, dependent: :destroy

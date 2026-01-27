@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :crypto_holdings, only: [:index] do
+    collection do
+      patch :update_wallet
+      post :sync_wallet
+    end
+  end
   resources :notifications, only: [:index, :update] do
     collection do
       post :images, controller: 'notifications/images', action: 'create'
