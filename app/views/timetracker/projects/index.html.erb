@@ -50,9 +50,9 @@
                           <i class="material-icons">more_vert</i>
                         </a>
                         <div class="dropdown__container">
-                          <div class="dropdown__content dropdown-menu dropdown-menu-right border-0 shadow-sm">
-                            <%= link_to timetracker_project_close_url(project), data: { turbo_method: :post }, class: 'dropdown-item text-muted' do %>
-                              <i class="material-icons align-middle mr-2 font-size-sm">archive</i>
+                          <div class="dropdown__content dropdown-menu dropdown-menu-right border-0 shadow-sm project-actions-menu">
+                            <%= link_to timetracker_project_close_url(project), data: { turbo_method: :post }, class: 'dropdown-item' do %>
+                              <i class="material-icons">archive</i>
                               Archive Project
                             <% end %>
                           </div>
@@ -100,7 +100,7 @@
           <div class="row">
             <% @closed_projects.each do |project| %>
               <div class="col-md-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm rounded-lg bg-light opacity-75">
+                <div class="card h-100 border-0 shadow-sm rounded-lg archived-project-card">
                   <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-start mb-3">
                       <span class="badge badge-pill badge-secondary px-3 py-2">Archived</span>
@@ -109,16 +109,15 @@
                           <i class="material-icons">more_vert</i>
                         </a>
                         <div class="dropdown__container">
-                          <div class="dropdown__content dropdown-menu border-0 shadow-sm">
-                            <div class="d-flex gap-2 p-3">
-                              <%= link_to timetracker_project_open_url(project), data: { turbo_method: :post }, class: 'btn btn-outline-secondary btn-sm rounded-pill px-3' do %>
-                                <i class="material-icons align-middle mr-1 font-size-sm">unarchive</i>
-                                Restore
-                              <% end %>
-                              <%= link_to timetracker_project_url(project), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-link text-danger btn-sm p-0 ml-3' do %>
-                                <i class="material-icons align-middle">delete</i>
-                              <% end %>
-                            </div>
+                          <div class="dropdown__content dropdown-menu dropdown-menu-right border-0 shadow-sm project-actions-menu">
+                            <%= link_to timetracker_project_open_url(project), data: { turbo_method: :post }, class: 'dropdown-item' do %>
+                              <i class="material-icons">unarchive</i>
+                              Restore
+                            <% end %>
+                            <%= link_to timetracker_project_url(project), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'dropdown-item text-danger' do %>
+                              <i class="material-icons">delete</i>
+                              Delete
+                            <% end %>
                           </div>
                         </div>
                       </div>

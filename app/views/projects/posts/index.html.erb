@@ -64,7 +64,7 @@
                     <% end %>
                     
                     <% if current_user && current_user.can_update_resource?(post) %>
-                      <%= link_to edit_project_post_path(@project, post), class: 'btn btn-link text-muted p-0', title: 'Edit Post' do %>
+                      <%= link_to edit_project_post_path(@project, post), class: 'btn btn-link text-muted p-0 blog-edit-button', title: 'Edit Post' do %>
                         <i class="material-icons align-middle">edit</i>
                       <% end %>
                     <% end %>

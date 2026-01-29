@@ -86,6 +86,50 @@
   cursor: pointer !important;
 }
 
+/* Align SimpleForm checkbox and label on the same baseline */
+.simple_form .form-check {
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+}
+
+.simple_form .form-check .form-check-input {
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.simple_form .form-check .form-check-label {
+  margin-left: 0.5rem;
+}
+
+/* Keep post visibility checkbox aligned and prevent nested wrapper spacing issues */
+.public-visibility-toggle {
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+.public-visibility-toggle .form-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+.public-visibility-toggle .form-check .form-check-input {
+  position: static;
+  margin: 0;
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+}
+
+.public-visibility-toggle .form-check .form-check-label {
+  display: inline-block;
+  margin: 0;
+  line-height: 1.2;
+}
+
 /* Ensure mood selection labels remain clickable and properly associated */
 .input-radio--innerlabel label {
   cursor: pointer !important;

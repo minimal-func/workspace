@@ -115,7 +115,7 @@
                     </div>
                     
                     <% if current_user %>
-                      <%= link_to edit_project_material_path(@project, material), class: 'btn btn-link text-muted p-0', title: 'Edit' do %>
+                      <%= link_to edit_project_material_path(@project, material), class: 'material-edit-button', title: 'Edit' do %>
                         <i class="material-icons align-middle">edit</i>
                       <% end %>
                     <% end %>

@@ -1,36 +1,42 @@
-<div class="d-flex justify-content-center">
-  <h1>Edit post</h1>
-</div>
-
-<div class="d-flex justify-content-center">
-  <%= simple_form_for [@project, @post], html: { class: 'w-100', style: 'max-width: 800px;' } do |f| %>
-    <div class="col-sm-12 mb-4">
-      <%= f.input :title, label: false, placeholder: "Title", input_html: { class: 'display-4 border-0 shadow-none px-0', style: 'font-weight: bold; background: transparent;' } %>
-    </div>
-    <div class="col-sm-12 mb-3">
-      <%= f.input :featured_image, label: "Add Cover", input_html: { class: 'form-control-file' } %>
-    </div>
-    <div class="col-sm-12 mb-3">
-      <%= f.input :short_description, label: false, placeholder: "Add a short description...", input_html: { class: 'lead border-0 shadow-none px-0', style: 'background: transparent;' } %>
-    </div>
-
-    <div class="col-sm-12 mb-3">
-      <div id="post-editor" data-post-id="<%= @post.id %>" data-project-id="<%= @project.id %>"></div>
-      <%= f.input :body_json, as: :hidden, input_html: { id: 'post_body_json', value: @post.body_json.to_json } %>
-    </div>
-
-    <div class="col-sm-12 mb-5">
-      <%= f.input :public, as: :boolean, wrapper: :boolean, label: "Publicly visible" %>
-    </div>
-
-    <div class="col-sm-12 d-flex align-items-center justify-content-between border-top pt-4">
-      <div>
-        <%= f.button :submit, "Save Changes", class: 'btn btn-primary' %>
-        <%= link_to "Cancel", project_post_path(@project, @post), class: 'btn btn-link text-muted' %>
+<div class="container post-form-page">
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <div class="d-flex justify-content-center mb-4">
+        <h1>Edit post</h1>
       </div>
-      <div class="text-muted small">
-        Changes are saved automatically
-      </div>
+
+      <%= simple_form_for [@project, @post], html: { class: 'post-form' } do |f| %>
+        <div class="row">
+          <div class="col-12 mb-4">
+            <%= f.input :title, label: false, placeholder: "Title", input_html: { class: 'display-4 border-0 shadow-none px-0', style: 'font-weight: bold; background: transparent;' } %>
+          </div>
+          <div class="col-12 mb-3">
+            <%= f.input :featured_image, label: "Add Cover", input_html: { class: 'form-control-file' } %>
+          </div>
+          <div class="col-12 mb-3">
+            <%= f.input :short_description, label: false, placeholder: "Add a short description...", input_html: { class: 'lead border-0 shadow-none px-0', style: 'background: transparent;' } %>
+          </div>
+
+          <div class="col-12 mb-3">
+            <div id="post-editor" data-post-id="<%= @post.id %>" data-project-id="<%= @project.id %>"></div>
+            <%= f.input :body_json, as: :hidden, input_html: { id: 'post_body_json', value: @post.body_json.to_json } %>
+          </div>
+
+          <div class="col-12 mb-5">
+            <%= f.input :public, as: :boolean, wrapper: :boolean, label: "Publicly visible", wrapper_html: { class: 'public-visibility-toggle' } %>
+          </div>
+
+          <div class="col-12 d-flex flex-column flex-md-row align-items-md-center justify-content-between border-top pt-4">
+            <div class="mb-3 mb-md-0">
+              <%= f.button :submit, "Save Changes", class: 'btn btn-primary' %>
+              <%= link_to "Cancel", project_post_path(@project, @post), class: 'btn btn-link text-muted' %>
+            </div>
+            <div class="text-muted small text-md-right">
+              Changes are saved automatically
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
