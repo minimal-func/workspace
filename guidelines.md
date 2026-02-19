@@ -1,1 +1,2 @@
-Do not use parentheses in the method call without arguments
+- Do not use parentheses in the method call without arguments
+- Use `.erb` for pages generation instead of `.slim`
