@@ -8,3 +8,4 @@
 
 # Load gamification seed data
 require_relative 'seeds/gamification'
+require_relative 'seeds/sample_data'
