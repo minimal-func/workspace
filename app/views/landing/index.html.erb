@@ -2,8 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 offset-md-2">
-        <h1 class="landing-title text-white">Design Your Best Self</h1>
-        <p class="lead mb-4 text-white opacity-100">The ultimate toolkit for personal growth. Track your moods, build powerful habits, and reflect on your journey with an all-in-one digital companion.</p>
+        <span class="landing-eyebrow text-white">A daily system for wellbeing</span>
+        <h1 class="landing-title text-white">Build a life that feels lighter, calmer, and more meaningful</h1>
+        <p class="lead mb-4 text-white opacity-100">MyDay helps you increase happiness by tracking mood, energy, gratitude, and direction in one place, so you can repeat what makes your days better.</p>
         <div class="landing-cta">
           <% if current_user %>
             <%= link_to "Go to Dashboard", dashboards_path, class: "btn btn-lg btn-primary mr-2" %>
@@ -21,40 +22,81 @@
   <div class="container">
     <div class="row text-center">
       <div class="col-md-12">
-        <h2 class="landing-section-title">A Framework for Growth</h2>
-        <p class="landing-section-subtitle">MyDay provides the structure you need to build a better you, one day at a time.</p>
+        <h2 class="landing-section-title">A Practical Framework for Happiness</h2>
+        <p class="landing-section-subtitle">The app turns vague self-improvement into a daily loop you can actually follow.</p>
       </div>
     </div>
 
     <div class="row mt-5">
       <div class="col-md-3 text-center">
         <div class="feature-box">
-          <i class="material-icons feature-icon">auto_stories</i>
-          <h4 class="feature-title">Daily Journaling</h4>
-          <p class="feature-text">Capture your thoughts, challenges, and wins with a structured, searchable daily journal.</p>
+          <i class="material-icons feature-icon">sentiment_very_satisfied</i>
+          <h4 class="feature-title">Notice What Lifts You</h4>
+          <p class="feature-text">Track mood over time and see which routines, people, and environments consistently improve your days.</p>
         </div>
       </div>
 
       <div class="col-md-3 text-center">
         <div class="feature-box">
-          <i class="material-icons feature-icon">sentiment_satisfied</i>
-          <h4 class="feature-title">Mood & Energy Tracking</h4>
-          <p class="feature-text">Log your emotional state and energy levels to identify patterns and cultivate well-being.</p>
+          <i class="material-icons feature-icon">battery_charging_full</i>
+          <h4 class="feature-title">Protect Your Energy</h4>
+          <p class="feature-text">Measure energy alongside mood so you can catch burnout early and make better decisions before the day slips away.</p>
         </div>
       </div>
 
       <div class="col-md-3 text-center">
         <div class="feature-box">
-          <i class="material-icons feature-icon">emoji_events</i>
-          <h4 class="feature-title">Gamified Habit Building</h4>
-          <p class="feature-text">Earn points, unlock achievements, and level up as you build consistency and hit your goals.</p>
+          <i class="material-icons feature-icon">favorite</i>
+          <h4 class="feature-title">Practice Gratitude</h4>
+          <p class="feature-text">End the day by naming what was good, supportive, or meaningful so attention shifts toward what is already working.</p>
         </div>
       </div>
       <div class="col-md-3 text-center">
         <div class="feature-box">
-          <i class="material-icons feature-icon">monitoring</i>
-          <h4 class="feature-title">Data-Driven Insights</h4>
-          <p class="feature-text">Visualize your progress with charts and reflections to gain deep self-awareness.</p>
+          <i class="material-icons feature-icon">explore</i>
+          <h4 class="feature-title">Stay Aligned</h4>
+          <p class="feature-text">Use one meaningful daily challenge and reflection prompts to keep your time pointed at what matters most.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="space--sm">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="happiness-loop">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="happiness-loop-step">
+                <span class="loop-step-number">01</span>
+                <h4>Check in</h4>
+                <p>Score your mood, energy, and sense of alignment in under a minute.</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="happiness-loop-step">
+                <span class="loop-step-number">02</span>
+                <h4>Name the friction</h4>
+                <p>Identify the one challenge that would make tomorrow noticeably better.</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="happiness-loop-step">
+                <span class="loop-step-number">03</span>
+                <h4>Capture the good</h4>
+                <p>Write down what you are grateful for before your attention moves on.</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="happiness-loop-step">
+                <span class="loop-step-number">04</span>
+                <h4>Adjust tomorrow</h4>
+                <p>Use the reflection prompt to design a day that feels calmer and more satisfying.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -65,9 +107,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <h2 class="landing-section-title">Project Dashboard</h2>
+        <h2 class="landing-section-title">Organize Life Without Losing the Human Part</h2>
         <p class="landing-section-text">
-          Create projects for different areas of your life or work. Each project can contain:
+          Create projects for different areas of your life or work, but keep them tied to wellbeing instead of raw output. Each project can contain:
         </p>
         <ul class="feature-list">
           <li>
@@ -106,9 +148,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 order-md-2">
-        <h2 class="landing-section-title">Daily Reflections</h2>
+        <h2 class="landing-section-title">Daily Reflections That Improve Tomorrow</h2>
         <p class="landing-section-text">
-          Build self-awareness by tracking your:
+          Build self-awareness by tracking the inputs that most strongly influence happiness:
         </p>
         <ul class="feature-list">
           <li>
@@ -148,8 +190,8 @@
     <div class="row">
       <div class="col-md-8 offset-md-2">
         <div class="cta-content">
-          <h2 class="landing-section-title text-white">Ready to Build Your Best Self?</h2>
-          <p class="landing-section-subtitle text-white opacity-75">Start your journey of personal growth today and see how far you can go.</p>
+          <h2 class="landing-section-title text-white">Ready to Build Happier Days on Purpose?</h2>
+          <p class="landing-section-subtitle text-white opacity-75">Start tracking the habits, emotions, and reflections that genuinely improve your life.</p>
           <div class="mt-4">
             <% if current_user %>
               <%= link_to "Go to Dashboard", dashboards_path, class: "btn btn-lg btn-primary" %>

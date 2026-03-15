@@ -1,6 +1,46 @@
 .container
   .row.justify-content-center
     .col-md-10.col-lg-8
+      .happiness-hero-card.shadow-sm.mb-4
+        .d-flex.flex-column.flex-lg-row.justify-content-between.align-items-start
+          .pr-lg-4
+            span.happiness-kicker Happier days are built, not guessed
+            h2.happiness-title.mb-3 MyDay helps you notice what actually improves your wellbeing
+            p.happiness-subtitle.mb-3
+              | Track your emotional state, protect your energy, and end each day with gratitude and reflection.
+              | Over time, that gives you a repeatable recipe for more satisfying days.
+            p.happiness-focus-copy.mb-0= @happiness_focus
+          .happiness-score-panel.mt-4.mt-lg-0
+            .happiness-score-label 7-day happiness score
+            .happiness-score-value= @happiness_score
+            .happiness-score-scale
+              | /10
+
+        .row.mt-4
+          .col-md-4
+            .happiness-stat-card
+              .happiness-stat-label Gratitude days
+              .happiness-stat-value= @gratitude_days_count
+              .happiness-stat-note last 7 days
+          .col-md-4
+            .happiness-stat-card
+              .happiness-stat-label Reflection days
+              .happiness-stat-value= @reflection_days_count
+              .happiness-stat-note last 7 days
+          .col-md-4
+            .happiness-stat-card
+              .happiness-stat-label Weekly signal
+              .happiness-stat-trend= @happiness_trend
+
+        .row.mt-3
+          - @weekly_happiness_metrics.each do |metric|
+            .col-md-4
+              .happiness-metric-card class="theme-#{metric[:theme]}"
+                .happiness-metric-label= metric[:label]
+                .happiness-metric-value= metric[:value]
+                .happiness-metric-scale
+                  | /10
+
       .card.shadow-sm
         .card-header.bg-white.py-3
           .d-flex.justify-content-between.align-items-center
@@ -26,7 +66,8 @@
                   = link_to "Set my main task", new_main_task_url, class: 'btn btn-sm btn-warning'
 
             .form-group.mb-5
-              label.font-weight-bold.d-block * My mood today:
+              label.font-weight-bold.d-block * How happy do I feel right now?
+              p.text-muted.small.mb-2 Track the emotional quality of your day so you can spot what truly lifts it.
               .mood-drag-wrapper.mt-3.w-100
                 = f.simple_fields_for :today_moods do |mood|
                   .d-flex.justify-content-between.align-items-center.mb-2
@@ -40,7 +81,8 @@
                   = mood.input :value, as: :hidden, input_html: { id: 'mood-hidden-input', value: mood.object.value || 10 }
 
             .form-group.mb-5
-              label.font-weight-bold.d-block * My level of confidence that I'm on the right track:
+              label.font-weight-bold.d-block * How aligned does my day feel?
+              p.text-muted.small.mb-2 Happiness lasts longer when your time matches what matters to you.
               .confidence-drag-wrapper.mt-3.w-100
                 = f.simple_fields_for :today_day_ratings do |day_rating|
                   .d-flex.justify-content-between.align-items-center.mb-2
@@ -54,7 +96,8 @@
                   = day_rating.input :value, as: :hidden, input_html: { id: 'confidence-hidden-input', value: day_rating.object.value || 10 }
 
             .form-group.mb-5
-              label.font-weight-bold.d-block * My level of energy:
+              label.font-weight-bold.d-block * How much energy do I have to enjoy the day?
+              p.text-muted.small.mb-2 Energy protects patience, focus, and enjoyment. Low energy usually needs care before effort.
               .energy-drag-wrapper.mt-3.w-100
                 = f.simple_fields_for :today_energy_levels do |energy_level|
                   .d-flex.justify-content-between.align-items-center.mb-2
@@ -71,25 +114,25 @@
 
             .form-group.mb-4
               = f.simple_fields_for :today_biggest_challenges do |biggest_challenge|
-                = biggest_challenge.input :content, placeholder: "To make my day successful I need to ...", 
-                  label: "Today's Biggest Challenge:", required: true, 
+                = biggest_challenge.input :content, placeholder: "What one hard thing would make tomorrow feel lighter or more meaningful?", 
+                  label: "What is the one challenge that would most improve my day?", required: true, 
                   input_html: { rows: 2, class: 'form-control' }
 
             .form-group.mb-4
               = f.simple_fields_for :today_daily_lessons do |daily_lesson|
-                = daily_lesson.input :content, placeholder: "What did I learn today", 
-                  label: "One Important thing I learned today:", required: true, 
+                = daily_lesson.input :content, placeholder: "What did today teach me about what helps or hurts my happiness?", 
+                  label: "What did I learn about having a better day?", required: true, 
                   input_html: { rows: 2, class: 'form-control' }
 
             .form-group.mb-4
               = f.simple_fields_for :today_daily_gratitudes do |daily_gratitude|
-                = daily_gratitude.input :content, placeholder: "Today I am grateful for ...", 
-                  label: "Today I am grateful for:", required: true, 
+                = daily_gratitude.input :content, placeholder: "Who or what made today feel richer, calmer, or kinder?", 
+                  label: "What am I grateful for today?", required: true, 
                   input_html: { rows: 2, class: 'form-control' }
 
             .form-group.mb-4
               = f.simple_fields_for :today_reflections do |reflection|
-                label.font-weight-bold I didn't have time today but tomorrow I will...
+                label.font-weight-bold What would make tomorrow happier or more peaceful?
                 #reflection-editor.mt-2.border.rounded.p-3 style="min-height: 150px;" data-reflection-id=reflection.object.id
                 = reflection.input :body_json, as: :hidden, input_html: { id: 'reflection_body_json', value: reflection.object.body_json.to_json }
 

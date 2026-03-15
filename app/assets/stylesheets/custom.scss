@@ -798,3 +798,114 @@
     border-bottom: none !important;
   }
 }
+
+.happiness-hero-card {
+  padding: 2rem;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top right, rgba(255, 193, 7, 0.28), transparent 32%),
+    linear-gradient(135deg, #fff9ef 0%, #f4fbff 55%, #f6fff7 100%);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.happiness-kicker {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9a6700;
+}
+
+.happiness-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #183153;
+}
+
+.happiness-subtitle,
+.happiness-focus-copy {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #43536b;
+}
+
+.happiness-score-panel,
+.happiness-stat-card,
+.happiness-metric-card {
+  border-radius: 18px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(24, 49, 83, 0.08);
+}
+
+.happiness-score-panel {
+  min-width: 13rem;
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.happiness-score-label,
+.happiness-stat-label,
+.happiness-metric-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #5d6b82;
+}
+
+.happiness-score-value,
+.happiness-stat-value,
+.happiness-metric-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #183153;
+}
+
+.happiness-score-scale,
+.happiness-metric-scale,
+.happiness-stat-note {
+  color: #6b778c;
+}
+
+.happiness-stat-card,
+.happiness-metric-card {
+  height: 100%;
+  padding: 1rem 1.1rem;
+}
+
+.happiness-stat-trend {
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #43536b;
+}
+
+.happiness-metric-card.theme-sun {
+  background: linear-gradient(180deg, rgba(255, 248, 219, 0.95), rgba(255, 255, 255, 0.92));
+}
+
+.happiness-metric-card.theme-sea {
+  background: linear-gradient(180deg, rgba(224, 245, 255, 0.95), rgba(255, 255, 255, 0.92));
+}
+
+.happiness-metric-card.theme-leaf {
+  background: linear-gradient(180deg, rgba(232, 250, 232, 0.95), rgba(255, 255, 255, 0.92));
+}
+
+@media (max-width: 767px) {
+  .happiness-hero-card {
+    padding: 1.5rem;
+  }
+
+  .happiness-title {
+    font-size: 1.6rem;
+  }
+
+  .happiness-score-panel {
+    min-width: 0;
+    width: 100%;
+  }
+}
