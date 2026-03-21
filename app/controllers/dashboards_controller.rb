@@ -49,6 +49,10 @@ class DashboardsController < ApplicationController
     @reflection_days_count = @user.reflections.where(created_at: recent_range)
       .distinct.count("DATE(created_at)")
 
+    @active_projects = current_user.projects.includes(:todos).order(id: :desc).limit(3)
+    project_ids = current_user.projects.pluck(:id)
+    @open_todos_count = Todo.where(project_id: project_ids, finished: false).count
+
     @happiness_trend = happiness_trend_for(recent_moods)
     @happiness_focus = happiness_focus_for(
       mood: average_value(recent_moods),

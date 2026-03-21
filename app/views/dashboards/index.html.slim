@@ -41,6 +41,32 @@
                 .happiness-metric-scale
                   | /10
 
+      - if @active_projects.any?
+        .card.shadow-sm.mb-4
+          .card-header.bg-white.py-3.d-flex.justify-content-between.align-items-center
+            h5.mb-0 Meaningful work
+            = link_to "Time tracker", timetracker_projects_path, class: "btn btn-sm btn-outline-secondary"
+          .card-body.py-3
+            p.text-muted.small.mb-3
+              | Working on things that matter drives your alignment score. You have
+              strong  #{@open_todos_count}
+              |  open todo#{@open_todos_count == 1 ? '' : 's'} across your projects.
+            .row
+              - @active_projects.each do |project|
+                .col-md-4.mb-2
+                  .border.rounded.p-3
+                    .d-flex.justify-content-between.align-items-start
+                      strong.d-block.mb-1= project.title
+                      = link_to "todos", project_todos_path(project), class: "btn btn-sm btn-outline-primary"
+                    - total = project.todos.count
+                    - done = project.todos.where(finished: true).count
+                    - if total > 0
+                      .progress.mt-2 style="height: 4px;"
+                        .progress-bar style="width: #{(done.to_f / total * 100).round}%;"
+                      small.text-muted.d-block.mt-1 #{done}/#{total} todos done
+                    - else
+                      small.text-muted No todos yet
+
       .card.shadow-sm
         .card-header.bg-white.py-3
           .d-flex.justify-content-between.align-items-center
