@@ -1,24 +1,35 @@
-<%= line_chart @moods.pluck(:created_at, :value) %>
-
-<table class="border--round table--alternate-row">
-  <thead>
-    <tr>
-      <th>Mood</th>
-      <th>Day</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @moods.each do |mood| %>
-      <tr>
-        <td><%= mood.value %></td>
-        <td><%= mood.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<% if @pagy.pages > 1 %>
-  <div class="pagination">
-    <%= pagy_nav(@pagy).html_safe %>
+<div class="container">
+  <div class="text-center mb-5">
+    <h1>Moods</h1>
+    <p class="lead text-muted">Your emotional landscape — patterns emerge when you look back.</p>
   </div>
-<% end %>
+
+  <% if @moods.any? %>
+    <div class="mb-5">
+      <%= line_chart @moods.pluck(:created_at, :value), curve: false, points: true, colors: ["#e07b9a"], height: "220px" %>
+    </div>
+
+    <div class="row">
+      <% @moods.each do |mood| %>
+        <div class="col-md-3 col-sm-6 mb-3">
+          <div class="card text-center border shadow-sm">
+            <div class="card-body py-3">
+              <div style="font-size: 2rem; font-weight: 700; color: #e07b9a;"><%= mood.value %></div>
+              <small class="text-muted"><%= mood.created_at.strftime("%d %b %Y") %></small>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @pagy.pages > 1 %>
+      <div class="d-flex justify-content-center mt-4">
+        <%= pagy_nav(@pagy).html_safe %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-center py-5 text-muted">
+      <p>No mood entries yet. Start logging from the dashboard.</p>
+    </div>
+  <% end %>
+</div>

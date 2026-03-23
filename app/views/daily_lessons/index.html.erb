@@ -1,16 +1,27 @@
-<table class="border--round table--alternate-row">
-  <thead>
-    <tr>
-      <th style="width: 80%">Daily Lessons</th>
-      <th style="width: 20%">Day</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @daily_lessons.each do |lesson| %>
-      <tr>
-        <td><%= lesson.content.html_safe %></td>
-        <td><%= lesson.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container">
+  <div class="text-center mb-5">
+    <h1>Lessons Learned</h1>
+    <p class="lead text-muted">Wisdom collected one day at a time. Your own personal curriculum.</p>
+  </div>
+
+  <% if @daily_lessons.any? %>
+    <div class="row">
+      <% @daily_lessons.each do |lesson| %>
+        <div class="col-md-12 mb-4">
+          <div class="card border shadow-sm">
+            <div class="card-body p-4">
+              <div class="mb-3"><%= lesson.content.html_safe %></div>
+              <div class="text-muted border-top pt-2">
+                <small><%= lesson.created_at.strftime("%d %b %Y") %></small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center py-5 text-muted">
+      <p>No lessons logged yet. Reflect on what today taught you.</p>
+    </div>
+  <% end %>
+</div>

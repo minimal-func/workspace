@@ -1,24 +1,35 @@
-<%= line_chart @energy_levels.pluck(:created_at, :value) %>
-
-<table class="border--round table--alternate-row">
-  <thead>
-    <tr>
-      <th>Energy Level</th>
-      <th>Day</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @energy_levels.each do |level| %>
-      <tr>
-        <td><%= level.value %></td>
-        <td><%= level.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<% if @pagy.pages > 1 %>
-  <div class="pagination">
-    <%= pagy_nav(@pagy).html_safe %>
+<div class="container">
+  <div class="text-center mb-5">
+    <h1>Energy</h1>
+    <p class="lead text-muted">Track the ebb and flow of your vitality over time.</p>
   </div>
-<% end %>
+
+  <% if @energy_levels.any? %>
+    <div class="mb-5">
+      <%= line_chart @energy_levels.pluck(:created_at, :value), curve: false, points: true, colors: ["#f0a500"], height: "220px" %>
+    </div>
+
+    <div class="row">
+      <% @energy_levels.each do |level| %>
+        <div class="col-md-3 col-sm-6 mb-3">
+          <div class="card text-center border shadow-sm">
+            <div class="card-body py-3">
+              <div style="font-size: 2rem; font-weight: 700; color: #f0a500;"><%= level.value %></div>
+              <small class="text-muted"><%= level.created_at.strftime("%d %b %Y") %></small>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @pagy.pages > 1 %>
+      <div class="d-flex justify-content-center mt-4">
+        <%= pagy_nav(@pagy).html_safe %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-center py-5 text-muted">
+      <p>No energy entries yet. Start logging from the dashboard.</p>
+    </div>
+  <% end %>
+</div>

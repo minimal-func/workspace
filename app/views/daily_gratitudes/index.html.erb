@@ -1,22 +1,33 @@
-<table class="border--round table--alternate-row">
-  <thead>
-    <tr>
-      <th style="width: 80%">Daily Gratitudes</th>
-      <th style="width: 20%">Day</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @daily_gratitudes.each do |gratitude| %>
-      <tr>
-        <td><%= gratitude.content.html_safe %></td>
-        <td><%= gratitude.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<% if @pagy.pages > 1 %>
-  <div class="pagination">
-    <%= pagy_nav(@pagy).html_safe %>
+<div class="container">
+  <div class="text-center mb-5">
+    <h1>Gratitudes</h1>
+    <p class="lead text-muted">A record of the good. Big moments and small joys alike.</p>
   </div>
-<% end %>
+
+  <% if @daily_gratitudes.any? %>
+    <div class="row">
+      <% @daily_gratitudes.each do |gratitude| %>
+        <div class="col-md-12 mb-4">
+          <div class="card border shadow-sm">
+            <div class="card-body p-4">
+              <div class="mb-3"><%= gratitude.content.html_safe %></div>
+              <div class="text-muted border-top pt-2">
+                <small><%= gratitude.created_at.strftime("%d %b %Y") %></small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @pagy.pages > 1 %>
+      <div class="d-flex justify-content-center mt-4">
+        <%= pagy_nav(@pagy).html_safe %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-center py-5 text-muted">
+      <p>No gratitudes yet. What's one thing from today you're thankful for?</p>
+    </div>
+  <% end %>
+</div>

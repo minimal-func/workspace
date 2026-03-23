@@ -1,24 +1,35 @@
-<%= line_chart @day_ratings.pluck(:created_at, :value) %>
-
-<table class="border--round table--alternate-row">
-  <thead>
-    <tr>
-      <th>Day Rating</th>
-      <th>Day</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @day_ratings.each do |rating| %>
-      <tr>
-        <td><%= rating.value %></td>
-        <td><%= rating.created_at.strftime("%d.%m.%Y at %H:%M") %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<% if @pagy.pages > 1 %>
-  <div class="pagination">
-    <%= pagy_nav(@pagy).html_safe %>
+<div class="container">
+  <div class="text-center mb-5">
+    <h1>Day Ratings</h1>
+    <p class="lead text-muted">How have your days been feeling? Your honest scores tell a story.</p>
   </div>
-<% end %>
+
+  <% if @day_ratings.any? %>
+    <div class="mb-5">
+      <%= line_chart @day_ratings.pluck(:created_at, :value), curve: false, points: true, colors: ["#7b68ee"], height: "220px" %>
+    </div>
+
+    <div class="row">
+      <% @day_ratings.each do |rating| %>
+        <div class="col-md-3 col-sm-6 mb-3">
+          <div class="card text-center border shadow-sm">
+            <div class="card-body py-3">
+              <div style="font-size: 2rem; font-weight: 700; color: #7b68ee;"><%= rating.value %></div>
+              <small class="text-muted"><%= rating.created_at.strftime("%d %b %Y") %></small>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @pagy.pages > 1 %>
+      <div class="d-flex justify-content-center mt-4">
+        <%= pagy_nav(@pagy).html_safe %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-center py-5 text-muted">
+      <p>No day ratings yet. Start rating your days from the dashboard.</p>
+    </div>
+  <% end %>
+</div>
