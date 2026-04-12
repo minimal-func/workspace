@@ -1,7 +1,31 @@
 <div class="container">
   <div class="row mb-4">
-    <div class="col-md-10 offset-md-1">
-      <h1 class="text-center">Your Achievements</h1>
+    <div class="col-lg-10 offset-lg-1">
+      <section class="mascot-guidance-card gamification-hero shadow-sm">
+        <div class="row align-items-center">
+          <div class="col-md-4 text-center text-md-left mb-4 mb-md-0">
+            <div class="gamification-hero__art">
+              <%= render "application/mascot", size: :hero, css_class: "gamification-mascot", title: "Sunny cheering on your progress" %>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <span class="mascot-guidance-card__eyebrow">Sunny's progress room</span>
+            <h1 class="gamification-hero__title">Your Achievements</h1>
+            <p class="gamification-hero__headline"><%= @mascot_headline %></p>
+            <p class="gamification-hero__message mb-3"><%= @mascot_message %></p>
+            <div class="gamification-hero__stats">
+              <div class="gamification-hero__stat">
+                <span class="gamification-hero__stat-label">Total points</span>
+                <strong><%= current_user.total_points %></strong>
+              </div>
+              <div class="gamification-hero__stat">
+                <span class="gamification-hero__stat-label">Mascot focus</span>
+                <strong><%= @mascot_focus %></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -17,11 +41,10 @@
             <h3><%= @level.name %></h3>
             <% if @next_level %>
               <div class="progress mt-3">
-                <% percent = ((@level.points_required.to_f / @next_level.points_required) * 100).round %>
                 <div class="progress-bar bg-success"
                   role="progressbar"
-                  style="width: <%= percent %>%"
-                  aria-valuenow="<%= percent %>"
+                  style="width: <%= @level_progress_percentage %>%"
+                  aria-valuenow="<%= @level_progress_percentage %>"
                   aria-valuemin="0"
                   aria-valuemax="100">
                 </div>
@@ -101,6 +124,10 @@
                       <% if achievement.threshold > 1 %>
                         <p class="text-muted small">
                           Complete this action <%= achievement.threshold %> times to unlock
+                        </p>
+                      <% else %>
+                        <p class="text-muted small">
+                          Sunny says this one is one action away
                         </p>
                       <% end %>
                     </div>

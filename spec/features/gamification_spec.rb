@@ -14,6 +14,7 @@ RSpec.feature "Gamification", type: :feature do
     visit gamification_path
     expect(page).to have_content("Your Achievements")
     expect(page).to have_content("Your Level")
+    expect(page).to have_content("Sunny's progress room")
   end
 
   scenario "User earns points and levels up" do

@@ -784,6 +784,59 @@ body.auth-layout {
   }
 }
 
+.gamification-hero {
+  overflow: hidden;
+}
+
+.gamification-hero__art {
+  display: flex;
+  justify-content: center;
+}
+
+.gamification-mascot {
+  filter: drop-shadow(0 20px 30px rgba(24, 49, 83, 0.12));
+}
+
+.gamification-hero__title {
+  margin-bottom: 0.5rem;
+}
+
+.gamification-hero__headline {
+  margin-bottom: 0.5rem;
+  color: var(--color-gray-800);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.gamification-hero__message {
+  color: var(--color-gray-600);
+  line-height: 1.7;
+}
+
+.gamification-hero__stats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.gamification-hero__stat {
+  min-width: 180px;
+  padding: 0.9rem 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(24, 49, 83, 0.08);
+}
+
+.gamification-hero__stat-label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--color-gray-600);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .badge-level {
   background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
   color: white;
@@ -820,6 +873,16 @@ body.auth-layout {
 
   .progress-bar {
     background-color: var(--color-success);
+  }
+}
+
+@media (max-width: 768px) {
+  .gamification-hero__stats {
+    flex-direction: column;
+  }
+
+  .gamification-hero__stat {
+    width: 100%;
   }
 }
 
