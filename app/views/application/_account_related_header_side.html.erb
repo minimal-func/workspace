@@ -32,9 +32,11 @@
                 </div>
               </div>
           </li>
-          <li class="dropdown">
-              <span class="dropdown__trigger" style="display: flex; align-items: center; gap: 8px;">
-                <%= image_tag "avatar-round-1.png", class: "avatar image--xxs round" %>
+          <li class="dropdown header-account-menu">
+              <span class="dropdown__trigger header-account-trigger">
+                <span class="header-account-avatar">
+                  <%= image_tag "avatar-round-1.png", class: "header-account-avatar__image", alt: "" %>
+                </span>
                 <span class="user-email"><%= current_user.email %></span>
                 <% if current_user.level.present? %>
                   <span class="badge-level">
