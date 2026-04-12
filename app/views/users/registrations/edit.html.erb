@@ -1,12 +1,23 @@
 <span class="auth-shell__eyebrow">Account Settings</span>
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 <p class="lead">
-  Update your email or password details below.
+  Update your avatar, email, or password details below.
 </p>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
   <div class="row">
+    <div class="col-md-12">
+      <%= f.label :avatar %>
+      <div class="auth-shell__hint">Upload a square image for the cleanest result. Max size: 5MB.</div>
+      <% if resource.avatar.attached? %>
+        <div class="mb-3">
+          <%= image_tag resource.avatar, class: "header-account-avatar__image", alt: "#{resource.email} avatar", style: "width: 96px; height: 96px; border-radius: 50%; object-fit: cover;" %>
+        </div>
+      <% end %>
+      <%= f.file_field :avatar, accept: "image/*" %>
+    </div>
+
     <div class="col-md-12">
       <%= f.label :email %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Your email" %>
@@ -34,7 +45,7 @@
 
     <div class="col-md-12">
       <%= f.label :current_password %>
-      <span class="auth-shell__hint">We need your current password to confirm changes.</span>
+      <span class="auth-shell__hint">We need your current password to confirm email or password changes.</span>
       <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password" %>
     </div>
 

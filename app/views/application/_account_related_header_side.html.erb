@@ -35,7 +35,7 @@
           <li class="dropdown header-account-menu">
               <span class="dropdown__trigger header-account-trigger">
                 <span class="header-account-avatar">
-                  <%= image_tag "avatar-round-1.png", class: "header-account-avatar__image", alt: "" %>
+                  <%= image_tag user_avatar_source(current_user), class: "header-account-avatar__image", alt: "#{current_user.email} avatar" %>
                 </span>
                 <span class="user-email"><%= current_user.email %></span>
                 <% if current_user.level.present? %>
@@ -75,6 +75,9 @@
                         <% end %>
                         <li>
                           <%= link_to "My Achievements", gamification_path %>
+                        </li>
+                        <li>
+                          <%= link_to "Account Settings", edit_user_registration_path %>
                         </li>
                         <li>
                           <%= link_to "Log out", destroy_user_session_url, data: { turbo_method: :delete } %>

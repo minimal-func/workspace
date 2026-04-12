@@ -2,9 +2,10 @@ module ApplicationHelper
   include Pagy::Frontend
   include EditorjsHelper
 
-  def gravatar_url(email, size)
-    gravatar = Digest::MD5::hexdigest(email).downcase
-    url = "https://gravatar.com/avatar/#{gravatar}.png?s=#{size}"
+  def user_avatar_source(user)
+    return "avatar-round-1.png" unless user&.avatar&.attached?
+
+    user.avatar
   end
 
   def project_mascot_payload(section:, items_count:, completed_count: nil, empty_message:, project: nil, total_work_items: nil)

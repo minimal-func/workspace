@@ -33,4 +33,15 @@ RSpec.feature "Authentication", type: :feature do
 
     expect(page).to have_content("Welcome! You have signed up successfully.")
   end
+
+  scenario "User uploads an avatar without changing credentials" do
+    login_as(user, scope: :user)
+    visit edit_user_registration_path
+
+    attach_file "Avatar", Rails.root.join("app/assets/images/avatar-round-1.png")
+    click_button "Update"
+
+    expect(page).to have_content("Your account has been updated successfully.")
+    expect(user.reload.avatar).to be_attached
+  end
 end

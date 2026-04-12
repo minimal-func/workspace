@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_one_attached :avatar
+
   has_many :day_ratings, dependent: :destroy
   has_many :energy_levels, dependent: :destroy
   has_many :moods, dependent: :destroy
@@ -38,6 +40,9 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :today_daily_lessons, allow_destroy: true
   accepts_nested_attributes_for :today_daily_gratitudes, allow_destroy: true
   accepts_nested_attributes_for :today_biggest_challenges, allow_destroy: true
+
+  validate :avatar_is_an_image
+  validate :avatar_size_within_limit
 
   # Gamification methods
   def update_total_points
@@ -79,5 +84,21 @@ class User < ApplicationRecord
     return false unless project
 
    project.user == self
+  end
+
+  private
+
+  def avatar_is_an_image
+    return unless avatar.attached?
+    return if avatar.blob.content_type&.start_with?("image/")
+
+    errors.add(:avatar, "must be an image")
+  end
+
+  def avatar_size_within_limit
+    return unless avatar.attached?
+    return if avatar.blob.byte_size <= 5.megabytes
+
+    errors.add(:avatar, "must be smaller than 5MB")
   end
 end
