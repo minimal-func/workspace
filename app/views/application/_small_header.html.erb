@@ -2,6 +2,7 @@
     <div class="container">
         <div class="mobile-header__inner">
             <a href="/" class="mobile-header__brand">
+                <%= render "application/mascot", size: :nav, css_class: "mobile-header__mascot", title: "MyDay mascot" %>
                 <h2>MyDay.<%= @app_title %></h2>
             </a>
             <a href="#" class="hamburger-toggle mobile-header__toggle" data-toggle-class="#menu2;hidden-xs hidden-sm" aria-label="Toggle navigation">

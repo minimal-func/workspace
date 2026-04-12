@@ -6,6 +6,10 @@
   padding: 6rem 0;
 }
 
+.landing-hero {
+  min-height: 60vh;
+}
+
 .landing-mascot-stage {
   position: relative;
   padding: 2rem 1.5rem 1rem;
@@ -264,7 +268,39 @@
 /* No special styling for buttons as we're using the standard btn-primary */
 
 /* Responsive Adjustments */
+@media (min-width: 768px) and (max-width: 991px) {
+  .landing-hero {
+    min-height: 0;
+    padding: 5rem 0 4rem;
+    overflow: hidden;
+  }
+
+  .landing-mascot-stage {
+    max-width: 360px;
+    margin: 2rem auto 0;
+    padding-bottom: 1.75rem;
+  }
+
+  .landing-mascot-art.myday-mascot--hero {
+    display: block;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .landing-mascot-art svg {
+    overflow: hidden;
+  }
+
+  .landing-mascot-note {
+    margin-top: 0.75rem;
+  }
+}
+
 @media (max-width: 768px) {
+  .landing-hero {
+    min-height: 0;
+  }
+
   .landing-title {
     font-size: 2.5rem;
   }
