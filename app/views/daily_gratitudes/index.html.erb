@@ -3,6 +3,9 @@
     <h1>Gratitudes</h1>
     <p class="lead text-muted">A record of the good. Big moments and small joys alike.</p>
   </div>
+  <%= render "application/journal_mascot_panel",
+    title: "Sunny, your gratitude companion",
+    **journal_mascot_payload(section: :daily_gratitudes, items_count: @daily_gratitudes.size) %>
 
   <% if @daily_gratitudes.any? %>
     <div class="row">

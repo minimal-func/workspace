@@ -3,6 +3,9 @@
     <h1>Challenges</h1>
     <p class="lead text-muted">Every obstacle you named was one you faced. Look how far you've come.</p>
   </div>
+  <%= render "application/journal_mascot_panel",
+    title: "Sunny, your challenge companion",
+    **journal_mascot_payload(section: :biggest_challenges, items_count: @biggest_challenges.size) %>
 
   <% if @biggest_challenges.any? %>
     <div class="row">

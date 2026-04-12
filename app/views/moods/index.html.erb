@@ -3,6 +3,9 @@
     <h1>Moods</h1>
     <p class="lead text-muted">Your emotional landscape — patterns emerge when you look back.</p>
   </div>
+  <%= render "application/journal_mascot_panel",
+    title: "Sunny, your mood tracking companion",
+    **journal_mascot_payload(section: :moods, items_count: @moods.size) %>
 
   <% if @moods.any? %>
     <div class="mb-5">

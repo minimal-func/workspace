@@ -217,6 +217,28 @@
   margin-bottom: 2rem;
 }
 
+.journal-mascot-panel {
+  margin-top: 2rem;
+  align-items: stretch;
+  background:
+    radial-gradient(circle at top right, rgba(84, 211, 155, 0.18), transparent 34%),
+    radial-gradient(circle at bottom left, rgba(255, 227, 138, 0.28), transparent 30%),
+    linear-gradient(135deg, #fffaf0 0%, #f4fbff 55%, #f7fff6 100%);
+}
+
+.journal-mascot-panel__art {
+  margin-right: 1rem;
+}
+
+.journal-mascot-panel__mascot {
+  filter: drop-shadow(0 14px 24px rgba(24, 49, 83, 0.12));
+}
+
+.journal-mascot-panel__headline {
+  margin-bottom: 0.5rem;
+  color: var(--color-gray-800);
+}
+
 /* CTA Section */
 .cta-section {
   position: relative;
@@ -351,6 +373,10 @@
 
   .mascot-guidance-card {
     text-align: center;
+  }
+
+  .journal-mascot-panel__art {
+    margin-right: 0;
   }
 }
 

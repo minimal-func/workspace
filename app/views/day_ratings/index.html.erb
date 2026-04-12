@@ -3,6 +3,9 @@
     <h1>Day Ratings</h1>
     <p class="lead text-muted">How have your days been feeling? Your honest scores tell a story.</p>
   </div>
+  <%= render "application/journal_mascot_panel",
+    title: "Sunny, your day rating companion",
+    **journal_mascot_payload(section: :day_ratings, items_count: @day_ratings.size) %>
 
   <% if @day_ratings.any? %>
     <div class="mb-5">

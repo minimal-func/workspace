@@ -3,6 +3,9 @@
     <h1>Lessons Learned</h1>
     <p class="lead text-muted">Wisdom collected one day at a time. Your own personal curriculum.</p>
   </div>
+  <%= render "application/journal_mascot_panel",
+    title: "Sunny, your lesson companion",
+    **journal_mascot_payload(section: :daily_lessons, items_count: @daily_lessons.size) %>
 
   <% if @daily_lessons.any? %>
     <div class="row">

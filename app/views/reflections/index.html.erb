@@ -1,5 +1,8 @@
 <div class="container">
   <h1 class="text-center mb-4">My Reflections</h1>
+  <%= render "application/journal_mascot_panel",
+    title: "Sunny, your reflection companion",
+    **journal_mascot_payload(section: :reflections, items_count: @reflections.size) %>
 
   <div class="row">
     <% @reflections.each do |reflection| %>
