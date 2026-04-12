@@ -3,6 +3,7 @@ class Notification < ApplicationRecord
   belongs_to :notifiable, polymorphic: true, optional: true
 
   scope :unread, -> { where(read_at: nil) }
+  scope :ordered, -> { order(created_at: :desc) }
   scope :recent, -> { order(created_at: :desc).limit(10) }
 
   def read?

@@ -1,29 +1,30 @@
 <section class="bg--secondary">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 offset-lg-2">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h1>Notifications</h1>
+  <div class="container notifications-page">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-xl-7">
+        <div class="notifications-page__header">
+          <h1 class="notifications-page__title">Notifications</h1>
+          <p class="notifications-page__subtitle">Recent activity and updates in one place.</p>
         </div>
 
-        <div class="card p-0">
+        <div class="card notifications-page__card">
           <% if @notifications.any? %>
             <div class="notifications-list">
               <% @notifications.each do |notification| %>
                 <div class="notification-item-wrapper <%= 'unread' unless notification.read? %>">
-                  <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
-                    <div class="flex-grow-1">
+                  <div class="notification-row">
+                    <div class="notification-row__content">
                       <%= link_to notification_path(notification), data: { turbo_method: :patch }, class: "text-decoration-none text-dark d-block" do %>
                         <p class="mb-1 notification-message <%= 'font-weight-bold' unless notification.read? %>">
                           <%= notification.message %>
                         </p>
-                        <small class="text-muted">
+                        <small class="text-muted notification-row__timestamp">
                           <%= time_ago_in_words(notification.created_at) %> ago
                         </small>
                       <% end %>
                     </div>
                     <% unless notification.read? %>
-                      <div class="ml-3">
+                      <div class="notification-row__action">
                         <%= link_to "Mark as read", notification_path(notification), data: { turbo_method: :patch }, class: "btn btn-sm btn-outline-primary" %>
                       </div>
                     <% end %>
@@ -31,8 +32,16 @@
                 </div>
               <% end %>
             </div>
+            <% if @pagy.pages > 1 %>
+              <div class="pagination-container d-flex justify-content-center mt-4 mb-4">
+                <%= pagy_nav(@pagy).html_safe %>
+              </div>
+            <% end %>
           <% else %>
-            <p class="text-center py-4">No new notifications</p>
+            <div class="notifications-page__empty-state">
+              <h3>All caught up</h3>
+              <p class="mb-0">There are no notifications right now.</p>
+            </div>
           <% end %>
         </div>
       </div>

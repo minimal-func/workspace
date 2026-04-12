@@ -2,7 +2,7 @@ class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @notifications = current_user.notifications.recent
+    @pagy, @notifications = pagy(current_user.notifications.ordered, items: 10)
   end
 
   def update
