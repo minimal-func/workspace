@@ -19,6 +19,16 @@
 
   <div class="row">
     <div class="col-md-10 offset-md-1">
+      <%= render "application/project_mascot_panel",
+        title: "Sunny organizing your projects",
+        **project_mascot_payload(
+          section: :projects,
+          items_count: @active_projects.count + @closed_projects.count,
+          completed_count: @closed_projects.count,
+          total_work_items: @active_projects.count + @closed_projects.count,
+          empty_message: "Open a project and Sunny will help you connect tasks, notes, files, and links around the same goal."
+        ) %>
+
       <% if @active_projects.blank? && @closed_projects.blank? %>
         <div class="text-center py-5 bg-light rounded-lg shadow-sm">
           <i class="material-icons display-1 text-muted mb-3">work_outline</i>

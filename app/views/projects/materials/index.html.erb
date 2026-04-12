@@ -48,6 +48,15 @@
 
   <div class="row">
     <div class="col-md-10 offset-md-1">
+      <%= render "application/project_mascot_panel",
+        title: "Sunny organizing materials for #{@project.title}",
+        **project_mascot_payload(
+          project: @project,
+          section: :materials,
+          items_count: @materials.count,
+          empty_message: "Add a file or folder here so the project stops depending on memory and scattered documents."
+        ) %>
+
       <% if @materials.empty? %>
         <div class="text-center py-5 bg-light rounded-lg shadow-sm">
           <i class="material-icons display-1 text-muted mb-3">folder_open</i>

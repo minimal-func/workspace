@@ -18,6 +18,15 @@
 
   <div class="row">
     <div class="col-md-10 offset-md-1">
+      <%= render "application/project_mascot_panel",
+        title: "Sunny curating project posts for #{@project.title}",
+        **project_mascot_payload(
+          project: @project,
+          section: :posts,
+          items_count: @posts.count,
+          empty_message: "Capture a quick update, decision, or lesson here so the project history stays readable."
+        ) %>
+
       <% if @posts.empty? %>
         <div class="text-center py-5 bg-light rounded-lg shadow-sm">
           <i class="material-icons display-1 text-muted mb-3">post_add</i>

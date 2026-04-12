@@ -12,6 +12,8 @@
 
   .row
     .col-md-10.offset-md-1
+      = render "application/project_mascot_panel", **project_mascot_payload(section: :tasks, items_count: @todos.count, completed_count: @todos.count(&:finished?), empty_message: "Turn the next concrete step into a task so Sunny can show clear progress inside this project.", project: @project).merge(title: "Sunny organizing tasks for #{@project.title}")
+
       - if @todos.empty?
         .text-center.py-5.bg-light.rounded-lg.shadow-sm.border-0
           i.material-icons.display-1.text-muted.mb-3 assignment_late

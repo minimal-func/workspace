@@ -6,6 +6,16 @@
         <p class="timetracker-subtitle">Track time spent on tasks and manage your project resources</p>
       </div>
 
+      <%= render "application/project_mascot_panel",
+        title: "Sunny guiding task momentum for #{@current_project.title}",
+        **project_mascot_payload(
+          project: @current_project,
+          section: :tasks,
+          items_count: @current_project.tasks.count,
+          completed_count: @current_project.tasks.where.not(finished_at: nil).count,
+          empty_message: "Start the project with a task and Sunny will turn it into visible momentum across the whole workspace."
+        ) %>
+
       <div class="task-navigation">
         <ul>
           <li>

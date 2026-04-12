@@ -837,6 +837,37 @@ body.auth-layout {
   text-transform: uppercase;
 }
 
+.project-mascot-panel__art {
+  margin-bottom: 1rem;
+}
+
+.project-mascot-panel__mascot {
+  filter: drop-shadow(0 12px 24px rgba(24, 49, 83, 0.12));
+}
+
+.project-mascot-panel__headline {
+  margin-bottom: 0.45rem;
+  color: var(--color-gray-800);
+}
+
+.project-mascot-panel__focus {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(24, 49, 83, 0.08);
+}
+
+.project-mascot-panel__focus-label {
+  color: var(--color-gray-600);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .badge-level {
   background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
   color: white;

@@ -18,6 +18,15 @@
 
   <div class="row">
     <div class="col-md-10 offset-md-1">
+      <%= render "application/project_mascot_panel",
+        title: "Sunny collecting links for #{@project.title}",
+        **project_mascot_payload(
+          project: @project,
+          section: :links,
+          items_count: @saved_links.count,
+          empty_message: "Save the references you keep reopening so Sunny can keep this project research in one place."
+        ) %>
+
       <% if @saved_links.empty? %>
         <div class="text-center py-5 bg-light rounded-lg shadow-sm border">
           <i class="material-icons display-1 text-muted mb-3">link_off</i>
