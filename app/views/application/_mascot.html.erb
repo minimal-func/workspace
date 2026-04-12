@@ -1,0 +1,49 @@
+<% size = local_assigns.fetch(:size, :default) %>
+<% css_class = local_assigns[:css_class] %>
+<% title = local_assigns.fetch(:title, "MyDay mascot") %>
+<% gradient_key = "mascot-#{SecureRandom.hex(4)}" %>
+
+<div class="myday-mascot myday-mascot--<%= size %> <%= css_class %>">
+  <svg viewBox="0 0 260 260" role="img" aria-label="<%= title %>" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="<%= "#{gradient_key}-body" %>" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ffe38a" />
+        <stop offset="100%" stop-color="#ffb347" />
+      </linearGradient>
+      <linearGradient id="<%= "#{gradient_key}-leaf" %>" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#54d39b" />
+        <stop offset="100%" stop-color="#1f9d74" />
+      </linearGradient>
+    </defs>
+
+    <circle class="myday-mascot__halo" cx="130" cy="130" r="104" />
+    <path class="myday-mascot__shadow" d="M68 203c0-16 28-29 62-29s62 13 62 29c0 7-6 13-16 17H84c-10-4-16-10-16-17Z" />
+    <g class="myday-mascot__spark myday-mascot__spark--left">
+      <circle cx="48" cy="93" r="9" />
+      <path d="M48 75v-12M48 123v-12M30 93H18M78 93H66M35 80l-9-8M70 115l-9-8M35 106l-9 8M70 71l-9 8" />
+    </g>
+    <g class="myday-mascot__spark myday-mascot__spark--right">
+      <circle cx="212" cy="78" r="7" />
+      <path d="M212 62v-10M212 104V94M196 78h-10M238 78h-10M201 67l-7-6M230 96l-7-6M201 89l-7 6M230 60l-7 6" />
+    </g>
+
+    <path class="myday-mascot__leaf" fill="url(#<%= "#{gradient_key}-leaf" %>)" d="M149 45c17-19 38-22 52-17-3 21-16 36-45 42l-18-3 11-22Z" />
+    <path class="myday-mascot__stem" d="M132 86c6-16 14-28 26-38" />
+
+    <path class="myday-mascot__body" fill="url(#<%= "#{gradient_key}-body" %>)" d="M129 70c42 0 76 34 76 76s-34 66-76 66-74-24-74-66 32-76 74-76Z" />
+    <path class="myday-mascot__belly" d="M129 93c28 0 51 22 51 49s-23 42-51 42-49-16-49-42 21-49 49-49Z" />
+    <path class="myday-mascot__cheek" d="M87 142c0-8 7-15 16-15 10 0 15 7 15 15 0 9-5 15-15 15-9 0-16-6-16-15Z" />
+    <path class="myday-mascot__cheek" d="M141 142c0-8 6-15 15-15 10 0 16 7 16 15 0 9-6 15-16 15-9 0-15-6-15-15Z" />
+
+    <circle class="myday-mascot__eye" cx="103" cy="126" r="7" />
+    <circle class="myday-mascot__eye-highlight" cx="106" cy="123" r="2" />
+    <circle class="myday-mascot__eye" cx="157" cy="126" r="7" />
+    <circle class="myday-mascot__eye-highlight" cx="160" cy="123" r="2" />
+    <path class="myday-mascot__mouth" d="M111 153c6 9 16 13 19 13 4 0 14-4 20-13" />
+
+    <path class="myday-mascot__arm" d="M71 142c-16 3-27 14-30 28" />
+    <path class="myday-mascot__arm" d="M189 142c16 3 27 14 30 28" />
+    <path class="myday-mascot__leg" d="M105 197c-6 14-6 26-3 37" />
+    <path class="myday-mascot__leg" d="M155 197c6 14 6 26 3 37" />
+  </svg>
+</div>

@@ -6,7 +6,10 @@
       <div class="col-lg-3 text-center text-left-sm hidden-xs order-lg-2">
         <div class="bar__module">
             <a href="/" style="text-decoration: none">
-              <h2>MyDay.<%= @app_title %></h2>
+              <div class="brand-mark">
+                <%= render "application/mascot", size: :nav, css_class: "brand-mark__mascot", title: "MyDay mascot" %>
+                <h2>MyDay.<%= @app_title %></h2>
+              </div>
             </a>
         </div>
         <!--end module-->

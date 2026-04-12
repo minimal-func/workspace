@@ -1,7 +1,7 @@
-<section class="cover imagebg-hero height-60 text-center">
+<section class="cover imagebg-hero height-60">
   <div class="container">
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
+    <div class="row align-items-center">
+      <div class="col-lg-7 text-center text-lg-left">
         <span class="landing-eyebrow text-white">A daily system for wellbeing</span>
         <h1 class="landing-title text-white">Build a life that feels lighter, calmer, and more meaningful</h1>
         <p class="lead mb-4 text-white opacity-100">MyDay helps you increase happiness by tracking mood, energy, gratitude, and direction in one place, so you can repeat what makes your days better.</p>
@@ -12,6 +12,18 @@
             <%= link_to "Get Started for Free", new_user_registration_path, class: "btn btn-lg btn-primary mr-2" %>
             <%= link_to "Sign In", new_user_session_path, class: "btn btn-lg btn-outline-primary" %>
           <% end %>
+        </div>
+        <div class="landing-mascot-caption text-white">
+          Meet Sunny, your gentle reminder to notice what made today better.
+        </div>
+      </div>
+      <div class="col-lg-5 mt-5 mt-lg-0">
+        <div class="landing-mascot-stage">
+          <%= render "application/mascot", size: :hero, css_class: "landing-mascot-art", title: "Sunny, the MyDay mascot" %>
+          <div class="landing-mascot-note">
+            <span class="landing-mascot-note__eyebrow">Your day guide</span>
+            <p class="mb-0">Sunny shows up across MyDay to make reflection feel warmer, lighter, and easier to return to.</p>
+          </div>
         </div>
       </div>
     </div>

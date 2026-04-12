@@ -6,6 +6,60 @@
   padding: 6rem 0;
 }
 
+.landing-mascot-stage {
+  position: relative;
+  padding: 2rem 1.5rem 1rem;
+  border-radius: 32px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(6px);
+  text-align: center;
+}
+
+.landing-mascot-stage::before {
+  content: '';
+  position: absolute;
+  inset: 18px 22px auto;
+  height: 120px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255, 234, 166, 0.42), rgba(255, 234, 166, 0));
+}
+
+.landing-mascot-art {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.18));
+}
+
+.landing-mascot-caption {
+  margin-top: 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.landing-mascot-note {
+  position: relative;
+  z-index: 1;
+  max-width: 270px;
+  margin: -0.5rem auto 0;
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+  background: rgba(10, 16, 28, 0.48);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.landing-mascot-note__eyebrow {
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 227, 138, 0.95);
+}
+
 .landing-title {
   font-size: 3.5rem;
   font-weight: 800;
@@ -174,6 +228,39 @@
   margin: 0 auto;
 }
 
+.mascot-guidance-card {
+  padding: 1.4rem 1.6rem;
+  border: 1px solid rgba(24, 49, 83, 0.08);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 227, 138, 0.3), transparent 34%),
+    linear-gradient(135deg, #fffaf0 0%, #f4fbff 55%, #f5fff8 100%);
+}
+
+.mascot-guidance-card__art {
+  margin-right: 1.25rem;
+  flex-shrink: 0;
+}
+
+.mascot-guidance-card__copy h4 {
+  color: var(--color-gray-800);
+}
+
+.mascot-guidance-card__copy p {
+  color: var(--color-gray-600);
+  line-height: 1.6;
+}
+
+.mascot-guidance-card__eyebrow {
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  color: #9a6700;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 /* No special styling for buttons as we're using the standard btn-primary */
 
 /* Responsive Adjustments */
@@ -188,6 +275,11 @@
 
   .feature-box {
     padding: 1.5rem;
+  }
+
+  .landing-mascot-stage {
+    margin: 0 auto;
+    max-width: 360px;
   }
 
   .cta-section {
@@ -214,6 +306,15 @@
     padding-left: 1rem;
     padding-right: 1rem;
     margin-bottom: 0;
+  }
+
+  .mascot-guidance-card__art {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .mascot-guidance-card {
+    text-align: center;
   }
 }
 

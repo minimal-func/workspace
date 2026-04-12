@@ -135,9 +135,137 @@
   background-repeat: no-repeat !important;
 }
 
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-mark h2 {
+  margin-bottom: 0;
+}
+
+.myday-mascot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.myday-mascot svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.myday-mascot--nav {
+  width: 42px;
+  height: 42px;
+}
+
+.myday-mascot--small {
+  width: 116px;
+  height: 116px;
+}
+
+.myday-mascot--default {
+  width: 180px;
+  height: 180px;
+}
+
+.myday-mascot--hero {
+  width: 100%;
+  max-width: 320px;
+}
+
+.myday-mascot__halo {
+  fill: rgba(255, 255, 255, 0.26);
+}
+
+.myday-mascot__shadow {
+  fill: rgba(24, 49, 83, 0.13);
+}
+
+.myday-mascot__stem,
+.myday-mascot__arm,
+.myday-mascot__leg,
+.myday-mascot__mouth {
+  fill: none;
+  stroke: #3a3d46;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.myday-mascot__stem {
+  stroke-width: 6;
+}
+
+.myday-mascot__body {
+  stroke: rgba(58, 61, 70, 0.15);
+  stroke-width: 3;
+}
+
+.myday-mascot__belly {
+  fill: rgba(255, 249, 231, 0.92);
+}
+
+.myday-mascot__cheek {
+  fill: rgba(255, 137, 103, 0.28);
+}
+
+.myday-mascot__eye {
+  fill: #2c3140;
+}
+
+.myday-mascot__eye-highlight {
+  fill: #ffffff;
+}
+
+.myday-mascot__mouth {
+  stroke-width: 6;
+}
+
+.myday-mascot__arm,
+.myday-mascot__leg {
+  stroke-width: 9;
+}
+
+.myday-mascot__spark {
+  fill: rgba(255, 227, 138, 0.9);
+  stroke: rgba(255, 255, 255, 0.92);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.myday-mascot__spark--left {
+  animation: mascot-bob 5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.myday-mascot__spark--right {
+  animation: mascot-bob 4.2s ease-in-out infinite reverse;
+  transform-origin: center;
+}
+
+.brand-mark__mascot {
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.14));
+}
+
+@keyframes mascot-bob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
 @media (max-width: 767px) {
   .imagebg-hero {
     min-height: 100vh;
+  }
+
+  .brand-mark {
+    justify-content: center;
   }
 }
 
