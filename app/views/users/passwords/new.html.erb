@@ -1,23 +1,21 @@
-<div class="container pos-vertical-center">
+<span class="auth-shell__eyebrow">Account Recovery</span>
+<h2>Forgot your password?</h2>
+<p class="lead">
+  Enter your email and we’ll send reset instructions.
+</p>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= devise_error_messages! %>
   <div class="row">
-    <div class="col-md-7 col-lg-5">
-      <h2>Forgot your password?</h2>
-      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-        <div class="row">
-          <div class="col-md-12">
-          </div>
-          <div class="col-md-12">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Your email" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.submit "Send me reset password instructions", class: "btn btn--primary type--uppercase" %>
-          </div>
-        </div>
-        <!--end of row-->
-      <% end %>
-      <%= render "users/shared/links" %>
+    <div class="col-md-12">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Your email" %>
+    </div>
+    <div class="col-md-12">
+      <%= f.submit "Send reset instructions", class: "btn btn--primary type--uppercase auth-shell__submit" %>
     </div>
   </div>
-  <!--end of row-->
+<% end %>
+
+<div class="auth-shell__links">
+  <%= render "users/shared/links" %>
 </div>
-<!--end of container-->

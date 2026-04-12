@@ -3,6 +3,7 @@
   <head>
     <title>Daily Reflections</title>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <%= stylesheet_link_tag 'included', media: 'all' %>
 
@@ -10,11 +11,31 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
-  <body>
-    <div class="main-container">
-        <section class="height-100 imagebg text-center" data-overlay="4">
-            <%= yield %>
-        </section>
-    </div>
+  <body class="auth-layout">
+    <% flash.each do |key, value| %>
+      <% flash_variant = case key.to_sym
+                         when :notice then 'success'
+                         when :alert then 'danger'
+                         else key.to_s.parameterize
+                         end %>
+      <div class="notification flash-notification pos-right pos-top" data-animation="from-top" data-notification-link="search-box">
+        <div class="notification-close-cross"></div>
+        <div class="flash-message flash-message--<%= flash_variant %>">
+          <%= value %>
+        </div>
+      </div>
+    <% end %>
+
+    <main class="auth-shell">
+      <div class="auth-shell__aurora auth-shell__aurora--one"></div>
+      <div class="auth-shell__aurora auth-shell__aurora--two"></div>
+      <div class="auth-shell__grid"></div>
+
+      <div class="auth-shell__content">
+        <div class="auth-shell__panel">
+          <%= yield %>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

@@ -1,16 +1,22 @@
+<span class="auth-shell__eyebrow">Email Verification</span>
 <h2>Resend confirmation instructions</h2>
+<p class="lead">
+  We’ll send a fresh confirmation link to your email address.
+</p>
 
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Your email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+    </div>
+    <div class="col-md-12">
+      <%= f.submit "Resend confirmation instructions", class: "btn btn--primary type--uppercase auth-shell__submit" %>
+    </div>
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>
+<div class="auth-shell__links">
+  <%= render "users/shared/links" %>
+</div>

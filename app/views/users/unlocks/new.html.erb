@@ -1,16 +1,22 @@
+<span class="auth-shell__eyebrow">Account Access</span>
 <h2>Resend unlock instructions</h2>
+<p class="lead">
+  Enter your email and we’ll send unlock instructions right away.
+</p>
 
 <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Resend unlock instructions" %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Your email" %>
+    </div>
+    <div class="col-md-12">
+      <%= f.submit "Resend unlock instructions", class: "btn btn--primary type--uppercase auth-shell__submit" %>
+    </div>
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>
+<div class="auth-shell__links">
+  <%= render "users/shared/links" %>
+</div>

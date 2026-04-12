@@ -1,31 +1,30 @@
-<div class="container pos-vertical-center">
+<span class="auth-shell__eyebrow">Account Recovery</span>
+<h2>Set a new password</h2>
+<p class="lead">
+  Choose a new password to regain access to your account.
+</p>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+  <%= f.hidden_field :reset_password_token %>
   <div class="row">
-    <div class="col-md-7 col-lg-5">
-      <h2>Forgot your password?</h2>
-      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-        <%= devise_error_messages! %>
-        <%= f.hidden_field :reset_password_token %>
-        <div class="row">
-          <div class="col-md-12">
-            <%= f.label :password, "New password" %><br />
-            <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-            <% end %>
-            <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.label :password_confirmation, "Confirm new password" %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "off" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.submit "Change my password", class: "btn btn--primary type--uppercase" %>
-          </div>
-        </div>
-        <!--end of row-->
+    <div class="col-md-12">
+      <%= f.label :password, "New password" %>
+      <% if @minimum_password_length %>
+        <em><%= @minimum_password_length %> characters minimum</em>
       <% end %>
-      <%= render "users/shared/links" %>
+      <%= f.password_field :password, autofocus: true, autocomplete: "off", placeholder: "New password" %>
+    </div>
+    <div class="col-md-12">
+      <%= f.label :password_confirmation, "Confirm new password" %>
+      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm new password" %>
+    </div>
+    <div class="col-md-12">
+      <%= f.submit "Change my password", class: "btn btn--primary type--uppercase auth-shell__submit" %>
     </div>
   </div>
-  <!--end of row-->
+<% end %>
+
+<div class="auth-shell__links">
+  <%= render "users/shared/links" %>
 </div>
-<!--end of container-->

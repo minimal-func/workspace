@@ -1,34 +1,30 @@
-<div class="container pos-vertical-center">
+<span class="auth-shell__eyebrow">Daily Reflections</span>
+<h2>Sign up to continue</h2>
+<p class="lead">
+  Welcome! Sign up with your email and password.
+</p>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
   <div class="row">
-    <div class="col-md-7 col-lg-5">
-      <h2>Sign up to continue</h2>
-      <p class="lead">
-          Welcome! Sign up with your email/password
-      </p>
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
-        <div class="row">
-          <div class="col-md-12">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Your email" %>
-          </div>
-          <div class="col-md-12">
-            <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %><br />
-            <%= f.password_field :password, autocomplete: "off", placeholder: "Your password" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm password" %>
-          </div>
-          <div class="col-md-12">
-            <%= f.submit "Sign up", class: "btn btn--primary type--uppercase" %>
-          </div>
-        </div>
-        <!--end of row-->
+    <div class="col-md-12">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Your email" %>
+    </div>
+    <div class="col-md-12">
+      <% if @minimum_password_length %>
+        <em><%= @minimum_password_length %> characters minimum</em>
       <% end %>
-      <%= render "users/shared/links" %>
+      <%= f.password_field :password, autocomplete: "off", placeholder: "Your password" %>
+    </div>
+    <div class="col-md-12">
+      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirm password" %>
+    </div>
+    <div class="col-md-12">
+      <%= f.submit "Sign up", class: "btn btn--primary type--uppercase auth-shell__submit" %>
     </div>
   </div>
-  <!--end of row-->
+<% end %>
+
+<div class="auth-shell__links">
+  <%= render "users/shared/links" %>
 </div>
-<!--end of container-->
