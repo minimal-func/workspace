@@ -1,9 +1,10 @@
 <% size = local_assigns.fetch(:size, :default) %>
 <% css_class = local_assigns[:css_class] %>
 <% title = local_assigns.fetch(:title, "MyDay mascot") %>
+<% action = local_assigns.fetch(:action, :wave) %>
 <% gradient_key = "mascot-#{SecureRandom.hex(4)}" %>
 
-<div class="myday-mascot myday-mascot--<%= size %> <%= css_class %>">
+<div class="myday-mascot myday-mascot--<%= size %> myday-mascot--action-<%= action %> <%= css_class %>">
   <svg viewBox="0 0 260 260" role="img" aria-label="<%= title %>" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="<%= "#{gradient_key}-body" %>" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -51,5 +52,52 @@
     <path class="myday-mascot__arm myday-mascot__arm--right" d="M189 142c16 3 27 14 30 28" />
     <path class="myday-mascot__leg myday-mascot__leg--left" d="M105 197c-6 14-6 26-3 37" />
     <path class="myday-mascot__leg myday-mascot__leg--right" d="M155 197c6 14 6 26 3 37" />
+
+    <% case action.to_sym %>
+    <% when :focus %>
+      <g class="myday-mascot__prop myday-mascot__prop--clipboard">
+        <rect x="182" y="112" width="34" height="46" rx="9" />
+        <rect x="191" y="103" width="16" height="10" rx="5" />
+        <path d="M191 135l8 8 12-14" />
+      </g>
+    <% when :write, :learn %>
+      <g class="myday-mascot__prop myday-mascot__prop--notebook">
+        <rect x="184" y="110" width="38" height="44" rx="10" />
+        <path d="M196 110v44M201 124h12M201 136h12M201 148h10" />
+      </g>
+      <g class="myday-mascot__prop myday-mascot__prop--pencil">
+        <path d="M167 165l22-23" />
+        <path d="M186 139l8 8" />
+      </g>
+    <% when :organize %>
+      <g class="myday-mascot__prop myday-mascot__prop--folder">
+        <path d="M176 121h20l8 8h28c5 0 9 4 9 9v17c0 5-4 9-9 9h-56c-5 0-9-4-9-9v-25c0-5 4-9 9-9Z" />
+      </g>
+    <% when :explore %>
+      <g class="myday-mascot__prop myday-mascot__prop--compass">
+        <circle cx="208" cy="136" r="22" />
+        <path d="M208 121l8 19-19 8 11-27Z" />
+      </g>
+    <% when :reflect, :heart %>
+      <g class="myday-mascot__prop myday-mascot__prop--heart">
+        <path d="M205 119c0-8 6-14 13-14 5 0 9 3 11 7 2-4 6-7 11-7 8 0 14 6 14 14 0 17-25 27-25 27s-24-10-24-27Z" />
+      </g>
+    <% when :balance %>
+      <g class="myday-mascot__prop myday-mascot__prop--balance">
+        <path d="M208 106v46M192 118h32" />
+        <path d="M198 118l-10 16h20l-10-16Z" />
+        <path d="M218 118l-10 16h20l-10-16Z" />
+      </g>
+    <% when :brave %>
+      <g class="myday-mascot__prop myday-mascot__prop--shield">
+        <path d="M208 104l21 8v19c0 16-12 27-21 32-9-5-21-16-21-32v-19l21-8Z" />
+        <path d="M198 132l7 7 13-15" />
+      </g>
+    <% when :celebrate %>
+      <g class="myday-mascot__prop myday-mascot__prop--trophy">
+        <path d="M196 108h24v11c0 8-5 15-12 17v10h9v9h-18v-9h9v-10c-7-2-12-9-12-17v-11Z" />
+        <path d="M196 112h-9c0 8 4 13 10 13M220 112h9c0 8-4 13-10 13" />
+      </g>
+    <% end %>
   </svg>
 </div>

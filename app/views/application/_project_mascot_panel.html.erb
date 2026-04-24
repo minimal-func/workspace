@@ -1,7 +1,9 @@
+<% action_name = local_assigns.fetch(:action, :wave) %>
+
 <section class="mascot-guidance-card project-mascot-panel shadow-sm mb-4">
   <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start">
     <div class="mascot-guidance-card__art project-mascot-panel__art">
-      <%= render "application/mascot", size: :small, css_class: "project-mascot-panel__mascot", title: title %>
+      <%= render "application/mascot", size: :small, css_class: "project-mascot-panel__mascot", title: title, action: action_name %>
     </div>
     <div class="mascot-guidance-card__copy text-center text-md-left">
       <span class="mascot-guidance-card__eyebrow"><%= eyebrow %></span>

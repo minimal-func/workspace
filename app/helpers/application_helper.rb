@@ -45,6 +45,7 @@ module ApplicationHelper
       end
 
     {
+      action: mascot_action_for(section),
       eyebrow: "Sunny's project desk",
       headline: headline,
       message: message,
@@ -111,10 +112,26 @@ module ApplicationHelper
     }.fetch(section)
 
     {
+      action: mascot_action_for(section),
       eyebrow: config[:eyebrow],
       headline: items_count.zero? ? config[:empty_headline] : config[:filled_headline],
       message: items_count.zero? ? config[:empty_message] : config[:filled_message],
       focus: items_count.zero? ? config[:empty_focus] : config[:filled_focus]
     }
+  end
+
+  def mascot_action_for(section)
+    {
+      tasks: :focus,
+      posts: :write,
+      materials: :organize,
+      links: :explore,
+      reflections: :reflect,
+      day_ratings: :balance,
+      moods: :reflect,
+      daily_gratitudes: :heart,
+      daily_lessons: :learn,
+      biggest_challenges: :brave
+    }.fetch(section, :wave)
   end
 end

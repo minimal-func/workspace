@@ -301,6 +301,184 @@
   transform-origin: center;
 }
 
+.myday-mascot__prop {
+  transform-box: fill-box;
+}
+
+.myday-mascot__prop rect,
+.myday-mascot__prop circle,
+.myday-mascot__prop path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.myday-mascot__prop--clipboard rect:first-child,
+.myday-mascot__prop--notebook rect,
+.myday-mascot__prop--folder path,
+.myday-mascot__prop--compass circle,
+.myday-mascot__prop--shield path:first-child,
+.myday-mascot__prop--trophy path:first-child {
+  fill: rgba(255, 255, 255, 0.96);
+  stroke: rgba(58, 61, 70, 0.16);
+  stroke-width: 3;
+}
+
+.myday-mascot__prop--clipboard rect:nth-child(2),
+.myday-mascot__prop--trophy path:last-child {
+  fill: #ffd36b;
+  stroke: rgba(58, 61, 70, 0.12);
+  stroke-width: 2;
+}
+
+.myday-mascot__prop--clipboard path,
+.myday-mascot__prop--notebook path,
+.myday-mascot__prop--pencil path,
+.myday-mascot__prop--compass path,
+.myday-mascot__prop--balance path,
+.myday-mascot__prop--shield path:last-child,
+.myday-mascot__prop--trophy path {
+  fill: none;
+  stroke: #3a3d46;
+  stroke-width: 4;
+}
+
+.myday-mascot__prop--folder path {
+  fill: rgba(255, 241, 197, 0.98);
+}
+
+.myday-mascot__prop--compass path {
+  fill: #ffb347;
+  stroke-width: 3;
+}
+
+.myday-mascot__prop--heart path {
+  fill: #ff8e9d;
+  stroke: rgba(58, 61, 70, 0.1);
+  stroke-width: 2;
+}
+
+.myday-mascot__prop--balance path:first-child {
+  stroke-width: 5;
+}
+
+.myday-mascot__prop--shield path:first-child {
+  fill: rgba(196, 231, 255, 0.96);
+}
+
+.myday-mascot__prop--trophy path:first-child {
+  fill: rgba(255, 224, 122, 0.98);
+}
+
+.myday-mascot--action-focus .myday-mascot__arm--left {
+  animation: mascot-focus-left 4.2s ease-in-out infinite;
+}
+
+.myday-mascot--action-focus .myday-mascot__arm--right {
+  animation: mascot-hold-right 4.2s ease-in-out infinite;
+}
+
+.myday-mascot--action-write .myday-mascot__arm--left,
+.myday-mascot--action-learn .myday-mascot__arm--left {
+  animation: mascot-hold-left 4s ease-in-out infinite;
+}
+
+.myday-mascot--action-write .myday-mascot__arm--right,
+.myday-mascot--action-learn .myday-mascot__arm--right {
+  animation: mascot-write-right 3.3s ease-in-out infinite;
+}
+
+.myday-mascot--action-organize .myday-mascot__arm--left {
+  animation: mascot-carry-left 4.2s ease-in-out infinite;
+}
+
+.myday-mascot--action-organize .myday-mascot__arm--right {
+  animation: mascot-carry-right 4.2s ease-in-out infinite;
+}
+
+.myday-mascot--action-explore .myday-mascot__core {
+  animation: mascot-lean 4.4s ease-in-out infinite;
+}
+
+.myday-mascot--action-explore .myday-mascot__arm--left {
+  animation: mascot-point-left 4.4s ease-in-out infinite;
+}
+
+.myday-mascot--action-explore .myday-mascot__arm--right {
+  animation: mascot-point-right 4.4s ease-in-out infinite;
+}
+
+.myday-mascot--action-reflect .myday-mascot__face,
+.myday-mascot--action-heart .myday-mascot__face,
+.myday-mascot--action-balance .myday-mascot__face {
+  animation-duration: 6s;
+}
+
+.myday-mascot--action-reflect .myday-mascot__arm--left,
+.myday-mascot--action-heart .myday-mascot__arm--left,
+.myday-mascot--action-balance .myday-mascot__arm--left {
+  animation: mascot-soft-left 5s ease-in-out infinite;
+}
+
+.myday-mascot--action-reflect .myday-mascot__arm--right,
+.myday-mascot--action-heart .myday-mascot__arm--right,
+.myday-mascot--action-balance .myday-mascot__arm--right {
+  animation: mascot-soft-right 5s ease-in-out infinite;
+}
+
+.myday-mascot--action-brave .myday-mascot__core {
+  animation: mascot-brave-core 4.6s ease-in-out infinite;
+}
+
+.myday-mascot--action-brave .myday-mascot__arm--left {
+  animation: mascot-brave-left 4.6s ease-in-out infinite;
+}
+
+.myday-mascot--action-brave .myday-mascot__arm--right {
+  animation: mascot-hold-right 4.6s ease-in-out infinite;
+}
+
+.myday-mascot--action-celebrate svg {
+  animation: mascot-celebrate-float 2.8s ease-in-out infinite;
+}
+
+.myday-mascot--action-celebrate .myday-mascot__shadow {
+  animation: mascot-celebrate-shadow 2.8s ease-in-out infinite;
+}
+
+.myday-mascot--action-celebrate .myday-mascot__arm--left {
+  animation: mascot-cheer-left 1.8s ease-in-out infinite;
+}
+
+.myday-mascot--action-celebrate .myday-mascot__arm--right {
+  animation: mascot-cheer-right 1.8s ease-in-out infinite;
+}
+
+.myday-mascot--action-celebrate .myday-mascot__spark--left,
+.myday-mascot--action-celebrate .myday-mascot__spark--right {
+  animation-duration: 1.5s;
+}
+
+.myday-mascot--action-guide .myday-mascot__arm--left {
+  animation: mascot-guide-left 4.8s ease-in-out infinite;
+}
+
+.myday-mascot--action-guide .myday-mascot__arm--right {
+  animation: mascot-guide-right 4.8s ease-in-out infinite;
+}
+
+.myday-mascot--action-focus .myday-mascot__prop,
+.myday-mascot--action-write .myday-mascot__prop,
+.myday-mascot--action-learn .myday-mascot__prop,
+.myday-mascot--action-organize .myday-mascot__prop,
+.myday-mascot--action-explore .myday-mascot__prop,
+.myday-mascot--action-reflect .myday-mascot__prop,
+.myday-mascot--action-heart .myday-mascot__prop,
+.myday-mascot--action-balance .myday-mascot__prop,
+.myday-mascot--action-brave .myday-mascot__prop,
+.myday-mascot--action-celebrate .myday-mascot__prop {
+  animation: mascot-prop-bob 4.4s ease-in-out infinite;
+}
+
 .brand-mark__mascot {
   filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.14));
 }
@@ -361,6 +539,15 @@
   }
 }
 
+@keyframes mascot-prop-bob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
 @keyframes mascot-blink {
   0%, 44%, 48%, 100% {
     transform: scaleY(1);
@@ -407,6 +594,186 @@
   }
 }
 
+@keyframes mascot-focus-left {
+  0%, 100% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-16deg) translateY(-4px);
+  }
+}
+
+@keyframes mascot-hold-right {
+  0%, 100% {
+    transform: rotate(9deg);
+  }
+  50% {
+    transform: rotate(18deg) translate(-1px, -1px);
+  }
+}
+
+@keyframes mascot-hold-left {
+  0%, 100% {
+    transform: rotate(-18deg);
+  }
+  50% {
+    transform: rotate(-8deg) translateY(-2px);
+  }
+}
+
+@keyframes mascot-write-right {
+  0%, 100% {
+    transform: rotate(14deg);
+  }
+  50% {
+    transform: rotate(28deg) translate(2px, 4px);
+  }
+}
+
+@keyframes mascot-carry-left {
+  0%, 100% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(-18deg) translate(-2px, -3px);
+  }
+}
+
+@keyframes mascot-carry-right {
+  0%, 100% {
+    transform: rotate(7deg);
+  }
+  50% {
+    transform: rotate(18deg) translate(2px, -3px);
+  }
+}
+
+@keyframes mascot-lean {
+  0%, 100% {
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    transform: translateX(-4px) scale(1.02, 0.99);
+  }
+}
+
+@keyframes mascot-point-left {
+  0%, 100% {
+    transform: rotate(-18deg);
+  }
+  50% {
+    transform: rotate(-30deg) translate(-4px, -2px);
+  }
+}
+
+@keyframes mascot-point-right {
+  0%, 100% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(4deg) translate(3px, -1px);
+  }
+}
+
+@keyframes mascot-soft-left {
+  0%, 100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(-18deg) translate(-1px, 3px);
+  }
+}
+
+@keyframes mascot-soft-right {
+  0%, 100% {
+    transform: rotate(8deg);
+  }
+  50% {
+    transform: rotate(18deg) translate(1px, 3px);
+  }
+}
+
+@keyframes mascot-brave-core {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.025, 0.99) translateY(-2px);
+  }
+}
+
+@keyframes mascot-brave-left {
+  0%, 100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(-18deg) translate(-2px, -4px);
+  }
+}
+
+@keyframes mascot-celebrate-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes mascot-celebrate-shadow {
+  0%, 100% {
+    opacity: 0.9;
+    transform: scaleX(1);
+  }
+  35% {
+    opacity: 0.55;
+    transform: scaleX(0.86);
+  }
+  60% {
+    opacity: 0.72;
+    transform: scaleX(0.92);
+  }
+}
+
+@keyframes mascot-cheer-left {
+  0%, 100% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(-34deg) translate(-3px, -10px);
+  }
+}
+
+@keyframes mascot-cheer-right {
+  0%, 100% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(34deg) translate(3px, -10px);
+  }
+}
+
+@keyframes mascot-guide-left {
+  0%, 100% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(-20deg) translate(-3px, -2px);
+  }
+}
+
+@keyframes mascot-guide-right {
+  0%, 100% {
+    transform: rotate(12deg);
+  }
+  50% {
+    transform: rotate(22deg) translate(2px, -3px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .myday-mascot svg,
   .myday-mascot__shadow,
@@ -417,6 +784,7 @@
   .myday-mascot__leg,
   .myday-mascot__eye,
   .myday-mascot__eye-highlight,
+  .myday-mascot__prop,
   .myday-mascot__spark--left,
   .myday-mascot__spark--right {
     animation: none !important;
