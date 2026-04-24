@@ -155,6 +155,8 @@
   width: 100%;
   height: auto;
   overflow: visible;
+  animation: mascot-float 4.8s ease-in-out infinite;
+  transform-origin: center 58%;
 }
 
 .myday-mascot--nav {
@@ -183,6 +185,8 @@
 
 .myday-mascot__shadow {
   fill: rgba(24, 49, 83, 0.13);
+  transform-origin: center;
+  animation: mascot-shadow 4.8s ease-in-out infinite;
 }
 
 .myday-mascot__stem,
@@ -229,6 +233,57 @@
   stroke-width: 9;
 }
 
+.myday-mascot__top,
+.myday-mascot__core,
+.myday-mascot__face,
+.myday-mascot__arm,
+.myday-mascot__leg,
+.myday-mascot__eye,
+.myday-mascot__eye-highlight {
+  transform-box: fill-box;
+}
+
+.myday-mascot__top {
+  transform-origin: 35% 100%;
+  animation: mascot-leaf-sway 3.8s ease-in-out infinite;
+}
+
+.myday-mascot__core {
+  transform-origin: center 55%;
+  animation: mascot-breathe 4.8s ease-in-out infinite;
+}
+
+.myday-mascot__face {
+  transform-origin: center;
+  animation: mascot-face-bob 4.8s ease-in-out infinite;
+}
+
+.myday-mascot__eye,
+.myday-mascot__eye-highlight {
+  transform-origin: center;
+  animation: mascot-blink 7.2s ease-in-out infinite;
+}
+
+.myday-mascot__arm--left {
+  transform-origin: 100% 0%;
+  animation: mascot-wave-left 4.8s ease-in-out infinite;
+}
+
+.myday-mascot__arm--right {
+  transform-origin: 0% 0%;
+  animation: mascot-wave-right 4.8s ease-in-out infinite;
+}
+
+.myday-mascot__leg--left {
+  transform-origin: 50% 0%;
+  animation: mascot-step-left 4.8s ease-in-out infinite;
+}
+
+.myday-mascot__leg--right {
+  transform-origin: 50% 0%;
+  animation: mascot-step-right 4.8s ease-in-out infinite;
+}
+
 .myday-mascot__spark {
   fill: rgba(255, 227, 138, 0.9);
   stroke: rgba(255, 255, 255, 0.92);
@@ -256,6 +311,116 @@
   }
   50% {
     transform: translateY(-5px);
+  }
+}
+
+@keyframes mascot-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes mascot-shadow {
+  0%, 100% {
+    opacity: 0.9;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scaleX(0.92);
+  }
+}
+
+@keyframes mascot-leaf-sway {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(5deg) translateY(-1px);
+  }
+}
+
+@keyframes mascot-breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.015, 0.99);
+  }
+}
+
+@keyframes mascot-face-bob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(1px);
+  }
+}
+
+@keyframes mascot-blink {
+  0%, 44%, 48%, 100% {
+    transform: scaleY(1);
+  }
+  46%,
+  47% {
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes mascot-wave-left {
+  0%, 100% {
+    transform: rotate(6deg);
+  }
+  50% {
+    transform: rotate(-4deg) translateY(-1px);
+  }
+}
+
+@keyframes mascot-wave-right {
+  0%, 100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(4deg) translateY(-1px);
+  }
+}
+
+@keyframes mascot-step-left {
+  0%, 100% {
+    transform: rotate(4deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+}
+
+@keyframes mascot-step-right {
+  0%, 100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .myday-mascot svg,
+  .myday-mascot__shadow,
+  .myday-mascot__top,
+  .myday-mascot__core,
+  .myday-mascot__face,
+  .myday-mascot__arm,
+  .myday-mascot__leg,
+  .myday-mascot__eye,
+  .myday-mascot__eye-highlight,
+  .myday-mascot__spark--left,
+  .myday-mascot__spark--right {
+    animation: none !important;
+    transform: none !important;
   }
 }
 
