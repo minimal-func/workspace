@@ -1,0 +1,14 @@
+default: &default
+  host: redis
+  port: 6379
+  db: 0
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  db: 1
+
+production:
+  url: <%= ENV['REDIS_URL'] %>
