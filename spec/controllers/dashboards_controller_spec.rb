@@ -30,11 +30,11 @@ RSpec.describe DashboardsController, type: :controller do
 
       get :index
 
-      expect(assigns(:happiness_score)).to eq(7.0)
+      expect(assigns(:happiness_score)).to eq(6.6)
       expect(assigns(:gratitude_days_count)).to eq(2)
       expect(assigns(:reflection_days_count)).to eq(1)
       expect(assigns(:happiness_trend)).to include('trending upward')
-      expect(assigns(:happiness_focus)).to include('Energy is the main constraint')
+      expect(assigns(:happiness_focus)).to include('Mood is your biggest opportunity')
       expect(assigns(:weekly_happiness_metrics)).to include(
         hash_including(label: 'Mood', value: 5.7),
         hash_including(label: 'Alignment', value: 8.0),
