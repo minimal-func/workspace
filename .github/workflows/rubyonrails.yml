@@ -15,28 +15,34 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:11-alpine
+        image: postgres:15-alpine
         ports:
           - "5432:5432"
         env:
           POSTGRES_DB: rails_test
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
+      redis:
+        image: redis:7-alpine
+        ports:
+          - "6379:6379"
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+      REDIS_URL: "redis://localhost:6379/1"
+      DEV_SECRET_KEY_BASE: "test-secret-key-for-ci-environment-only"
+      TEST_SECRET_KEY_BASE: "test-secret-key-for-ci-environment-only"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      # Add or replace dependency steps here
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410 # v1.179.1
         with:
           bundler-cache: true
-      # Add or replace database setup steps here
+      - name: Install JavaScript dependencies
+        run: yarn install --frozen-lockfile
       - name: Set up database schema
-        run: bin/rails db:schema:load
-      # Add or replace test runners here
+        run: bin/rails db:create db:schema:load
       - name: Run tests
         run: bin/rake
 

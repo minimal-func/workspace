@@ -20,14 +20,12 @@ class GamificationService
 
   def self.check_action_achievements(action, user)
     action_type = action.to_s.start_with?('create_') ? "#{action.to_s.sub('create_', '')}_created" : "#{action.to_s.sub('complete_', '')}_completed"
-    
-    # Find achievements related to this action type
+
+    count = user.points.where(action: action.to_s).count
+    user_achievement_ids = user.achievements.pluck(:id)
+
     Achievement.where(achievement_type: action_type).each do |achievement|
-      # Count how many times the user has performed this action
-      count = user.points.where(action: action.to_s).count
-      
-      # Award achievement if threshold is met
-      if count >= achievement.threshold && !user.achievements.include?(achievement)
+      if count >= achievement.threshold && !user_achievement_ids.include?(achievement.id)
         achievement.award_to(user)
       end
     end

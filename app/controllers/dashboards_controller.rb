@@ -1,107 +1,32 @@
 class DashboardsController < ApplicationController
   def index
-    prepare_dashboard
+    load_dashboard
   end
 
   def create
     if current_user.update(user_params)
       redirect_to dashboards_url
     else
-      prepare_dashboard
+      load_dashboard
       render "index"
     end
   end
 
   private
 
-  def prepare_dashboard
+  def load_dashboard
     @user = current_user
+    data = DashboardData.new(@user).prepare
 
-    @user.today_reflections.first_or_initialize
-    @user.today_day_ratings.first_or_initialize
-    @user.today_biggest_challenges.first_or_initialize
-    @user.today_daily_lessons.first_or_initialize
-    @user.today_daily_gratitudes.first_or_initialize
-    @user.today_energy_levels.first_or_initialize
-    @user.today_moods.first_or_initialize
-
-    @main_task ||= current_user.main_task
-
-    recent_range = 6.days.ago.beginning_of_day..Time.current.end_of_day
-    recent_moods = @user.moods.where(created_at: recent_range)
-    recent_day_ratings = @user.day_ratings.where(created_at: recent_range)
-    recent_energy_levels = @user.energy_levels.where(created_at: recent_range)
-
-    @happiness_score = [
-      average_value(recent_moods),
-      average_value(recent_day_ratings),
-      average_value(recent_energy_levels)
-    ].compact.sum.fdiv(3).round(1)
-
-    @weekly_happiness_metrics = [
-      { label: "Mood", value: average_value(recent_moods), theme: "sun" },
-      { label: "Alignment", value: average_value(recent_day_ratings), theme: "sea" },
-      { label: "Energy", value: average_value(recent_energy_levels), theme: "leaf" }
-    ]
-
-    @gratitude_days_count = @user.daily_gratitudes.where(created_at: recent_range)
-      .distinct.count("DATE(created_at)")
-    @reflection_days_count = @user.reflections.where(created_at: recent_range)
-      .distinct.count("DATE(created_at)")
-
-    @active_projects = current_user.projects.includes(:todos).order(id: :desc).limit(3)
-    project_ids = current_user.projects.pluck(:id)
-    @open_todos_count = Todo.where(project_id: project_ids, finished: false).count
-
-    @happiness_trend = happiness_trend_for(recent_moods)
-    @happiness_focus = happiness_focus_for(
-      mood: average_value(recent_moods),
-      alignment: average_value(recent_day_ratings),
-      energy: average_value(recent_energy_levels)
-    )
-  end
-
-  def average_value(records)
-    return 0.0 if records.empty?
-
-    records.average(:value).to_f.round(1)
-  end
-
-  def happiness_trend_for(recent_moods)
-    recent_values = recent_moods.order(created_at: :asc).pluck(:value)
-    return "Start logging your mood to uncover what reliably makes your days better." if recent_values.size < 3
-
-    midpoint = recent_values.size / 2
-    first_half = recent_values.first(midpoint)
-    second_half = recent_values.last(recent_values.size - midpoint)
-    difference = (second_half.sum.fdiv(second_half.size)) - (first_half.sum.fdiv(first_half.size))
-
-    if difference >= 0.5
-      "Your mood is trending upward this week. Keep protecting the habits that are working."
-    elsif difference <= -0.5
-      "Your mood dipped this week. Reduce pressure and lean on small restorative routines tomorrow."
-    else
-      "Your mood is stable this week. Small gains in sleep, gratitude, and focus should move it upward."
-    end
-  end
-
-  def happiness_focus_for(mood:, alignment:, energy:)
-    lowest_area, lowest_value = {
-      "mood" => mood,
-      "alignment" => alignment,
-      "energy" => energy
-    }.min_by { |_area, value| value }
-
-    return "You do not have enough check-ins yet. Start with one honest daily entry and build from there." if lowest_value.zero?
-
-    case lowest_area
-    when "mood"
-      "Mood is your biggest opportunity. Use the reflection and gratitude prompts to notice what genuinely lifted you."
-    when "alignment"
-      "Alignment is lagging. Narrow tomorrow to one meaningful challenge so progress feels clearer and lighter."
-    else
-      "Energy is the main constraint. A happier day tomorrow probably starts with recovery, not more ambition."
-    end
+    @main_task = data[:main_task]
+    @happiness_score = data[:happiness_score]
+    @weekly_happiness_metrics = data[:weekly_happiness_metrics]
+    @gratitude_days_count = data[:gratitude_days_count]
+    @reflection_days_count = data[:reflection_days_count]
+    @active_projects = data[:active_projects]
+    @open_todos_count = data[:open_todos_count]
+    @happiness_trend = data[:happiness_trend]
+    @happiness_focus = data[:happiness_focus]
   end
 
   def user_params

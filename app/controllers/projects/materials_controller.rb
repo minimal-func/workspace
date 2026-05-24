@@ -72,11 +72,11 @@ module Projects
     private
 
     def set_project
-      @project = Project.find(params[:project_id])
+      @project = current_user.projects.find(params[:project_id])
     end
 
     def set_material
-      @material = Material.find(params[:id])
+      @material = Material.joins(:project).where(projects: { user_id: current_user.id }).find(params[:id])
     end
 
     def set_current_folder

@@ -322,6 +322,56 @@ function initReflectionEditor() {
   }
 }
 
+function initKnowledgeSearch() {
+  const form = document.getElementById('knowledge-search-form');
+  if (!form || form.dataset.searchInitialized) return;
+  form.dataset.searchInitialized = "true";
+
+  const input = form.querySelector('input[name="query"]');
+  const resultsContainer = document.getElementById('knowledge-search-results');
+  let timeout;
+
+  function performSearch(query) {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch(form.action, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-CSRF-Token': csrfToken
+      },
+      body: new URLSearchParams({ query: query, partial: 'true' })
+    })
+    .then(response => response.text())
+    .then(html => {
+      if (resultsContainer) {
+        resultsContainer.innerHTML = html;
+      }
+    })
+    .catch(error => console.error('Search error:', error));
+  }
+
+  if (input) {
+    input.addEventListener('input', function() {
+      clearTimeout(timeout);
+      const query = this.value.trim();
+      if (query.length > 1) {
+        timeout = setTimeout(() => performSearch(query), 300);
+      } else if (resultsContainer) {
+        resultsContainer.innerHTML = '';
+      }
+    });
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const query = input ? input.value.trim() : '';
+    if (query.length > 0) {
+      performSearch(query);
+    }
+  });
+}
+
 function initApp() {
   loadReact();
   initTrixEditor();
@@ -331,6 +381,7 @@ function initApp() {
   initDashboard();
   initNotifications();
   initDatepickers();
+  initKnowledgeSearch();
 }
 
 document.addEventListener('turbo:load', initApp);

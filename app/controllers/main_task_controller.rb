@@ -6,8 +6,16 @@ class MainTaskController < ApplicationController
   def create
     main_task = current_user.main_task
 
-    return redirect_to dashboards_url if main_task && main_task.update!(main_task_params)
-    return redirect_to dashboards_url if !main_task && current_user.create_main_task(main_task_params)
+    if main_task
+      if main_task.update(main_task_params)
+        return redirect_to dashboards_url
+      end
+    else
+      new_task = current_user.build_main_task(main_task_params)
+      if new_task.save
+        return redirect_to dashboards_url
+      end
+    end
 
     render :new
   end

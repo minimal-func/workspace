@@ -1,0 +1,19 @@
+- if @results.present?
+  .knowledge-search-results-inner
+    .knowledge-search-results-header
+      = "#{@results.size} result#{@results.size == 1 ? '' : 's'} for \"#{@query}\""
+    - @results.each do |item|
+      a.knowledge-stream-item href=item[:path]
+        .knowledge-stream-icon class="knowledge-icon--#{item[:type]}"
+          i class=item[:icon]
+        .knowledge-stream-content
+          .knowledge-stream-header
+            span.knowledge-stream-type = item[:title]
+            span.knowledge-stream-date = time_ago_in_words(item[:date]) + " ago"
+          .knowledge-stream-preview = item[:preview]
+- elsif @query.present?
+  .knowledge-search-results-inner
+    .knowledge-search-results-header.text-muted
+      | No results found for "#{@query}"
+- else
+  .knowledge-search-results-inner style="display: none;"

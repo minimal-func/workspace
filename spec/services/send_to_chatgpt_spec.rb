@@ -5,19 +5,12 @@ RSpec.describe SendToChatgpt, type: :service do
     let(:message) { "Hello, how are you?" }
     let(:service) { described_class.new(message) }
 
-    it "sends a request to OpenAI API" do
-      stub_request(:post, "https://api.openai.com/v1/chat/completions")
-        .with(
-          body: hash_including(
-            model: 'gpt-3.5-turbo-16k',
-            messages: [{ role: 'user', content: message }]
-          )
-        )
-        .to_return(
-          status: 200,
-          body: { choices: [{ message: { content: "I'm doing well!" } }] }.to_json,
-          headers: { 'Content-Type' => 'application/json' }
-        )
+    it "delegates to LlmRouter" do
+      router_instance = instance_double(LlmRouter)
+      expect(LlmRouter).to receive(:new).and_return(router_instance)
+      expect(router_instance).to receive(:chat)
+        .with([{ role: "user", content: message }])
+        .and_return("I'm doing well!")
 
       result = service.call
       expect(result).to eq("I'm doing well!")

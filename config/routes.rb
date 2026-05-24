@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   resources :daily_gratitudes, only: [:index]
   resources :main_task, only: [:new, :create]
   resources :chatgpt, only: [:index]
+  resources :knowledge, only: [:index], controller: :knowledge do
+    post :search, on: :collection
+  end
 
   get 'gamification', to: 'gamification#index'
 

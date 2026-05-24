@@ -3,6 +3,7 @@ module Projects
     before_action :authenticate_user!, only: %i[new create index edit update]
     before_action :set_project, only: %i[new create index]
     before_action :set_saved_link, only: %i[show edit update]
+    before_action :authorize_saved_link, only: %i[edit update]
 
     def new
       @saved_link = @project.saved_links.build
@@ -10,7 +11,9 @@ module Projects
 
     def create
       @saved_link = @project.saved_links.build(saved_link_params)
-      @saved_link.save!
+      unless @saved_link.save
+        render :new and return
+      end
       
       # Award points for creating a saved link
       GamificationService.award_points_for(:create_saved_link, current_user, @saved_link) if current_user
@@ -32,7 +35,7 @@ module Projects
 
     def update
       @project = @saved_link.project
-      if can_update_resource?(@saved_link) && @saved_link.update(saved_link_params)
+      if current_user&.can_update_resource?(@saved_link) && @saved_link.update(saved_link_params)
         redirect_to project_saved_links_path(@project), notice: 'Saved link was successfully updated.'
       else
         render :edit
@@ -42,11 +45,17 @@ module Projects
     private
 
     def set_project
-      @project = Project.find(params[:project_id])
+      @project = current_user.projects.find(params[:project_id])
     end
 
     def set_saved_link
       @saved_link = SavedLink.find(params[:id])
+    end
+
+    def authorize_saved_link
+      unless current_user&.can_update_resource?(@saved_link)
+        redirect_to root_path, alert: "You don't have permission to access this resource."
+      end
     end
 
     def saved_link_params

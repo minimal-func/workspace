@@ -14,7 +14,7 @@ module Projects
 
     def create
       @todo = @project.todos.build(todo_params)
-      @todo.save!
+      @todo.save
       
       # Award points for creating a todo
       GamificationService.award_points_for(:create_todo, current_user, @todo) if current_user
@@ -55,11 +55,11 @@ module Projects
     private
 
     def set_project
-      @project = Project.find(params[:project_id])
+      @project = current_user.projects.find(params[:project_id])
     end
 
     def set_todo
-      @todo = Todo.find(params[:id])
+      @todo = Todo.joins(:project).where(projects: { user_id: current_user.id }).find(params[:id])
     end
 
     def todo_params

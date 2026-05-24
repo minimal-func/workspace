@@ -61,7 +61,11 @@ module Projects
     end
 
     def set_post
-      @post = Post.find(params[:id])
+      if action_name == "show"
+        @post = Post.find(params[:id])
+      else
+        @post = Post.joins(:project).where(projects: { user_id: current_user.id }).find(params[:id])
+      end
     end
 
     def post_params

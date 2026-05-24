@@ -19,6 +19,12 @@ module Projects
       # For now, let's use a simpler approach: attach it to the project or post if it exists
       # But Editor.js image upload happens before the post is necessarily saved
       # Let's attach it to the project as a generic attachment for now
+      allowed_types = %w[image/jpeg image/png image/gif image/webp image/svg+xml]
+      unless file && allowed_types.include?(file.content_type)
+        render json: { success: 0, error: "Invalid file type. Allowed: JPEG, PNG, GIF, WebP, SVG" }, status: :unprocessable_entity
+        return
+      end
+
       blob = ActiveStorage::Blob.create_and_upload!(
         io: file,
         filename: file.original_filename,

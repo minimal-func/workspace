@@ -5,6 +5,12 @@ module Notifications
     def create
       file = params[:image]
       
+      allowed_types = %w[image/jpeg image/png image/gif image/webp image/svg+xml]
+      unless file && allowed_types.include?(file.content_type)
+        render json: { success: 0, error: "Invalid file type. Allowed: JPEG, PNG, GIF, WebP, SVG" }, status: :unprocessable_entity
+        return
+      end
+
       blob = ActiveStorage::Blob.create_and_upload!(
         io: file,
         filename: file.original_filename,
