@@ -52,6 +52,28 @@ bin/dev
 
 This will start both the Rails server and the esbuild watcher.
 
+Production email
+----------------
+
+Password-reset emails require an external SMTP provider. Set these Heroku config
+vars before deploying; the application intentionally does not fall back to a
+local mail server in production:
+
+```bash
+heroku config:set --app myday \
+  SMTP_ADDRESS=smtp.sendgrid.net \
+  SMTP_PORT=587 \
+  SMTP_DOMAIN=myday.ildarsafin.tech \
+  SMTP_USERNAME=apikey \
+  SMTP_PASSWORD='your-provider-api-key' \
+  MAILER_FROM='noreply@ildarsafin.tech'
+```
+
+The example uses SendGrid's SMTP relay. For another provider, supply its SMTP
+host, port, credentials, and (if needed) `SMTP_AUTHENTICATION` and
+`SMTP_ENABLE_STARTTLS_AUTO`. Verify the sending domain with the provider so
+messages from `MAILER_FROM` pass SPF/DKIM checks.
+
 JavaScript Bundling
 ------------------
 
