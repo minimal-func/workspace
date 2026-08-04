@@ -209,6 +209,23 @@
   color: var(--color-primary);
 }
 
+.feature-list--details li {
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.feature-list--details li strong {
+  flex: 0 0 9rem;
+}
+
+.feature-list--details li span {
+  flex: 1;
+}
+
+.feature-list--details li .mr-2 {
+  margin-right: 0 !important;
+}
+
 /* Showcase Images */
 .project-showcase, .reflection-showcase {
   padding: 1rem;
