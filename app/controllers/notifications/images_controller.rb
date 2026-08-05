@@ -11,6 +11,11 @@ module Notifications
         return
       end
 
+      if file.size > 10.megabytes
+        render json: { success: 0, error: "File must be smaller than 10MB" }, status: :unprocessable_entity
+        return
+      end
+
       blob = ActiveStorage::Blob.create_and_upload!(
         io: file,
         filename: file.original_filename,

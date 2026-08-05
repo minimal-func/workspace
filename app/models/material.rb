@@ -2,6 +2,7 @@ class Material < ApplicationRecord
   include Notifiable
   validates :title, presence: true
   validate :file_attachment_for_non_folders
+  validate :file_size_within_limit
 
   has_one_attached :file, dependent: :destroy
 
@@ -45,5 +46,12 @@ class Material < ApplicationRecord
     if folder? && file.attached?
       errors.add(:file, 'cannot be attached to folders')
     end
+  end
+
+  def file_size_within_limit
+    return unless file.attached?
+    return if file.blob.byte_size <= 10.megabytes
+
+    errors.add(:file, "must be smaller than 10MB")
   end
 end
