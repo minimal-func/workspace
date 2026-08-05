@@ -9,9 +9,14 @@ RSpec.describe LandingController, type: :controller do
         sign_in user
       end
 
-      it 'redirects to dashboards path' do
+      it 'returns a success response' do
         get :index
-        expect(response).to redirect_to(dashboards_path)
+        expect(response).to be_successful
+      end
+
+      it 'assigns @app_title' do
+        get :index
+        expect(assigns(:app_title)).to eq('Personal Productivity')
       end
     end
 
