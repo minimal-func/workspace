@@ -372,6 +372,24 @@ function initKnowledgeSearch() {
   });
 }
 
+function initCopyButtons() {
+  document.querySelectorAll('.donate-copy').forEach(button => {
+    if (button.dataset.copyInitialized) return;
+    button.dataset.copyInitialized = "true";
+
+    button.addEventListener('click', () => {
+      const text = button.dataset.copyText;
+      navigator.clipboard.writeText(text).then(() => {
+        const original = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => {
+          button.textContent = original;
+        }, 1500);
+      });
+    });
+  });
+}
+
 function initApp() {
   loadReact();
   initTrixEditor();
@@ -382,6 +400,7 @@ function initApp() {
   initNotifications();
   initDatepickers();
   initKnowledgeSearch();
+  initCopyButtons();
 }
 
 document.addEventListener('turbo:load', initApp);

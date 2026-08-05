@@ -304,6 +304,77 @@
   text-transform: uppercase;
 }
 
+/* Donate Section */
+.donate-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+  height: 100%;
+  min-height: 13rem;
+  padding: 1.75rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-800);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.donate-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-soft);
+  color: inherit;
+  text-decoration: none;
+}
+
+.donate-card-icon {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  font-size: 1.15rem;
+}
+
+.donate-card-title {
+  margin-bottom: 0;
+  font-weight: 600;
+  color: var(--color-gray-800);
+}
+
+.donate-card-text {
+  margin-bottom: 0;
+  color: var(--color-gray-600);
+  line-height: 1.6;
+}
+
+.donate-card-link {
+  margin-top: auto;
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.donate-address {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-white);
+  color: var(--color-gray-800);
+  font-size: 0.75rem;
+}
+
+.donate-copy {
+  margin-top: auto;
+}
+
 /* No special styling for buttons as we're using the standard btn-primary */
 
 /* Responsive Adjustments */
