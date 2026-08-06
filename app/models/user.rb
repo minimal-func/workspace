@@ -39,10 +39,10 @@ class User < ApplicationRecord
   FEATURE_UNLOCKS = {
     timetracker: { name: 'Time Tracker', level: 1, cost: 0 },
     todos: { name: 'Tasks', level: 2, cost: 150 },
-    posts: { name: 'Posts', level: 3, cost: 250 },
-    materials: { name: 'Materials', level: 4, cost: 350 },
-    saved_links: { name: 'Saved Links', level: 5, cost: 450 },
-    knowledge: { name: 'Knowledge', level: 4, cost: 350 }
+    saved_links: { name: 'Saved Links', level: 3, cost: 450 },
+    posts: { name: 'Posts', level: 4, cost: 250 },
+    knowledge: { name: 'Knowledge', level: 5, cost: 350 },
+    materials: { name: 'Materials', level: 6, cost: 350 }
   }.freeze
 
   def self.feature_unlocks
