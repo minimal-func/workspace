@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   resources :notifications, only: [:index, :update] do
     collection do
       post :images, controller: 'notifications/images', action: 'create'
@@ -68,6 +70,7 @@ Rails.application.routes.draw do
 
   resources :embeds
   resources :invitations, only: [:new, :create, :show]
+  resource :waiting_list, only: [:new, :create], controller: "waiting_list"
  
   devise_for :users, controllers: {
     sessions:    "users/sessions",

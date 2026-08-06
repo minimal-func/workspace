@@ -1,0 +1,28 @@
+<section class="auth-shell">
+  <span class="auth-shell__eyebrow">Invitation only</span>
+  <h2>Join the waiting list</h2>
+
+  <p>MyDay is currently invite-only. Leave your email and we'll let you know when a spot opens up.</p>
+
+  <%= form_with(model: @waiting_list_log, url: waiting_list_path, local: true) do |f| %>
+    <% if @waiting_list_log.errors.any? %>
+      <div class="alert alert-danger">
+        <ul>
+          <% @waiting_list_log.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :email, "Email" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "you@example.com" %>
+      </div>
+      <div class="col-md-12 mt-3">
+        <%= f.submit "Join the list", class: "btn btn--primary type--uppercase auth-shell__submit" %>
+      </div>
+    </div>
+  <% end %>
+</section>

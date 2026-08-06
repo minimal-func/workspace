@@ -9,3 +9,6 @@
 # Load gamification seed data
 require_relative 'seeds/gamification'
 require_relative 'seeds/sample_data'
+
+# Create a default admin user in development only
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

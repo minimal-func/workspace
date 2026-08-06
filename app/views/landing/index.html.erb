@@ -19,7 +19,7 @@
         </div>
 
         <% if !current_user && User.count.positive? %>
-          <p class="landing-hero-note text-white mt-3">MyDay is currently invite-only. Ask someone already using MyDay for an invitation.</p>
+          <p class="landing-hero-note text-white mt-3">MyDay is currently invite-only. Ask someone already using MyDay for an invitation, or <a href="<%= new_waiting_list_path %>" class="text-white underline">join the waiting list</a>.</p>
         <% elsif !current_user %>
           <p class="landing-hero-note text-white mt-3">MyDay is currently invite-only, but you can start the first account here.</p>
         <% end %>

@@ -8,6 +8,20 @@ class ApplicationController < ActionController::Base
 
   helper_method :turbo_native_app?, :feature_unlocked?, :feature_name, :feature_unlock_level, :feature_purchase_cost, :feature_can_be_purchased?, :project_feature_unlocked?, :project_feature_name, :project_feature_unlock_level
 
+  protected
+
+  def authenticate_user!
+    return if admin_controller?
+
+    super
+  end
+
+  private
+
+  def admin_controller?
+    controller_path.split("/").first == "admin"
+  end
+
   def turbo_native_app?
     request.user_agent&.include?("MyDayTurboNative")
   end

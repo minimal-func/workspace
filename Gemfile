@@ -90,3 +90,6 @@ end
 gem "redis", "~> 4.0"
 
 gem "metainspector", "~> 5.15"
+
+gem "activeadmin", "~> 3.5"
+gem "kaminari", "~> 1.2"

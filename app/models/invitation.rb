@@ -1,5 +1,6 @@
 class Invitation < ApplicationRecord
-  belongs_to :inviter, class_name: "User"
+  belongs_to :inviter, class_name: "User", optional: true
+  has_one :waiting_list_log
   belongs_to :accepted_user, class_name: "User", optional: true
 
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
