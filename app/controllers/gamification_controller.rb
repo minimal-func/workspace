@@ -14,6 +14,28 @@ class GamificationController < ApplicationController
     @mascot_focus = mascot_focus
   end
 
+  def purchase_feature
+    feature = params.require(:feature).to_sym
+
+    unless User.feature_unlocks.key?(feature)
+      redirect_to gamification_path, alert: 'Invalid feature selected.'
+      return
+    end
+
+    if current_user.feature_unlocked?(feature)
+      redirect_to gamification_path, notice: "#{User.feature_name(feature)} is already unlocked."
+      return
+    end
+
+    unless current_user.can_purchase_feature?(feature)
+      redirect_to gamification_path, alert: "You need #{User.feature_purchase_cost(feature)} points to unlock #{User.feature_name(feature)}."
+      return
+    end
+
+    current_user.purchase_feature!(feature)
+    redirect_to gamification_path, notice: "#{User.feature_name(feature)} unlocked by spending #{current_user.feature_purchase_cost(feature)} points!"
+  end
+
   private
 
   def level_progress_percentage

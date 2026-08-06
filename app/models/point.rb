@@ -6,7 +6,7 @@ class Point < ApplicationRecord
   after_create :update_user_total_points
   after_destroy :update_user_total_points
 
-  validates :value, presence: true, numericality: { greater_than: 0 }
+  validates :value, presence: true, numericality: { other_than: 0, only_integer: true }
   validates :action, presence: true
 
   private

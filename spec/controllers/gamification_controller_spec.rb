@@ -38,4 +38,28 @@ RSpec.describe GamificationController, type: :controller do
       expect(assigns(:level)).to be_nil
     end
   end
+
+  describe 'POST #purchase_feature' do
+    let!(:level1) { FactoryBot.create(:level, level_number: 1, points_required: 0, name: 'Beginner') }
+
+    before do
+      FactoryBot.create(:point, user: user, value: 300, action: 'initial_bonus')
+      user.reload
+    end
+
+    it 'allows purchasing an unlocked feature for points' do
+      post :purchase_feature, params: { feature: 'posts' }
+
+      expect(response).to redirect_to(gamification_path)
+      expect(user.reload.purchased_features).to include('posts')
+      expect(user.total_points).to eq(50)
+    end
+
+    it 'does not allow purchasing when the user lacks enough points' do
+      post :purchase_feature, params: { feature: 'materials' }
+
+      expect(response).to redirect_to(gamification_path)
+      expect(flash[:alert]).to include('You need 350 points to unlock Materials.')
+    end
+  end
 end

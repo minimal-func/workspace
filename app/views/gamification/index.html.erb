@@ -69,7 +69,7 @@
               <% @points.each do |point| %>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   <span><%= point.action.humanize %></span>
-                  <span class="badge badge-primary badge-pill"><%= "+#{point.value}" %></span>
+                  <span class="badge badge-primary badge-pill"><%= point.value.positive? ? "+#{point.value}" : point.value %></span>
                 </li>
               <% end %>
             </ul>
@@ -115,9 +115,23 @@
         <div class="card-body">
           <ul class="list-group list-group-flush">
             <% User.feature_unlocks_sorted.each do |feature, info| %>
-              <li class="list-group-item d-flex justify-content-between align-items-center <%= 'text-muted' unless current_user.project_feature_unlocked?(feature) %>">
+              <% unlocked = current_user.feature_unlocked?(feature) %>
+              <% cost = current_user.feature_purchase_cost(feature) %>
+              <% can_buy = current_user.can_purchase_feature?(feature) %>
+              <li class="list-group-item d-flex justify-content-between align-items-center <%= 'text-muted' unless unlocked %>">
                 <span><%= info[:name] %></span>
-                <span><%= current_user.project_feature_unlocked?(feature) ? 'Unlocked' : "Level #{info[:level]}" %></span>
+                <div class="d-flex align-items-center">
+                  <% if unlocked %>
+                    <span class="badge badge-success">Unlocked</span>
+                  <% else %>
+                    <span class="mr-3">Level <%= info[:level] %></span>
+                    <% if can_buy %>
+                      <%= button_to "Buy for #{cost} points", purchase_gamification_path(feature: feature), method: :post, class: 'btn btn-sm btn-primary' %>
+                    <% else %>
+                      <span class="text-muted small">Costs <%= cost %> points</span>
+                    <% end %>
+                  <% end %>
+                </div>
               </li>
             <% end %>
           </ul>

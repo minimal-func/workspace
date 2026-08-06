@@ -6,14 +6,22 @@ class ApplicationController < ActionController::Base
 
   include Pagy::Backend
 
-  helper_method :turbo_native_app?, :feature_unlocked?, :feature_name, :feature_unlock_level, :project_feature_unlocked?, :project_feature_name, :project_feature_unlock_level
+  helper_method :turbo_native_app?, :feature_unlocked?, :feature_name, :feature_unlock_level, :feature_purchase_cost, :feature_can_be_purchased?, :project_feature_unlocked?, :project_feature_name, :project_feature_unlock_level
 
   def turbo_native_app?
     request.user_agent&.include?("MyDayTurboNative")
   end
 
   def feature_unlocked?(feature)
-    current_user&.project_feature_unlocked?(feature) || false
+    current_user&.feature_unlocked?(feature) || false
+  end
+
+  def feature_purchase_cost(feature)
+    current_user&.feature_purchase_cost(feature)
+  end
+
+  def feature_can_be_purchased?(feature)
+    current_user&.can_purchase_feature?(feature) || false
   end
 
   def feature_name(feature)

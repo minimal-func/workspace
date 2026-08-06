@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   end
 
   get 'gamification', to: 'gamification#index'
+  post 'gamification/purchase_feature', to: 'gamification#purchase_feature', as: 'purchase_gamification'
 
   post 'chatgpt', to: 'chatgpt#create'
 

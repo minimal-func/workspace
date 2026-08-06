@@ -37,12 +37,12 @@ class User < ApplicationRecord
   belongs_to :level, optional: true
 
   FEATURE_UNLOCKS = {
-    timetracker: { name: 'Time Tracker', level: 1 },
-    todos: { name: 'Tasks', level: 2 },
-    posts: { name: 'Posts', level: 3 },
-    materials: { name: 'Materials', level: 4 },
-    saved_links: { name: 'Saved Links', level: 5 },
-    knowledge: { name: 'Knowledge', level: 4 }
+    timetracker: { name: 'Time Tracker', level: 1, cost: 0 },
+    todos: { name: 'Tasks', level: 2, cost: 150 },
+    posts: { name: 'Posts', level: 3, cost: 250 },
+    materials: { name: 'Materials', level: 4, cost: 350 },
+    saved_links: { name: 'Saved Links', level: 5, cost: 450 },
+    knowledge: { name: 'Knowledge', level: 4, cost: 350 }
   }.freeze
 
   def self.feature_unlocks
@@ -59,6 +59,10 @@ class User < ApplicationRecord
 
   def self.feature_unlock_level(feature)
     feature_unlocks.fetch(feature.to_sym)[:level]
+  end
+
+  def self.feature_purchase_cost(feature)
+    feature_unlocks.fetch(feature.to_sym)[:cost]
   end
 
   def self.project_feature_unlocks
@@ -82,8 +86,38 @@ class User < ApplicationRecord
     Level.for_points(total_points || 0)&.level_number || 0
   end
 
+  def feature_unlocked?(feature)
+    current_level_number >= self.class.feature_unlock_level(feature) || purchased_feature?(feature)
+  end
+
   def project_feature_unlocked?(feature)
-    current_level_number >= self.class.project_feature_unlock_level(feature)
+    feature_unlocked?(feature)
+  end
+
+  def feature_purchase_cost(feature)
+    self.class.feature_purchase_cost(feature)
+  end
+
+  def purchased_feature?(feature)
+    Array(purchased_features).map(&:to_s).include?(feature.to_s)
+  end
+
+  def can_purchase_feature?(feature)
+    return false unless self.class.feature_unlocks.key?(feature.to_sym)
+    return false if feature_unlocked?(feature)
+
+    total_points.to_i >= feature_purchase_cost(feature).to_i
+  end
+
+  def purchase_feature!(feature)
+    cost = feature_purchase_cost(feature)
+    raise ArgumentError, "Invalid feature" unless cost
+    raise StandardError, "Cannot purchase #{feature}" unless can_purchase_feature?(feature)
+
+    transaction do
+      award_points(-cost, "purchase_#{feature}")
+      update!(purchased_features: (Array(purchased_features) + [feature.to_s]).uniq)
+    end
   end
 
   accepts_nested_attributes_for :today_day_ratings, allow_destroy: true

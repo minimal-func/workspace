@@ -60,14 +60,40 @@ RSpec.describe User, type: :model do
     it 'unlocks time tracker at level 1' do
       expect(user.project_feature_unlocked?(:timetracker)).to be true
     end
- 
+
     it 'does not unlock posts until level 3' do
       expect(user.project_feature_unlocked?(:posts)).to be false
     end
- 
+
     it 'unlocks posts at level 3' do
       user.update(level: level3, total_points: 300)
       expect(user.project_feature_unlocked?(:posts)).to be true
+    end
+  end
+
+  describe 'feature purchases' do
+    let!(:level1) { FactoryBot.create(:level, level_number: 1, points_required: 0, name: 'Beginner') }
+    let(:user) { FactoryBot.create(:user, level: level1) }
+
+    before do
+      FactoryBot.create(:point, user: user, value: 300, action: 'initial_bonus')
+      user.reload
+    end
+
+    it 'allows purchasing a feature when the user has enough points' do
+      expect(user.can_purchase_feature?(:posts)).to be true
+      user.purchase_feature!(:posts)
+
+      expect(user.purchased_feature?(:posts)).to be true
+      expect(user.feature_unlocked?(:posts)).to be true
+      expect(user.total_points).to eq(50)
+    end
+
+    it 'does not allow purchasing a feature the user already unlocked by level' do
+      level3 = FactoryBot.create(:level, level_number: 3, points_required: 300, name: 'Enthusiast')
+      user.update(level: level3, total_points: 300)
+
+      expect(user.can_purchase_feature?(:posts)).to be false
     end
   end
 end

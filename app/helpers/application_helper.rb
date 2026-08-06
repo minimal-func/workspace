@@ -26,7 +26,12 @@ module ApplicationHelper
     if feature_unlocked?(feature)
       link_to User.feature_name(feature), path
     else
-      content_tag(:span, class: 'text-muted locked', title: "Reach Level #{User.feature_unlock_level(feature)} to unlock #{User.feature_name(feature)}") do
+      title = "Reach Level #{User.feature_unlock_level(feature)} to unlock #{User.feature_name(feature)}"
+      if feature_can_be_purchased?(feature)
+        title = "Buy #{User.feature_name(feature)} for #{feature_purchase_cost(feature)} points or reach Level #{User.feature_unlock_level(feature)}"
+      end
+
+      content_tag(:span, class: 'text-muted locked', title: title) do
         "#{User.feature_name(feature)} (Level #{User.feature_unlock_level(feature)})"
       end
     end
