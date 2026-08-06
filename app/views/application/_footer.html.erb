@@ -1,12 +1,12 @@
 <footer class="footer-7 text-center-xs  ">
     <div class="container">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-md-6">
                 <span class="type--fine-print">&copy;
                     <span class="update-year"></span> Made by <a href="https://ildarsafin.tech" target="_blank">Ildar Safin</a></span>
             </div>
-            <div class="col-md-6 text-right text-center-xs">
-                <ul class="social-list list-inline">
+            <div class="col-md-6 d-flex flex-column flex-md-row justify-content-center justify-content-md-end align-items-md-center">
+                <ul class="social-list list-inline mb-0 me-md-4">
                     <li>
                         <a href="https://github.com/ildarsafin" target="_blank">
                             <i class="socicon socicon-github icon icon--xs"></i>
@@ -28,8 +28,8 @@
                         </a>
                     </li>
                 </ul>
-                <div class="footer-actions d-flex justify-content-center justify-content-md-end align-items-center mt-3 mt-md-0">
-                  <%= link_to help_path, class: "btn btn--sm btn-outline-secondary type--uppercase me-2" do %>
+                <div class="footer-actions d-flex justify-content-center align-items-center gap-2">
+                  <%= link_to help_path, class: "btn btn--sm btn-outline-secondary type--uppercase" do %>
                     <span class="btn__text">Help</span>
                   <% end %>
                   <%= link_to landing_path(anchor: "support"), class: "btn btn--sm btn--primary type--uppercase" do %>

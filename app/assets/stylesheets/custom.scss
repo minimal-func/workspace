@@ -2572,11 +2572,14 @@ body.auth-layout {
 
 /* Footer action buttons (Help / Support MyDay) */
 .footer-actions {
+  max-width: 100%;
+
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     vertical-align: middle;
+    margin-bottom: 0;
 
     .btn__text {
       display: inline-flex;
@@ -2586,6 +2589,19 @@ body.auth-layout {
       i {
         line-height: 1;
         margin-right: 0.4em;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    flex-wrap: nowrap;
+
+    .btn--sm {
+      padding-right: 0.9rem;
+      padding-left: 0.9rem;
+
+      .btn__text {
+        font-size: 0.75em;
       }
     }
   }
