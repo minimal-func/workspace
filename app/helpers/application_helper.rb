@@ -22,15 +22,17 @@ module ApplicationHelper
     )
   end
 
-  def project_feature_link(feature, path)
-    if project_feature_unlocked?(feature)
-      link_to User.project_feature_name(feature), path
+  def feature_link(feature, path)
+    if feature_unlocked?(feature)
+      link_to User.feature_name(feature), path
     else
-      content_tag(:span, class: 'text-muted locked', title: "Reach Level #{User.project_feature_unlock_level(feature)} to unlock #{User.project_feature_name(feature)}") do
-        "#{User.project_feature_name(feature)} (Level #{User.project_feature_unlock_level(feature)})"
+      content_tag(:span, class: 'text-muted locked', title: "Reach Level #{User.feature_unlock_level(feature)} to unlock #{User.feature_name(feature)}") do
+        "#{User.feature_name(feature)} (Level #{User.feature_unlock_level(feature)})"
       end
     end
   end
+
+  alias project_feature_link feature_link
 
   def journal_mascot_payload(section:, items_count:)
     MascotPayload.journal(section: section, items_count: items_count)

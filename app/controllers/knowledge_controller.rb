@@ -1,4 +1,6 @@
 class KnowledgeController < ApplicationController
+  before_action :ensure_knowledge_unlocked, only: %i[index search]
+
   def index
     @stats = knowledge_stats
     @recent_items = recent_knowledge_items
@@ -140,6 +142,10 @@ class KnowledgeController < ApplicationController
     end
 
     results.sort_by { |i| i[:date] }.reverse.first(15)
+  end
+
+  def ensure_knowledge_unlocked
+    require_feature_level(:knowledge)
   end
 
   def generate_insight

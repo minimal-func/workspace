@@ -36,16 +36,33 @@ class User < ApplicationRecord
   has_many :achievements, through: :user_achievements
   belongs_to :level, optional: true
 
-  PROJECT_FEATURE_UNLOCKS = {
+  FEATURE_UNLOCKS = {
     timetracker: { name: 'Time Tracker', level: 1 },
     todos: { name: 'Tasks', level: 2 },
     posts: { name: 'Posts', level: 3 },
     materials: { name: 'Materials', level: 4 },
-    saved_links: { name: 'Saved Links', level: 5 }
+    saved_links: { name: 'Saved Links', level: 5 },
+    knowledge: { name: 'Knowledge', level: 4 }
   }.freeze
 
+  def self.feature_unlocks
+    FEATURE_UNLOCKS
+  end
+
+  def self.feature_unlocks_sorted
+    feature_unlocks.sort_by { |_feature, info| info[:level] }.to_h
+  end
+
+  def self.feature_name(feature)
+    feature_unlocks.fetch(feature.to_sym)[:name]
+  end
+
+  def self.feature_unlock_level(feature)
+    feature_unlocks.fetch(feature.to_sym)[:level]
+  end
+
   def self.project_feature_unlocks
-    PROJECT_FEATURE_UNLOCKS
+    feature_unlocks.except(:knowledge)
   end
 
   def self.project_feature_unlocks_sorted
@@ -53,11 +70,11 @@ class User < ApplicationRecord
   end
 
   def self.project_feature_name(feature)
-    project_feature_unlocks.fetch(feature.to_sym)[:name]
+    feature_name(feature)
   end
 
   def self.project_feature_unlock_level(feature)
-    project_feature_unlocks.fetch(feature.to_sym)[:level]
+    feature_unlock_level(feature)
   end
 
   def current_level_number
