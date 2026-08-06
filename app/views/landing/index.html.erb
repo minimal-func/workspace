@@ -17,6 +17,12 @@
             <% end %>
           <% end %>
         </div>
+
+        <% if !current_user && User.count.positive? %>
+          <p class="landing-hero-note text-white mt-3">MyDay is currently invite-only. Ask someone already using MyDay for an invitation.</p>
+        <% elsif !current_user %>
+          <p class="landing-hero-note text-white mt-3">MyDay is currently invite-only, but you can start the first account here.</p>
+        <% end %>
         <div class="landing-mascot-caption text-white">
           Meet Sunny, your gentle reminder to notice what made today better.
         </div>
