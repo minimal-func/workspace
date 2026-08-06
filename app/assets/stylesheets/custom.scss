@@ -2569,3 +2569,24 @@ body.auth-layout {
     padding: 0.85rem 1rem;
   }
 }
+
+/* Footer action buttons (Help / Support MyDay) */
+.footer-actions {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+
+    .btn__text {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+
+      i {
+        line-height: 1;
+        margin-right: 0.4em;
+      }
+    }
+  }
+}
