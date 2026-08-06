@@ -66,7 +66,8 @@ Rails.application.routes.draw do
   end
 
   resources :embeds
-
+  resources :invitations, only: [:new, :create, :show]
+ 
   devise_for :users, controllers: {
     sessions:    "users/sessions",
     passwords: "users/passwords",

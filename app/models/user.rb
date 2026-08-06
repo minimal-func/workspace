@@ -5,7 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one_attached :avatar
-
+ 
+  has_many :sent_invitations, class_name: "Invitation", foreign_key: "inviter_id", dependent: :destroy
+  has_many :received_invitations, class_name: "Invitation", foreign_key: "accepted_user_id", dependent: :nullify
+ 
   has_many :day_ratings, dependent: :destroy
   has_many :energy_levels, dependent: :destroy
   has_many :moods, dependent: :destroy

@@ -77,6 +77,9 @@
                           <%= link_to "My Achievements", gamification_path %>
                         </li>
                         <li>
+                          <%= link_to "Invite someone", new_invitation_path %>
+                        </li>
+                        <li>
                           <%= link_to "Account Settings", edit_user_registration_path %>
                         </li>
                         <li>
@@ -97,10 +100,12 @@
       </span>
     <% end %>
 
+  <% if User.count.zero? %>
     <%= link_to new_user_registration_path, class: "btn btn--sm btn--primary type--uppercase" do %>
       <span class="btn__text">
          Signup
       </span>
     <% end %>
-  </div>
+  <% end %>
+</div>
 <% end %>

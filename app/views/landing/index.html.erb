@@ -9,8 +9,12 @@
           <% if current_user %>
             <%= link_to "Go to Dashboard", dashboards_path, class: "btn btn-lg btn-primary mr-2" %>
           <% else %>
-            <%= link_to "Get Started for Free", new_user_registration_path, class: "btn btn-lg btn-primary mr-2" %>
-            <%= link_to "Support MyDay", "#support", class: "btn btn-lg btn-outline-primary" %>
+            <%= link_to "Login", new_user_session_path, class: "btn btn-lg btn-primary mr-2" %>
+            <% if User.count.zero? %>
+              <%= link_to "Start for Free", new_user_registration_path, class: "btn btn-lg btn-outline-primary" %>
+            <% else %>
+              <%= link_to "Support MyDay", "#support", class: "btn btn-lg btn-outline-primary" %>
+            <% end %>
           <% end %>
         </div>
         <div class="landing-mascot-caption text-white">

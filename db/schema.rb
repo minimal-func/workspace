@@ -124,6 +124,19 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_06_100500) do
     t.index ["user_id"], name: "index_energy_levels_on_user_id"
   end
 
+  create_table "invitations", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "token", null: false
+    t.bigint "inviter_id", null: false
+    t.bigint "accepted_user_id"
+    t.datetime "accepted_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["accepted_user_id"], name: "index_invitations_on_accepted_user_id"
+    t.index ["inviter_id"], name: "index_invitations_on_inviter_id"
+    t.index ["token"], name: "index_invitations_on_token", unique: true
+  end
+
   create_table "levels", force: :cascade do |t|
     t.integer "level_number", null: false
     t.integer "points_required", null: false
@@ -279,6 +292,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_06_100500) do
   add_foreign_key "daily_lessons", "users"
   add_foreign_key "day_ratings", "users"
   add_foreign_key "energy_levels", "users"
+  add_foreign_key "invitations", "users", column: "accepted_user_id"
+  add_foreign_key "invitations", "users", column: "inviter_id"
   add_foreign_key "main_tasks", "users"
   add_foreign_key "materials", "materials", column: "parent_id"
   add_foreign_key "materials", "projects"

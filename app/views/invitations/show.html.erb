@@ -1,0 +1,16 @@
+<section class="auth-shell">
+  <span class="auth-shell__eyebrow">Invitation created</span>
+  <h2>Your invitation is ready</h2>
+
+  <p>
+    Share this link with <strong><%= @invitation.email %></strong> so they can create their account.
+  </p>
+
+  <div class="form-group">
+    <%= text_field_tag :invite_link, new_user_registration_url(invite_token: @invitation.token), readonly: true, class: "form-control" %>
+  </div>
+
+  <p class="text-muted">This invitation can only be used once.</p>
+
+  <%= link_to "Invite another user", new_invitation_path, class: "btn btn--primary type--uppercase" %>
+</section>

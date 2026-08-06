@@ -24,13 +24,32 @@ RSpec.feature "Authentication", type: :feature do
     expect(page).to have_link("Login")
   end
 
-  scenario "User signs up" do
+  scenario "Guest cannot sign up without an invitation" do
+    create(:user)
     visit new_user_registration_path
-    fill_in "Your email", with: "newuser@example.com"
-    fill_in "Your password", with: "password123"
+  
+    expect(page).to have_content("You need a valid invitation to sign up.")
+  end
+ 
+  scenario "Current user can invite someone and the invitee can sign up" do
+    login_as(user, scope: :user)
+    visit new_invitation_path
+ 
+    fill_in "Email to invite", with: "newuser@example.com"
+    click_button "Send invite"
+ 
+    expect(page).to have_content("Invitation created successfully")
+    expect(page).to have_content("newuser@example.com")
+ 
+    logout(:user)
+    invitation = Invitation.last
+    visit new_user_registration_path(invite_token: invitation.token)
+ 
+    fill_in "Email", with: "newuser@example.com"
+    fill_in "Password", with: "password123"
     fill_in "Confirm password", with: "password123"
     click_button "Sign up"
-
+ 
     expect(page).to have_content("Welcome! You have signed up successfully.")
   end
 

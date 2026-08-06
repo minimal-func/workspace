@@ -3,16 +3,27 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   layout "onboard"
   before_action :configure_account_update_params, only: [:update]
-
+  before_action :validate_invitation_token!, only: [:new, :create]
+ 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    if @invitation&.email.present? && params.dig(:user, :email).present? && params[:user][:email] != @invitation.email
+      build_resource(sign_up_params)
+      resource.errors.add(:email, "must match the invited email")
+      return respond_with resource, action: :new
+    end
+
+    super do |resource|
+      if resource.persisted? && @invitation.present?
+        @invitation.accept!(resource)
+      end
+    end
+  end
 
   # GET /resource/edit
   # def edit
@@ -56,7 +67,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
       super
     end
   end
+ 
+  def validate_invitation_token!
+    token = params[:invite_token] || params.dig(:user, :invite_token)
+    @invitation = Invitation.find_by(token: token) if token.present?
 
+    return if User.count.zero? || @invitation&.available_for_sign_up?
+
+    redirect_to landing_path, alert: "You need a valid invitation to sign up."
+  end
+ 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
   #   super(resource)
