@@ -4,7 +4,7 @@
   </span>
 <% end -%>
 
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+<%- if devise_mapping.registerable? && controller_name != 'registrations' && controller_name != 'sessions' %>
   <span class="type--fine-print block">Dont have an account yet?
     <%= link_to "Create account", new_registration_path(resource_name) %>
   </span>
