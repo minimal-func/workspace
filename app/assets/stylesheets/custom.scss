@@ -1251,9 +1251,111 @@ body.auth-layout {
 }
 
 /* Form styles */
+/* Container used by many SimpleForm forms throughout the app */
 .form-container {
   width: 100%;
   max-width: 100%;
+}
+
+/* Normalize controls inside form-container so all forms share the same visual rhythm
+   (aligns behavior added for post-form in blog.scss to every .form-container) */
+.form-container input[type="text"],
+.form-container input[type="file"],
+.form-container input[type="email"],
+.form-container textarea,
+.form-container .form-control,
+.form-container .form-control-file {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  min-height: 44px;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: var(--radius-md);
+  background: #fff;
+  box-shadow: var(--shadow-subtle);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-size: 1rem;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+
+.form-container input[type="file"] {
+  padding: 0.5rem 0.75rem;
+}
+
+.form-container input:focus,
+.form-container textarea:focus,
+.form-container .form-control:focus {
+  outline: none;
+  border-color: rgba(66,133,244,0.9);
+  box-shadow: 0 6px 18px rgba(66,133,244,0.06);
+}
+
+/* Generic action row used by many forms */
+.form-container .form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding-top: 1rem;
+}
+
+.form-container .form-actions > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Make buttons inside forms consistent */
+.form-container .btn,
+.form-container .btn.btn-primary,
+.form-container .btn-secondary,
+.form-container .btn-outline-secondary,
+.form-container a.btn,
+.form-container button.btn {
+  border-radius: var(--radius-md);
+  padding: 0.55rem 1rem;
+  height: auto;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  line-height: 1;
+}
+
+/* Also ensure link-styled buttons and anchors match */
+.form-container .btn-link,
+.form-container a.btn-link,
+.form-container .btn .btn-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1rem;
+  min-height: 44px;
+  box-sizing: border-box;
+  background: transparent;
+  border: 0;
+  color: inherit;
+}
+
+/* Ensure any button inside form-actions shares same baseline */
+.form-container .form-actions a.btn,
+.form-container .form-actions button.btn {
+  vertical-align: middle;
+}
+
+/* Responsive: stack actions and make buttons full-width on narrow screens */
+@media (max-width: 576px) {
+  .form-container .form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .form-container .btn {
+    width: 100%;
+  }
 }
 
 .card {

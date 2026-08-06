@@ -96,6 +96,8 @@
   margin-bottom: 1rem;
 }
 
+/* Make text inputs, textareas and file inputs share consistent sizing and spacing
+   with the app's general form styles (.form-container) so controls line up visually */
 .post-form input[type="text"],
 .post-form input[type="file"],
 .post-form input[type="email"],
@@ -103,14 +105,20 @@
 .post-form .form-control,
 .post-form .form-control-file {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1rem; /* same as other forms */
+  min-height: 44px; /* ensure consistent vertical rhythm */
   border: 1px solid rgba(0,0,0,0.12);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background: #fff;
-  box-shadow: 0 1px 2px rgba(16,24,40,0.03);
+  box-shadow: var(--shadow-subtle);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
   font-size: 1rem;
   line-height: 1.4;
+  box-sizing: border-box;
+}
+
+.post-form input[type="file"] {
+  padding: 0.5rem; /* slightly smaller padding for file inputs */
 }
 
 .post-form input:focus,
@@ -121,39 +129,43 @@
   box-shadow: 0 6px 18px rgba(66,133,244,0.06);
 }
 
-/* Title styling: keep large but aligned and visually separated */
+/* Title styling: keep large but aligned with inputs for consistent left/right spacing */
 .post-form .display-4 {
   font-size: 1.8rem;
   line-height: 1.2;
-  padding: 0.25rem 0;
+  padding: 0.5rem 1rem; /* match input horizontal padding */
   margin-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+  border-radius: calc(var(--radius-md) - 2px);
+  border: 1px solid transparent;
+  background: transparent;
 }
 
-/* Short description as subtle supporting text */
+/* Short description as subtle supporting text but aligned with inputs */
 .post-form .lead {
   font-size: 1.05rem;
   color: var(--color-gray-700);
-  padding: 0.5rem 0.25rem;
+  padding: 0.5rem 1rem; /* align with inputs */
   margin-bottom: 0.75rem;
+  background: transparent;
 }
 
 /* Editor region styling */
 #post-editor {
   min-height: 320px;
   border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   padding: 0.75rem;
   background: #fff;
-  box-shadow: 0 3px 10px rgba(16,24,40,0.03);
+  box-shadow: var(--shadow-subtle);
 }
 
 /* File input alignment */
 .post-form .form-control-file {
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem 0.75rem;
   border: 1px dashed rgba(0,0,0,0.06);
-  border-radius: 6px;
+  border-radius: calc(var(--radius-md) - 2px);
   background: linear-gradient(180deg, #fff, #fbfbfb);
+  display: block;
 }
 
 /* Public toggle alignment */
@@ -167,20 +179,51 @@
   margin: 0;
 }
 
-/* Action row */
+/* Action row: reuse app-wide .form-actions spacing so buttons align with other forms */
 .post-form .form-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  flex-wrap: wrap; /* allow wrapping on small screens like other forms */
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding-top: 1rem;
 }
 
-.post-form .btn {
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
+/* Make primary buttons consistent with other form buttons */
+.post-form .btn,
+.post-form .btn.btn-primary {
+  border-radius: var(--radius-md);
+  padding: 0.55rem 1rem;
+  height: auto;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Responsive tweaks */
+/* Ensure action container groups buttons and aligns them */
+.post-form .form-actions > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Secondary links should behave like small action buttons and visually match primary buttons */
+.post-form .btn.btn-link,
+.post-form .btn-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1rem;
+  min-height: 44px;
+  box-sizing: border-box;
+  background: transparent;
+  border: 0;
+  color: inherit;
+}
+
+/* Responsive tweaks: match other forms' behavior */
 @media (max-width: 576px) {
   .post-form .form-actions {
     flex-direction: column-reverse;
