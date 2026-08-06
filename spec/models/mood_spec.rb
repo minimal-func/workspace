@@ -24,4 +24,19 @@ RSpec.describe Mood, type: :model do
       end
     end
   end
+
+  describe "tags" do
+    it "stores tag list as an array" do
+      mood = FactoryBot.build(:mood, tag_list: 'work, calm, focus')
+
+      expect(mood.tags).to eq(['work', 'calm', 'focus'])
+      expect(mood.tag_list).to eq(['work', 'calm', 'focus'])
+    end
+
+    it "ignores blank tags" do
+      mood = FactoryBot.build(:mood, tag_list: 'work, , calm,,')
+
+      expect(mood.tags).to eq(['work', 'calm'])
+    end
+  end
 end

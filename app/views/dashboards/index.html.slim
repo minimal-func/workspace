@@ -115,6 +115,7 @@
                     span Bad
                     span Awesome
                   = mood.input :value, as: :hidden, input_html: { id: 'mood-hidden-input', value: mood.object.value || 10 }
+                  = mood.input :tag_list, label: false, placeholder: 'Optional tags: work, calm, focus', input_html: { class: 'form-control mt-3' }
 
             .form-group.mb-5
               label.font-weight-bold.d-block * How aligned does my day feel?
@@ -130,6 +131,7 @@
                     span Doubtful
                     span Unstoppable
                   = day_rating.input :value, as: :hidden, input_html: { id: 'confidence-hidden-input', value: day_rating.object.value || 10 }
+                  = day_rating.input :tag_list, label: false, placeholder: 'Optional tags: productive, calm, aligned', input_html: { class: 'form-control mt-3' }
 
             .form-group.mb-5
               label.font-weight-bold.d-block * How much energy do I have to enjoy the day?
@@ -145,6 +147,7 @@
                     span Lowest
                     span Highest
                   = energy_level.input :value, as: :hidden, input_html: { id: 'energy-hidden-input', value: energy_level.object.value || 10 }
+                  = energy_level.input :tag_list, label: false, placeholder: 'Optional tags: energetic, tired, balanced', input_html: { class: 'form-control mt-3' }
 
             hr.my-4
 

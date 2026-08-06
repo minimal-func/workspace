@@ -16,6 +16,13 @@
             <div class="card-body py-3">
               <div style="font-size: 2rem; font-weight: 700; color: #f0a500;"><%= level.value %></div>
               <small class="text-muted"><%= level.created_at.strftime("%d %b %Y") %></small>
+              <% if level.tags.any? %>
+                <div class="mt-2">
+                  <% level.tags.each do |tag| %>
+                    <span class="badge badge-secondary me-1"><%= tag %></span>
+                  <% end %>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>

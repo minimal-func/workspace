@@ -35,9 +35,9 @@ class DashboardsController < ApplicationController
       today_daily_gratitudes_attributes: [:id, :content],
       today_reflections_attributes: [:id, :content, :body_json],
       today_biggest_challenges_attributes: [:id, :content],
-      today_moods_attributes: [:id, :value],
-      today_day_ratings_attributes: [:id, :value],
-      today_energy_levels_attributes: [:id, :value]
+      today_moods_attributes: [:id, :value, :tag_list],
+      today_day_ratings_attributes: [:id, :value, :tag_list],
+      today_energy_levels_attributes: [:id, :value, :tag_list]
     ).tap do |permitted_params|
       if permitted_params[:today_reflections_attributes].present?
         permitted_params[:today_reflections_attributes].each do |index, reflection_params|

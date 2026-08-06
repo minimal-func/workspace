@@ -52,9 +52,9 @@ RSpec.describe DashboardsController, type: :controller do
             today_daily_gratitudes_attributes: [{ content: 'Valid content' }],
             today_reflections_attributes: [{ content: 'Valid content' }],
             today_biggest_challenges_attributes: [{ content: 'Valid content' }],
-            today_moods_attributes: [{ value: 1 }],
-            today_day_ratings_attributes: [{ value: 1 }],
-            today_energy_levels_attributes: [{ value: 1 }]
+            today_moods_attributes: [{ value: 1, tag_list: 'happy, grateful' }],
+            today_day_ratings_attributes: [{ value: 1, tag_list: 'aligned' }],
+            today_energy_levels_attributes: [{ value: 1, tag_list: 'energetic' }]
           }
         }
       }
@@ -63,6 +63,9 @@ RSpec.describe DashboardsController, type: :controller do
         post :create, params: valid_attributes
         user.reload
         expect(user.today_daily_lessons.first.content).to eq('Valid content')
+        expect(user.today_moods.first.tags).to eq(['happy', 'grateful'])
+        expect(user.today_day_ratings.first.tags).to eq(['aligned'])
+        expect(user.today_energy_levels.first.tags).to eq(['energetic'])
       end
 
       it 'redirects to the dashboards url' do

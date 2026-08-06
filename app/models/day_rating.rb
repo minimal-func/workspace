@@ -1,5 +1,7 @@
 class DayRating < ApplicationRecord
   include Notifiable
+  include Taggable
+
   belongs_to :user
 
   validates :value, presence: true
