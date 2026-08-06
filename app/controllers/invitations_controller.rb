@@ -1,4 +1,6 @@
 class InvitationsController < ApplicationController
+  layout "onboard"
+
   before_action :authenticate_user!
 
   def new

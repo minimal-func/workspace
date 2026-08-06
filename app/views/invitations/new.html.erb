@@ -1,26 +1,27 @@
-<section class="auth-shell">
-  <span class="auth-shell__eyebrow">Invite someone new</span>
-  <h2>Invite a teammate</h2>
+<span class="auth-shell__eyebrow">Invite someone new</span>
+<h2>Invite a teammate</h2>
+<p class="lead">
+  Send an invitation and share the sign-up link with the invitee.
+</p>
 
-  <%= form_with(model: @invitation, local: true) do |f| %>
-    <% if @invitation.errors.any? %>
-      <div class="alert alert-danger">
-        <ul>
-          <% @invitation.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="row">
-      <div class="col-md-12">
-        <%= f.label :email, "Email to invite" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Invitee email" %>
-      </div>
-      <div class="col-md-12 mt-3">
-        <%= f.submit "Send invite", class: "btn btn--primary type--uppercase auth-shell__submit" %>
-      </div>
+<%= form_with(model: @invitation, local: true) do |f| %>
+  <% if @invitation.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @invitation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
-</section>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.label :email, "Email to invite" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Invitee email" %>
+    </div>
+    <div class="col-md-12">
+      <%= f.submit "Send invite", class: "btn btn--primary type--uppercase auth-shell__submit" %>
+    </div>
+  </div>
+<% end %>
