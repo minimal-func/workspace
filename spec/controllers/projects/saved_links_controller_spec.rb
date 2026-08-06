@@ -3,9 +3,11 @@ require 'rails_helper'
 module Projects
   RSpec.describe SavedLinksController, type: :controller do
     let(:user) { FactoryBot.create(:user) }
+    let!(:level5) { FactoryBot.create(:level, level_number: 5, points_required: 1000, name: 'Master') }
     let(:project) { FactoryBot.create(:project, user: user) }
-
+ 
     before do
+      user.update(level: level5, total_points: 1000)
       sign_in user
     end
 

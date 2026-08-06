@@ -69,11 +69,11 @@
                           </div>
                           <div class="project-dropdown__content">
                             <ul class="menu-vertical">
-                              <li><%= link_to "Timetracker", timetracker_project_tasks_path(project) %></li>
-                              <li><%= link_to "Posts", project_posts_path(project) %></li>
-                              <li><%= link_to "Materials", project_materials_path(project) %></li>
-                              <li><%= link_to "Saved Links", project_saved_links_path(project) %></li>
-                              <li><%= link_to "Todos", project_todos_path(project) %></li>
+                              <li><%= project_feature_link(:timetracker, timetracker_project_tasks_path(project)) %></li>
+                              <li><%= project_feature_link(:posts, project_posts_path(project)) %></li>
+                              <li><%= project_feature_link(:materials, project_materials_path(project)) %></li>
+                              <li><%= project_feature_link(:saved_links, project_saved_links_path(project)) %></li>
+                              <li><%= project_feature_link(:todos, project_todos_path(project)) %></li>
                             </ul>
                           </div>
                         </div>

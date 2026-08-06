@@ -3,9 +3,11 @@ require 'rails_helper'
 module Projects
   RSpec.describe TodosController, type: :controller do
     let(:user) { FactoryBot.create(:user) }
+    let!(:level2) { FactoryBot.create(:level, level_number: 2, points_required: 100, name: 'Explorer') }
     let(:project) { FactoryBot.create(:project, user: user) }
-
+ 
     before do
+      user.update(level: level2, total_points: 100)
       sign_in user
     end
 

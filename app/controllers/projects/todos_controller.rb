@@ -1,6 +1,7 @@
 module Projects
   class TodosController < ApplicationController
     before_action :authenticate_user!
+    before_action :ensure_todos_unlocked, only: %i[index new create show edit update destroy]
     before_action :set_project, only: %i[new create index]
     before_action :set_todo, only: %i[update show edit destroy]
 
@@ -64,6 +65,10 @@ module Projects
 
     def todo_params
       params.require(:todo).permit(:name, :finished)
+    end
+ 
+    def ensure_todos_unlocked
+      require_project_feature_level(:todos)
     end
   end
 end

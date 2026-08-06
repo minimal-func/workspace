@@ -3,9 +3,11 @@ require 'rails_helper'
 module Projects
   RSpec.describe MaterialsController, type: :controller do
     let(:user) { FactoryBot.create(:user) }
+    let!(:level4) { FactoryBot.create(:level, level_number: 4, points_required: 600, name: 'Achiever') }
     let(:project) { FactoryBot.create(:project, user: user) }
-
+ 
     before do
+      user.update(level: level4, total_points: 600)
       sign_in user
     end
 

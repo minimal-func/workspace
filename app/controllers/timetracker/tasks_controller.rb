@@ -1,6 +1,7 @@
 module Timetracker
   class TasksController < ApplicationController
     before_action :set_app_title
+    before_action :ensure_timetracker_unlocked, only: %i[index create finish]
 
     def index
       @projects = current_user.projects
@@ -46,7 +47,11 @@ module Timetracker
     def tasks_params
       params.require(:task).permit(:id, :content, :project_id)
     end
-
+ 
+    def ensure_timetracker_unlocked
+      require_project_feature_level(:timetracker)
+    end
+ 
     def set_app_title
       @app_title = 'Timetracker'
     end

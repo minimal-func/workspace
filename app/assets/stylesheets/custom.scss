@@ -60,6 +60,16 @@
   background-color: var(--color-white);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
+ 
+.locked {
+  opacity: 0.65;
+  cursor: default;
+}
+ 
+.locked span,
+.locked a {
+  cursor: default;
+}
 
 .project-card:hover,
 .resource-card:hover,

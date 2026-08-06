@@ -19,33 +19,68 @@
       <div class="task-navigation">
         <ul>
           <li>
-            <%= link_to timetracker_project_tasks_path(@current_project) do %>
-              <i class="material-icons">timer</i>
-              <span>Time Tracker</span>
+            <% if project_feature_unlocked?(:timetracker) %>
+              <%= link_to timetracker_project_tasks_path(@current_project) do %>
+                <i class="material-icons">timer</i>
+                <span>Time Tracker</span>
+              <% end %>
+            <% else %>
+              <span class="text-muted locked" title="Reach Level #{project_feature_unlock_level(:timetracker)} to unlock Time Tracker">
+                <i class="material-icons">timer</i>
+                <span>Time Tracker</span>
+              </span>
             <% end %>
           </li>
           <li>
-            <%= link_to project_posts_path(@current_project) do %>
-              <i class="material-icons">description</i>
-              <span>Posts</span>
+            <% if project_feature_unlocked?(:posts) %>
+              <%= link_to project_posts_path(@current_project) do %>
+                <i class="material-icons">description</i>
+                <span>Posts</span>
+              <% end %>
+            <% else %>
+              <span class="text-muted locked" title="Reach Level #{project_feature_unlock_level(:posts)} to unlock Posts">
+                <i class="material-icons">description</i>
+                <span>Posts</span>
+              </span>
             <% end %>
           </li>
           <li>
-            <%= link_to project_materials_path(@current_project) do %>
-              <i class="material-icons">book</i>
-              <span>Materials</span>
+            <% if project_feature_unlocked?(:materials) %>
+              <%= link_to project_materials_path(@current_project) do %>
+                <i class="material-icons">book</i>
+                <span>Materials</span>
+              <% end %>
+            <% else %>
+              <span class="text-muted locked" title="Reach Level #{project_feature_unlock_level(:materials)} to unlock Materials">
+                <i class="material-icons">book</i>
+                <span>Materials</span>
+              </span>
             <% end %>
           </li>
           <li>
-            <%= link_to project_saved_links_path(@current_project) do %>
-              <i class="material-icons">link</i>
-              <span>Links</span>
+            <% if project_feature_unlocked?(:saved_links) %>
+              <%= link_to project_saved_links_path(@current_project) do %>
+                <i class="material-icons">link</i>
+                <span>Links</span>
+              <% end %>
+            <% else %>
+              <span class="text-muted locked" title="Reach Level #{project_feature_unlock_level(:saved_links)} to unlock Links">
+                <i class="material-icons">link</i>
+                <span>Links</span>
+              </span>
             <% end %>
           </li>
           <li>
-            <%= link_to project_todos_path(@current_project) do %>
-              <i class="material-icons">check_circle</i>
-              <span>Tasks</span>
+            <% if project_feature_unlocked?(:todos) %>
+              <%= link_to project_todos_path(@current_project) do %>
+                <i class="material-icons">check_circle</i>
+                <span>Tasks</span>
+              <% end %>
+            <% else %>
+              <span class="text-muted locked" title="Reach Level #{project_feature_unlock_level(:todos)} to unlock Tasks">
+                <i class="material-icons">check_circle</i>
+                <span>Tasks</span>
+              </span>
             <% end %>
           </li>
         </ul>

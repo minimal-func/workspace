@@ -36,6 +36,39 @@ class User < ApplicationRecord
   has_many :achievements, through: :user_achievements
   belongs_to :level, optional: true
 
+  PROJECT_FEATURE_UNLOCKS = {
+    timetracker: { name: 'Time Tracker', level: 1 },
+    todos: { name: 'Tasks', level: 2 },
+    posts: { name: 'Posts', level: 3 },
+    materials: { name: 'Materials', level: 4 },
+    saved_links: { name: 'Saved Links', level: 5 }
+  }.freeze
+
+  def self.project_feature_unlocks
+    PROJECT_FEATURE_UNLOCKS
+  end
+
+  def self.project_feature_unlocks_sorted
+    project_feature_unlocks.sort_by { |_feature, info| info[:level] }.to_h
+  end
+
+  def self.project_feature_name(feature)
+    project_feature_unlocks.fetch(feature.to_sym)[:name]
+  end
+
+  def self.project_feature_unlock_level(feature)
+    project_feature_unlocks.fetch(feature.to_sym)[:level]
+  end
+
+  def current_level_number
+    return level.level_number if level
+    Level.for_points(total_points || 0)&.level_number || 0
+  end
+
+  def project_feature_unlocked?(feature)
+    current_level_number >= self.class.project_feature_unlock_level(feature)
+  end
+
   accepts_nested_attributes_for :today_day_ratings, allow_destroy: true
   accepts_nested_attributes_for :today_energy_levels, allow_destroy: true
   accepts_nested_attributes_for :today_moods, allow_destroy: true

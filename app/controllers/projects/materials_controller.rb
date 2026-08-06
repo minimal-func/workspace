@@ -1,6 +1,7 @@
 module Projects
   class MaterialsController < ApplicationController
     before_action :authenticate_user!, only: %i[new create index edit update new_folder create_folder]
+    before_action :ensure_materials_unlocked, only: %i[index new create new_folder create_folder show edit update]
     before_action :set_project, only: %i[new create index new_folder create_folder]
     before_action :set_material, only: %i[show edit update]
     before_action :set_current_folder, only: %i[index new create new_folder create_folder]
@@ -82,13 +83,17 @@ module Projects
     def set_current_folder
       @current_folder = params[:folder_id] ? @project.materials.find(params[:folder_id]) : nil
     end
-
+ 
     def material_params
       params.require(:material).permit(:title, :short_description, :file)
     end
-
+ 
     def folder_params
       params.require(:material).permit(:title, :short_description)
+    end
+ 
+    def ensure_materials_unlocked
+      require_project_feature_level(:materials)
     end
   end
 end

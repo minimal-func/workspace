@@ -1,6 +1,7 @@
 module Projects
   class SavedLinksController < ApplicationController
     before_action :authenticate_user!, only: %i[new create index edit update]
+    before_action :ensure_saved_links_unlocked, only: %i[index new create show edit update]
     before_action :set_project, only: %i[new create index]
     before_action :set_saved_link, only: %i[show edit update]
     before_action :authorize_saved_link, only: %i[edit update]
@@ -56,6 +57,10 @@ module Projects
       unless current_user&.can_update_resource?(@saved_link)
         redirect_to root_path, alert: "You don't have permission to access this resource."
       end
+    end
+ 
+    def ensure_saved_links_unlocked
+      require_project_feature_level(:saved_links)
     end
 
     def saved_link_params

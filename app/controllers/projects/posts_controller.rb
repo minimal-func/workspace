@@ -1,6 +1,7 @@
 module Projects
   class PostsController < ApplicationController
     before_action :authenticate_user!, only: %i[new create edit update learn]
+    before_action :ensure_posts_unlocked, only: %i[index new create show edit update]
     before_action :set_project, only: %i[new create index edit update]
     before_action :set_post, only: %i[show edit update]
 
@@ -53,8 +54,12 @@ module Projects
         end
       end
     end
-
+ 
     private
+ 
+    def ensure_posts_unlocked
+      require_project_feature_level(:posts)
+    end
 
     def set_project
       @project = Project.find(params[:project_id])
