@@ -90,3 +90,104 @@
   max-width: 800px;
   margin: 0 auto;
 }
+
+/* Enhanced post form styling for improved alignment and professional appearance */
+.post-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.post-form input[type="text"],
+.post-form input[type="file"],
+.post-form input[type="email"],
+.post-form textarea,
+.post-form .form-control,
+.post-form .form-control-file {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(16,24,40,0.03);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.post-form input:focus,
+.post-form textarea:focus,
+.post-form .form-control:focus {
+  outline: none;
+  border-color: rgba(66,133,244,0.9);
+  box-shadow: 0 6px 18px rgba(66,133,244,0.06);
+}
+
+/* Title styling: keep large but aligned and visually separated */
+.post-form .display-4 {
+  font-size: 1.8rem;
+  line-height: 1.2;
+  padding: 0.25rem 0;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Short description as subtle supporting text */
+.post-form .lead {
+  font-size: 1.05rem;
+  color: var(--color-gray-700);
+  padding: 0.5rem 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Editor region styling */
+#post-editor {
+  min-height: 320px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  padding: 0.75rem;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(16,24,40,0.03);
+}
+
+/* File input alignment */
+.post-form .form-control-file {
+  padding: 0.5rem 0.5rem;
+  border: 1px dashed rgba(0,0,0,0.06);
+  border-radius: 6px;
+  background: linear-gradient(180deg, #fff, #fbfbfb);
+}
+
+/* Public toggle alignment */
+.post-form .public-visibility-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.post-form .public-visibility-toggle .form-check {
+  margin: 0;
+}
+
+/* Action row */
+.post-form .form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.post-form .btn {
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+  .post-form .form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .post-form .btn {
+    width: 100%;
+  }
+}
