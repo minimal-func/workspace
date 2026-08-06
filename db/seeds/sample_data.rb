@@ -244,4 +244,24 @@ sample_actions = [
 
 create_points!(user: owner, actions: sample_actions)
 
+# Push the demo user to Level 5 so gamification screenshots show an
+# unlocked Knowledge hub and a populated level/achievements section.
+level_5_threshold = Level.for_points(1_000).points_required
+current = owner.reload.total_points.to_i
+if current < level_5_threshold
+  resources = [
+    *Task.where(project_id: owner.projects.pluck(:id)),
+    *Todo.where(project_id: owner.projects.pluck(:id), finished: true),
+    *Post.where(project_id: owner.projects.pluck(:id)),
+    *SavedLink.where(project_id: owner.projects.pluck(:id)),
+    *Material.where(project_id: owner.projects.pluck(:id))
+  ]
+  resources.each { |resource| GamificationService.award_points_for(:complete_task, owner, resource) }
+  current = owner.reload.total_points.to_i
+  while current < level_5_threshold
+    GamificationService.award_points_for(:complete_task, owner, resources.first)
+    current = owner.reload.total_points.to_i
+  end
+end
+
 puts "Sample application data created successfully!"
