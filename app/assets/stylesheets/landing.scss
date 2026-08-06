@@ -436,6 +436,19 @@
     padding: 1.5rem;
   }
 
+  .cta-content .mt-4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .cta-content .mt-4 .btn {
+    margin: 0;
+    width: 100%;
+    max-width: 320px;
+  }
+
   .happiness-loop {
     padding: 1.25rem;
   }
@@ -444,14 +457,15 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
   .landing-cta .btn {
     white-space: nowrap;
     padding-left: 1rem;
     padding-right: 1rem;
-    margin-bottom: 0;
+    margin: 0;
   }
 
   .mascot-guidance-card__art {

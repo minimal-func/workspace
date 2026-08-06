@@ -10,18 +10,14 @@
             <%= link_to "Go to Dashboard", dashboards_path, class: "btn btn-lg btn-primary mr-2" %>
           <% else %>
             <%= link_to "Login", new_user_session_path, class: "btn btn-lg btn-primary mr-2" %>
-            <% if User.count.zero? %>
-              <%= link_to "Start for Free", new_user_registration_path, class: "btn btn-lg btn-outline-primary" %>
-            <% else %>
-              <%= link_to "Support MyDay", "#support", class: "btn btn-lg btn-outline-primary" %>
-            <% end %>
+            <%= link_to "Start for Free", new_waiting_list_path, class: "btn btn-lg btn-outline-primary" %>
           <% end %>
         </div>
 
         <% if !current_user && User.count.positive? %>
           <p class="landing-hero-note text-white mt-3">MyDay is currently invite-only. Ask someone already using MyDay for an invitation, or <a href="<%= new_waiting_list_path %>" class="text-white underline">join the waiting list</a>.</p>
         <% elsif !current_user %>
-          <p class="landing-hero-note text-white mt-3">MyDay is currently invite-only, but you can start the first account here.</p>
+          <p class="landing-hero-note text-white mt-3">MyDay is currently invite-only. Join the waiting list to get early access when it opens.</p>
         <% end %>
         <div class="landing-mascot-caption text-white">
           Meet Sunny, your gentle reminder to notice what made today better.
@@ -362,7 +358,7 @@
             <% if current_user %>
               <%= link_to "Go to Dashboard", dashboards_path, class: "btn btn-lg btn-primary" %>
             <% else %>
-              <%= link_to "Start for Free", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+              <%= link_to "Start for Free", new_waiting_list_path, class: "btn btn-lg btn-primary" %>
             <% end %>
             <%= link_to "Support MyDay", "#support", class: "btn btn-lg btn-outline-light ml-2" %>
           </div>
