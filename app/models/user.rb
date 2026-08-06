@@ -36,6 +36,14 @@ class User < ApplicationRecord
   has_many :achievements, through: :user_achievements
   belongs_to :level, optional: true
 
+  def self.ransackable_associations(_auth_object = nil)
+    ["achievements", "avatar_attachment", "avatar_blob", "biggest_challenges", "daily_gratitudes", "daily_lessons", "day_ratings", "energy_levels", "level", "main_task", "moods", "notifications", "points", "projects", "received_invitations", "reflections", "sent_invitations", "today_biggest_challenges", "today_daily_gratitudes", "today_daily_lessons", "today_day_ratings", "today_energy_levels", "today_moods", "today_reflections", "user_achievements"]
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    ["created_at", "current_sign_in_at", "email", "id", "id_value", "last_sign_in_at", "level_id", "purchased_features", "remember_created_at", "sign_in_count", "total_points", "updated_at"]
+  end
+
   FEATURE_UNLOCKS = {
     timetracker: { name: 'Time Tracker', level: 1, cost: 0 },
     todos: { name: 'Tasks', level: 2, cost: 150 },
