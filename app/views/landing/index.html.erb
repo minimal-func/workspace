@@ -249,6 +249,39 @@
   </div>
 </section>
 
+<section class="space--sm bg--light">
+  <div class="container">
+    <div class="row text-center mb-4">
+      <div class="col-md-12">
+        <h2 class="landing-section-title">Level up to unlock powerful tools</h2>
+        <p class="landing-section-subtitle">Earn points, reach levels, and open new capabilities that help you build habits and get more done.</p>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <% User.feature_unlocks_sorted.each do |feature, info| %>
+        <div class="col-md-4 text-center mb-3">
+          <div class="feature-box feature-box--small">
+            <i class="material-icons feature-icon">lock</i>
+            <h4 class="feature-title"><%= info[:name] %></h4>
+            <p class="feature-text">Unlocks at Level <strong><%= info[:level] %></strong>
+              <% if info[:cost].to_i > 0 %>
+                or purchase for <strong><%= info[:cost] %> points</strong>
+              <% end %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-12 text-center">
+        <p class="landing-section-text">Small daily actions add up — earn points through check-ins, tasks, and reflections to level up and unlock more features over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="space--sm">
   <div class="container">
     <div class="row">
