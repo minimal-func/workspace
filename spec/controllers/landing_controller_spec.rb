@@ -32,4 +32,16 @@ RSpec.describe LandingController, type: :controller do
       end
     end
   end
+
+  describe 'GET #help' do
+    it 'returns a success response' do
+      get :help
+      expect(response).to be_successful
+    end
+
+    it 'assigns @app_title' do
+      get :help
+      expect(assigns(:app_title)).to eq('Help')
+    end
+  end
 end
