@@ -1,9 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>MyDay.<%= @app_title %></title>
+    <meta charset="utf-8">
+    <title><%= meta_title %></title>
     <%= csrf_meta_tags %>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="<%= meta_description %>">
+    <meta name="keywords" content="<%= meta_keywords %>">
+    <meta name="author" content="Ildar Safin">
+    <meta name="robots" content="<%= meta_robots %>">
+    <link rel="canonical" href="<%= canonical_url %>">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="MyDay">
+    <meta property="og:type" content="<%= content_for?(:og_type) ? content_for(:og_type) : 'website' %>">
+    <meta property="og:url" content="<%= canonical_url %>">
+    <meta property="og:title" content="<%= meta_title %>">
+    <meta property="og:description" content="<%= meta_description %>">
+    <meta property="og:image" content="<%= og_image_url %>">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ildaronrails">
+    <meta name="twitter:creator" content="@ildaronrails">
+    <meta name="twitter:title" content="<%= meta_title %>">
+    <meta name="twitter:description" content="<%= meta_description %>">
+    <meta name="twitter:image" content="<%= og_image_url %>">
+
+    <% if ENV['GOOGLE_SITE_VERIFICATION'].present? %>
+      <meta name="google-site-verification" content="<%= ENV['GOOGLE_SITE_VERIFICATION'] %>">
+    <% end %>
+
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="MyDay">
@@ -16,6 +44,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= javascript_include_tag 'application' %>
+    <%= json_ld_structured_data %>
   </head>
 
   <body>

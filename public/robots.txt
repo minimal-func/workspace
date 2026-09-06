@@ -1,1 +1,45 @@
-# See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+# Robots.txt for MyDay (https://myday.ildarsafin.tech)
+User-agent: *
+Allow: /
+Allow: /help
+Allow: /waiting_list/new
+Allow: /favicon.*
+Allow: /apple-touch-icon.png
+Allow: /manifest.json
+Allow: /og-image.png
+
+# Protect private and user-authenticated areas
+Disallow: /admin/
+Disallow: /dashboards/
+Disallow: /dashboards
+Disallow: /reflections/
+Disallow: /reflections
+Disallow: /day_ratings/
+Disallow: /day_ratings
+Disallow: /energy_levels/
+Disallow: /energy_levels
+Disallow: /moods/
+Disallow: /moods
+Disallow: /biggest_challenges/
+Disallow: /biggest_challenges
+Disallow: /daily_lessons/
+Disallow: /daily_lessons
+Disallow: /daily_gratitudes/
+Disallow: /daily_gratitudes
+Disallow: /main_task/
+Disallow: /main_task
+Disallow: /gamification/
+Disallow: /gamification
+Disallow: /chatgpt/
+Disallow: /chatgpt
+Disallow: /knowledge/
+Disallow: /knowledge
+Disallow: /timetracker/
+Disallow: /projects/
+Disallow: /notifications/
+Disallow: /invitations/
+Disallow: /embeds/
+Disallow: /users/
+
+# Sitemap location
+Sitemap: https://myday.ildarsafin.tech/sitemap.xml

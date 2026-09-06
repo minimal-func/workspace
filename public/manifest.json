@@ -1,6 +1,7 @@
 {
-  "name": "MyDay Timetracker",
+  "name": "MyDay — Personal Productivity & Wellbeing Tracker",
   "short_name": "MyDay",
+  "description": "Daily productivity, wellbeing, mood tracking, and habit reflection system.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

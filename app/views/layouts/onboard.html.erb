@@ -1,9 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Daily Reflections</title>
+    <meta charset="utf-8">
+    <title><%= meta_title %></title>
     <%= csrf_meta_tags %>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="<%= meta_description %>">
+    <meta name="robots" content="<%= meta_robots %>">
+    <link rel="canonical" href="<%= canonical_url %>">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="MyDay">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= canonical_url %>">
+    <meta property="og:title" content="<%= meta_title %>">
+    <meta property="og:description" content="<%= meta_description %>">
+    <meta property="og:image" content="<%= og_image_url %>">
+    <meta property="og:locale" content="en_US">
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
 
     <%= stylesheet_link_tag 'included', media: 'all' %>
 
