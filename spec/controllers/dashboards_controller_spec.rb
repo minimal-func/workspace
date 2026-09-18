@@ -41,6 +41,25 @@ RSpec.describe DashboardsController, type: :controller do
         hash_including(label: 'Energy', value: 6.0)
       )
     end
+
+    it 'assigns active projects ordered by opened todos' do
+      project_few = FactoryBot.create(:project, user: user, title: 'Few Open')
+      project_many = FactoryBot.create(:project, user: user, title: 'Many Open')
+      project_none = FactoryBot.create(:project, user: user, title: 'No Open')
+
+      FactoryBot.create(:todo, project: project_few, finished: false)
+      FactoryBot.create(:todo, project: project_few, finished: true)
+
+      FactoryBot.create(:todo, project: project_many, finished: false)
+      FactoryBot.create(:todo, project: project_many, finished: false)
+
+      FactoryBot.create(:todo, project: project_none, finished: true)
+
+      get :index
+
+      expect(assigns(:active_projects)).to eq([project_many, project_few, project_none])
+      expect(assigns(:open_todos_count)).to eq(3)
+    end
   end
 
   describe 'POST #create' do

@@ -75,7 +75,7 @@ class DashboardData
   end
 
   def active_projects
-    user.projects.includes(:todos).order(id: :desc).limit(3)
+    user.projects.includes(:todos).ordered_by_open_todos.limit(3)
   end
 
   def open_todos_count
