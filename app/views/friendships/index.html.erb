@@ -1,0 +1,91 @@
+<section class="bg--secondary">
+  <div class="container py-5 friendships-page">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="mb-4">
+          <h1>Friends</h1>
+          <p class="text-muted mb-0">Connect with people you know on MyDay.</p>
+        </div>
+
+        <div class="card p-4 mb-4">
+          <h3 class="mb-3">Find people</h3>
+          <%= form_with url: friendships_path, method: :get, local: true, class: "form-row align-items-end" do %>
+            <div class="col-sm-9 mb-2 mb-sm-0">
+              <%= label_tag :q, "Email address", class: "sr-only" %>
+              <%= text_field_tag :q, @query, class: "form-control", placeholder: "Search by email" %>
+            </div>
+            <div class="col-sm-3">
+              <%= submit_tag "Search", class: "btn btn--primary w-100" %>
+            </div>
+          <% end %>
+
+          <% if @query.present? %>
+            <div class="mt-4">
+              <% if @users.any? %>
+                <% @users.each do |user| %>
+                  <% friendship = current_user.friendship_with(user) %>
+                  <div class="d-flex justify-content-between align-items-center py-2 border-top">
+                    <span><%= user.email %></span>
+                    <% if friendship&.accepted? %>
+                      <span class="text-success">Friends</span>
+                    <% elsif friendship&.requester == current_user %>
+                      <span class="text-muted">Request sent</span>
+                    <% elsif friendship.present? %>
+                      <span class="text-muted">Request received</span>
+                    <% else %>
+                      <%= button_to "Add friend", friendships_path, params: { user_id: user.id }, class: "btn btn-sm btn--primary" %>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% else %>
+                <p class="text-muted mb-0">No users found for that email.</p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <% if @incoming_friendships.any? %>
+          <div class="card p-4 mb-4">
+            <h3>Friend requests</h3>
+            <% @incoming_friendships.each do |friendship| %>
+              <div class="d-flex justify-content-between align-items-center py-2 border-top">
+                <span><%= friendship.requester.email %></span>
+                <div class="d-flex">
+                  <%= button_to "Accept", accept_friendship_path(friendship), method: :patch, class: "btn btn-sm btn--primary mr-2" %>
+                  <%= button_to "Decline", friendship_path(friendship), method: :delete, class: "btn btn-sm btn-outline-secondary" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <% if @outgoing_friendships.any? %>
+          <div class="card p-4 mb-4">
+            <h3>Sent requests</h3>
+            <% @outgoing_friendships.each do |friendship| %>
+              <div class="d-flex justify-content-between align-items-center py-2 border-top">
+                <span><%= friendship.addressee.email %></span>
+                <%= button_to "Cancel", friendship_path(friendship), method: :delete, class: "btn btn-sm btn-outline-secondary" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class="card p-4">
+          <h3>Your friends</h3>
+          <% if @friends.any? %>
+            <% @friends.each do |friend| %>
+              <% friendship = current_user.friendship_with(friend) %>
+              <div class="d-flex justify-content-between align-items-center py-2 border-top">
+                <span><%= friend.email %></span>
+                <%= button_to "Remove", friendship_path(friendship), method: :delete, class: "btn btn-sm btn-outline-secondary", data: { turbo_confirm: "Remove #{friend.email} from your friends?" } %>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="text-muted mb-0">You haven't added any friends yet.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

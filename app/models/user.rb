@@ -8,6 +8,8 @@ class User < ApplicationRecord
  
   has_many :sent_invitations, class_name: "Invitation", foreign_key: "inviter_id", dependent: :destroy
   has_many :received_invitations, class_name: "Invitation", foreign_key: "accepted_user_id", dependent: :nullify
+  has_many :sent_friendships, class_name: "Friendship", foreign_key: "requester_id", dependent: :destroy
+  has_many :received_friendships, class_name: "Friendship", foreign_key: "addressee_id", dependent: :destroy
  
   has_many :day_ratings, dependent: :destroy
   has_many :energy_levels, dependent: :destroy
@@ -30,6 +32,24 @@ class User < ApplicationRecord
   has_many :projects
   has_many :notifications, dependent: :destroy
 
+  def all_friendships
+    Friendship.where("requester_id = :id OR addressee_id = :id", id: id)
+  end
+
+  def friends
+    sent_friend_ids = sent_friendships.accepted.select(:addressee_id)
+    received_friend_ids = received_friendships.accepted.select(:requester_id)
+    User.where(id: sent_friend_ids).or(User.where(id: received_friend_ids))
+  end
+
+  def friendship_with(user)
+    Friendship.between(self, user).first
+  end
+
+  def friend_with?(user)
+    friendship_with(user)&.accepted? || false
+  end
+
   # Gamification associations
   has_many :points, dependent: :destroy
   has_many :user_achievements, dependent: :destroy
@@ -37,7 +57,7 @@ class User < ApplicationRecord
   belongs_to :level, optional: true
 
   def self.ransackable_associations(_auth_object = nil)
-    ["achievements", "avatar_attachment", "avatar_blob", "biggest_challenges", "daily_gratitudes", "daily_lessons", "day_ratings", "energy_levels", "level", "main_task", "moods", "notifications", "points", "projects", "received_invitations", "reflections", "sent_invitations", "today_biggest_challenges", "today_daily_gratitudes", "today_daily_lessons", "today_day_ratings", "today_energy_levels", "today_moods", "today_reflections", "user_achievements"]
+    ["achievements", "avatar_attachment", "avatar_blob", "biggest_challenges", "daily_gratitudes", "daily_lessons", "day_ratings", "energy_levels", "level", "main_task", "moods", "notifications", "points", "projects", "received_friendships", "received_invitations", "reflections", "sent_friendships", "sent_invitations", "today_biggest_challenges", "today_daily_gratitudes", "today_daily_lessons", "today_day_ratings", "today_energy_levels", "today_moods", "today_reflections", "user_achievements"]
   end
 
   def self.ransackable_attributes(_auth_object = nil)

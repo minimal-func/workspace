@@ -70,6 +70,9 @@ Rails.application.routes.draw do
 
   resources :embeds
   resources :invitations, only: [:new, :create, :show]
+  resources :friendships, only: [:index, :create, :destroy] do
+    patch :accept, on: :member
+  end
   resource :waiting_list, only: [:new, :create], controller: "waiting_list"
  
   devise_for :users, controllers: {

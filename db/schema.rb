@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_08_06_131000) do
+ActiveRecord::Schema[7.1].define(version: 2026_09_19_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -148,6 +148,18 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_06_131000) do
     t.datetime "updated_at", precision: nil, null: false
     t.string "tags", default: [], null: false, array: true
     t.index ["user_id"], name: "index_energy_levels_on_user_id"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.bigint "requester_id", null: false
+    t.bigint "addressee_id", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "accepted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["addressee_id"], name: "index_friendships_on_addressee_id"
+    t.index ["requester_id", "addressee_id"], name: "index_friendships_on_requester_id_and_addressee_id", unique: true
+    t.index ["requester_id"], name: "index_friendships_on_requester_id"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -332,6 +344,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_06_131000) do
   add_foreign_key "daily_lessons", "users"
   add_foreign_key "day_ratings", "users"
   add_foreign_key "energy_levels", "users"
+  add_foreign_key "friendships", "users", column: "addressee_id"
+  add_foreign_key "friendships", "users", column: "requester_id"
   add_foreign_key "invitations", "users", column: "accepted_user_id"
   add_foreign_key "invitations", "users", column: "inviter_id"
   add_foreign_key "main_tasks", "users"
